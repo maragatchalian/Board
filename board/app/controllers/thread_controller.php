@@ -1,10 +1,11 @@
 <?php
-class ThreadController extends AppController                    
+class ThreadController extends AppController            
 {
-
     public function index()                        
    {
-        // TODO: Get all threads            
+        $threads = Thread::getAll();
+                        
        $this->set(get_defined_vars());
     }                        
-}
+} 
+?>
