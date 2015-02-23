@@ -7,7 +7,10 @@
   <?php eh($v->title) ?></a>        
   </li>
   <?php endforeach ?>
+<br> <br>
 
+<!--Create button--> 
+<a class="btn btn-large btn-primary" href="<?php eh(url('thread/create')) ?>">Create</a>
 
 
 </ul>

@@ -3,8 +3,39 @@
 class Thread extends AppModel                    
 {
 
- public static function getAll()                
-   {
+//Thread Creation
+public $validation = array(
+                
+       'title' => array(
+            'length' => array(            
+               'validate_between', 1, 30,
+            ),        
+        ),
+    );
+
+
+ public function create(Comment $comment){
+        $this->validate();
+        $comment->validate();
+        if ($this->hasError() || $comment->hasError()) {                    
+           throw new ValidationException('invalid thread or comment');
+        }
+                    
+       $db = DB::conn();
+       $db->begin();
+
+       $db->query('INSERT INTO thread SET title = ?, created = NOW()', array($this->title));
+
+       $this->id = $db->lastInsertId();
+                    
+       // write first comment at the same time
+       $this->write($comment);
+                    
+       $db->commit();
+    }
+
+
+ public static function getAll(){
         $threads = array();
                     
         $db = DB::conn();
