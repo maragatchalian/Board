@@ -55,7 +55,14 @@ public static function get($id)
          'INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()',        
            array($this->id, $comment->username, $comment->body)
         );                    
-   } 
+
+	
+        if (!$comment->validate()) {
+           throw new ValidationException("invalid comment");
+        }
+    }
+
+
 
 }		
    
