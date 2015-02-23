@@ -1,18 +1,14 @@
+<!--Comment Format --> 
 <h1><?php eh($thread->title) ?></h1>
 
-<?php foreach ($comments as $k => $v): ?>
-
-
+<?php foreach($comments as $k => $v): ?>
 <div class="comment">                        
-
 <div class="meta">
- <?php eh($k + 1) ?>: <?php eh($v->username) ?> <?php eh($v->created) ?>       </div>
-
-<div><?php eh($v->body) ?></div>
-
-
+ <h4> <?php eh($k + 1) ?>: <?php eh($v->username) ?></h4> <?php eh($v->created) ?> 
 </div>
-
+<div><?php echo readable_text($v->body) ?></div>
+</div>
+<br /> 
 
 <?php endforeach ?>
 
@@ -31,6 +27,7 @@
   <label>Comment</label>
   <textarea name="body"><?php eh(Param::get('body')) ?></textarea>
   <br />
+
   <input type="hidden" name="thread_id" value="<?php eh($thread->id) ?>">
   <input type="hidden" name="page_next" value="write_end">
   <button type="submit" class="btn btn-primary">Submit</button>

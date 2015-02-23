@@ -34,66 +34,58 @@ public $validation = array(
        $db->commit();
     }
 
-
- public static function getAll(){
-        $threads = array();
-                    
+//Add a thread model
+public static function getAll(){
+	$threads = array();
         $db = DB::conn();
 	$rows = $db->rows('SELECT * FROM thread');
         
         foreach ($rows as $row) {                    
            $threads[] = new Thread($row);
-        }
+           }
                     
-       return $threads;
-    }            
+return $threads;
+}            
 
-public static function get($id)
-        {
-            $db = DB::conn();
-            $row = $db->row('SELECT * FROM thread WHERE id = ?', array($id));
+//Display the title of the selected thread
+public static function get($id){
+    $db = DB::conn();
+    $row = $db->row('SELECT * FROM thread WHERE id = ?', array($id));
 
-	   if(!$row) {
-           throw new RecordNotFoundException('no record found');
-           }	
+	if(!$row) {
+            throw new RecordNotFoundException('no record found');
+        }	
 
-	   return new self($row);    
+return new self($row);    
+}
 
-            }
-
- public function getComments()
-   {
-        $comments = array();
-                    
+public function getComments() {
+        $comments = array();       
         $db = DB::conn();
-        
+
         $rows = $db->rows(
         'SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC', array($this->id));
                     
-       foreach ($rows as $row) {                        
-           $comments[] = new Comment($row);
-        }
+           foreach ($rows as $row) {                        
+              $comments[] = new Comment($row);
+           }   
                     
-       return $comments;
+	return $comments;
+	}	
 
-	}
 
-
- public function write(Comment $comment)                    
-   {
-        $db = DB::conn();
-        $db->query(                
-         'INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()',        
-           array($this->id, $comment->username, $comment->body)
-        );                    
-
-	
-        if (!$comment->validate()) {
+ public function write(Comment $comment) {
+	if (!$comment->validate()) {
            throw new ValidationException("invalid comment");
         }
+
+	$db = DB::conn();
+	$db->query(
+         'INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()',
+           array($this->id, $comment->username, $comment->body)
+        );
+           
     }
-
-
 
 }		
    

@@ -1,6 +1,6 @@
 <?php
-class Comment extends AppModel
-{
+//Validation
+class Comment extends AppModel {
     public $validation = array(
 
         "username" => array(
