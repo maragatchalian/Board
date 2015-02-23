@@ -6,8 +6,7 @@
 <div class="comment">                        
 
 <div class="meta">
-    <?php eh($k + 1) ?>: <?php eh($v->username) ?> <?php eh($v->created) ?>            
-</div>
+ <?php eh($k + 1) ?>: <?php eh($v->username) ?> <?php eh($v->created) ?>       </div>
 
 <div><?php eh($v->body) ?></div>
 
@@ -16,6 +15,13 @@
 
 
 <?php endforeach ?>
+
+<!-- View Modification (Line Break) --> 
+<div>                    
+<?php echo readable_text($v->body) ?>
+</div>
+
+
 
 <hr>
                     
