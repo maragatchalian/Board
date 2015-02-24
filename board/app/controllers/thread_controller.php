@@ -2,14 +2,21 @@
 class ThreadController extends AppController            
 {
 
+ const ITEMS_PER_PAGE = 5;
+
+
 //Create a new comment (Thread)
 public function create(){
+
+        checkSession();
+
         $thread = new Thread;
         $comment = new Comment;
         $page = Param::get('page_next', 'create');
+        $comment->username = Param::get('username');
 
         switch ($page) {
- 	   case 'create':
+ 	         case 'create':
            break;
           
            case 'create_end':
@@ -42,14 +49,16 @@ public function index(){
 
 //View function
 public function view(){
+
         $thread = Thread::get(Param::get('thread_id'));
         $comments = $thread->getComments();
         $this->set(get_defined_vars());
         }
+
+
 public function write()
         {
-
-            
+                    
             $thread = Thread::get(Param::get('thread_id'));
             $comment = new Comment;
             $page = Param::get('page_next', 'write');
