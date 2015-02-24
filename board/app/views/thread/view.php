@@ -12,13 +12,6 @@
 
 <?php endforeach ?>
 
-<!-- View Modification (Line Break) --> 
-<div>                    
-<?php echo readable_text($v->body) ?>
-</div>
-
-
-
 <hr>
                     
 <form class="well" method="post" action="<?php eh(url('thread/write')) ?>">

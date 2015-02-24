@@ -5,32 +5,35 @@ class Thread extends AppModel
 
 //Thread Creation
 public $validation = array(
-                
        'title' => array(
             'length' => array(            
                'validate_between', 1, 30,
-            ),        
-        ),
-    );
+       		     ),        
+       		 ),
+    	);
 
 
  public function create(Comment $comment){
         $this->validate();
         $comment->validate();
-        if ($this->hasError() || $comment->hasError()) {                    
-           throw new ValidationException('invalid thread or comment');
+        
+	if ($this->hasError() || $comment->hasError()) {                    
+           throw new ValidationException('Invalid thread or comment');
         }
                     
        $db = DB::conn();
        $db->begin();
 
-       $db->query('INSERT INTO thread SET title = ?, created = NOW()', array($this->title));
+       $date_created = date("Y-m-d H:i:s");
+       $params = array(
+		 'title' => $this->title,
+		 'created'=> $date_created
+		 );	
 
-       $this->id = $db->lastInsertId();
-                    
-       // write first comment at the same time
-       $this->write($comment);
-                    
+       $db->insert('thread', $params);
+       $this->id = $db->lastInsertId(); //returns the latest inserted id
+       $this->write($comment); //write first comment at the same time
+
        $db->commit();
     }
 
