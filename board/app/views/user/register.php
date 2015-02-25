@@ -7,7 +7,7 @@
 <?php
 //Username Validation
 	 print_r($user->validation_errors); ?>
-	<h4 class="alert-heading">Validation error!</h4>
+	<em><h4 class="alert-heading">Oops!</h4></em>
 
 <?php if (!empty($user->validation_errors['username']['length'])): ?>
 	<div>
@@ -75,21 +75,12 @@
 <?php endif ?>
 
 <?php 
-//Confirm Password Validation
-	if (!empty($user->validation_errors['confirm_password']['length'])): ?>
-		<div><em>Your Confirm Password</em> must be between
-			<?php eh($user->validation['confirm_password']['length'][1]) ?> and
-			<?php eh($user->validation['confirm_password']['length'][2]) ?> characters in length.
-		</div>
-<?php endif  ?>
 
-<?php 
-//Checking if Password and Confirm Password match.
+//Checking if Password and Confirm Password matched
 	if (!empty($user->validation_errors['confirm_password']['match'])): ?>
 	<div>
-		<em>Your Password</em> must be equal to your
-		<em>Current Password</em>
-	</div>
+		Passwords did not match!
+		</div>
 <?php endif ?>
 
 </div>

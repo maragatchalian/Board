@@ -2,21 +2,13 @@
 <h5>Please log in to continue</h5>
 <br />
 
-<?php if ($user->hasError()): ?>
+	<?php if (!$user->is_validated) : ?>
 	<div class="alert alert-block">
-	<h4 class="alert-heading">Validation error!</h4>
-
-<?php 
-
-////Verify User Account
-if (!empty($user->validation_errors['password']['correct'])): ?>
-	<div>
-	<em>Invalid Username or Password</em>
+		<em><h4 class="alert-heading">Oops!</h4></em>
+		<em>Invalid Username or Password</em>
 	</div>
 <?php endif  ?>
 
-</div>
-<?php endif ?>
 
 <form action="<?php eh(url('')) ?>" method="post">
 	<div class="span12">

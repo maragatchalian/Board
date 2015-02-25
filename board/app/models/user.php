@@ -85,7 +85,25 @@ public function register(){
 
 
 public function login(){
-	$this->validate();
+	$db = DB::conn();
+		$params = array(
+			'username' => $this->username,
+				'password' => md5($this->password)
+		);
+
+	
+	$user = $db->row("SELECT id, username FROM user WHERE username = :username && password = :password", $params);
+
+	if(!$user) {
+		 $this->is_validated = false; 
+		 	 throw new RecordNotFoundException('No Record Found');
+		}
+
+ 		$_SESSION['user_id'] = $user['id'];
+ 		$_SESSION['username'] =$user['username'];
+
+}
+	/*$this->validate();
 		if ($this->hasError()) {
 		throw new ValidationException('Invalid Username or Password');
 		}
@@ -93,11 +111,13 @@ public function login(){
 		$db = DB::conn();
 		$_SESSION['user_id'] = $db->row("SELECT id FROM user WHERE username =?", array($this->username));
 		}
-
+	*/
 
 public function is_password_match(){
-	return $this->password == $this->confirm_password;
-	}
+	$db = DB::conn();
+	$username_exist = $db->row("SELECT username FROM user WHERE username = ?", array($this->username));
+ 	return !$username_exist;
+		}
 
 
 public function is_username_exist(){
@@ -106,8 +126,14 @@ public function is_username_exist(){
 	return (!$username_exist);
 }
 
+public function is_email_exist(){
+	$db = DB::conn();
+	$email_exist = $db->row("SELECT email FROM user where email = ?", array($this->email));
+	return (!$email_exist);
+}
 
-public function is_correct_user(){
+
+/*public function is_correct_user(){
 	$db = DB::conn();
 		$params = array(
 		'username' => $this->username,
@@ -116,6 +142,6 @@ public function is_correct_user(){
 	
 		$correct_user = $db->row("SELECT username, password FROM user WHERE username = :username && password =password", $params);
 		return !$correct_user;
-	}
+	}*/
 }
 ?>
