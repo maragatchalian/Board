@@ -3,6 +3,7 @@
 
 <?php if ($user->hasError()): ?>
 	<div class="alert alert-block">
+		
 <?php
 //Username Validation
 	 print_r($user->validation_errors); ?>

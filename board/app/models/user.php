@@ -10,9 +10,9 @@ const MIN_PASSWORD_LENGTH = 8;
 
 //Maximum Length
 const MAX_USERNAME_LENGTH = 20;
-const MAX_FIRST_NAME_LENGTH = 255;
-const MAX_LAST_NAME_LENGTH = 255;
-const MAX_EMAIL_LENGTH = 255;
+const MAX_FIRST_NAME_LENGTH = 254;
+const MAX_LAST_NAME_LENGTH = 254;
+const MAX_EMAIL_LENGTH = 254;
 const MAX_PASSWORD_LENGTH = 20;
 
 
@@ -22,7 +22,8 @@ public $validation = array(
 			'validate_between', self::MIN_USERNAME_LENGTH, self::MAX_USERNAME_LENGTH,
 		),
 		'exist' => array(
-			'is_username_exist', )
+			'is_username_exist', 
+			)
 		),
 		'first_name' => array(
 			'length' => array(
@@ -59,6 +60,7 @@ public $validation = array(
 
 public function register(){
 	$this->validate();
+	
 	if ($this->hasError()) {
 	throw new ValidationException('Invalid Input!');
 	}

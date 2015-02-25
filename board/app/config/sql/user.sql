@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS user(
 	email VARCHAR(255),
 	password VARCHAR(20),
 	confirm_password VARCHAR(20)
-)ENGINE=InnoDB;
+);
