@@ -1,23 +1,18 @@
-	<?php
-class ValidationException extends AppException
-	{	
-	
-	}
+<?php
 
 class AppException extends Exception
 	{	
 
 	}
 
+
 class RecordNotFoundException extends ValidationException
 	{
 
 	}
 
-class NotFoundException extends AppException
-	{
-		
+class ValidationException extends AppException
+	{	
+	
 	}
-
-?> 
 

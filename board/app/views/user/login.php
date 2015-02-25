@@ -7,6 +7,7 @@
 	<h4 class="alert-heading">Validation error!</h4>
 
 <?php 
+
 ////Verify User Account
 if (!empty($user->validation_errors['password']['correct'])): ?>
 	<div>

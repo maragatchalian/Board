@@ -1,6 +1,7 @@
 <?php
 
 class UserController extends AppController{
+
 	public function register() {
 	$params = array(
 		'username' => trim(Param::get('username')),
@@ -14,9 +15,8 @@ class UserController extends AppController{
 		$user = new User($params);
 		$page = Param::get('page_next', 'register');
 		
-		switch ($page){	
+		switch ($page) {	
 		case 'register':
-		
 		break;
 		case 'register_end':
 		try{
@@ -29,15 +29,16 @@ class UserController extends AppController{
 		default:
 		throw new NotFoundException("{$page} is not found");
 		break;
-		
+	}
 
 		$this->set(get_defined_vars());
 		$this->render($page);
-	}
-
 }
+	
+
 	public function login(){
 		$params = array(
+		'username' => trim(Param::get('username')),
 		'password' => Param::get('password'), 
 		);
 

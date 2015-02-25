@@ -11,8 +11,7 @@ FLUSH PRIVILEGES;
 -- Create tables
 --
 
-
-                    
+                   
 USE board;
                     
 CREATE TABLE IF NOT EXISTS thread (
@@ -32,6 +31,16 @@ body                    TEXT NOT NULL,
 created                 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (id),
 INDEX (thread_id, created)
+)ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS user(
+	id INT NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(id),
+	username VARCHAR(255) NOT NULL,
+	first_name VARCHAR(255)NOT NULL,
+	last_name VARCHAR(255)NOT NULL,
+	email VARCHAR(255)NOT NULL,
+	password VARCHAR(255)NOT NULL,
 )ENGINE=InnoDB;
 
 

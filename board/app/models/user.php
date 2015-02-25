@@ -10,11 +10,12 @@ const MIN_PASSWORD_LENGTH = 8;
 
 //Maximum Length
 const MAX_USERNAME_LENGTH = 20;
-const MAX_FIRST_NAME_LENGTH = 254;
-const MAX_LAST_NAME_LENGTH = 254;
-const MAX_EMAIL_LENGTH = 254;
+const MAX_FIRST_NAME_LENGTH = 255;
+const MAX_LAST_NAME_LENGTH = 255;
+const MAX_EMAIL_LENGTH = 255;
 const MAX_PASSWORD_LENGTH = 20;
 
+public $is_validated = true;
 
 public $validation = array(
 	'username' => array(
@@ -44,9 +45,6 @@ public $validation = array(
 			'length' => array(
 				'validate_between', self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH,
 			),
-		'correct' => array(
-			'is_correct_user',
-			)
 		),
 		'confirm_password' => array(
 			'length' => array(

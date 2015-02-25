@@ -44,7 +44,6 @@ $db->commit();
 
 }catch (Exception $e) {
 	$db->rollback();
-	throw $e;
 	}
 }
 
@@ -54,7 +53,7 @@ public static function getAll() {
 	$rows = $db->rows('SELECT * FROM thread');
 
 	foreach($rows as $row) {
-		$threads[] = new Thread($row);
+		$threads[] = new self($row);
 	}
 
 	return $threads;
@@ -66,7 +65,7 @@ public static function get($id){
 	$row = $db->row('SELECT * FROM thread WHERE id = ?', array($id));
 
 	if (!$row) {
-		throw new RecordNotFoundException('no record found');
+		throw new RecordNotFoundException('No Record Found');
 	}
 
 	return new self($row);
@@ -86,7 +85,7 @@ public function getComments(){
 
 public function write(Comment $comment){
 	if(!$comment->validate()) {
-		throw new ValidationException('invalid comment');
+		throw new ValidationException('Invalid Comment');
 	}
 
 	$db = DB::conn();

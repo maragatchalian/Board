@@ -12,7 +12,6 @@ class Comment extends AppModel {
 
 
     public $validation = array(
-
         "username" => array(
                "length" => array(
                      "validate_between", self::MIN_USERNAME_LENGTH, self::MAX_USERNAME_LENGTH,

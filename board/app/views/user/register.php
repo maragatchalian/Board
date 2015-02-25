@@ -23,10 +23,18 @@
 //Checking of username if it exists
 	if (!empty($user->validation_errors['username']['exist'])): ?>
 	<div>
-		<em>Your already have an account. Please Log in.</em>
+		<em> Username is already taken. Please choose another.</em>
 	</div>
 <?php endif ?>
 
+
+<?php
+//Checking of email if it already exists
+	if(!empty($user->validation_errors['email']['exist'])): ?>
+	<div>
+		<em> The email address is already registered. Please choose another.</em>
+	</div>
+<?php endif ?>
 
 <?php 
 //First Name Validation 
@@ -128,7 +136,7 @@
 
 <input type="hidden" name="page_next" value="register_end">
 <div class="span12">
-<button class="btn btn-info btn-large" type="submit">Register me</button>
+<button class="btn btn-info btn-large" type="submit">Register</button>
 <br />
 <br />
 
