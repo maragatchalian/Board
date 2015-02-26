@@ -47,10 +47,10 @@ $db->commit();
 	}
 }
 
-public static function getAll() {
+public static function getAll($offset, $limit) {
 	$threads = array();
 	$db = DB::conn();
-	$rows = $db->rows('SELECT * FROM thread');
+	$rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
 
 	foreach($rows as $row) {
 		$threads[] = new self($row);
@@ -58,6 +58,17 @@ public static function getAll() {
 
 	return $threads;
 	}
+
+ public static function countAll(){
+	$db = DB::conn();
+	return (int) $db->value('SELECT COUNT(*) FROM thread');
+}
+
+public function countComments(){
+	$db = DB::conn();
+	return (int) $db->value("SELECT COUNT(*) FROM comment WHERE thread_id = ? ", array($this->id));
+
+}
 
 
 public static function get($id){
@@ -71,11 +82,11 @@ public static function get($id){
 	return new self($row);
 }
 
-public function getComments(){
+public function getComments($offset, $limit){
 	$comments = array();
 	$db = DB::conn();
 
-	$rows = $db->rows('SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC', array($this->id));
+	$rows = $db->rows("SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC LIMIT {$offset}, {$limit}", array($this->id));
 	
 	foreach ($rows as $row) {
 		$comments[] = new Comment($row);

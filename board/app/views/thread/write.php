@@ -30,7 +30,7 @@
   <br />
   <input type="hidden" name="thread_id" value="<?php eh($thread->id) ?>">
   <input type="hidden" name="page_next" value="write_end">
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-medium btn-info">Submit</button>
                    
 </form>
 

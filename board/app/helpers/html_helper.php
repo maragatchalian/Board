@@ -16,13 +16,4 @@ function redirect($url){
 	header("Location: " . $url);
 	exit();
 }
-
-function logged_in(){
-    if(isset($_SESSION['user_id'])) {
-         redirect(url('user/home'));
-        }
-}
-
-
-
 ?>

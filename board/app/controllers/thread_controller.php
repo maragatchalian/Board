@@ -1,7 +1,6 @@
 <?php
 class ThreadController extends AppController {
-    const ITEMS_PER_PAGE = 5;
-
+    
 //Create a new comment (Thread)
 public function create(){
 
@@ -37,15 +36,34 @@ public function create(){
 
 //Instance of the Thread model, and its static functions getAll()
 public function index() {
-    $threads = Thread::getAll();
-    $this->set(get_defined_vars());
+    $per_page = 7;
+    $page = Param::get('page', 1);
+    $pagination = new SimplePagination($page, $per_page) ;
+
+    $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
+    $pagination->checkLastPage($threads);
+
+    $total = Thread::CountAll();
+    $pages = ceil($total / $per_page);
+    
+    $this->set(get_defined_vars()); 
     }   
 
 //View function
 public function view() {
 
+    $per_page = 5;
+    $page = Param::get('page', 1);
+    $pagination = new SimplePagination($page, $per_page) ;
+
         $thread = Thread::get(Param::get('thread_id'));
-        $comments = $thread->getComments();
+        $comments = $thread->getComments($pagination->start_index -1, $pagination->count + 1);
+        
+        $pagination->checkLastPage($comments);
+        $total = $thread->countComments();
+        $pages = ceil($total / $per_page);
+
+
         $this->set(get_defined_vars());
         }
 

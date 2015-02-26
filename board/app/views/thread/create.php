@@ -39,6 +39,6 @@
   <textarea name="body"><?php eh(Param::get('body')) ?></textarea>
   <br />
   <input type="hidden" name="page_next" value="create_end">
-  <button type="submit" class="btn btn-primary">Submit</button>                
+  <button type="submit" class="btn brt-medium btn-info">Submit</button>                
 </form>
 

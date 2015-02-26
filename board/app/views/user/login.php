@@ -1,4 +1,5 @@
-<h1>Welcome!</h1>
+<h1> Hello!</h1>
+<h4> それはあなたを見て良いことだ~</h4>
 <h5>Please log in to continue</h5>
 <br />
 
@@ -12,19 +13,19 @@
 
 <form action="<?php eh(url('')) ?>" method="post">
 	<div class="span12">
-	<label for="username"><h4>Username</h4></label>
+	<label for="username"><h4>Username:</h4></label>
 	<input type="text" name="username" value="<?php eh(Param::get('username')) ?>">
 	</div>
 
 	<div class="span12">
-	<label for="password"><h4>Password</h4></label>
+	<label for="password"><h4>Password:</h4></label>
 	<input type="password" name="password" value="<?php eh(Param::get('password')) ?>">
 	</div>
 	<br />
-
-	<input type="hidden" name="page_next" value="home">
+<!--Will be redirected to login_end once successfully logged in-->
+	<input type="hidden" name="page_next" value="login_end">
 	<div class="span12">
-	<button class="btn btn-info btn-large" type="submit">Login</button>
+	<button class="btn btn-info btn-medium" type="submit">Login</button>
 
 	<br />
 	<br /> 

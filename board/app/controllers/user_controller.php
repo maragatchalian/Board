@@ -37,6 +37,11 @@ class UserController extends AppController{
 	
 
 	public function login(){
+		
+		if (is_logged_in()) {
+			redirect(url('user/login_end'));
+		}
+
 		$params = array(
 		'username' => trim(Param::get('username')),
 		'password' => Param::get('password'), 
@@ -48,7 +53,7 @@ class UserController extends AppController{
 		 switch ($page) {
 		 	 case 'login':
 		 	 break;
-		 case 'home':
+		 case 'login_end':
 		 	try {
 		 			 $user->login();
 		 		 }catch (ValidationException $e) {
@@ -74,5 +79,6 @@ class UserController extends AppController{
 	public function home(){
 		$this->set(get_defined_vars());
 	}
+
 }
 ?>
