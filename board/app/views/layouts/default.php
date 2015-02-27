@@ -2,24 +2,17 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title> Board </title>
+        <title> DietCake Board </title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<!--The Links (Once user is logged in)-->
-<div class="container">
-<?php if (isset($_SESSION['user_id'])):?>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            
 <style>
     body{
         padding-top: 60px;
         }
 
 </style>
-
 
 <!--Dietcake Heading -->
 <body>
@@ -35,7 +28,9 @@
 <!--Menu Bar (Once the user is logged in)-->
 <div class="container">
 <?php if (isset($_SESSION['user_id'])):?>
+    <nav class="navbar navbar-default">
     <div class="container-fluid">
+      
         <style>
             ul#menu {
             padding: 0;
@@ -70,18 +65,14 @@
     </ul>  
     <br />
   
- <?php endif ?>
+<?php endif ?>
+               
+<?php echo $_content_ ?>
+</div>
 
-     <?php endif ?>
-
-                  
-    <?php echo $_content_ ?>
-    </div>
-
-
-    <script>
+<script>
     console.log(<?php eh(round(microtime(true) - TIME_START, 3)) ?> + 'sec');
-    </script>
+</script>
 
     </body>
 </html>

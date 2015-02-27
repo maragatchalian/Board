@@ -3,6 +3,10 @@
 class UserController extends AppController{
 
     public function register() {
+        if (is_logged_in()) {
+            redirect(url('user/home'));
+        }
+
     $params = array(
         'username' => trim(Param::get('username')),
         'first_name' => trim(Param::get('first_name')),
@@ -15,6 +19,7 @@ class UserController extends AppController{
         $user = new User($params);
         $page = Param::get('page_next', 'register');
         
+
         switch ($page) {    
         case 'register':
         break;
@@ -33,13 +38,14 @@ class UserController extends AppController{
 
         $this->set(get_defined_vars());
         $this->render($page);
-}
-    
+    }
+
 
     public function login(){
         
-        if (is_logged_in()) {
+          if (is_logged_in()) {
             redirect(url('user/login_end'));
+
         }
 
         $params = array(
@@ -69,7 +75,7 @@ class UserController extends AppController{
         $this->set(get_defined_vars());
         $this->render($page); 
     }
-
+    
     
     public function logout(){
          session_destroy();
