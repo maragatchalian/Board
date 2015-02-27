@@ -2,9 +2,9 @@
 <h1>Create a thread</h1>
                 
 <?php if ($thread->hasError() || $comment->hasError()): ?>
-<div class="alert alert-block">
+<div class="alert alert-error">
                     
-<h4 class="alert-heading">Validation error!</h4>
+<h4 class="alert-heading">Oops!</h4>
 <?php if (!empty($thread->validation_errors['title']['length'])): ?>    
    <div><em>Title</em> must be between
      <?php eh($thread->validation['title']['length'][1]) ?> and

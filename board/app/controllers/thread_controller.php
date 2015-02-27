@@ -69,12 +69,12 @@ public function view() {
 
 
 public function write(){
-                    
-        $thread = Thread::get(Param::get('thread_id'));
-        $comment = new Comment;
-        $page = Param::get('page_next', 'write');
+             
+   $thread = Thread::get(Param::get('thread_id'));
+   $comment = new Comment;
+   $page = Param::get('page_next', 'write');
 
-        switch($page) { 
+     switch($page) { 
           case 'write':
           break;
 
@@ -82,11 +82,11 @@ public function write(){
             $comment->username = Param::get('username');
             $comment->body = Param::get('body');
           
-          try {            
-              $thread->write($comment);
-              } 
+      try {            
+            $thread->write($comment);
+          } 
           
-          catch (ValidationException $e) {                    
+      catch (ValidationException $e) {                    
               $page = 'write';
           }                        
         

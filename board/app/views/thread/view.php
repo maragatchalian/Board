@@ -14,23 +14,23 @@
 
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>
-	<a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->prev ?>'>Previous</a>
-	<?php else: ?> 
-		 Previous
-	<?php endif ?>
+    <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->prev ?>'>Previous</a>
+    <?php else: ?> 
+         Previous
+    <?php endif ?>
 
 <?php for($i = 1; $i <= $pages; $i++): ?>
-	<?php if($i == $page): ?>
-	<?php echo $i ?>
-	<?php else: ?>
-		<a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $i ?>'><?php echo $i ?></a>
-	<?php endif; ?>
-	<?php endfor; ?>
+    <?php if($i == $page): ?>
+    <?php echo $i ?>
+    <?php else: ?>
+        <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $i ?>'><?php echo $i ?></a>
+    <?php endif; ?>
+    <?php endfor; ?>
 
-	<?php if(!$pagination->is_last_page): ?>
-	<a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->next ?>'>Next</a>
-	<?php else: ?>  Next
-	<?php endif ?>
+    <?php if(!$pagination->is_last_page): ?>
+    <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->next ?>'>Next</a>
+    <?php else: ?>  Next
+    <?php endif ?>
 
 
 

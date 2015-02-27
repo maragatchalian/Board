@@ -2,17 +2,17 @@
 Class User extends AppModel{
 
 //Minimum Length
-const MIN_USERNAME_LENGTH = 1;
-const MIN_FIRST_NAME_LENGTH = 1;
-const MIN_LAST_NAME_LENGTH = 1;
-const MIN_EMAIL_LENGTH = 1;
+const MIN_USERNAME_LENGTH = 2;
+const MIN_FIRST_NAME_LENGTH = 2;
+const MIN_LAST_NAME_LENGTH = 2;
+const MIN_EMAIL_LENGTH = 4;
 const MIN_PASSWORD_LENGTH = 8;
 
 //Maximum Length
 const MAX_USERNAME_LENGTH = 20;
-const MAX_FIRST_NAME_LENGTH = 255;
-const MAX_LAST_NAME_LENGTH = 255;
-const MAX_EMAIL_LENGTH = 255;
+const MAX_FIRST_NAME_LENGTH = 30;
+const MAX_LAST_NAME_LENGTH = 30;
+const MAX_EMAIL_LENGTH = 30;
 const MAX_PASSWORD_LENGTH = 20;
 
 public $is_validated = true;
@@ -22,39 +22,44 @@ public $validation = array(
 		'length' => array(
 			'validate_between', self::MIN_USERNAME_LENGTH, self::MAX_USERNAME_LENGTH,
 		),
+
 		'exist' => array(
 			'is_username_exist', 
 			)
 		),
+
 		'first_name' => array(
 			'length' => array(
 				'validate_between', self::MIN_FIRST_NAME_LENGTH, self::MAX_FIRST_NAME_LENGTH,
-			),
+			)
 		),
 		'last_name' => array(
 			'length' => array(
 				'validate_between', self::MIN_LAST_NAME_LENGTH, self::MAX_LAST_NAME_LENGTH,
-			),
+			)
 		),
+
 		'email' => array(
 			'length' => array(
 				'validate_between', self::MIN_EMAIL_LENGTH, self::MAX_EMAIL_LENGTH,
 			),
+
+		'exist' => array(
+			'is_email_exist',
+			)
 		),
+
 		'password' => array(
 			'length' => array(
 				'validate_between', self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH,
-			),
+			)
 		),
 		'confirm_password' => array(
-			'length' => array(
-				'validate_between', self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH,
+			'match' => array(
+				'is_password_match',
+				)
 		),
-		'match' => array(
-			'is_password_match',
-			),
-		),
-);
+	);
 
 public function register(){
 	$this->validate();
@@ -68,7 +73,7 @@ public function register(){
 		'username' => $this->username,
 		'first_name' => $this->first_name,
 		'last_name' => $this->last_name,
-		'email' => $this->email,
+		'email' => strtolower($this->email),
 		'password' => md5($this->password)
 		);
 
@@ -92,7 +97,7 @@ public function login(){
 		);
 
 	
-	$user = $db->row("SELECT id, username FROM user WHERE username = :username && password = :password", $params);
+	 $user = $db->row("SELECT id, username FROM user WHERE BINARY username = :username && BINARY password = :password", $params);
 
 	if(!$user) {
 		 $this->is_validated = false; 
@@ -103,20 +108,9 @@ public function login(){
  		$_SESSION['username'] =$user['username'];
 
 }
-	/*$this->validate();
-		if ($this->hasError()) {
-		throw new ValidationException('Invalid Username or Password');
-		}
-
-		$db = DB::conn();
-		$_SESSION['user_id'] = $db->row("SELECT id FROM user WHERE username =?", array($this->username));
-		}
-	*/
 
 public function is_password_match(){
-	$db = DB::conn();
-	$username_exist = $db->row("SELECT username FROM user WHERE username = ?", array($this->username));
- 	return !$username_exist;
+	 return $this->password == $this->confirm_password;
 		}
 
 
@@ -128,20 +122,8 @@ public function is_username_exist(){
 
 public function is_email_exist(){
 	$db = DB::conn();
-	$email_exist = $db->row("SELECT email FROM user where email = ?", array($this->email));
-	return (!$email_exist);
-}
-
-
-/*public function is_correct_user(){
-	$db = DB::conn();
-		$params = array(
-		'username' => $this->username,
-		'password' => md5($this->password)
-		);
-	
-		$correct_user = $db->row("SELECT username, password FROM user WHERE username = :username && password =password", $params);
-		return !$correct_user;
-	}*/
+	$username_exist = $db->row("SELECT email FROM user where email = ?", array($this->email));
+	return (!$username_exist);
+	}
 }
 ?>
