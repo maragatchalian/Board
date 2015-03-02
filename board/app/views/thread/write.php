@@ -2,20 +2,20 @@
 <h2><?php eh($thread->title) ?></h2>
 
 <?php if ($comment->hasError()): ?>
-     <div class="alert alert-block">
+     <div class="alert alert-error">
      <h4 class="alert-heading">Oops!</h4>
 
 <?php if (!empty($comment->validation_errors['username']['length'])): ?>            
     <div><em>Your Username</em> must be between                
      <?php eh($comment->validation['username']['length'][1]) ?> and                    
-     <?php eh($comment->validation['username']['length'][2]) ?> characters in length.
+     <?php eh($comment->validation['username']['length'][2]) ?> characters.
     </div>
 <?php endif //End of Username Validation ?>
 
 <?php if (!empty($comment->validation_errors['body']['length'])): ?>                
    <div><em>Your Comment</em> must be between 
    <?php eh($comment->validation['body']['length'][1]) ?>  and                    
-   <?php eh($comment->validation['body']['length'][2]) ?> characters in length.
+   <?php eh($comment->validation['body']['length'][2]) ?> characters.
    </div>            
 <?php endif //End of Comment Validation?>
 

@@ -1,15 +1,14 @@
 <!--Comment Format --> 
 <h1><?php eh($thread->title) ?></h1>
-
-<?php foreach($comments as $k=>$v): ?>
-<div class="comment">                        
-<div class="meta">
- <h4><?php eh($k + 1) ?>. <?php eh($v->username) ?></h4> <?php eh($v->created) ?>
-</div>
-<div><?php echo readable_text($v->body) ?></div>
-</div>
+  <?php foreach($comments as $k=>$v): ?>
+  <div class="comment">                        
+  <div class="meta">
+  <h4> <ul style="list-style-type:square">
+  <li> <?php eh($v->username) ?></h4> <?php eh($v->created) ?> </li>
+  </div>
+    <div><?php echo readable_text($v->body) ?></div>
+  </div>
 <br /> 
-
 <?php endforeach ?>
 
 <!--Pagination --> 
@@ -31,8 +30,6 @@
     <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->next ?>'>Next</a>
     <?php else: ?>  Next
     <?php endif ?>
-
-
 
 
 <hr>

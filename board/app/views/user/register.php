@@ -49,7 +49,7 @@
     if (!empty($user->validation_errors['email']['length'])): ?>
         <div><em>Your Email</em> must be between
             <?php eh($user->validation['email']['length'][1]) ?> and
-            <?php eh($user->validation['email']['length'][2]) ?> characters in length.
+            <?php eh($user->validation['email']['length'][2]) ?> characters.
         </div>
 <?php endif ?>
 
@@ -66,7 +66,7 @@
     if (!empty($user->validation_errors['password']['length'])): ?>
         <div><em>Your Password</em> must be between
             <?php eh($user->validation['password']['length'][1]) ?> and
-            <?php eh($user->validation['password']['length'][2]) ?> characters in length.
+            <?php eh($user->validation['password']['length'][2]) ?> characters.
         </div>
 <?php endif ?>
 

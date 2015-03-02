@@ -1,7 +1,10 @@
 <?php
 class ThreadController extends AppController {
     
-//Create a new comment (Thread)
+/*Create a new comment (Thread)
+* :: - STATIC FUNCTION, can be called from the class name
+* -> - INSTANCE, can only be called from an instance of the class.
+*/
 public function create(){
 
         $thread = new Thread();
@@ -9,13 +12,13 @@ public function create(){
         $page = Param::get('page_next', 'create');
         
         switch ($page) {
- 	         case 'create':
+           case 'create':
            break;
           
            case 'create_end':
             $thread->title = Param::get('title');
             $comment->username = Param::get('username');
-	          $comment->body = Param::get('body');
+            $comment->body = Param::get('body');
  
            try {
                $thread->create($comment);
@@ -24,10 +27,10 @@ public function create(){
             }
            break;
            
-	         default:
+           default:
             throw new NotFoundException("{$page} is not found");
             break;
-    	   }	
+         }  
 
        $this->set(get_defined_vars());
        $this->render($page);
@@ -100,6 +103,6 @@ public function write(){
             $this->set(get_defined_vars());
             $this->render($page);
         
-	}
+  }
 }
 ?>
