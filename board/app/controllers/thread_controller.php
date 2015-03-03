@@ -20,19 +20,19 @@ class ThreadController extends AppController {
           $comment->username = Param::get('username');
           $comment->body = Param::get('body');
  
-        try 
-        {
-          $thread->create($comment);
-        } 
+          try 
+          {
+            $thread->create($comment);
+          } 
 
-        catch (ValidationException $e) 
-        {
-          $page = 'create';
-        }
-           
+          catch (ValidationException $e) 
+          {
+            $page = 'create';
+          }
+          
         break;
         default:
-         throw new NotFoundException("{$page} is not found");
+          throw new NotFoundException("{$page} is not found");
         break;
       }  
 
@@ -105,7 +105,7 @@ class ThreadController extends AppController {
     }
 
   $this->set(get_defined_vars());
-   $this->render($page);   
+  $this->render($page);   
   }
 }
 ?>

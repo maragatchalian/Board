@@ -1,6 +1,3 @@
 app/config/core.php
-app/config/core.php~
-app/controllers/thread_controller.php~
-app/models.thread.php~
 app/tmp/logs/*.log
 app/webroot/bootstrap/img/*
