@@ -1,44 +1,49 @@
 <?php
 class ThreadController extends AppController {
-    
-/*Create a new comment (Thread)
-* :: - STATIC FUNCTION, can be called from the class name
-* -> - INSTANCE, can only be called from an instance of the class.
-*/
-public function create(){
-
-        $thread = new Thread();
-        $comment = new Comment();
-        $page = Param::get('page_next', 'create');
-        
-        switch ($page) {
-           case 'create':
-           break;
+  
+  /*Create a new comment (Thread)
+  * :: - STATIC FUNCTION, can be called from the class name
+  * -> - INSTANCE, can only be called from an instance of the class.
+  */
+  public function create(){
+    $thread = new Thread();
+    $comment = new Comment();
+    $page = Param::get('page_next', 'create');
+      
+      switch ($page) 
+      {
+        case 'create':
+        break;
           
-           case 'create_end':
-            $thread->title = Param::get('title');
-            $comment->username = Param::get('username');
-            $comment->body = Param::get('body');
+        case 'create_end':
+          $thread->title = Param::get('title');
+          $comment->username = Param::get('username');
+          $comment->body = Param::get('body');
  
-           try {
-               $thread->create($comment);
-               } catch (ValidationException $e) {
-               $page = 'create';
-            }
-           break;
+        try 
+        {
+          $thread->create($comment);
+        } 
+
+        catch (ValidationException $e) 
+        {
+          $page = 'create';
+        }
            
-           default:
-            throw new NotFoundException("{$page} is not found");
-            break;
-         }  
+        break;
+        default:
+         throw new NotFoundException("{$page} is not found");
+        break;
+      }  
 
-       $this->set(get_defined_vars());
-       $this->render($page);
-    }
+    $this->set(get_defined_vars());
+    $this->render($page);
+  }
  
 
-//Instance of the Thread model, and its static functions getAll()
-public function index() {
+  //Instance of the Thread model, and its static functions getAll()
+  public function index() 
+  {
     $per_page = 7;
     $page = Param::get('page', 1);
     $pagination = new SimplePagination($page, $per_page) ;
@@ -50,59 +55,57 @@ public function index() {
     $pages = ceil($total / $per_page);
     
     $this->set(get_defined_vars()); 
-    }   
+  }   
 
-//View function
-public function view() {
-
+  //View function
+  public function view() 
+  {
     $per_page = 5;
     $page = Param::get('page', 1);
     $pagination = new SimplePagination($page, $per_page) ;
 
-        $thread = Thread::get(Param::get('thread_id'));
-        $comments = $thread->getComments($pagination->start_index -1, $pagination->count + 1);
+    $thread = Thread::get(Param::get('thread_id'));
+    $comments = $thread->getComments($pagination->start_index -1, $pagination->count + 1);
         
-        $pagination->checkLastPage($comments);
-        $total = $thread->countComments();
-        $pages = ceil($total / $per_page);
+    $pagination->checkLastPage($comments);
+    $total = $thread->countComments();
+    $pages = ceil($total / $per_page);
+    $this->set(get_defined_vars());
+  }
 
 
-        $this->set(get_defined_vars());
-        }
+  public function write()
+  {
+    $thread = Thread::get(Param::get('thread_id'));
+    $comment = new Comment();
+    $page = Param::get('page_next', 'write');
 
+    switch($page) { 
+      case 'write':
+      break;
 
-public function write(){
-             
-   $thread = Thread::get(Param::get('thread_id'));
-   $comment = new Comment;
-   $page = Param::get('page_next', 'write');
-
-     switch($page) { 
-          case 'write':
-          break;
-
-          case 'write_end':                
-            $comment->username = Param::get('username');
-            $comment->body = Param::get('body');
+      case 'write_end':                
+        $comment->username = Param::get('username');
+        $comment->body = Param::get('body');
           
-      try {            
-            $thread->write($comment);
-          } 
-          
-      catch (ValidationException $e) {                    
-              $page = 'write';
-          }                        
+        try 
+        {            
+          $thread->write($comment);
+        } 
+
+        catch (ValidationException $e)
+        {                    
+          $page = 'write';
+        }                        
         
-          break;
-          
-          default:
-            throw new NotFoundException("{$page} is not found");
-            break;
-          }
+      break;
+      default:
+        throw new NotFoundException("{$page} is not found");
+      break;
+    }
 
-            $this->set(get_defined_vars());
-            $this->render($page);
-        
+  $this->set(get_defined_vars());
+   $this->render($page);   
   }
 }
 ?>
