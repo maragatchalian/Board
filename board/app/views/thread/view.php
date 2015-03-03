@@ -6,7 +6,7 @@
   <h4> <ul style="list-style-type:square">
   <li> <?php eh($v->username) ?></h4> <?php eh($v->created) ?> </li>
   </div>
-    <div><?php echo readable_text($v->body) ?></div>
+    <div><?php echo($v->body) ?></div>
   </div>
 <br /> 
 <?php endforeach ?>
