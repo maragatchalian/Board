@@ -4,7 +4,8 @@ class UserController extends AppController{
 
     public function register() 
     {
-        if (is_logged_in()) {
+        if (is_logged_in()) 
+        {
         redirect(url('user/home'));
         }
 
@@ -20,23 +21,18 @@ class UserController extends AppController{
         $user = new User($params);
         $page = Param::get('page_next', 'register');
         
-        switch ($page) 
-        {    
+        switch ($page) {    
             case 'register':
-            break;
+                break;
+            
             case 'register_end':
-       
-            try
-            {
-                $user->register();
-            }
+                try {
+                    $user->register();
+                } catch (ValidationException $e){
+                    $page = 'register';
+                }
 
-            catch (ValidationException $e)
-            {
-              $page = 'register';
-            }
-
-            break;
+                break;
             default:
                 throw new NotFoundException("{$page} is not found");
             break;
@@ -46,42 +42,36 @@ class UserController extends AppController{
         $this->render($page);
     }
 
-
     public function login()
     {
-        if (is_logged_in()) {
-        redirect(url('user/login_end'));
+        if (is_logged_in()) 
+        {
+            redirect(url('user/login_end'));
         }
 
         $params = array(
-        'username' => trim(Param::get('username')),
-        'password' => Param::get('password'), 
-        );
+            'username' => trim(Param::get('username')),
+            'password' => Param::get('password'), 
+            );
 
         $user = new User($params);
         $page = Param::get('page_next', 'login');
 
-        switch ($page) 
-        {
+        switch ($page) {
             case 'login':
-            break;
+                break;
          
             case 'login_end':
+                try {
+                    $user->login();
+                } catch (ValidationException $e) {
+                    $page = 'login';
+                }
             
-            try 
-            {
-                $user->login();
-            }
-
-            catch (ValidationException $e) 
-            {
-                $page = 'login';
-            }
-            
-            break;
+                break;
             default:
                 throw new NotFoundException("{$page} is not found");
-            break;
+                break;
         }
         
         $this->set(get_defined_vars());

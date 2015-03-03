@@ -5,48 +5,44 @@ class ThreadController extends AppController {
   * :: - STATIC FUNCTION, can be called from the class name
   * -> - INSTANCE, can only be called from an instance of the class.
   */
-  public function create(){
+  public function create()
+  {
     $thread = new Thread();
     $comment = new Comment();
-    $page = Param::get('page_next', 'create');
+    $current_page = Param::get('page_next', 'create');
       
-      switch ($page) 
-      {
-        case 'create':
+    switch ($current_page) {
+      case 'create':
         break;
-          
-        case 'create_end':
-          $thread->title = Param::get('title');
-          $comment->username = Param::get('username');
-          $comment->body = Param::get('body');
+      
+      case 'create_end':
+        $thread->title = Param::get('title');
+        $comment->username = Param::get('username');
+        $comment->body = Param::get('body');
  
-          try 
+        try 
           {
             $thread->create($comment);
-          } 
-
-          catch (ValidationException $e) 
-          {
+          } catch (ValidationException $e) {
             $page = 'create';
           }
           
-        break;
+          break;
         default:
-          throw new NotFoundException("{$page} is not found");
-        break;
+          throw new NotFoundException("{$current_page} is not found");
+          break;
       }  
 
     $this->set(get_defined_vars());
     $this->render($page);
   }
  
-
   //Instance of the Thread model, and its static functions getAll()
   public function index() 
   {
     $per_page = 7;
-    $page = Param::get('page', 1);
-    $pagination = new SimplePagination($page, $per_page) ;
+    $current_page = Param::get('page', 1);
+    $pagination = new SimplePagination($current_page, $per_page) ;
 
     $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
     $pagination->checkLastPage($threads);
@@ -57,7 +53,6 @@ class ThreadController extends AppController {
     $this->set(get_defined_vars()); 
   }   
 
-  //View function
   public function view() 
   {
     $per_page = 5;
@@ -91,17 +86,14 @@ class ThreadController extends AppController {
         try 
         {            
           $thread->write($comment);
-        } 
-
-        catch (ValidationException $e)
-        {                    
+        } catch (ValidationException $e) {                    
           $page = 'write';
         }                        
         
-      break;
+        break;
       default:
         throw new NotFoundException("{$page} is not found");
-      break;
+        break;
     }
 
   $this->set(get_defined_vars());

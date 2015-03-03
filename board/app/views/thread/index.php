@@ -1,11 +1,11 @@
 <h1>All threads</h1>
        
 <ul style="list-style-type:square">
-<?php foreach ($threads as $thread): ?>
-<li>
+    <?php foreach ($threads as $thread): ?>
+    <li>
     <a href="<?php eh(url('thread/view', array('thread_id' => $thread->id))) ?>">
     <?php eh($thread->title) ?></a>        
-</li>
+    </li>
     <?php endforeach; //Display contents of individual thread to href to A tag ?>
 
 <!-- pagination -->
@@ -17,19 +17,18 @@
         <?php endif ?>
 
 <?php for($i = 1; $i <= $pages; $i++): ?>
-    <?php if($i == $page): ?>
+    <?php if($i == $current_page): ?>
         <?php echo $i ?>
-     <?php else: ?>
+    <?php else: ?>
         <a class ="btn btn-small" href='?page=<?php echo $i ?>'><?php echo $i ?></a>
      <?php endif; ?>
-        <?php endfor; ?>
+<?php endfor; ?>
 
 <?php if(!$pagination->is_last_page): ?>
     <a class ="btn btn-small" href='?page=<?php echo $pagination->next ?>'>Next</a>
     <?php else: ?>
         Next
-    <?php endif ?>
-
+<?php endif ?>
 
 <!--Create button--> 
 <br />

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title> DietCake Board </title>
+<head> <meta charset="utf-8">
+<title> DietCake Board </title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -11,7 +10,6 @@
     body{
         padding-top: 60px;
         }
-
 </style>
 
 <!--Dietcake Heading -->
@@ -19,43 +17,46 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a class="brand"> Welcome to DietCake</a>
+     <a class="brand"> Welcome to DietCake</a>
             </div>
         </div>
     </div>
-
 
 <!--Menu Bar (Once the user is logged in)-->
 <div class="container">
 <?php if (isset($_SESSION['user_id'])):?>
     <nav class="navbar navbar-default">
     <div class="container-fluid">
-      
-        <style>
-            ul#menu {
-            padding: 0;
-            text-align: center;
-            }
+    
+    <style>
+        ul#menu 
+        {
+        padding: 0;
+        text-align: center;
+        }
 
-    ul#menu li {
-     display: inline;
-     }
+        ul#menu li 
+        {
+        display: inline;
+        }
 
-    ul#menu li a {
+        ul#menu li a 
+        {
         background-color: black;
         color: white;
         padding: 5px 5px;
         text-decoration: none;
         border-radius: 2px 2px 0 0;
         text-align: center;
-    }
+        }
 
-    ul#menu li a:hover {
-        background-color: lightgrey;
+        ul#menu li a:hover 
+        {
         color: black;
-    }
+        background-color: lightgrey;
+        }
+    </style>
 
-</style>
     <ul id="menu">
         <li><a href="<?php eh(url('user/home')) ?>">Home</a>
         <li><a href="<?php eh(url('thread/index')) ?>">All Threads</a></li>
@@ -74,5 +75,5 @@
     console.log(<?php eh(round(microtime(true) - TIME_START, 3)) ?> + 'sec');
 </script>
 
-    </body>
+</body>
 </html>

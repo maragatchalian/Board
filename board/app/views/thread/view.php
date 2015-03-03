@@ -1,13 +1,13 @@
 <!--Comment Format --> 
 <h1><?php eh($thread->title) ?></h1>
   <?php foreach($comments as $k=>$v): ?>
-  <div class="comment">                        
-  <div class="meta">
-  <h4> <ul style="list-style-type:square">
-  <li> <?php eh($v->username) ?></h4> <?php eh($v->created) ?> </li>
-  </div>
+    <div class="comment">                        
+      <div class="meta">
+        <h4> <ul style="list-style-type:square">
+        <li> <?php eh($v->username) ?></h4> <?php eh($v->created) ?> </li>
+      </div>
     <div><?php echo($v->body) ?></div>
-  </div>
+    </div>
 <br /> 
 <?php endforeach ?>
 
@@ -20,23 +20,23 @@
 
 <?php for($i = 1; $i <= $pages; $i++): ?>
     <?php if($i == $page): ?>
-    <?php echo $i ?>
+      <?php echo $i ?>
     <?php else: ?>
         <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $i ?>'><?php echo $i ?></a>
     <?php endif; ?>
-    <?php endfor; ?>
+<?php endfor; ?>
 
-    <?php if(!$pagination->is_last_page): ?>
+<?php if(!$pagination->is_last_page): ?>
     <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->next ?>'>Next</a>
     <?php else: ?>  Next
-    <?php endif ?>
+<?php endif ?>
 
 
-<hr>
-                    
+<hr>            
 <form class="well" method="post" action="<?php eh(url('thread/write')) ?>">
   <label>Your name</label>
   <input type="text" class="span2" name="username" value="<?php eh(Param::get('username')) ?>">
+  
   <label>Comment</label>
   <textarea name="body"><?php eh(Param::get('body')) ?></textarea>
   <br />

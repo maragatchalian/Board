@@ -3,7 +3,8 @@
 <h5>Please log in to continue</h5>
 <br />
 
-    <?php if (!$user->is_validated) : ?>
+<!--Empty/invalid username/password error message-->
+<?php if (!$user->is_validated) : ?>
     <div class="alert alert-error">
         <em><h4 class="alert-heading">Oops!</h4></em>
         <em>Invalid Username or Password</em>
