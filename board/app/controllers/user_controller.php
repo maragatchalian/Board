@@ -18,8 +18,8 @@ class UserController extends AppController{
         'confirm_password' => Param::get('confirm_password'),
         );
 
-        $user = new User($params);
-        $page = Param::get('page_next', 'register');
+    $user = new User($params);
+    $page = Param::get('page_next', 'register');
         
         switch ($page) {    
             case 'register':
@@ -37,7 +37,6 @@ class UserController extends AppController{
                 throw new NotFoundException("{$page} is not found");
             break;
         }
-
         $this->set(get_defined_vars());
         $this->render($page);
     }
@@ -52,27 +51,28 @@ class UserController extends AppController{
         $params = array(
             'username' => trim(Param::get('username')),
             'password' => Param::get('password'), 
-            );
+        );
 
         $user = new User($params);
         $page = Param::get('page_next', 'login');
 
-        switch ($page) {
-            case 'login':
-                break;
+            switch ($page) {
+                case 'login':
+                    break;
          
-            case 'login_end':
-                try {
-                    $user->login();
-                } catch (ValidationException $e) {
-                    $page = 'login';
-                }
+                case 'login_end':
+                    try 
+                    {
+                      $user->login();
+                    } catch (ValidationException $e) {
+                        $page = 'login';
+                    }
             
-                break;
-            default:
-                throw new NotFoundException("{$page} is not found");
-                break;
-        }
+                    break;
+                default:
+                    throw new NotFoundException("{$page} is not found");
+                    break;
+            }
         
         $this->set(get_defined_vars());
         $this->render($page); 

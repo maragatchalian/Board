@@ -1,5 +1,6 @@
 <!--View for Creation of comments on thread --> 
-<h1>Create a thread</h1>
+<font color = "black">
+<h1> Create a thread</h1>
               
 <?php if ($thread->hasError() || $comment->hasError()): ?>
   <div class="alert alert-error">             
@@ -11,7 +12,7 @@
     <em>Title</em> 
       must be between
       <?php eh($thread->validation['title']['length'][1]) ?> and
-      <?php eh($thread->validation['title']['length'][2]) ?> characters in length.
+      <?php eh($thread->validation['title']['length'][2]) ?> characters.
     </div>
   <?php endif ?>
 
@@ -21,7 +22,7 @@
       <em>Username</em> 
         must be between    
         <?php eh($comment->validation['username']['length'][1]) ?> and
-        <?php eh($comment->validation['username']['length'][2]) ?> characters in length.
+        <?php eh($comment->validation['username']['length'][2]) ?> characters.
     </div>
   <?php endif ?>
 
@@ -31,7 +32,7 @@
       <em>Comment</em> 
         must be between
         <?php eh($comment->validation['body']['length'][1]) ?> and
-        <?php eh($comment->validation['body']['length'][2]) ?> characters in length.
+        <?php eh($comment->validation['body']['length'][2]) ?> characters.
     </div>
   <?php endif ?>
 
@@ -52,5 +53,5 @@
   <input type="hidden" name="page_next" value="create_end">
   <button type="submit" class="btn brt-medium btn-info">Submit</button>                
 
+</font>
 </form>
-

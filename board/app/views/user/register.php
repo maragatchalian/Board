@@ -1,3 +1,4 @@
+<font color = "black">
 <h3>Registration</h3>
 <h5>Please fill up this form:</h5>
 
@@ -133,3 +134,4 @@ Already have an account? Log in
 
 </div>
 </form>
+</font>

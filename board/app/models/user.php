@@ -1,6 +1,7 @@
 <?php
 
 Class User extends AppModel {
+//The following constants are declared to avoid magic numbers
     const MIN_USERNAME_LENGTH = 2;
     const MIN_FIRST_NAME_LENGTH = 2;
     const MIN_LAST_NAME_LENGTH = 2;
@@ -15,6 +16,11 @@ Class User extends AppModel {
 
     public $is_validated = true;
 
+/*
+*Registration Length Validation
+*To make sure that a specific field is only limited 
+*to a specific number of characters.
+*/
     public $validation = array(
         'username' => array(
             'length' => array(
@@ -66,10 +72,10 @@ Class User extends AppModel {
         if ($this->hasError()) 
         {
             throw new ValidationException('Invalid Input!');
-         }
+        }
 
-    $db = DB::conn();
-    $params = array(
+    $db = DB::conn(); 
+    $params = array( //what is to be inserted when $params is called
         'username' => $this->username,
         'first_name' => $this->first_name,
         'last_name' => $this->last_name,
@@ -80,24 +86,20 @@ Class User extends AppModel {
         try 
         {
             $db->begin();
-            $db->insert('user', $params);
+            $db->insert('user', $params); //to insert values of $params in table 'user'
             $db->commit();
-        }
-
-        catch(Exception $e) 
-        {
+        } catch(Exception $e) {
             $db->rollback();
             throw $e;
         }
     }
-
 
     public function login()
     {
         $db = DB::conn();
         $params = array(
             'username' => $this->username,
-                'password' => md5($this->password)
+            'password' => md5($this->password)
         );
 
     $user = $db->row("SELECT id, username FROM user WHERE BINARY username = :username && BINARY password = :password", $params);
@@ -109,7 +111,7 @@ Class User extends AppModel {
         }
 
     $_SESSION['user_id'] = $user['id'];
-    $_SESSION['username'] =$user['username'];
+    $_SESSION['username'] = $user['username'];
     }
 
     public function is_password_match()

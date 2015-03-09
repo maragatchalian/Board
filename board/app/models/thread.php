@@ -1,11 +1,16 @@
 <?php
 
-//Thread Validation
 class Thread extends AppModel{
 
+/* 
+*The following constants are declared to avoid magic numbers.
+*Avoid using magic numbers so others couuld
+*   understand what that number is all about.
+*/
     const MIN_TITLE_LENGTH = 1;
     const MAX_TITLE_LENGTH = 30;
 
+//Thread Length Validation
     public $validation = array(
         'title' => array(
             'length' => array(
@@ -32,7 +37,7 @@ class Thread extends AppModel{
             'created'=> $date_created
              );
 
-    //Returns the latest inserted ID
+    //Latest inserted ID
             try 
             {
                 $db->begin();
@@ -42,10 +47,7 @@ class Thread extends AppModel{
     //write first comment at the same time
                 $this->write($comment);
                 $db->commit();
-            }
-
-            catch (Exception $e) 
-            {
+            } catch (Exception $e) {
                 $db->rollback();
             }
     }
@@ -106,7 +108,8 @@ class Thread extends AppModel{
 
     public function write(Comment $comment)
     {
-        if(!$comment->validate()) 
+
+        if(!$comment->validate())
         {
             throw new ValidationException('Invalid Comment');
         }
@@ -114,7 +117,7 @@ class Thread extends AppModel{
         $db = DB::conn();
         $db->query(
             'INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()',
-            array($this->id, $comment->username, $comment->body)
-        );
+                array($this->id, $comment->username, $comment->body)
+        );     
     }
 }

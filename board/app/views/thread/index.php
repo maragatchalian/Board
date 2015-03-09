@@ -1,4 +1,6 @@
-<h1>All threads</h1>
+<h1> 
+    <font color ="black">
+    All threads</h1>
        
 <ul style="list-style-type:square">
     <?php foreach ($threads as $thread): ?>
@@ -35,4 +37,5 @@
 <br />
 <a class="btn btn-medium btn-info" href="<?php eh(url('thread/create')) ?>">Create Thread</a>
 
+    </font>
 </ul>

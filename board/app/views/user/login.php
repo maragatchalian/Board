@@ -1,3 +1,4 @@
+<font color = "black">
 <h1> Hello!</h1>
 <h4> それはあなたを見て良いことだ~</h4>
 <h5>Please log in to continue</h5>
@@ -36,3 +37,4 @@ If you don't have an account, register
 </div>
 
 </form>
+</font>

@@ -1,4 +1,5 @@
 <!--Comment Format --> 
+<font color = "black">
 <h1><?php eh($thread->title) ?></h1>
   <?php foreach($comments as $k=>$v): ?>
     <div class="comment">                        
@@ -44,5 +45,5 @@
   <input type="hidden" name="thread_id" value="<?php eh($thread->id) ?>">
   <input type="hidden" name="page_next" value="write_end">
   <button type="submit" class="btn btn-medium btn-info">Submit</button>
-                    
+</font>      
 </form>
