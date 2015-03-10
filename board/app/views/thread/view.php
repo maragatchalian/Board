@@ -20,7 +20,7 @@
     <?php endif ?>
 
 <?php for($i = 1; $i <= $pages; $i++): ?>
-    <?php if($i == $page): ?>
+    <?php if($i == $current_page): ?>
       <?php echo $i ?>
     <?php else: ?>
         <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $i ?>'><?php echo $i ?></a>

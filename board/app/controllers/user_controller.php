@@ -10,10 +10,10 @@ class UserController extends AppController{
         }
 
     $params = array(
-        'username' => trim(Param::get('username')),
-        'first_name' => trim(Param::get('first_name')),
-        'last_name' => trim(Param::get('last_name')),
-        'email' => trim(Param::get('email')),
+        'username' => Param::get('username'),
+        'first_name' => Param::get('first_name'),
+        'last_name' => Param::get('last_name'),
+        'email' => Param::get('email'),
         'password' => Param::get('password'),
         'confirm_password' => Param::get('confirm_password'),
         );

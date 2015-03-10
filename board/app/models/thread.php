@@ -29,9 +29,7 @@ class Thread extends AppModel{
                 throw new ValidationException('Invalid thread or comment');
             }
 
-        $db = DB::conn();
         $date_created = date("Y-m-d H:i:s");
-
         $params = array(
             'title' => $this->title,
             'created'=> $date_created
@@ -40,6 +38,7 @@ class Thread extends AppModel{
     //Latest inserted ID
             try 
             {
+                $db = DB::conn();
                 $db->begin();
                 $db->insert('thread', $params);
                 $this->id = $db->lastInsertId();

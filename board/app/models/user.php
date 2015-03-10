@@ -1,6 +1,6 @@
 <?php
 
-Class User extends AppModel {
+class User extends AppModel {
 //The following constants are declared to avoid magic numbers
     const MIN_USERNAME_LENGTH = 2;
     const MIN_FIRST_NAME_LENGTH = 2;
@@ -19,7 +19,7 @@ Class User extends AppModel {
 /*
 *Registration Length Validation
 *To make sure that a specific field is only limited 
-*to a specific number of characters.
+*   to a specific number of characters.
 */
     public $validation = array(
         'username' => array(
@@ -74,7 +74,7 @@ Class User extends AppModel {
             throw new ValidationException('Invalid Input!');
         }
 
-    $db = DB::conn(); 
+    
     $params = array( //what is to be inserted when $params is called
         'username' => $this->username,
         'first_name' => $this->first_name,
@@ -85,6 +85,7 @@ Class User extends AppModel {
 
         try 
         {
+            $db = DB::conn(); 
             $db->begin();
             $db->insert('user', $params); //to insert values of $params in table 'user'
             $db->commit();

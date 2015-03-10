@@ -41,7 +41,7 @@ class ThreadController extends AppController {
     $this->render($current_page);
   }
  
-  //Displays all the threads
+  //Displays maximum number of threads per page
   public function index() 
   {
     $per_page = self::MAX_THREAD_PER_PAGE; 
@@ -57,12 +57,12 @@ class ThreadController extends AppController {
     $this->set(get_defined_vars()); 
   }   
 
-  //Displays all the comments (depends on what thread you clicked)
+  //Displays the comments of the thread
   public function view() 
   {
     $per_page = self::MAX_COMMENT_PER_PAGE;
-    $page = Param::get('page', 1);
-    $pagination = new SimplePagination($page, $per_page) ;
+    $current_page = Param::get('page', 1);
+    $pagination = new SimplePagination($current_page, $per_page) ;
 
     $thread = Thread::get(Param::get('thread_id'));
     $comments = $thread->getComments($pagination->start_index -1, $pagination->count + 1);
@@ -78,9 +78,9 @@ class ThreadController extends AppController {
   {
     $thread = Thread::get(Param::get('thread_id'));
     $comment = new Comment();
-    $page = Param::get('page_next', 'write');
+    $current_page = Param::get('page_next', 'write');
 
-    switch($page) { 
+    switch($current_page) { 
       case 'write':
       break;
 
@@ -92,17 +92,17 @@ class ThreadController extends AppController {
         {            
           $thread->write($comment);
         } catch (ValidationException $e) {                    
-          $page = 'write';
+          $current_page = 'write';
         }                        
         
         break;
       default:
-        throw new NotFoundException("{$page} is not found");
+        throw new NotFoundException("{$current_page} is not found");
         break;
     }
 
   $this->set(get_defined_vars());
-  $this->render($page);   
+  $this->render($current_page);   
   }
 }
 ?>
