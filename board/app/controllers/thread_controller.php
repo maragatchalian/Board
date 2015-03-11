@@ -13,9 +13,10 @@ class ThreadController extends AppController {
     {
         $thread = new Thread();
         $comment = new Comment();
+        $category_name = Param::get('category_name');
         $current_page = Param::get('page_next', 'create');
-      
-        switch ($current_page) {
+
+            switch ($current_page) {
             case 'create':
             break;
       
@@ -23,8 +24,9 @@ class ThreadController extends AppController {
             $thread->title = Param::get('title');
             $comment->username = Param::get('username');
             $comment->body = Param::get('body');
- 
-            try 
+            
+           
+             try 
             {
                 $thread->create($comment);
             } catch (ValidationException $e) {
@@ -62,6 +64,8 @@ class ThreadController extends AppController {
         $per_page = self::MAX_COMMENT_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page) ;
+        $category_name = Param::get('category_name');
+        
 
         $thread = Thread::get(Param::get('thread_id'));
         $comments = $thread->getComments($pagination->start_index -1, $pagination->count + 1);
@@ -103,5 +107,6 @@ class ThreadController extends AppController {
     $this->set(get_defined_vars());
     $this->render($current_page);   
     }
-}
+
+  }
 ?>

@@ -17,7 +17,7 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-     <a class="brand"> Welcome to DietCake</a>
+     <a class="brand"> FoodFacts!</a>
             </div>
         </div>
     </div>
@@ -59,13 +59,16 @@
 
     <ul id="menu">
         <li><a href="<?php eh(url('user/home')) ?>">Home</a>
-        <li><a href="<?php eh(url('thread/index')) ?>">All Threads</a></li>
-        <li><a href="<?php eh(url('#')) ?>">My Threads</a></li>
+        <li><a href="<?php eh(url('user/profile')) ?>">Profile</a></li>
+        <li><a href="<?php eh(url('thread/index')) ?>">Threads</a>
         <li><a href="<?php eh(url('thread/create')) ?>">Create New Thread</a></li>  
+        <li><a href="<?php eh(url('#')) ?>">Users</a></li> 
         <li><a href="<?php eh(url('user/logout')) ?>">Logout</a></li>
     </ul>  
     <br />
-  
+
+    
+      
 <?php endif ?>
                
 <?php echo $_content_ ?>

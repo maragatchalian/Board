@@ -4,9 +4,9 @@
         <br />
         <center>
             <font color ="black">
-                <h1>Hello~</h1>
+                <h1>NEWSFEED</h1>
                 <h3>お帰りなさい</h3>
-            </font>
+                </font>
         </center>
         </head>
     </body>

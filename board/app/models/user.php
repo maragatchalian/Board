@@ -135,5 +135,18 @@ class User extends AppModel {
         $username_exist = $db->row("SELECT email FROM user where email = ?", array($this->email));
         return (!$username_exist);
     }
+
+    //Gets user's Data
+    public static function get(){
+        $db = DB::conn();
+        $row = $db->row("SELECT * FROM user 
+                    WHERE id = ?", array($_SESSION['user_id']));    
+        
+        if (!$row) {
+            throw new RecordNotFoundException('no record found');
+        }
+        return new self($row);
+    }
+    
 }
 ?>

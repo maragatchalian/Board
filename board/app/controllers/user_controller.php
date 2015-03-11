@@ -84,9 +84,16 @@ class UserController extends AppController{
         redirect(url('user/login'));
     }
 
-    public function home()
-    {
-        $this->set(get_defined_vars());
+    public function home() {
+        
     }
+
+    public function profile() {
+    $user = User::get();
+    $this->set(get_defined_vars());
+    }
+
 }
+
 ?>
+

@@ -2,15 +2,21 @@
 <font color = "black">
 <h1><?php eh($thread->title) ?></h1>
   <?php foreach($comments as $k=>$v): ?>
+   
     <div class="comment">                        
       <div class="meta">
+
         <h4> <ul style="list-style-type:square">
-        <li> <?php eh($v->username) ?></h4> <?php eh($v->created) ?> </li>
-      </div>
-    <div><?php echo($v->body) ?></div>
+        <li>  <?php eh($v->username) ?> </li> </h4> 
+          <?php eh($v->created) ?> 
+      </div> 
     </div>
+
+    <div><?php echo($v->body) ?></div>
+      
 <br /> 
 <?php endforeach ?>
+
 
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>

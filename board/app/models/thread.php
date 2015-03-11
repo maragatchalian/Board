@@ -19,8 +19,8 @@ class Thread extends AppModel{
         ),
     );
 
-    public function create(Comment $comment) 
-    {
+        public function create(Comment $comment) { 
+        
         $this->validate();
         $comment->validate();
 
@@ -119,4 +119,17 @@ class Thread extends AppModel{
                 array($this->id, $comment->username, $comment->body)
         );     
     }
+
+    //This is supposed to get the thread's category values
+    public static function category($category_name){
+        
+        $db = DB::conn();
+        $row = $db->row("SELECT category_name FROM category 
+                WHERE category_name = ?", array($category_name)); 
+        
+        if (!$row) {
+            throw new RecordNotFoundException('no record found');
+            }
+        return new self($row);
+        }    
 }
