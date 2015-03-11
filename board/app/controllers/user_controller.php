@@ -6,7 +6,7 @@ class UserController extends AppController{
     {
         if (is_logged_in()) 
         {
-        redirect(url('user/home'));
+            redirect(url('user/home'));
         }
 
     $params = array(
@@ -23,12 +23,12 @@ class UserController extends AppController{
         
         switch ($page) {    
             case 'register':
-                break;
+            break;
             
             case 'register_end':
                 try {
                     $user->register();
-                } catch (ValidationException $e){
+                } catch (ValidationException $e) {
                     $page = 'register';
                 }
 
@@ -58,13 +58,13 @@ class UserController extends AppController{
 
             switch ($page) {
                 case 'login':
-                    break;
+                break;
          
                 case 'login_end':
                     try 
                     {
-                      $user->login();
-                    } catch (ValidationException $e) {
+                        $user->login();
+                    }catch (ValidationException $e){
                         $page = 'login';
                     }
             

@@ -17,8 +17,8 @@ class User extends AppModel {
     public $is_validated = true;
 
 /*
-*Registration Length Validation
-*To make sure that a specific field is only limited 
+*Registration Length Validation.
+*to make sure that a specific field is only limited 
 *   to a specific number of characters.
 */
     public $validation = array(
@@ -66,7 +66,8 @@ class User extends AppModel {
         ),
     );
 
-    public function register(){
+    public function register()
+    {
         $this->validate();
     
         if ($this->hasError()) 
