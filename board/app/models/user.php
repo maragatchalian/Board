@@ -147,6 +147,32 @@ class User extends AppModel {
         }
         return new self($row);
     }
+
+    //Update Profile
+    public function update(){
+         if (!$this->validate()) {
+            throw new ValidationException('Invalid user credentials');
+        }
+
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $db->update(
+                 'user', array(
+                    'username' => $this->username,
+                    'first_name' => $this->first_name,
+                    'last_name' => $this->last_name,
+                    'email' => strtolower($this->email)
+                    ),
+                 array('id'=>$_SESSION['user_id']) 
+                  );
+            $db->commit();
+            }catch(Exception $e) {
+                 $db->rollback();
+                 throw $e;
+            }
+
+    }
     
 }
 ?>

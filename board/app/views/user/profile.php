@@ -1,5 +1,5 @@
 <html>
-    <head>
+    <head> </head>
         <br />
         <br />
         <center>
@@ -15,10 +15,11 @@
 
                 <h3> Security </h3>
                 **Password is hidden** <br />
-
+                <form action="<?php eh(url('user/edit')) ?>" method="post">
+                <div class="span12">
                 <button class="btn btn-info btn-medium" type="submit">Edit Profile</button>
                  </font>
         </center>
-        </head>
+        </form>
     </body>
 </html>

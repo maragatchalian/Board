@@ -88,9 +88,45 @@ class UserController extends AppController{
         
     }
 
+
+    /*
+    * Display user's name, username, and email
+    */
     public function profile() {
     $user = User::get();
     $this->set(get_defined_vars());
+    }
+
+    public function edit(){
+        $params = array(
+            'username' => Param::get('username'),
+            'first_name' => Param::get('first_name'),
+            'last_name' => Param::get('last_name'),
+            'email' => Param::get('email') 
+            );
+
+        $user = new User($params);
+        $page = Param::get('page_next', 'edit');
+
+        switch ($page) {
+            case 'edit':
+            break;
+
+            case 'edit_end':
+                try {
+                     $user->update();
+                     }catch (ValidationException $e) {
+                        $page = 'edit';
+                     }
+                     break;
+                default:
+                    throw new NotFoundException("{$page} is not found");
+                    break;
+                }
+
+        $this->set(get_defined_vars());
+        $this->render($page); 
+
     }
 
 }
