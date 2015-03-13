@@ -1,27 +1,34 @@
-<!--Comment Format --> 
-<center>
+<!--View thread and its comments --> 
 <font color = "black">
 
+<!--Thread Title and Category Name-->
+<center>
 <h1><?php eh($thread->title) ?></h1>
 <h3>Category: <?php eh($thread->category_name)?></h3>
 </center>
-  <?php foreach($comments as $k=>$v): ?>
+
+<!--Spacing-->
+ <div class="comment">                        
+ <div class="meta">
+
+<!--View Comments-->
+<?php foreach($comments as $get_what): ?>
    
-    <div class="comment">                        
-      <div class="meta">
+<!--View Username-->
+<h4> <ul style="list-style-type:square">
+<li>  <?php eh($get_what->username) ?> </li> </h4> 
 
-        <h4> <ul style="list-style-type:square">
-        <li>  <?php eh($v->username) ?> </li> </h4> 
-          <?php eh($v->created) ?> 
-      </div> 
-    </div>
-
-    <div><?php echo($v->body) ?></div>
-
-      
-<br /> 
+ <!--View Date of Creation-->    
+<?php eh($get_what->created) ?> 
+    <div><?php echo($get_what->body) ?></div>
+    <br /> 
 <?php endforeach ?>
 
+    
+
+<!--End of Scpacing-->
+</div> 
+</div>
 
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>
@@ -30,7 +37,7 @@
          Previous
     <?php endif ?>
 
-<?php for($i = 1; $i <= $pages; $i++): ?>
+<?php for($i = 1; $i <= $current_page; $i++): ?>
     <?php if($i == $current_page): ?>
       <?php echo $i ?>
     <?php else: ?>
@@ -45,7 +52,7 @@
 
 
 <hr>            
-<form class="well" method="post" action="<?php eh(url('thread/write')) ?>">
+<form class="well" method="post" action="<?php eh(url('comment/write')) ?>">
   <label>Your name</label>
   <input type="text" class="span2" name="username" value="<?php eh(Param::get('username')) ?>">
   

@@ -2,11 +2,12 @@
 
 //Comment Validation
 class Comment extends AppModel {
+
     const MIN_USERNAME_LENGTH = 1;
     const MIN_BODY_LENGTH = 1;
 
     const MAX_USERNAME_LENGTH = 20;
-    const MAX_BODY_LENGTH = 200;
+    const MAX_BODY_LENGTH = 140;
 
     public $validation = array(
         "username" => array(
@@ -22,37 +23,57 @@ class Comment extends AppModel {
         ),
       );
 
-    public function favorite(){
-        try {
-            $db = DB::conn();
-            $db->begin();
-            $db->insert('favorite', array('comment_id' => $this->id , 'user_id' => $_SESSION['user_id'] ));
-            $db->commit();
-            } catch (Exception $e) {
-            $db->rollback();
-            }
 
-        redirect(url('thread/view', array('thread_id' => $_SESSION['thread_id']))); 
-     }
-
-    public function unfavorite(){
-        try {
-            $db = DB::conn();
-            $db->begin();
-            $db->query('DELETE FROM favorite
-                 WHERE comment_id = ? && user_id = ?', array($this->id, $_SESSION['user_id']));
-            $db->commit();
-            } catch (Exception $e) {
-            $db->rollback();
+     public function countAll($thread_id)
+    {
+        $db = DB::conn();
+        return (int) $db->value("SELECT COUNT(*) FROM comment 
+            WHERE thread_id = ? ", array($thread_id));
     }
 
-    redirect(url('thread/view', array('thread_id' => $_SESSION['thread_id']))); 
-
-    public function favorited(){
+    public static function getAll($offset, $limit, $thread_id) {
+        $comments = array();
         $db = DB::conn();
-        $favorited_comment = $db->row('SELECT * FROM favorite WHERE comment_id = ? && user_id = ?', array($this->id, $_SESSION['user_id']));
-        
-        return !$favorited_comment;
+        $rows = $db->rows("SELECT * FROM comment
+                WHERE thread_id = ?
+                ORDER BY created ASC LIMIT {$offset}, {$limit}", array($thread_id));
+        foreach ($rows as $row) {
+            $comments[] = new self($row);
+        }
+        return $comments;
+        }
+
+        public static function get($id)
+            {
+        $db = DB::conn();
+        $row = $db->row('SELECT * FROM comment WHERE id = ?', array($id));
+            if (!$row) {
+                throw new RecordNotFoundException('no record found');
+        }
+            return new self($row);
+    }
+
+    public function write(Comment $comment, $thread_id) {
+    
+    if(!$comment->validate()) {
+        throw new ValidationException('invalid comment');
+    }
+
+    try {
+        $db = DB::conn();
+        $created = date("Y-m-d H:i:s");
+        $db->begin();
+        $params = array(
+            
+            'thread_id' => $thread_id,
+            'body' => $comment->body,
+            'created' => $created
+        );
+
+        $db->insert('comment', $params);
+        $db->commit();
+        } catch (Exception $e) {
+        $db->rollback();
+        }
     }
 }
-?> 
