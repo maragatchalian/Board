@@ -111,5 +111,15 @@ class ThreadController extends AppController {
     $this->render($current_page);   
     }
 
+    public function favorite(){
+        $comment = Comment::get(Param::get('comment_id'));
+        $comment->favorite();
+    }
+
+    public function unfavorite(){
+        $comment = Comment::get(Param::get('comment_id'));
+        $comment->unfavorite();
+    }
+
    }
 ?>
