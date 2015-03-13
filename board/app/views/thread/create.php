@@ -38,19 +38,19 @@
 
 </div>
 <?php endif ?>
-                  
+ 
 <form class="well" method="post" action="<?php eh(url('')) ?>">
 
-  <label>Category:</label>
-  <select name="categories"> 
-    <option value="<?php eh(Param::get('category_name'))?>">Restaurants</option>
-    <option value="<?php eh(Param::get('category_name'))?>">Location</option>
-    <option value="<?php eh(Param::get('category_name'))?>">Food</option>
-    <option value="<?php eh(Param::get('category_name'))?>">Beverages</option>
-    <option value="<?php eh(Param::get('category_name'))?>">Desserts</option>
-</select>
+  <label>Choose a Category</label>
+  <input type="radio" name="category_name" value="Location">Location<br>
+  <input type="radio" name="category_name" value="Location">Location<br>
+  <input type="radio" name="category_name" value="Food">Food<br>
+  <input type="radio" name="category_name" value="Beverages">Beverages<br>
+  <input type="radio" name="category_name" value="Dessert">Dessert<br>
 
 
+  <input type="text" class="span2" name="category_name" value="<?php eh(Param::get('category_name')) ?>">
+  
   <label>Title</label>
   <input type="text" class="span2" name="title" value="<?php eh(Param::get('title')) ?>">
  

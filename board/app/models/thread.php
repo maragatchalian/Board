@@ -7,8 +7,13 @@ class Thread extends AppModel{
 *Avoid using magic numbers so others couuld
 *   understand what that number is all about.
 */
+
     const MIN_TITLE_LENGTH = 1;
     const MAX_TITLE_LENGTH = 30;
+
+//ughh
+
+    
 
 //Thread Length Validation
     public $validation = array(
@@ -32,7 +37,8 @@ class Thread extends AppModel{
         $date_created = date("Y-m-d H:i:s");
         $params = array(
             'title' => $this->title,
-            'created'=> $date_created
+            'created'=> $date_created,
+            'category_name'=>$this->category_name
              );
 
     //Latest inserted ID
@@ -120,16 +126,6 @@ class Thread extends AppModel{
         );     
     }
 
-    //This is supposed to get the thread's category values
-    public static function category($category_name){
-        
-        $db = DB::conn();
-        $row = $db->row("SELECT category_name FROM category 
-                WHERE category_name = ?", array($category_name)); 
-        
-        if (!$row) {
-            throw new RecordNotFoundException('no record found');
-            }
-        return new self($row);
-        }    
+
+            
 }
