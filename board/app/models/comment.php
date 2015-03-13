@@ -52,7 +52,7 @@ class Comment extends AppModel {
         $db = DB::conn();
         $favorited_comment = $db->row('SELECT * FROM favorite WHERE comment_id = ? && user_id = ?', array($this->id, $_SESSION['user_id']));
         
-        return !$cfavorited_comment;
+        return !$favorited_comment;
     }
 }
 ?> 
