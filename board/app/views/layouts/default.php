@@ -4,8 +4,9 @@
 <title> DietCake Board </title>
 
 <!-- Bootstrap Core CSS -->
+<link href="/bootstrap/css/custom.css" rel="stylesheet">
 <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/glyphicons-extended/css/glyphicons-extended.min.css" rel="stylesheet" type="text/css">
+<link href="/glypicons/glyphicons-extended/css/glyphicons-extended.min.css" rel="stylesheet" type="text/css">
 
 <style>
     body{

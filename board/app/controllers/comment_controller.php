@@ -1,6 +1,30 @@
 <?php
 class CommentController extends AppController {
 
+
+/*
+* 
+* set Favorite and unfavorite
+*
+*/
+    public function setFavorite(){
+        $comment = Comment::get(Param::get('comment_id'));
+        $method = Param::get('method');
+
+        switch ($method) {
+            case 'add':
+            $comment->addFavorite();
+            break;
+            case 'remove':
+            $comment->removeFavorite();
+            break;
+        default:
+            throw new InvalidArgumentException("{$method} is an invalid parameter");
+            break;
+        }
+        redirect(url('thread/view', array('thread_id' => $_SESSION['thread_id']))); 
+    }
+
     //Write a new comment
     public function write() {
         $thread_id = Param::get('thread_id');
@@ -27,11 +51,8 @@ class CommentController extends AppController {
             throw new NotFoundException("{$current_page} is not found");
             break;
         }
-
     $this->set(get_defined_vars());
     $this->render($current_page);   
     }
-
-
-
+    
 }

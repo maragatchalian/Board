@@ -43,7 +43,6 @@ class ThreadController extends AppController {
     }
     
  
-
     //Displays maximum number of threads per page
     public function index() 
     {

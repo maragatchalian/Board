@@ -22,13 +22,23 @@
 <?php eh($get_what->created) ?> 
     <div><?php echo($get_what->body) ?></div>
     <br /> 
-<?php endforeach ?>
 
-    
+<!--Favorite-->
+<?php if ($get_what->is_favorited()) : ?>
+ <a href="<?php eh(url('comment/setFavorite',
+        array('comment_id' => $comment->id, 'method' => 'add')))?>"> Favorite</a> 
 
-<!--End of Scpacing-->
+<!--Unfavorite-->
+ <?php else : ?>
+  <a href="<?php eh(url('comment/setFavorite', 
+      array('comment_id' => $comment->id, 'method' => 'remove')))?>"> Unfavorite</a> 
+
 </div> 
 </div>
+<?php endif ?>
+<?php endforeach ?>
+
+<br />
 
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>

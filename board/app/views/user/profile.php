@@ -5,8 +5,8 @@
         <center>
             <font color ="black">
                 <h1>Hello, <?php eh($user->username) ?>!</h1> 
-                <br />
-                <a href="<?php eh(url('#')) ?>">Favorites</a>             
+                <br /> 
+                <a href="<?php eh(url('comment/favorites')) ?>">My Favorites</a>      
                 <a href="<?php eh(url('#')) ?>">Following</a>
                 <h3> Account </h3>
                 First Name: <?php eh($user->first_name) ?> <br />
