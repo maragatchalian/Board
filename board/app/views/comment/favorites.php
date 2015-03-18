@@ -1,2 +1,6 @@
-<h1> Favorites </h1>
+<font color ='black'>
+	<center> 
+<h1> My Favorites </h1>
+
+<!--insert codes here-->
 

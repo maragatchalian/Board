@@ -92,6 +92,8 @@ class UserController extends AppController{
 
     }
 
+ 
+
     public function edit(){
         $params = array(
             'username' => Param::get('username'),

@@ -31,4 +31,8 @@ class CommentController extends AppController {
     $this->render($current_page);   
     }
 
+    public function favorites(){
+        
+    }
+
 } //end
