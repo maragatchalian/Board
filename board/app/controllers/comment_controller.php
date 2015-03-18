@@ -31,8 +31,15 @@ class CommentController extends AppController {
     $this->render($current_page);   
     }
 
-    public function favorites(){
+    public function favorites() {
         
+    }
+
+    public function delete() { 
+        $comment = Param::get('comment_id');
+        $this->set(get_defined_vars());
+        $comment->delete();
+        $this->render('comment/delete');
     }
 
 } //end
