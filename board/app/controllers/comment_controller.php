@@ -54,5 +54,28 @@ class CommentController extends AppController {
     $this->set(get_defined_vars());
     $this->render($current_page);   
     }
-    
+
+     public function delete() {
+        $comments = new Comment();
+        $user_id = $_SESSION['user_id'];
+        $comment_id = Param::get('comment_id');
+        if (!$comment_id) {
+        redirect('thread/index');
+        }
+        try {
+            $comment = Comment::get($comment_id);
+            if ($comment->user_id == $_SESSION['userid']) {
+            $comments->delete($comment_id);
+        }
+        } catch (ValidationException $e) {
+            throw new NotFoundException('Comment not found');
+        }
+        $this->set(get_defined_vars());
+        redirect(url('thread/view', array('thread_id' => $thread_id)));
+}
+
+
+
+
+
 }

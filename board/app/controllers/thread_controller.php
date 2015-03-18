@@ -9,20 +9,29 @@ class ThreadController extends AppController {
     * -> - INSTANCE, can only be called from an instance of the class.
     */
 
-    public function create()
-    {
+    /*
+    *   Everything inputted on the form (view/thread/create.php) will be 
+    *   gathered by this function
+    */
+    public function create() {
         $thread = new Thread();
         $comment = new Comment();
         $current_page = Param::get('page_next', 'create');   
                 
-            switch ($current_page) {
+            switch ($current_page) { 
             case 'create':
             break;
       
+        /*  
+        *   After the user clicked on submit, the page will be redirected to 'create_end'
+        *   From the $thread database, this will get the title.. and so on. 
+        *   after all, controllers are all about getting the inputted data.
+        *   then the data gathered here will be tranferred to view (view/thread/view.php)
+        */
         case 'create_end':
-            $thread->title = Param::get('title');
-            $thread->category_name = Param::get('category_name');
-            $comment->username = Param::get('username');
+            $thread->title = Param::get('title'); 
+            $thread->category_name = Param::get('category_name'); 
+            $comment->username = Param::get('username'); 
             $comment->body = Param::get('body');
             
               try 
@@ -76,10 +85,8 @@ class ThreadController extends AppController {
         $this->set(get_defined_vars());
 
     }
-    
-  
 
-    
+}
 
-   }
+
 ?>

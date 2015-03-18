@@ -67,6 +67,18 @@ class Comment extends AppModel {
         }
     }
 
+    //Delete own comment
+    public function delete($id) {
+        try {
+        $db = DB::conn();
+        $db->begin();
+        $delete = $db->query('DELETE FROM comment WHERE id = ?', array($this->id));
+        $db->commit();
+        } catch (Exception $e) {
+        $db->rollback();
+        }
+    }
+
     public function addFavorite() {
         try {
             $db = DB::conn();

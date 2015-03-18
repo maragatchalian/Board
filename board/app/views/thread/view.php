@@ -12,31 +12,41 @@
  <div class="meta">
 
 <!--View Comments-->
-<?php foreach($comments as $get_what): ?>
+<?php foreach($comments as $get_from_comment): ?>
    
 <!--View Username-->
 <h4> <ul style="list-style-type:square">
-<li>  <?php eh($get_what->username) ?> </li> </h4> 
+<li>  <?php eh($get_from_comment->username) ?> </li> </h4> 
 
  <!--View Date of Creation-->    
-<?php eh($get_what->created) ?> 
-    <div><?php echo($get_what->body) ?></div>
+<?php eh($get_from_comment->created) ?> 
+    <div><?php echo($get_from_comment->body) ?></div>
     <br /> 
 
+<!-- Delete Comment -->
+<?php if ($get_from_comment->delete()) : ?>
+<a href="<?php eh(url('comment/delete', 
+        array('id' => $comment->id)))?>"> Delete</a>
+<?php endif ?>
+
+
 <!--Favorite-->
-<?php if ($get_what->is_favorited()) : ?>
- <a href="<?php eh(url('comment/setFavorite',
-        array('comment_id' => $comment->id, 'method' => 'add')))?>"> Favorite</a> 
+<?php if ($get_from_comment->is_favorited()) : ?>
+  <a href="<?php eh(url('comment/setFavorite',
+        array('id' => $comment->id, 'method' => 'add')))?>"> Favorite</a> 
 
 <!--Unfavorite-->
  <?php else : ?>
   <a href="<?php eh(url('comment/setFavorite', 
-      array('comment_id' => $comment->id, 'method' => 'remove')))?>"> Unfavorite</a> 
+      array('id' => $comment->id, 'method' => 'remove')))?>"> Unfavorite</a> 
+
+<?php endif ?>
+<?php endforeach ?>
+
 
 </div> 
 </div>
-<?php endif ?>
-<?php endforeach ?>
+
 
 <br />
 
@@ -74,4 +84,4 @@
   <input type="hidden" name="page_next" value="write_end">
   <button type="submit" class="btn btn-medium btn-info">Submit</button>
 </font> 
-</form>
+</form> 

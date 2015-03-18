@@ -2,9 +2,9 @@
 
 class Thread extends AppModel{
     /*
-    *The following constants are declared to avoid magic numbers.
-    *Avoid using magic numbers so others couuld
-    * understand what that number is all about.
+    *   The following constants are declared to avoid magic numbers.
+    *   Avoid using magic numbers so others couuld
+    *   understand what that number is all about.
     */
     const MIN_TITLE_LENGTH = 1;
     const MAX_TITLE_LENGTH = 30;
@@ -18,6 +18,12 @@ class Thread extends AppModel{
         ),
     );
 
+    /*
+    * Thread Model
+    * This is where the database manipulation and validation happens
+    *
+    */
+
     public function create(Comment $comment) {
         $this->validate();
         $comment->validate();
@@ -27,16 +33,16 @@ class Thread extends AppModel{
         }
 
         $date_created = date("Y-m-d H:i:s");
-        $params = array(
-        'title' => $this->title,
-        'created'=> $date_created,
-        'category_name'=>$this->category_name
+        $params = array(            //$params is the variable name of this set. (title, created, category_name)
+        'title' => $this->title,    //input will be stored in the column 'title'
+        'created'=> $date_created,  //input will be stored in the column 'created'
+        'category_name'=>$this->category_name //input will be stored in the column 'category_name'
         );
     //Latest inserted ID
     try {
         $db = DB::conn();
         $db->begin();
-        $db->insert('thread', $params);
+        $db->insert('thread', $params); //insert $params (the previous set i mentioned before) into 'thread' table
         $this->id = $db->lastInsertId();
     //write first comment at the same time
         $this->write($comment);
@@ -45,6 +51,7 @@ class Thread extends AppModel{
         $db->rollback();
         }
     }
+
     public static function getAll($offset, $limit) {
     $threads = array();
     $db = DB::conn();
@@ -97,4 +104,7 @@ class Thread extends AppModel{
             array($this->id, $comment->username, $comment->body)
             );
     }
+
+
+    
 }
