@@ -2,10 +2,8 @@
 
 class UserController extends AppController{
 
-    public function register() 
-    {
-        if (is_logged_in()) 
-        {
+    public function register() {
+        if (is_logged_in()) {
             redirect(url('user/home'));
         }
 
@@ -15,7 +13,7 @@ class UserController extends AppController{
         'last_name' => Param::get('last_name'),
         'email' => Param::get('email'),
         'password' => Param::get('password'),
-        'confirm_password' => Param::get('confirm_password'),
+        'confirm_password' => Param::get('confirm_password')
         );
 
     $user = new User($params);
@@ -41,16 +39,15 @@ class UserController extends AppController{
         $this->render($page);
     }
 
-    public function login()
-    {
+    public function login() {
         if (is_logged_in()) 
         {
-            redirect(url('user/login_end'));
+            redirect(url('user/home'));
         }
 
         $params = array(
             'username' => trim(Param::get('username')),
-            'password' => Param::get('password'), 
+            'password' => Param::get('password')
         );
 
         $user = new User($params);
@@ -60,7 +57,7 @@ class UserController extends AppController{
                 case 'login':
                 break;
          
-                case 'login_end':
+                case 'home':
                     try 
                     {
                         $user->login();
@@ -78,16 +75,10 @@ class UserController extends AppController{
         $this->render($page); 
     }
         
-    public function logout()
-    {
+    public function logout() {
         session_destroy();
         redirect(url('user/login'));
     }
-
-    public function home() {
-        
-    }
-
 
     /*
     * Display user's name, username, and email
@@ -95,6 +86,10 @@ class UserController extends AppController{
     public function profile() {
     $user = User::get();
     $this->set(get_defined_vars());
+    }
+
+    public function home(){
+
     }
 
     public function edit(){

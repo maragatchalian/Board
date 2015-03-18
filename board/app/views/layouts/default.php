@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head> <meta charset="utf-8">
-<title> DietCake Board </title>
+<title> Welcome to Food </title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/bootstrap/css/custom.css" rel="stylesheet">
 <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/glypicons/glyphicons-extended/css/glyphicons-extended.min.css" rel="stylesheet" type="text/css">
 
 <style>
     body{

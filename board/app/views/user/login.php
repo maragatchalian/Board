@@ -26,7 +26,7 @@
     <br />
     
 <!--Will be redirected to login_end once successfully logged in-->
-    <input type="hidden" name="page_next" value="login_end">
+    <input type="hidden" name="page_next" value="home">
     <div class="span12">
     <button class="btn btn-info btn-medium" type="submit">Login</button>
 

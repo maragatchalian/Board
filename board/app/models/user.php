@@ -68,26 +68,24 @@ class User extends AppModel {
 
     public function register()
     {
-        $this->validate();
+        if (!$this->validate()) {
     
-        if ($this->hasError()) 
-        {
             throw new ValidationException('Invalid Input!');
         }
 
     
-    $params = array( //what is to be inserted when $params is called
-        'username' => $this->username,
-        'first_name' => $this->first_name,
-        'last_name' => $this->last_name,
-        'email' => strtolower($this->email),
-        'password' => md5($this->password)
-        );
-
         try 
         {
             $db = DB::conn(); 
             $db->begin();
+
+            $params = array( //what is to be inserted when $params is called
+                'username' => $this->username,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email' => strtolower($this->email),
+                'password' => md5($this->password)
+            );
             $db->insert('user', $params); //to insert values of $params in table 'user'
             $db->commit();
         } catch(Exception $e) {
@@ -96,25 +94,25 @@ class User extends AppModel {
         }
     }
 
-    public function login()
-    {
+    public function login() {
         $db = DB::conn();
         $params = array(
             'username' => $this->username,
             'password' => md5($this->password)
         );
 
-    $user = $db->row("SELECT id, username FROM user WHERE BINARY username = :username && BINARY password = :password", $params);
+        $user = $db->row("SELECT id, username FROM user 
+            WHERE BINARY username = :username AND BINARY password = :password", $params);
 
-        if(!$user) 
-        {
-            $this->is_validated = false; 
-            throw new RecordNotFoundException('No Record Found');
-        }
+            if(!$user)  {
+                $this->is_validated = false; 
+                throw new RecordNotFoundException('No Record Found');
+            }
 
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
     }
+
 
     public function is_password_match()
     {
