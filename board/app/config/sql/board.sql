@@ -28,4 +28,4 @@ CREATE TABLE IF NOT EXISTS user(
     password VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
-    );
+    );  
