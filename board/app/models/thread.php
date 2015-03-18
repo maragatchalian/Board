@@ -33,11 +33,10 @@ class Thread extends AppModel{
         }
 
         $date_created = date("Y-m-d H:i:s");
-        $params = array(            //$params is the variable name of this set. (title, created, category_name)
+        $params = array(            //$params is the variable name of this set. (title, created)
         'title' => $this->title,    //input will be stored in the column 'title'
-        'created'=> $date_created,  //input will be stored in the column 'created'
-        'category_name'=>$this->category_name //input will be stored in the column 'category_name'
-        );
+        'created'=> $date_created  //input will be stored in the column 'created'
+         );
     //Latest inserted ID
     try {
         $db = DB::conn();

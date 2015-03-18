@@ -1,10 +1,9 @@
 <!--View thread and its comments --> 
 <font color = "black">
 
-<!--Thread Title and Category Name-->
+<!--Thread Title-->
 <center>
 <h1><?php eh($thread->title) ?></h1>
-<h3>Category: <?php eh($thread->category_name)?></h3>
 </center>
 
 <!--Spacing-->
@@ -23,31 +22,10 @@
     <div><?php echo($get_from_comment->body) ?></div>
     <br /> 
 
-<!-- Delete Comment -->
-<?php if ($get_from_comment->delete()) : ?>
-<a href="<?php eh(url('comment/delete', 
-        array('id' => $comment->id)))?>"> Delete</a>
-<?php endif ?>
-
-
-<!--Favorite-->
-<?php if ($get_from_comment->is_favorited()) : ?>
-  <a href="<?php eh(url('comment/setFavorite',
-        array('id' => $comment->id, 'method' => 'add')))?>"> Favorite</a> 
-
-<!--Unfavorite-->
- <?php else : ?>
-  <a href="<?php eh(url('comment/setFavorite', 
-      array('id' => $comment->id, 'method' => 'remove')))?>"> Unfavorite</a> 
-
-<?php endif ?>
 <?php endforeach ?>
-
 
 </div> 
 </div>
-
-
 <br />
 
 <!--Pagination --> 

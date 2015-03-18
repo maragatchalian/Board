@@ -23,7 +23,6 @@ class Comment extends AppModel {
         ),
       );
 
-
      public static function countAll($thread_id) {
         $db = DB::conn();
         return (int) $db->value("SELECT COUNT(*) FROM comment 
@@ -67,78 +66,4 @@ class Comment extends AppModel {
         }
     }
 
-    //Delete own comment
-    public function delete($id) {
-        try {
-        $db = DB::conn();
-        $db->begin();
-        $delete = $db->query('DELETE FROM comment WHERE id = ?', array($this->id));
-        $db->commit();
-        } catch (Exception $e) {
-        $db->rollback();
-        }
-    }
-
-    public function addFavorite() {
-        try {
-            $db = DB::conn();
-            $db->begin();
-            $params = array(
-                'comment_id' => $this->id,
-                'user_id' => $_SESSION['user_id']
-            );
-        
-        $db->insert('favorite', $params);
-        $db->commit();
-        } catch (Exception $e) {
-        $db->rollback();
-        }
-    }
-    public function removeFavorite() {
-        try {
-            $db = DB::conn();
-            $db->begin();
-            $params = array(
-                $this->id,
-                $_SESSION['user_id']
-            );
-
-        $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', $params);
-        $db->commit();
-        } catch (Exception $e) {
-        $db->rollback();
-        }
-    }
-
-       //select the favoited comments
-    public function is_favorited() {
-        $db = DB::conn();
-            $params = array(
-            $this->id,      
-            $_SESSION['user_id']
-            );
-        $comment_favorited = $db->row('SELECT * FROM  favorite
-            WHERE comment_id = ? AND user_id = ?', $params);
-        return !$comment_favorited;
-        }
-
-    //count the favotites in each comment
-    public function countFavorite() {
-        $db = DB::conn();
-        $total_favorites = $db->value('SELECT COUNT(*) FROM favorite
-            WHERE comment_id =?', array($this->id));
-        
-        return $total_favorites;
-    }
-
-     public function getThreadId() {
-            $db = DB::conn();
-            $thread_id = $db->row('SELECT thread_id FROM comment
-            WHERE id = ?', array($this->comment_id));
-        return implode($thread_id);
-    }   
-
-
-
-
-}
+} //end
