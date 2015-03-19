@@ -40,7 +40,7 @@ class CommentController extends AppController {
         $comment = Comment::get(Param::get('comment_id'));
         $this->set(get_defined_vars());
         $comment->deleteComment();
-        $this->render('thread/index');
+        $this->render('comment/delete');
     }  
 
 } //end

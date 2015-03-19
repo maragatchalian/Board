@@ -66,7 +66,16 @@ public $validation = array(
         }
     }
 
-    public function deleteComment(Comment $comment) {
+    public static function get($id) {
+    $db = DB::conn();
+    $row = $db->row('SELECT * FROM comment WHERE id = ?', array($id));
+    if (!$row) {
+    throw new RecordNotFoundException('no record found');
+    }
+    return new self($row);
+    }
+
+    public function deleteComment() {
         try {
             $db = DB::conn();
             $db->begin();
@@ -87,5 +96,7 @@ public $validation = array(
         return $this->user_id === $_SESSION['user_id'];
         
     }
+
+
 
 } //end

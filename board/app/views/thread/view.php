@@ -26,7 +26,7 @@
 
 <!-- Delete Comment -->
 <?php if ($get_from_comment->isUserComment()) : ?> 
-  <a href="<?php eh(url('thread/index', array('comment_id' => $get_from_comment->id)))?>"
+  <a href="<?php eh(url('comment/delete', array('comment_id' => $get_from_comment->id)))?>"
   onclick="return confirm('Are you sure you want to delete this comment?')">
 Delete this comment
 </a>
