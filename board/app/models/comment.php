@@ -88,9 +88,26 @@ public $validation = array(
             );
 
             $db->query('DELETE FROM comment WHERE id = ? AND user_id = ?', $params);
+            $this->deleteFavoritedComment();
             $db->commit();
             } catch (Exception $e) {
             $db->rollback();
+        }
+    }
+
+        public function deleteFavoritedComment() {
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $params = array(
+                $this->id,
+                $_SESSION['user_id']
+        );
+
+        $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', $params );
+        $db->commit();
+        } catch (Exception $e) {
+        $db->rollback();
         }
     }
 

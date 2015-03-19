@@ -40,6 +40,9 @@ class CommentController extends AppController {
         $this->render('comment/delete');
     }  
 
+
+
+
     public function favorites() {
         
     }
