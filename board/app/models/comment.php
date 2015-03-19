@@ -55,6 +55,7 @@ public $validation = array(
         $db->begin();
         $params = array(
             'user_id' => $_SESSION['user_id'],
+            'username' => $this->username,
             'thread_id' => $thread_id,
             'body' => $this->body,
             'created' => $created
@@ -163,6 +164,18 @@ public $validation = array(
         $total_favorite = $db->value('SELECT COUNT(*) FROM favorite
             WHERE comment_id =?', array($this->id));
     return $total_favorite;
+    }
+
+    public function viewFavorite() {
+        $db = DB::conn();
+        $params = array(
+            $this->id,
+            $_SESSION['user_id']
+        );
+
+        $view_favorite = $db->rows('SELECT * FROM favorite
+            WHERE comment_id = ? AND user_id = ?', $params);
+        return $view_favorite;
     }
 
 } //end

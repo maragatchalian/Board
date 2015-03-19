@@ -4,6 +4,7 @@ class CommentController extends AppController {
    //Write a new comment
     public function write() {
         $thread_id = Param::get('thread_id');
+
         $thread = Thread::get($thread_id);
         $comment = new Comment();
         $current_page = Param::get('page_next', 'write');
@@ -14,7 +15,7 @@ class CommentController extends AppController {
 
         case 'write_end':                
             $comment->body = Param::get('body');
-            
+            $comment->username = Param::get('username');
             
             try 
             {            
@@ -41,13 +42,12 @@ class CommentController extends AppController {
     }  
 
 
-
-
     public function favorites() {
-        
+        $user = User::get();
+
+        $this->set(get_defined_vars());
     }
-
-
+    
     public function setFavorite() {
         $comment = Comment::get(Param::get('comment_id'));
         $method = Param::get('method');

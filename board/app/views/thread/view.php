@@ -43,12 +43,13 @@
   Unfavorite</a>
 <?php endif ?>
 
+<!-- Count Favorite -->
+<?php echo $get_from_comment->countFavorite() ?> Favorites
 
 <?php endforeach ?>
 
 
-<!-- Count Likes -->
-<?php //echo $comment->countFavorite() ?> Favorites
+
 
 
 </div> 
