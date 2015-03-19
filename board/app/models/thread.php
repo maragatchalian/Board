@@ -32,20 +32,22 @@ class Thread extends AppModel{
             throw new ValidationException('Invalid thread or comment');
         }
 
-        $date_created = date("Y-m-d H:i:s");
-        $params = array(            //$params is the variable name of this set. (title, created)
-        'title' => $this->title,    //input will be stored in the column 'title'
-        'created'=> $date_created  //input will be stored in the column 'created'
-         );
+              
     //Latest inserted ID
     try {
         $db = DB::conn();
+        $date_created = date("Y-m-d H:i:s");
         $db->begin();
-        $db->insert('thread', $params); //insert $params (the previous set i mentioned before) into 'thread' table
-        $this->id = $db->lastInsertId();
-    //write first comment at the same time
-        $this->write($comment);
-        $db->commit();
+         $params = array(            //$params is the variable name of this set. (title, created)
+            'title' => $this->title,    //input will be stored in the column 'title'
+            'created'=> $date_created, 
+            'user_id'=> $_SESSION['user_id']
+            );
+            $db->insert('thread', $params); //insert $params (the previous set i mentioned before) into 'thread' table
+            $this->id = $db->lastInsertId();
+        //write first comment at the same time
+            $comment->write($comment, $this->id);
+            $db->commit();
         } catch (Exception $e) {
         $db->rollback();
         }
@@ -93,17 +95,15 @@ class Thread extends AppModel{
         return $comments;
     }
     
-    public function write(Comment $comment) {
+    /*public function write(Comment $comment) {
         if(!$comment->validate()) {
             throw new ValidationException('Invalid Comment');
     }
     $db = DB::conn();
     $db->query(
-        'INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()',
-            array($this->id, $comment->username, $comment->body)
+        'INSERT INTO comment SET thread_id = ?, user_id = ?, body = ?, created = NOW()',
+            array($this->id, $this->$_SESSION['user_id'], $comment->body, )
             );
-    }
+    }*/
 
-
-    
 }

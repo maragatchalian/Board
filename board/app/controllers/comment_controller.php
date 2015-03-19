@@ -15,6 +15,7 @@ class CommentController extends AppController {
         case 'write_end':                
             $comment->body = Param::get('body');
             
+            
             try 
             {            
                $comment->write($comment, $thread_id);
@@ -36,10 +37,10 @@ class CommentController extends AppController {
     }
 
     public function delete() { 
-        $comment = Param::get('comment_id');
+        $comment = Comment::get(Param::get('comment_id'));
         $this->set(get_defined_vars());
-        $comment->delete();
-        $this->render('comment/delete');
-    }
+        $comment->deleteComment();
+        $this->render('thread/index');
+    }  
 
 } //end

@@ -53,9 +53,9 @@ public $validation = array(
         $created = date("Y-m-d H:i:s");
         $db->begin();
         $params = array(
-            
+            'user_id' => $_SESSION['user_id'],
             'thread_id' => $thread_id,
-            'body' => $comment->body,
+            'body' => $this->body,
             'created' => $created
         );
 
@@ -66,7 +66,7 @@ public $validation = array(
         }
     }
 
-    public function delete() {
+    public function deleteComment(Comment $comment) {
         try {
             $db = DB::conn();
             $db->begin();
@@ -76,7 +76,7 @@ public $validation = array(
                 $_SESSION['user_id']
             );
 
-            $db->query('DELETE FROM comment WHERE id = ? AND user_id = ?', $params );
+            $db->query('DELETE FROM comment WHERE id = ? AND user_id = ?', $params);
             $db->commit();
             } catch (Exception $e) {
             $db->rollback();
@@ -84,7 +84,8 @@ public $validation = array(
     }
 
     public function isUserComment() {
-        return /*$this->user_id ===*/ $_SESSION['user_id'];
+        return $this->user_id === $_SESSION['user_id'];
+        
     }
 
 } //end
