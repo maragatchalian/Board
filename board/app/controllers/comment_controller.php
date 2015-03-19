@@ -32,15 +32,36 @@ class CommentController extends AppController {
     $this->render($current_page);   
     }
 
-    public function favorites() {
-        
-    }
-
+    
     public function delete() { 
         $comment = Comment::get(Param::get('comment_id'));
         $this->set(get_defined_vars());
         $comment->deleteComment();
         $this->render('comment/delete');
     }  
+
+    public function favorites() {
+        
+    }
+
+
+    public function setFavorite() {
+        $comment = Comment::get(Param::get('comment_id'));
+        $method = Param::get('method');
+        
+        switch ($method) {
+            case 'add':
+                $comment->addFavorite();
+                break;
+            case 'remove':
+                $comment->removeFavorite();
+                break;
+        default:
+            throw new InvalidArgumentException("{$method} is an invalid parameter");
+            break;
+        }
+        //redirect(url('thread/view', array('thread_id' => $_SESSION['thread_id'])));
+        redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
+    }
 
 } //end

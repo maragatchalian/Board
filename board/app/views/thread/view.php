@@ -24,15 +24,32 @@
     <div><?php echo($get_from_comment->body) ?></div>
     <br /> 
 
+
 <!-- Delete Comment -->
 <?php if ($get_from_comment->isUserComment()) : ?> 
   <a href="<?php eh(url('comment/delete', array('comment_id' => $get_from_comment->id)))?>"
   onclick="return confirm('Are you sure you want to delete this comment?')">
-Delete this comment
+|| Delete this comment ||
 </a>
 <?php endif ?>
 
+
+ <!-- Favorite Comment -->
+<?php if ($get_from_comment->isCommentFavorited()) : ?>
+<a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
+    Favorite</a>
+<?php else : ?>
+<a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'remove')))?>">
+  Unfavorite</a>
+<?php endif ?>
+
+
 <?php endforeach ?>
+
+
+<!-- Count Likes -->
+<?php //echo $comment->countFavorite() ?> Favorites
+
 
 </div> 
 </div>
