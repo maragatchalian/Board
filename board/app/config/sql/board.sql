@@ -36,5 +36,6 @@ CREATE TABLE IF NOT EXISTS favorite(
     id INT(11) NOT NULL AUTO_INCREMENT,
     comment_id INT(11) NOT NULL,
     user_id INT(11) NOT NULL,
+    comment_body VARCHAR(140) NOT NULL,
     PRIMARY KEY (id)
     );  

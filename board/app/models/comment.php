@@ -123,6 +123,7 @@ public $validation = array(
             $db->begin();
             $params = array(
                 'comment_id' => $this->id,
+                'comment_body'=> $this->body, //*added
                 'user_id' => $_SESSION['user_id']
             );
             $db->insert('favorite', $params);
@@ -152,9 +153,10 @@ public $validation = array(
         $db = DB::conn();
         $params = array(
             $this->id,
+            
             $_SESSION['user_id']
         );
-        $comment_favorited = $db->row('SELECT * FROM favorite 
+        $comment_favorited = $db->rows('SELECT * FROM favorite 
             WHERE comment_id = ? AND user_id = ?', $params);
         return !$comment_favorited;
     }
@@ -166,16 +168,19 @@ public $validation = array(
     return $total_favorite;
     }
 
-    public function viewFavorite() {
+    public static function getAllFavorites() {
+        $favorites = array();
         $db = DB::conn();
-        $params = array(
-            $this->id,
-            $_SESSION['user_id']
-        );
+                        
+        $rows = $db->rows('SELECT * FROM favorite
+            WHERE user_id = ?', array($_SESSION['user_id']));
 
-        $view_favorite = $db->rows('SELECT * FROM favorite
-            WHERE comment_id = ? AND user_id = ?', $params);
-        return $view_favorite;
+            foreach($rows as $row) {
+            $favorites[] = new self($row);
+         }
+        return $favorites;
     }
+
+ 
 
 } //end

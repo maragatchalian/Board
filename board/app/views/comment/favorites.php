@@ -1,19 +1,24 @@
 <html>
     <head> </head>
-		<font color ='black'>
-		<center> 
-		<h1> My Favorites </h1>
+        <font color ='black'>
+        <center> 
+        <h1> My Favorites </h1>
         <br />
         <br />
         <center>
-                Hello, <?php eh($user->username) ?>!
+                <h3>Hello, <?php eh($user->first_name) ?>! </h3>
                 <br /> 
-               
-               <?php foreach($comments as $get_from_comment): ?>
-               You have <?php echo $get_from_comment->countFavorite() ?> Favorites             
-			   <?php endforeach ?>
-               
-                
+                Here's the list of your favorite comments:
+                    <br /> 
+                            
+            <ul style="list-style-type:square">
+            <?php foreach ($favorites as $get_from_favorite): ?>
+            <li>
+                <?php eh($get_from_favorite->comment_body) ?></a>      
+                   
+            </li>
+                <?php endforeach; //Display contents of individual thread to href to A tag ?>
+           
                 </font>
         </center>
         </form>

@@ -31,6 +31,7 @@ class ThreadController extends AppController {
         case 'create_end':
             $thread->title = Param::get('title'); 
             $comment->body = Param::get('body');
+            $comment->username = Param::get('username');
             
               try 
             {
