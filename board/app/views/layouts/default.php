@@ -63,7 +63,7 @@
         <li><a href="<?php eh(url('user/profile')) ?>">Profile</a></li>
         <li><a href="<?php eh(url('thread/index')) ?>">Threads</a>
         <li><a href="<?php eh(url('thread/create')) ?>">Create New Thread</a></li>  
-        <li><a href="<?php eh(url('#')) ?>">Users</a></li> 
+        <li><a href="<?php eh(url('user/users')) ?>">Users</a></li> 
         <li><a href="<?php eh(url('user/logout')) ?>">Logout</a></li>
     </ul>  
     <br />

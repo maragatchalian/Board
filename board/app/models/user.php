@@ -72,8 +72,7 @@ class User extends AppModel {
     
             throw new ValidationException('Invalid Input!');
         }
-
-    
+ 
         try 
         {
             $db = DB::conn(); 
@@ -170,6 +169,18 @@ class User extends AppModel {
                  throw $e;
             }
 
+    }
+
+    //View all users
+    public static function getAllUsers() {
+        $users = array();
+        $db = DB::conn();
+        $rows = $db->rows("SELECT * FROM user");
+            
+            foreach($rows as $row) {
+                $users[] = new self($row);
+            }
+        return $users;
     }
 
 } //end

@@ -23,7 +23,6 @@ public $validation = array(
         ),
     );
 
-    
     public static function countAll($thread_id) {
         $db = DB::conn();
         return (int) $db->value("SELECT COUNT(*) FROM comment 
