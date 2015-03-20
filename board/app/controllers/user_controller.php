@@ -150,10 +150,9 @@ class UserController extends AppController{
         $user = User::get();
         $users = $user->getAllUsers();
         $this->set(get_defined_vars());
+        //$follow = $user::get(Param::get('follow_id'));
 
-    }
+    } 
 
-    
-            
 }//end
 

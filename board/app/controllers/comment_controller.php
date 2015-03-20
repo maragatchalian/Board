@@ -80,4 +80,6 @@ const MAX_COMMENT_PER_PAGE = 5;
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
     }
 
+
+
 } //end

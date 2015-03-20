@@ -6,9 +6,19 @@
 <h1><?php eh($thread->title) ?></h1>
 </center>
 
+ <!-- Follow/Unfollow User -->
+<?php if ($follow->isUserFollow()) : ?>
+<a href="<?php eh(url('follow/setFollowing', array('user_id' => $follow->user_id, 'method' => 'add')))?>">
+    Follow</a>
+<?php else : ?>
+<a href="<?php eh(url('follow/setFollowing', array('user_id' => $follow->user_id, 'method' => 'remove')))?>">
+  Unfollow</a>
+<?php endif ?>
+
 <!--Spacing-->
  <div class="comment">                        
  <div class="meta">
+
 
 <!--View Comments-->
 <?php foreach($comments as $get_from_comment): ?>
@@ -17,7 +27,8 @@
 <h4> <ul style="list-style-type:square">
 <li>  <?php eh($get_from_comment->username) ?> </li> </h4> 
 
- <!--View Date of Creation-->    
+
+<!--View Date of Creation-->    
 <?php eh($get_from_comment->created) ?> 
 
  <!--View Comment Body-->    
@@ -48,13 +59,8 @@
 
 <?php endforeach ?>
 
-
-
-
-
 </div> 
 </div>
-<br />
 
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>

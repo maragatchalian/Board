@@ -39,3 +39,9 @@ CREATE TABLE IF NOT EXISTS favorite(
     comment_body VARCHAR(140) NOT NULL,
     PRIMARY KEY (id)
     );  
+
+CREATE TABLE IF NOT EXISTS follow(
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    PRIMARY KEY (id)
+    ); 
