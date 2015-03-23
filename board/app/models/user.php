@@ -207,15 +207,17 @@ class User extends AppModel {
         }
     }
 
+
    public function removeFollowing() {
         try {
             $db = DB::conn();
             $db->begin();
             $params = array(
-                $this->id, 
+                'username' => $this->username,
                 $_SESSION['user_id']
             );
-            $db->query('DELETE FROM follow WHERE id = ? AND user_id = ?', $params);
+            
+            $db->query('DELETE FROM follow WHERE username = ? AND user_id', $params);
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
@@ -225,12 +227,12 @@ class User extends AppModel {
         public function isUserFollowing() {
         $db = DB::conn();
         $params = array(
-            $this->id,
+            'id' => $follow->id,
             $_SESSION['user_id']
         );
         
         $user_following = $db->rows('SELECT * FROM follow
-            WHERE id = ? AND user_id = ?', $params);
+            WHERE id =? AND user_id = ?', $params);
         return !$user_following;    
     }
 

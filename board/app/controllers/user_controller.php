@@ -173,7 +173,8 @@ class UserController extends AppController{
             break;
         }
         //redirect(url('thread/view', array('thread_id' => $_SESSION['thread_id'])));
-        redirect(url('user/view'));//, array('thread_id' => $comment->thread_id)));
+        //redirect(url('user/view'));//, array('thread_id' => $comment->thread_id)));
+        redirect(url('user/view', array('id' => $follow->id)));
     }
 
 }//end
