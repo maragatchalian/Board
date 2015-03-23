@@ -95,7 +95,8 @@ public $validation = array(
         }
     }
 
-        public function deleteFavoritedComment() {
+    //Functions with regards to favorites
+    public function deleteFavoritedComment() {
         try {
             $db = DB::conn();
             $db->begin();

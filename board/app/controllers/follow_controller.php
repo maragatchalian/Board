@@ -3,6 +3,7 @@
 class FollowController extends AppController {
 
     public function following() {
+
         $user = User::get();
         $following = Follow::getAllFollowing();
         $this->set(get_defined_vars());  

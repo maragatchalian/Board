@@ -69,23 +69,32 @@ class ThreadController extends AppController {
 
     
 //Displays the comments of the thread
-    public function view() 
-    {
+    public function view() {
+       
         $per_page = self::MAX_COMMENT_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);      
-        $thread = Thread::get(Param::get('thread_id'));
+
+        //$thread = Thread::get(Param::get('thread_id'));
+        //$comments = $thread->getComments($pagination->start_index -1, $pagination->count + 1);
+        $thread_id = Param::get('thread_id'); //added
+        $thread = Thread::get($thread_id); //added 
+
+        $comments = Comment::getAll($pagination->start_index -1, $pagination->count + 1, $thread_id);//added
+       
+        $user_id = Param::get('user_id');
+        $user = User::get($user_id);
+        $following = Follow::getAllUsers($user_id);
+
+        //$user_id = Param::get('user_id');
+        //$following = Follow::getAll($user_id);
         
-        $comments = $thread->getComments($pagination->start_index -1, $pagination->count + 1);
-        
+        $total = Comment::countAll($thread_id);//added
         $pagination->checkLastPage($comments);
-        $total = $thread->countComments();
+        //$total = $thread->countComments();
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
-
     }
+} //end
 
-}
 
-
-?>

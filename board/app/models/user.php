@@ -172,18 +172,16 @@ class User extends AppModel {
     }
 
     //View all users
-    public static function getAllUsers() {
+    public static function getAllUsers($id) {
         $users = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM user");
+        $rows = $db->rows("SELECT * FROM user WHERE id = ?", array($id));
             
             foreach($rows as $row) {
                 $users[] = new self($row);
             }
         return $users;
     }
-
-
 
 
 } //end
