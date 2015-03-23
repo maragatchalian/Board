@@ -128,31 +128,23 @@ class UserController extends AppController{
 
     //view all users
     public function users() {
-       $user = User::get(); //name of user
-       //$this->set(get_defined_vars());
-
-        //$per_page = self::MAX_COMMENT_PER_PAGE; 
-        //$current_page = Param::get('page', 1);
-        //$pagination = new SimplePagination($current_page, $per_page);
-       $id = Param::get('id');
-        $users = User::getAllUsers($id);//($pagination->start_index -1, $pagination->count + 1);
-        //$pagination->checkLastPage($threads);
-
-        //$total = Comment::CountFavorite();
-        //$pages = ceil($total / $per_page);
-    
-        $this->set(get_defined_vars()); 
+       $user = User::get();
+       $users = User::getAllUsers();
+       $this->set(get_defined_vars());  
 
     }
 
     //View other user page
     public function view() {
-        $user = User::get();
-        $users = $user->getAllUsers();
-        $this->set(get_defined_vars());
-        //$follow = $user::get(Param::get('follow_id'));
+        $user = User::get();     
+       
 
-    } 
+        $id = Param::get('id');
+        $users = User::get($id);
+        //$following = User::getAllUsers($id);
+
+        $this->set(get_defined_vars());
+    }
 
     //--------------------------------------------------------
     public function following() {

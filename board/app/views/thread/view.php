@@ -50,14 +50,6 @@
 
 <?php endforeach ?>
 
- <!-- Follow/Unfollow User -->
-<?php if ($users->isUserFollow()) : ?> 
-<a href="<?php eh(url('user/setFollowing', array('user_id' => $users->id, 'method' => 'add')))?>">
-    Follow</a>
-<?php else : ?>
-<a href="<?php eh(url('user/setFollowing', array('user_id' => $users->id, 'method' => 'remove')))?>">
-  Unfollow</a>
-<?php endif ?>
 
 </div> 
 </div>

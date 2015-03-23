@@ -81,8 +81,8 @@ class ThreadController extends AppController {
         $thread = Thread::get($thread_id); //added 
         $comments = Comment::getAll($pagination->start_index -1, $pagination->count + 1, $thread_id);//added
        
-        $id = Param::get('id');
-        $users = User::get($id);
+        //$id = Param::get('id');
+        //$users = User::get($id);
         //$following = User::getAllUsers($id);
 
         //$user_id = Param::get('user_id');
