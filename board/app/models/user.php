@@ -212,10 +212,10 @@ class User extends AppModel {
             $db = DB::conn();
             $db->begin();
             $params = array(
-                'username' => $this->username,
+                $this->id, 
                 $_SESSION['user_id']
             );
-            $db->query('DELETE FROM follow WHERE username AND user_id = ?', $params);
+            $db->query('DELETE FROM follow WHERE id = ? AND user_id = ?', $params);
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
