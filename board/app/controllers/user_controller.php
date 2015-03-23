@@ -134,8 +134,8 @@ class UserController extends AppController{
         //$per_page = self::MAX_COMMENT_PER_PAGE; 
         //$current_page = Param::get('page', 1);
         //$pagination = new SimplePagination($current_page, $per_page);
-
-        $users = User::getAllUsers();//($pagination->start_index -1, $pagination->count + 1);
+       $id = Param::get('id');
+        $users = User::getAllUsers($id);//($pagination->start_index -1, $pagination->count + 1);
         //$pagination->checkLastPage($threads);
 
         //$total = Comment::CountFavorite();
@@ -163,15 +163,18 @@ class UserController extends AppController{
     }
 
     public function setFollowing() {
-        $follow = User::get(Param::get('user_id'));
+        $follow = User::get(Param::get('id'));
         $method = Param::get('method');
         
+        /*$id = User::get(Param::get('user_id'));
+        $follow = User::getAllUsers($id);
+        $method = Param::get('method');*/
         switch ($method) {
             case 'add':
-                $comment->addFollowing();
+                $follow->addFollowing();
                 break;
             case 'remove':
-                $comment->removeFollowing();
+                $follow->removeFollowing();
                 break;
         default:
             throw new InvalidArgumentException("{$method} is an invalid parameter");

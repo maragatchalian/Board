@@ -11,14 +11,6 @@
  <div class="meta">
 
 
- <!-- Follow/Unfollow User -->
-<?php if ($following->isUserFollow()) : ?> 
-<a href="<?php eh(url('user/setFollowing', array('user_id' => $following->user_id, 'method' => 'add')))?>">
-    Follow</a>
-<?php else : ?>
-<a href="<?php eh(url('user/setFollowing', array('user_id' => $following->user_id, 'method' => 'remove')))?>">
-  Unfollow</a>
-<?php endif ?>
 
 <!--View Comments-->
 <?php foreach($comments as $get_from_comment): ?>
@@ -44,8 +36,6 @@
 </a>
 <?php endif ?>
 
-
-
  <!-- Favorite Comment -->
 <?php if ($get_from_comment->isCommentFavorited()) : ?>
 <a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
@@ -59,6 +49,15 @@
 <?php echo $get_from_comment->countFavorite() ?> Favorites
 
 <?php endforeach ?>
+
+ <!-- Follow/Unfollow User -->
+<?php if ($users->isUserFollow()) : ?> 
+<a href="<?php eh(url('user/setFollowing', array('user_id' => $users->id, 'method' => 'add')))?>">
+    Follow</a>
+<?php else : ?>
+<a href="<?php eh(url('user/setFollowing', array('user_id' => $users->id, 'method' => 'remove')))?>">
+  Unfollow</a>
+<?php endif ?>
 
 </div> 
 </div>
@@ -78,10 +77,13 @@
     <?php endif; ?>
 <?php endfor; ?>
 
+
+
 <?php if(!$pagination->is_last_page): ?>
     <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->next ?>'>Next</a>
     <?php else: ?>  Next
 <?php endif ?>
+
 
 
 <hr>            

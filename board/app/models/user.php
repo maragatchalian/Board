@@ -183,10 +183,12 @@ class User extends AppModel {
         return $users;
     }
 
-    //-----------------------------------------------------------------------
+    //-----------------------------------------------------------------------//
+                       /*Follow and Unfollow user*/
+    //-----------------------------------------------------------------------//
 
     public function isUserFollow() {
-        return $this->id === $_SESSION['user_id']; //this->user_id
+        return $this->id === $_SESSION['user_id']; 
     }
 
     public function addFollowing(){
@@ -210,10 +212,10 @@ class User extends AppModel {
             $db = DB::conn();
             $db->begin();
             $params = array(
-                $this->id,
+                'username' => $this->username,
                 $_SESSION['user_id']
             );
-            $db->query('DELETE FROM follow WHERE id AND user_id = ?', $params);
+            $db->query('DELETE FROM follow WHERE username AND user_id = ?', $params);
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
@@ -254,6 +256,5 @@ class User extends AppModel {
          }
         return $following;
     }
-
 
 } //end

@@ -79,12 +79,11 @@ class ThreadController extends AppController {
         //$comments = $thread->getComments($pagination->start_index -1, $pagination->count + 1);
         $thread_id = Param::get('thread_id'); //added
         $thread = Thread::get($thread_id); //added 
-
         $comments = Comment::getAll($pagination->start_index -1, $pagination->count + 1, $thread_id);//added
        
-        $user_id = Param::get('id');
-        $users = User::get($user_id);
-        $following = User::getAllUsers($user_id);
+        $id = Param::get('id');
+        $users = User::get($id);
+        //$following = User::getAllUsers($id);
 
         //$user_id = Param::get('user_id');
         //$following = Follow::getAll($user_id);
@@ -95,6 +94,7 @@ class ThreadController extends AppController {
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
     }
+
 } //end
 
 
