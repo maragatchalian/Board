@@ -43,5 +43,7 @@ CREATE TABLE IF NOT EXISTS favorite(
 CREATE TABLE IF NOT EXISTS follow(
     id INT(11) NOT NULL AUTO_INCREMENT,
     user_id INT(11) NOT NULL,
+    username VARCHAR(20) NOT NULL,
     PRIMARY KEY (id)
     ); 
+

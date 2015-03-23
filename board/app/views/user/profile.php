@@ -7,7 +7,7 @@
                 <h1>Hello, <?php eh($user->username) ?>!</h1> 
                 <br /> 
                 <a href="<?php eh(url('comment/favorites')) ?>">My Favorites</a>      
-                <a href="<?php eh(url('follow/following')) ?>">Following</a>
+                <a href="<?php eh(url('user/following')) ?>">Following</a>
                 <h3> Account </h3>
                 First Name: <?php eh($user->first_name) ?> <br />
                 Last Name: <?php eh($user->last_name) ?><br />

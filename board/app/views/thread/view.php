@@ -13,10 +13,10 @@
 
  <!-- Follow/Unfollow User -->
 <?php if ($following->isUserFollow()) : ?> 
-<a href="<?php eh(url('follow/setFollowing', array('user_id' => $following->user_id, 'method' => 'add')))?>">
+<a href="<?php eh(url('user/setFollowing', array('user_id' => $following->user_id, 'method' => 'add')))?>">
     Follow</a>
 <?php else : ?>
-<a href="<?php eh(url('follow/setFollowing', array('user_id' => $following->user_id, 'method' => 'remove')))?>">
+<a href="<?php eh(url('user/setFollowing', array('user_id' => $following->user_id, 'method' => 'remove')))?>">
   Unfollow</a>
 <?php endif ?>
 
