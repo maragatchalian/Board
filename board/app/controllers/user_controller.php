@@ -134,43 +134,24 @@ class UserController extends AppController{
 
     }
 
-    //View other users - user/view.php
-    /*public function view() {
-        $user = User::get();  //display yung OWN name ng user pag nag hello.  (Greeting)
-        $id = Param::get('user_id');
-            // $thread_id = Param::get('thread_id'); 
-        $users = User::get($id);
-            //$thread = Thread::get($thread_id); 
-        $user_get_all = User::getOtherUser(Param::get('user_id')); 
-            // $comments = Comment::getAll($thread_id); --> katumbas sa thread. pag cnlick yung thread lahat
-            //ng comments under dun, madidisplay
-
-        $this->set(get_defined_vars());
+    public function others_success(){
 
     }
-    public function view() {
-        $id = Param::get('user_id');
-        $user = User::get();
-        $users = User::get($id);
-        $user_get_all = User::getOtherUser(Param::get('user_id')); 
-        $this->set(get_defined_vars());
 
-    }*/
-
-     public function others() {
+    public function others() {
         $users = new User();
-     
         $user_id = Param::get('user_id');
         $user = User::get($user_id);
         $this->set(get_defined_vars());
-        }
+    }
 
 
-    //--------------------------------------------------------
+    //Functions related to following/unfollowing a user.
     public function following() {
-
-        $user = User::getData();
+        $user = User::getData(); //For Greeting Purposes. Fetch the Name of the user.
         $following = User::getAllFollowing();
+        $username = Param::get('username');
+        
         $this->set(get_defined_vars());  
     }
 
@@ -189,7 +170,7 @@ class UserController extends AppController{
             throw new InvalidArgumentException("{$method} is an invalid parameter");
             break;
         }
-        redirect(url('user/view'));//, array('user_id' => $_SESSION['user_id'])));
+        redirect(url('user/others_success'));// array('user_id' => $_SESSION['user_id']);
     }
 
 }//end
