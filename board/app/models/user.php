@@ -183,7 +183,8 @@ class User extends AppModel {
         return $users;
     }
 
-    //-----------------------------------------------------------------------//
+
+      //-----------------------------------------------------------------------//
                        /*Follow and Unfollow user*/
     //-----------------------------------------------------------------------//
 
@@ -207,7 +208,6 @@ class User extends AppModel {
         }
     }
 
-
    public function removeFollowing() {
         try {
             $db = DB::conn();
@@ -224,28 +224,26 @@ class User extends AppModel {
         }
     }
 
-        public function isUserFollowing() {
+    public function isUserFollowing() {
         $db = DB::conn();
         $params = array(
-            'id' => $follow->id,
+            'username' => $this->username,
             $_SESSION['user_id']
         );
         
         $user_following = $db->rows('SELECT * FROM follow
-            WHERE id =? AND user_id = ?', $params);
+            WHERE username = ? AND user_id = ?', $params);
         return !$user_following;    
     }
 
-    
     public static function countFollowing() {
         $db = DB::conn();
         $total_following = $db->value('SELECT COUNT(*) FROM follow
-            WHERE id = ?', array($this->id));
+            WHERE id = ?', array($follow->id));
         
         return $total_following;
     }
        
-
     public static function getAllFollowing() {
         $following = array();
         $db = DB::conn();

@@ -1,6 +1,6 @@
-<h1> 
-    <font color ="black">
-    All threads</h1>
+<font color ="black">
+    <center> <br /><br />
+    <h1> All threads</h1>
        
 <ul style="list-style-type:square">
     <?php foreach ($threads as $thread): ?>

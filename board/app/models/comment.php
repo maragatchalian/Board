@@ -138,7 +138,8 @@ public $validation = array(
         $db = DB::conn();
         $db->begin();
         $params = array(
-            $this->id,
+            $this->id, /*if you removed this, once you unvaforited a comment,
+                         every comment you favorited will be deleted*/
             $_SESSION['user_id']
         );
     
@@ -153,8 +154,7 @@ public $validation = array(
         $db = DB::conn();
         $params = array(
             $this->id,
-            
-            $_SESSION['user_id']
+                  $_SESSION['user_id']
         );
         $comment_favorited = $db->rows('SELECT * FROM favorite 
             WHERE comment_id = ? AND user_id = ?', $params);
@@ -181,6 +181,6 @@ public $validation = array(
         return $favorites;
     }
 
-    
+
 
 } //end

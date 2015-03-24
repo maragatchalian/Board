@@ -84,13 +84,15 @@ class UserController extends AppController{
     * Display user's name, username, and email
     */
     public function profile() {
-    $user = User::get();
-    $this->set(get_defined_vars());
+        $user = User::get();
+        $this->set(get_defined_vars());
     }
 
     public function home(){
 
     }
+
+
 
  
 
@@ -130,20 +132,18 @@ class UserController extends AppController{
     public function users() {
        $user = User::get();
        $users = User::getAllUsers();
-       $this->set(get_defined_vars());  
-
+       $this->set(get_defined_vars()); 
     }
 
     //View other user page
     public function view() {
         $user = User::get();     
-       
-
         $id = Param::get('id');
         $users = User::get($id);
-        //$following = User::getAllUsers($id);
-
+        $user_get_all = User::getAllUsers($id);
         $this->set(get_defined_vars());
+
+        //$comments = Comment::getAll($pagination->start_index -1, $pagination->count + 1, $thread_id);//added
     }
 
     //--------------------------------------------------------
@@ -156,11 +156,9 @@ class UserController extends AppController{
 
     public function setFollowing() {
         $follow = User::get(Param::get('id'));
+        //$follow = User::getAllFollowing(Param::get('follow_id'));
         $method = Param::get('method');
         
-        /*$id = User::get(Param::get('user_id'));
-        $follow = User::getAllUsers($id);
-        $method = Param::get('method');*/
         switch ($method) {
             case 'add':
                 $follow->addFollowing();
@@ -172,9 +170,7 @@ class UserController extends AppController{
             throw new InvalidArgumentException("{$method} is an invalid parameter");
             break;
         }
-        //redirect(url('thread/view', array('thread_id' => $_SESSION['thread_id'])));
-        //redirect(url('user/view'));//, array('thread_id' => $comment->thread_id)));
-        redirect(url('user/view', array('id' => $follow->id)));
+        redirect(url('user/view'));//, array('user_id' => $_SESSION['user_id'])));
     }
 
 }//end
