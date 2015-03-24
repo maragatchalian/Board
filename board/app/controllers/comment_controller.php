@@ -44,7 +44,7 @@ const MAX_COMMENT_PER_PAGE = 5;
 
 
     public function favorites() {
-        $user = User::get();
+        $user = User::getData();
         $favorites = Comment::getAllFavorites();//($pagination->start_index -1, $pagination->count + 1);
         $this->set(get_defined_vars()); 
     }

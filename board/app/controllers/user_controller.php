@@ -84,7 +84,8 @@ class UserController extends AppController{
     * Display user's name, username, and email
     */
     public function profile() {
-        $user = User::get();
+
+        $user = User::getData();
         $this->set(get_defined_vars());
     }
 
@@ -126,32 +127,55 @@ class UserController extends AppController{
 
     //View all users - user/users.php
     public function users() {
-       $user = User::get();
+        $user_id = Param::get('user_id');
+       $user = User::get($user_id);
        $users = User::getAllUsers();
        $this->set(get_defined_vars()); 
 
     }
 
     //View other users - user/view.php
-    public function view() {
-        $user = User::get();     
+    /*public function view() {
+        $user = User::get();  //display yung OWN name ng user pag nag hello.  (Greeting)
         $id = Param::get('user_id');
+            // $thread_id = Param::get('thread_id'); 
         $users = User::get($id);
-        $user_get_all = User::getAllUsers($id);
+            //$thread = Thread::get($thread_id); 
+        $user_get_all = User::getOtherUser(Param::get('user_id')); 
+            // $comments = Comment::getAll($thread_id); --> katumbas sa thread. pag cnlick yung thread lahat
+            //ng comments under dun, madidisplay
+
         $this->set(get_defined_vars());
+
     }
+    public function view() {
+        $id = Param::get('user_id');
+        $user = User::get();
+        $users = User::get($id);
+        $user_get_all = User::getOtherUser(Param::get('user_id')); 
+        $this->set(get_defined_vars());
+
+    }*/
+
+     public function others() {
+        $users = new User();
+     
+        $user_id = Param::get('user_id');
+        $user = User::get($user_id);
+        $this->set(get_defined_vars());
+        }
+
 
     //--------------------------------------------------------
     public function following() {
 
-        $user = User::get();
+        $user = User::getData();
         $following = User::getAllFollowing();
         $this->set(get_defined_vars());  
     }
 
     public function setFollowing() {
-        $follow = User::get(Param::get('id'));
-        //$follow = User::getAllFollowing(Param::get('follow_id'));
+        $follow = User::getData(Param::get('id'));
         $method = Param::get('method');
         
         switch ($method) {

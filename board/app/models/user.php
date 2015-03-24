@@ -134,7 +134,7 @@ class User extends AppModel {
     }
 
     //Gets user's Data
-    public static function get(){
+    public static function getData(){
         $db = DB::conn();
         $row = $db->row("SELECT * FROM user 
                     WHERE id = ?", array($_SESSION['user_id']));    
@@ -183,6 +183,12 @@ class User extends AppModel {
         return $users;
     }
 
+    public static function get($user_id) {
+        $db = DB::conn();
+        $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
+      
+        return $row;
+    }   
 
       //-----------------------------------------------------------------------//
                        /*Follow and Unfollow user*/

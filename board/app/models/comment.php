@@ -38,7 +38,7 @@ public $validation = array(
         
         foreach ($rows as $row) {
             $comments[] = new self($row);
-        }
+            }
         return $comments;
         }
 
