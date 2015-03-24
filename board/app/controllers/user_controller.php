@@ -92,10 +92,6 @@ class UserController extends AppController{
 
     }
 
-
-
- 
-
     public function edit(){
         $params = array(
             'username' => Param::get('username'),
@@ -128,22 +124,21 @@ class UserController extends AppController{
 
     }
 
-    //view all users
+    //View all users - user/users.php
     public function users() {
        $user = User::get();
        $users = User::getAllUsers();
        $this->set(get_defined_vars()); 
+
     }
 
-    //View other user page
+    //View other users - user/view.php
     public function view() {
         $user = User::get();     
-        $id = Param::get('id');
+        $id = Param::get('user_id');
         $users = User::get($id);
         $user_get_all = User::getAllUsers($id);
         $this->set(get_defined_vars());
-
-        //$comments = Comment::getAll($pagination->start_index -1, $pagination->count + 1, $thread_id);//added
     }
 
     //--------------------------------------------------------
