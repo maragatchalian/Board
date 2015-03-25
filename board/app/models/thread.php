@@ -16,6 +16,13 @@ class Thread extends AppModel{
             'validate_between', self::MIN_TITLE_LENGTH, self::MAX_TITLE_LENGTH
             ),
         ),
+
+    //Category Validation
+    'category' => array(
+        'length' => array(
+            'validate_between', self::MIN_TITLE_LENGTH, self::MAX_TITLE_LENGTH
+            ),
+        ),
     );
 
     /*
@@ -41,7 +48,8 @@ class Thread extends AppModel{
          $params = array(            //$params is the variable name of this set. (title, created)
             'title' => $this->title,    //input will be stored in the column 'title'
             'created'=> $date_created, 
-            'user_id'=> $_SESSION['user_id']
+            'user_id'=> $_SESSION['user_id'],
+            'category' => $this->category
             );
             $db->insert('thread', $params); //insert $params (the previous set i mentioned before) into 'thread' table
             $this->id = $db->lastInsertId();
@@ -92,18 +100,41 @@ class Thread extends AppModel{
             foreach ($rows as $row) {
              $comments[] = new Comment($row);
             }
+
         return $comments;
     }
-    
-    /*public function write(Comment $comment) {
-        if(!$comment->validate()) {
-            throw new ValidationException('Invalid Comment');
-    }
-    $db = DB::conn();
-    $db->query(
-        'INSERT INTO comment SET thread_id = ?, user_id = ?, body = ?, created = NOW()',
-            array($this->id, $this->$_SESSION['user_id'], $comment->body, )
-            );
-    }*/
 
-}
+ //Sorting
+public static function getAllMyThread($offset, $limit, $id) {
+    $threads = array();
+    $db = DB::conn();
+    $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}",array($id));
+        foreach($rows as $row) {
+            $threads[] = new self($row);
+         }
+    return $threads;
+    }
+
+
+    public static function getByCategory($offset, $limit, $category) {
+    $threads = array();
+    $db = DB::conn();
+    $rows = $db->rows("SELECT * FROM thread WHERE category = ? LIMIT {$offset}, {$limit}",array($category));
+        foreach($rows as $row) {
+            $threads[] = new self($row);
+         }
+    return $threads;
+    }
+
+     public static function getAllCategory() {
+        $db = DB::conn();
+        $rows = $db->rows('SELECT DISTINCT category FROM thread');
+        $categories = array();
+        foreach ($rows as $row) {
+            if (!empty($row['category'])) {
+                $categories[] = $row['category'];
+            }
+        }
+        return $categories;
+    }
+} //end

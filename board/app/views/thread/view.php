@@ -4,13 +4,12 @@
 <!--Thread Title-->
 <center>
 <h1><?php eh($thread->title) ?></h1>
+<h3>Category: <?php eh($thread->category)?></h3>
 </center>
 
 <!--Spacing-->
  <div class="comment">                        
  <div class="meta">
-
-
 
 <!--View Comments-->
 <?php foreach($comments as $get_from_comment): ?>
@@ -19,14 +18,12 @@
 <h4> <ul style="list-style-type:square">
 <li>  <?php eh($get_from_comment->username) ?> </li> </h4> 
 
-
 <!--View Date of Creation-->    
 <?php eh($get_from_comment->created) ?> 
 
  <!--View Comment Body-->    
     <div><?php echo($get_from_comment->body) ?></div>
     <br /> 
-
 
 <!-- Delete Comment -->
 <?php if ($get_from_comment->isUserComment()) : ?> 

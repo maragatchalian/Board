@@ -1,5 +1,4 @@
 <font color ="black">
-    <center> <br /><br />
     <h1> All threads</h1>
        
 <ul style="list-style-type:square">

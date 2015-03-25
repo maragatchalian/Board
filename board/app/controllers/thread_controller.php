@@ -29,12 +29,13 @@ class ThreadController extends AppController {
         *   then the data gathered here will be tranferred to view (view/thread/view.php)
         */
         case 'create_end':
+
             $thread->title = Param::get('title'); 
+            $thread->category = Param::get('category');
             $comment->body = Param::get('body');
             $comment->username = Param::get('username');
             
-              try 
-            {
+            try  {
                 $thread->create($comment);
             } catch (ValidationException $e) {
                 $current_page = 'create';
@@ -46,14 +47,11 @@ class ThreadController extends AppController {
         }  
 
         $this->set(get_defined_vars());
-        $this->render($current_page);
-                    
+        $this->render($current_page);               
     }
     
- 
     //Displays maximum number of threads per page
-    public function index() 
-    {
+    public function index() {
         $per_page = self::MAX_THREAD_PER_PAGE; 
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
@@ -65,7 +63,7 @@ class ThreadController extends AppController {
     }   
 
     
-//Displays the comments of the thread
+    //Displays the comments of the thread
     public function view() {
        
        //pagination
@@ -81,6 +79,46 @@ class ThreadController extends AppController {
         $pagination->checkLastPage($comments);
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
+    }
+
+//sorting
+    public function myThreads() {
+        $per_page = self::MAX_THREAD_PER_PAGE; 
+        $current_page = Param::get('page', 1);
+        $id = $_SESSION['user_id'];
+        $pagination = new SimplePagination($current_page, $per_page);
+
+        $threads = Thread::getAllMyThread($pagination->start_index -1, $pagination->count + 1, $id);
+        $pagination->checkLastPage($threads);
+
+        $total = Thread::CountAll();
+        $pages = ceil($total / $per_page);
+    
+        $this->set(get_defined_vars()); 
+        $this->render('index');
+    }
+
+
+    public function byCategory() {
+        $category = Param::get('category','none');
+        if ( $category !== 'none') {
+            $per_page = self::MAX_THREAD_PER_PAGE; 
+            $current_page = Param::get('page', 1);
+            $pagination = new SimplePagination($current_page, $per_page);
+
+            $threads = Thread::getByCategory($pagination->start_index -1, $pagination->count + 1, $category);
+            $pagination->checkLastPage($threads);
+
+            $total = Thread::CountAll();
+            $pages = ceil($total / $per_page);
+            $this->set(get_defined_vars());
+            $this->render('index');
+        } else {
+            $categories = Thread::getAllCategory();
+            $this->set(get_defined_vars());
+            $this->render('categories');
+        }    
+       
     }
 
 } //end

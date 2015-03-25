@@ -10,7 +10,6 @@
 <h2><?php eh($user->username);?>'s profile</h2>
 <form class="span6 well shadow" method="POST">
 
-<input class="span6" type="text" value="<?php eh($user->id) ?>" name="email" disabled> <br />
 <label>First name</label>
 <input class="span6" type="text" value="<?php eh($user->first_name) ?>" name="firstname" disabled> <br />
 <label>Last name</label>
@@ -18,7 +17,6 @@
 <label>Username</label>
 <input class="span6" type="text" value="<?php eh($user->username) ?>" name="username" disabled> <br />
 <label>Email</label>
-<input class="span6" type="email" value="<?php eh($user->email) ?>" name="email" disabled> <br />
-<label>Id</label>
+<input class="span6" type="email" value="<?php eh($user->email) ?>" name="email" disabled> 
 <br/>
 </form>

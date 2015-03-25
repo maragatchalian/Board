@@ -58,16 +58,17 @@
         }
     </style>
 
-    <ul id="menu">
+
+<ul id="menu">
         <li><a href="<?php eh(url('user/home')) ?>">Home</a>
         <li><a href="<?php eh(url('user/profile')) ?>">Profile</a></li>
-        <li><a href="<?php eh(url('thread/index')) ?>">Threads</a>
+        <li><a href="<?php eh(url('thread/index')) ?>">All Threads</a></li>
+        <li><a href="<?php eh(url('thread/myThreads')) ?>">My Threads</a></li>
+        <li><a href="<?php eh(url('thread/byCategory')) ?>">Thread Categories</a></li>
         <li><a href="<?php eh(url('thread/create')) ?>">Create New Thread</a></li>  
         <li><a href="<?php eh(url('user/users')) ?>">Users</a></li> 
         <li><a href="<?php eh(url('user/logout')) ?>">Logout</a></li>
-    </ul>  
-    <br />
-
+    </ul>
     
       
 <?php endif ?>
