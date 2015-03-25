@@ -154,7 +154,7 @@ public $validation = array(
         $db = DB::conn();
         $params = array(
             $this->id,
-                  $_SESSION['user_id']
+            $_SESSION['user_id']
         );
         $comment_favorited = $db->rows('SELECT * FROM favorite 
             WHERE comment_id = ? AND user_id = ?', $params);

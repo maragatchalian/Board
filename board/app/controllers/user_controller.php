@@ -127,7 +127,7 @@ class UserController extends AppController{
 
     //View all users - user/users.php
     public function users() {
-        $user_id = Param::get('user_id');
+       $user_id = Param::get('user_id');
        $user = User::get($user_id);
        $users = User::getAllUsers();
        $this->set(get_defined_vars()); 
@@ -139,24 +139,27 @@ class UserController extends AppController{
     }
 
     public function others() {
-        $users = new User();
-        $user_id = Param::get('user_id');
-        $user = User::get($user_id);
+      
+        $user_id = Param::get('user_id');   
+        $user = new User;
+        $row = User::get($user_id);
+        foreach ($row as $key => $value) {
+            $user->$key = $value;
+        }
         $this->set(get_defined_vars());
+        
     }
-
 
     //Functions related to following/unfollowing a user.
     public function following() {
         $user = User::getData(); //For Greeting Purposes. Fetch the Name of the user.
         $following = User::getAllFollowing();
         $username = Param::get('username');
-        
         $this->set(get_defined_vars());  
     }
 
     public function setFollowing() {
-        $follow = User::getData(Param::get('id'));
+        $follow = User::getData(Param::get('user_id'));
         $method = Param::get('method');
         
         switch ($method) {
@@ -171,7 +174,12 @@ class UserController extends AppController{
             break;
         }
         redirect(url('user/others_success'));// array('user_id' => $_SESSION['user_id']);
+        //redirect(url('user/others', array('user_id' => $_SESSION['user_id']))); 
     }
+
+
+
+
 
 }//end
 

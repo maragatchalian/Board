@@ -133,6 +133,24 @@ class User extends AppModel {
         return (!$username_exist);
     }
 
+
+    public static function get($user_id) {
+        $db = DB::conn();
+        $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
+        return $row;
+    }   
+
+    public static function getAll($id) {
+        $user = array();
+        $db = DB::conn();
+        $rows = $db->rows("SELECT * FROM user WHERE id = ?", array($id));
+        
+        foreach ($rows as $row) {
+            $user[] = new self($row);
+            }
+        return $user;
+        }
+
     //Gets user's Data
     public static function getData(){
         $db = DB::conn();
@@ -183,20 +201,15 @@ class User extends AppModel {
         return $users;
     }
 
-    public static function get($user_id) {
-        $db = DB::conn();
-        $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
-      
-        return $row;
-    }   
 
-      //-----------------------------------------------------------------------//
+
+    //-----------------------------------------------------------------------//
                        /*Follow and Unfollow user*/
     //-----------------------------------------------------------------------//
 
-    public function isUserFollow() {
+    /*public function isUserFollow() {
         return $this->id === $_SESSION['user_id']; 
-    }
+    }*/
 
     public function addFollowing(){
         try {
@@ -204,7 +217,7 @@ class User extends AppModel {
             $db->begin();
             $params = array(
             'username' => $this->username,
-            'user_id' => $_SESSION['user_id']
+            'user_id' => $this->id
             );
         
             $db->insert('follow', $params);
@@ -219,11 +232,11 @@ class User extends AppModel {
             $db = DB::conn();
             $db->begin();
             $params = array(
-                'username' => $this->username,
-                $_SESSION['user_id']
+                $this->username,
+                $this->id
             );
             
-            $db->query('DELETE FROM follow WHERE username = ? AND user_id', $params);
+            $db->query('DELETE FROM follow WHERE username = ? AND user_id  = ?', $params);
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
@@ -233,19 +246,17 @@ class User extends AppModel {
     public function isUserFollowing() {
         $db = DB::conn();
         $params = array(
-            'username' => $this->username,
-            $_SESSION['user_id']
+            $this->username,
+            $this->id
         );
-        
-        $user_following = $db->rows('SELECT * FROM follow
-            WHERE username = ? AND user_id = ?', $params);
+        $user_following = $db->row('SELECT * FROM follow WHERE username = ? AND user_id = ?', $params);
         return !$user_following;    
     }
 
-    public static function countFollowing() {
+    public static function countFollowing($user_id) {
         $db = DB::conn();
         $total_following = $db->value('SELECT COUNT(*) FROM follow
-            WHERE id = ?', array($follow->id));
+            WHERE user_id = ?', array($user_id));
         
         return $total_following;
     }
