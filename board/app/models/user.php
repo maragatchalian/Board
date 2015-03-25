@@ -151,7 +151,7 @@ class User extends AppModel {
         return $user;
         }
 
-    //Gets user's Data
+    /*//Gets user's Data - Mara
     public static function getData(){
         $db = DB::conn();
         $row = $db->row("SELECT * FROM user 
@@ -161,6 +161,17 @@ class User extends AppModel {
             throw new RecordNotFoundException('no record found');
         }
         return new self($row);
+    }*/
+
+    //Gets user's Data - J
+    public static function getData($user_id){
+    $db = DB::conn();
+    $row = $db->row("SELECT * FROM user
+        WHERE id = ?", array($user_id));
+    if (!$row) {
+    throw new RecordNotFoundException('no record found');
+    }
+    return new self($row);
     }
 
     //Update Profile
@@ -211,7 +222,7 @@ class User extends AppModel {
         return $this->id === $_SESSION['user_id']; 
     }*/
 
-    public function addFollowing(){
+    /*public function addFollowing(){ //mara
         try {
             $db = DB::conn();
             $db->begin();
@@ -225,25 +236,56 @@ class User extends AppModel {
         } catch (Exception $e) {
             $db->rollback();
         }
-    }
+    }*/
 
-   public function removeFollowing() {
+    public function addFollowing(){ // -J
         try {
             $db = DB::conn();
             $db->begin();
             $params = array(
-                $this->username,
-                $this->id
+            'username' => $this->username,
+            'user_id' => $_SESSION['user_id']// used $_SESSION['user_id'] instead of $this->id
             );
-            
-            $db->query('DELETE FROM follow WHERE username = ? AND user_id  = ?', $params);
+        
+            $db->insert('follow', $params);
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
         }
     }
 
-    public function isUserFollowing() {
+
+   /*public function removeFollowing() {
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $params = array(
+                $this->username,
+                $this-> $_SESSION['user_id']
+            );
+            $db->query('DELETE FROM follow WHERE username = ? AND user_id  = ?', $params);
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+        }
+    }*/
+
+    public function removeFollowing() {
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $params = array(
+                $this->username,
+                $_SESSION['user_id']   //HERE PO YUNG FIX
+            );
+            $db->query('DELETE FROM follow WHERE username = ? AND user_id = ?', $params);
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+        }
+    }
+
+    /*public function isUserFollowing() {
         $db = DB::conn();
         $params = array(
             $this->username,
@@ -251,7 +293,17 @@ class User extends AppModel {
         );
         $user_following = $db->row('SELECT * FROM follow WHERE username = ? AND user_id = ?', $params);
         return !$user_following;    
-    }
+    }*/
+
+public function isUserFollowing() {
+$db = DB::conn();
+$params = array(
+$this->username,
+$_SESSION['user_id'],      //FIX HERE SINCE ID NG CURRENT USER ANG HINAHANAP
+);
+$user_following = $db->row('SELECT * FROM follow WHERE username = ? AND user_id = ?', $params);
+return !$user_following;
+}
 
     public static function countFollowing($user_id) {
         $db = DB::conn();

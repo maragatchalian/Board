@@ -82,12 +82,21 @@ class UserController extends AppController{
 
     /*
     * Display user's name, username, and email
-    */
+    
     public function profile() {
 
         $user = User::getData();
         $this->set(get_defined_vars());
-    }
+    }*/
+
+     /*
+* Display user's name, username, and email
+*/
+public function profile() {
+$user = User::getData($_SESSION['user_id']);
+$this->set(get_defined_vars());
+}
+
 
     public function home(){
 
@@ -143,20 +152,32 @@ class UserController extends AppController{
         $user_id = Param::get('user_id');   
         $user = new User;
         $row = User::get($user_id);
-        foreach ($row as $key => $value) {
-            $user->$key = $value;
-        }
+
+            foreach ($row as $key => $value) 
+            {
+                $user->$key = $value;
+            }
+
         $this->set(get_defined_vars());
         
     }
 
     //Functions related to following/unfollowing a user.
-    public function following() {
+    /*public function following() {
         $user = User::getData(); //For Greeting Purposes. Fetch the Name of the user.
         $following = User::getAllFollowing();
         $username = Param::get('username');
         $this->set(get_defined_vars());  
-    }
+    }*/
+
+    
+     public function following() { //-J
+$user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
+$following = User::getAllFollowing();
+$username = Param::get('username');
+$this->set(get_defined_vars());
+}
+
 
     public function setFollowing() {
         $follow = User::getData(Param::get('user_id'));
@@ -173,8 +194,8 @@ class UserController extends AppController{
             throw new InvalidArgumentException("{$method} is an invalid parameter");
             break;
         }
-        redirect(url('user/others_success'));// array('user_id' => $_SESSION['user_id']);
-        //redirect(url('user/others', array('user_id' => $_SESSION['user_id']))); 
+        //redirect(url('user/others', array('user_id' => $_SESSION['user_id'])));  
+        redirect(url('user/others', array('user_id' => $follow->id)));   
     }
 
 

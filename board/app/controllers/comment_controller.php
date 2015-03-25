@@ -43,11 +43,18 @@ const MAX_COMMENT_PER_PAGE = 5;
     }  
 
 
-    public function favorites() {
+   /* public function favorites() {
         $user = User::getData();
         $favorites = Comment::getAllFavorites();//($pagination->start_index -1, $pagination->count + 1);
         $this->set(get_defined_vars()); 
-    }
+    }*/
+
+     public function favorites() { // -J
+$user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
+$favorites = Comment::getAllFavorites();
+$username = Param::get('username');
+$this->set(get_defined_vars());
+}
         
     public function setFavorite() {
         $comment = Comment::get(Param::get('comment_id'));
@@ -64,7 +71,6 @@ const MAX_COMMENT_PER_PAGE = 5;
             throw new InvalidArgumentException("{$method} is an invalid parameter");
             break;
         }
-        //redirect(url('thread/view', array('thread_id' => $_SESSION['thread_id'])));
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
     }
 
