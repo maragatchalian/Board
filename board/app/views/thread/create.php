@@ -1,5 +1,7 @@
 <!--View for Creation of comments on thread --> 
 <font color = "black">
+    <br />
+    <br />
 <h1> Create a thread</h1>
               
 <?php if ($thread->hasError() || $comment->hasError()): ?>

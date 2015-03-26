@@ -7,17 +7,17 @@ class UserController extends AppController{
             redirect(url('user/home'));
         }
 
-    $params = array(
-        'username' => Param::get('username'),
-        'first_name' => Param::get('first_name'),
-        'last_name' => Param::get('last_name'),
-        'email' => Param::get('email'),
-        'password' => Param::get('password'),
-        'confirm_password' => Param::get('confirm_password')
+        $params = array(
+            'username' => Param::get('username'),
+            'first_name' => Param::get('first_name'),
+            'last_name' => Param::get('last_name'),
+            'email' => Param::get('email'),
+            'password' => Param::get('password'),
+            'confirm_password' => Param::get('confirm_password')
         );
 
-    $user = new User($params);
-    $page = Param::get('page_next', 'register');
+        $user = new User($params);
+        $page = Param::get('page_next', 'register');
         
         switch ($page) {    
             case 'register':
@@ -30,7 +30,7 @@ class UserController extends AppController{
                     $page = 'register';
                 }
 
-                break;
+            break;
             default:
                 throw new NotFoundException("{$page} is not found");
             break;
@@ -40,8 +40,7 @@ class UserController extends AppController{
     }
 
     public function login() {
-        if (is_logged_in()) 
-        {
+        if (is_logged_in()) {
             redirect(url('user/home'));
         }
 
@@ -58,17 +57,16 @@ class UserController extends AppController{
                 break;
          
                 case 'home':
-                    try 
-                    {
+                    try {
                         $user->login();
                     }catch (ValidationException $e){
                         $page = 'login';
                     }
             
-                    break;
+                break;
                 default:
                     throw new NotFoundException("{$page} is not found");
-                    break;
+                break;
             }
         
         $this->set(get_defined_vars());
@@ -79,36 +77,26 @@ class UserController extends AppController{
         session_destroy();
         redirect(url('user/login'));
     }
+  
+    //Display user's name, username, and email
 
-    /*
-    * Display user's name, username, and email
-    
     public function profile() {
-
-        $user = User::getData();
+        $user = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
-    }*/
-
-     /*
-* Display user's name, username, and email
-*/
-public function profile() {
-$user = User::getData($_SESSION['user_id']);
-$this->set(get_defined_vars());
-}
+    }
 
 
-    public function home(){
+    public function home() {
 
     }
 
-    public function edit(){
+    public function edit() {
         $params = array(
             'username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
             'last_name' => Param::get('last_name'),
             'email' => Param::get('email') 
-            );
+        );
 
         $user = new User($params);
         $page = Param::get('page_next', 'edit');
@@ -120,10 +108,10 @@ $this->set(get_defined_vars());
             case 'edit_end':
                 try {
                      $user->update();
-                     }catch (ValidationException $e) {
+                }catch (ValidationException $e) {
                         $page = 'edit';
                      }
-                     break;
+                break;
                 default:
                     throw new NotFoundException("{$page} is not found");
                     break;
@@ -131,7 +119,6 @@ $this->set(get_defined_vars());
 
         $this->set(get_defined_vars());
         $this->render($page); 
-
     }
 
     //View all users - user/users.php
@@ -140,11 +127,6 @@ $this->set(get_defined_vars());
        $user = User::get($user_id);
        $users = User::getAllUsers();
        $this->set(get_defined_vars()); 
-
-    }
-
-    public function others_success(){
-
     }
 
     public function others() {
@@ -163,21 +145,13 @@ $this->set(get_defined_vars());
     }
 
     //Functions related to following/unfollowing a user.
-    /*public function following() {
-        $user = User::getData(); //For Greeting Purposes. Fetch the Name of the user.
+    
+    public function following() { //-J
+        $user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
         $following = User::getAllFollowing();
         $username = Param::get('username');
-        $this->set(get_defined_vars());  
-    }*/
-
-    
-     public function following() { //-J
-$user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
-$following = User::getAllFollowing();
-$username = Param::get('username');
-$this->set(get_defined_vars());
-}
-
+        $this->set(get_defined_vars());
+    }
 
     public function setFollowing() {
         $follow = User::getData(Param::get('user_id'));
@@ -194,13 +168,7 @@ $this->set(get_defined_vars());
             throw new InvalidArgumentException("{$method} is an invalid parameter");
             break;
         }
-        //redirect(url('user/others', array('user_id' => $_SESSION['user_id'])));  
         redirect(url('user/others', array('user_id' => $follow->id)));   
     }
-
-
-
-
-
 }//end
 

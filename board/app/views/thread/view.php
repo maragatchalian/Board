@@ -1,6 +1,7 @@
 <!--View thread and its comments --> 
 <font color = "black">
-
+<br />
+<br />
 <!--Thread Title-->
 <center>
 <h1><?php eh($thread->title) ?></h1>

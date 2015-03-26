@@ -17,10 +17,9 @@ const MAX_COMMENT_PER_PAGE = 5;
         case 'write_end':                
             $comment->body = Param::get('body');
             $comment->username = Param::get('username');
-            
-            try 
-            {            
-               $comment->write($comment, $thread_id);
+                
+            try {            
+                $comment->write($comment, $thread_id);
             } catch (ValidationException $e) {                    
                 $current_page = 'write';
             }    
@@ -30,8 +29,9 @@ const MAX_COMMENT_PER_PAGE = 5;
             throw new NotFoundException("{$current_page} is not found");
             break;
         }
-    $this->set(get_defined_vars());
-    $this->render($current_page);   
+        
+        $this->set(get_defined_vars());
+        $this->render($current_page);   
     }
 
     public function delete() { 
@@ -41,17 +41,17 @@ const MAX_COMMENT_PER_PAGE = 5;
         $this->render('comment/delete');
     }  
 
-     public function favorites() { 
+    public function favorites() { 
         $user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
         $favorites = Comment::getAllFavorites();
         $username = Param::get('username');
         $this->set(get_defined_vars());
     }
-        
+            
     public function setFavorite() {
         $comment = Comment::get(Param::get('comment_id'));
         $method = Param::get('method');
-        
+            
         switch ($method) {
             case 'add':
                 $comment->addFavorite();
@@ -59,9 +59,9 @@ const MAX_COMMENT_PER_PAGE = 5;
             case 'remove':
                 $comment->removeFavorite();
                 break;
-        default:
-            throw new InvalidArgumentException("{$method} is an invalid parameter");
-            break;
+            default:
+                throw new InvalidArgumentException("{$method} is an invalid parameter");
+                break;
         }
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
     }

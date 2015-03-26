@@ -1,5 +1,7 @@
 <font color = 'black'>
 <center>
+	<br />
+	<br />
 <h1>Following</h1>
 
  <h3>Hello, <?php eh($user->first_name) ?>! </h3>
