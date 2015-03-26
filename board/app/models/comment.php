@@ -77,7 +77,7 @@ public $validation = array(
     return new self($row);
     }
 
-    public function deleteComment() {
+    public function delete() {
         try {
             $db = DB::conn();
             $db->begin();

@@ -3,7 +3,8 @@ class CommentController extends AppController {
 
 const MAX_COMMENT_PER_PAGE = 5;
 
-    public function write() {
+    public function write() 
+    {
         $thread_id = Param::get('thread_id');
 
         $thread = Thread::get($thread_id);
@@ -34,21 +35,24 @@ const MAX_COMMENT_PER_PAGE = 5;
         $this->render($current_page);   
     }
 
-    public function delete() { 
+    public function delete() 
+    { 
         $comment = Comment::get(Param::get('comment_id'));
+        $comment->delete();
         $this->set(get_defined_vars());
-        $comment->deleteComment();
         $this->render('comment/delete');
     }  
 
-    public function favorites() { 
+    public function favorites() 
+    { 
         $user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
         $favorites = Comment::getAllFavorites();
         $username = Param::get('username');
         $this->set(get_defined_vars());
     }
             
-    public function setFavorite() {
+    public function setFavorite() 
+    {
         $comment = Comment::get(Param::get('comment_id'));
         $method = Param::get('method');
             

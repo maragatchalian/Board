@@ -134,19 +134,14 @@ class UserController extends AppController{
         $user_id = Param::get('user_id');   
         $user = new User;
         $row = User::get($user_id);
-
-            foreach ($row as $key => $value) 
-            {
-                $user->$key = $value;
-            }
-
+        $user = new User($row);
         $this->set(get_defined_vars());
         
     }
 
     //Functions related to following/unfollowing a user.
     
-    public function following() { //-J
+    public function following() { 
         $user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
         $following = User::getAllFollowing();
         $username = Param::get('username');
