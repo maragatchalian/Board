@@ -208,13 +208,13 @@ class User extends AppModel {
         return $this->id === $_SESSION['user_id']; 
     }*/
 
-    public function addFollowing(){ // -J
+    public function addFollowing(){ 
         try {
             $db = DB::conn();
             $db->begin();
             $params = array(
             'username' => $this->username,
-            'user_id' => $_SESSION['user_id']// used $_SESSION['user_id'] instead of $this->id
+            'user_id' => $_SESSION['user_id']
             );
         
             $db->insert('follow', $params);
@@ -230,7 +230,7 @@ class User extends AppModel {
             $db->begin();
             $params = array(
                 $this->username,
-                $_SESSION['user_id']   //HERE PO YUNG FIX
+                $_SESSION['user_id']
             );
             $db->query('DELETE FROM follow WHERE username = ? AND user_id = ?', $params);
             $db->commit();

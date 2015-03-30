@@ -79,15 +79,15 @@ class UserController extends AppController{
     }
   
     //Display user's name, username, and email
-
     public function profile() {
         $user = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
     }
 
 
-    public function home() {
-
+    public function home() 
+    {
+        
     }
 
     public function edit() {

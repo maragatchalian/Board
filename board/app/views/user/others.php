@@ -1,4 +1,5 @@
  <!-- Follow/Unfollow User -->
+ <font color = "black">
 <?php if ($user->isUserFollowing()) : ?> 
     <a href="<?php eh(url('user/setFollowing', array('user_id' => $user->id, 'method' => 'add')))?>"> 
     	Follow</a>
@@ -19,4 +20,5 @@
 <label>Email</label>
 <input class="span6" type="email" value="<?php eh($user->email) ?>" name="email" disabled> 
 <br/>
+</font>
 </form>

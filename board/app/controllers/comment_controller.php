@@ -16,14 +16,19 @@ const MAX_COMMENT_PER_PAGE = 5;
             break;
 
         case 'write_end':                
-            $comment->body = Param::get('body');
-            $comment->username = Param::get('username');
+            
+            $params = array(
+            'body' => Param::get('body'),
+            'username' => Param::get('username')
+            );
+
+            $comment = new Comment($params);
                 
-            try {            
-                $comment->write($comment, $thread_id);
-            } catch (ValidationException $e) {                    
-                $current_page = 'write';
-            }    
+                try {            
+                    $comment->write($comment, $thread_id);
+                } catch (ValidationException $e) {                    
+                    $current_page = 'write';
+                }    
 
         break;
         default:
@@ -45,7 +50,7 @@ const MAX_COMMENT_PER_PAGE = 5;
 
     public function favorites() 
     { 
-        $user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
+        $user = User::get($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
         $favorites = Comment::getAllFavorites();
         $username = Param::get('username');
         $this->set(get_defined_vars());

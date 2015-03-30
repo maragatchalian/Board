@@ -2,15 +2,11 @@
     <head> </head>
         <font color ='black'>
         <center> 
+            <br />
+            <br />
         <h1> My Favorites </h1>
-        <br />
-        <br />
         <center>
-                <h3>Hello, <?php eh($user->first_name) ?>! </h3>
-                <br /> 
-                Here's the list of your favorite comments:
-                    <br /> 
-                            
+
             <ul style="list-style-type:square">
             <?php foreach ($favorites as $get_from_favorite): ?>
             <li>

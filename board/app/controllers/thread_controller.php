@@ -13,7 +13,8 @@ class ThreadController extends AppController {
     *   Everything inputted on the form (view/thread/create.php) will be 
     *   gathered by this function
     */
-    public function create() {
+    public function create() 
+    {
         $thread = new Thread();
         $comment = new Comment();
         $current_page = Param::get('page_next', 'create');   

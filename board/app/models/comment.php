@@ -44,20 +44,19 @@ public $validation = array(
 
     public function write(Comment $comment, $thread_id) {
     
-    if(!$comment->validate()) {
+    if(!$this->validate()) {
         throw new ValidationException('invalid comment');
     }
 
     try {
         $db = DB::conn();
-        $created = date("Y-m-d H:i:s");
-        $db->begin();
+         $db->begin();
         $params = array(
+            'created' => date("Y-m-d H:i:s"),
             'user_id' => $_SESSION['user_id'],
             'username' => $this->username,
             'thread_id' => $thread_id,
-            'body' => $this->body,
-            'created' => $created
+            'body' => $this->body
         );
 
         $db->insert('comment', $params);
@@ -156,15 +155,13 @@ public $validation = array(
             $this->id,
             $_SESSION['user_id']
         );
-        $comment_favorited = $db->rows('SELECT * FROM favorite 
-            WHERE comment_id = ? AND user_id = ?', $params);
+        $comment_favorited = $db->rows('SELECT * FROM favorite WHERE comment_id = ? AND user_id = ?', $params);
         return !$comment_favorited;
     }
 
     public function countFavorite() {
         $db = DB::conn();
-        $total_favorite = $db->value('SELECT COUNT(*) FROM favorite
-            WHERE comment_id =?', array($this->id));
+        $total_favorite = $db->value('SELECT COUNT(*) FROM favorite WHERE comment_id =?', array($this->id));
     return $total_favorite;
     }
 
@@ -172,8 +169,7 @@ public $validation = array(
         $favorites = array();
         $db = DB::conn();
                         
-        $rows = $db->rows('SELECT * FROM favorite
-            WHERE user_id = ?', array($_SESSION['user_id']));
+        $rows = $db->rows('SELECT * FROM favorite WHERE user_id = ?', array($_SESSION['user_id']));
 
             foreach($rows as $row) {
             $favorites[] = new self($row);
