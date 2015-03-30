@@ -83,55 +83,67 @@
 </div>
 <?php endif ?> 
 
-
+<form class="form-horizontal">
 <form action="<?php eh(url('')) ?>" method="post">
 <!--Username-->
-    <div class="span12">
-    <label for="username"><h5>Username</h5></label>
-    <input type="text" name="username" value="<?php eh(Param::get('username')) ?>">
-</div>
+    <div class="control-group">
+    <label class="control-label" for="username"><h5>Username</h5></label>
+    <div class="controls">
+    <input type="text" name="username" placeholder="Username" value="<?php eh(Param::get('username')) ?>">
+    </div>
+    </div>
 
 <!--First Name-->
-    <div class="span12">
-    <label for="first_name"><h5>First Name</h5></label>
-    <input type="text" name="first_name" value="<?php eh(Param::get('first_name')) ?>">
+    <div class="control-group">
+    <label class="control-label" for="first_name"><h5>First Name</h5></label>
+    <div class="controls">
+    <input type="text" name="first_name" placeholder="First Name" value="<?php eh(Param::get('first_name')) ?>">
+    </div>
     </div>
 
 <!--Last Name-->
-    <div class="span12">
-    <label for="last_name"><h5>Last Name</h5></label>
-    <input type="text" name="last_name" value="<?php eh(Param::get('last_name')) ?>">
+    <div class="control-group">
+    <label class="control-label" for="last_name"><h5>Last Name</h5></label>
+    <div class="controls">
+    <input type="text" name="last_name" placeholder="Last Name" value="<?php eh(Param::get('last_name')) ?>">
+    </div>
     </div>
 
 <!--Email-->
-    <div class="span12">
-    <label for="email"><h5>Email</h5></label>
-    <input type="email" name="email" value="<?php eh(Param::get('email')) ?>">
+    <div class="control-group">
+    <label class="control-label" for="email"><h5>Email</h5></label>
+    <div class="controls">
+    <input type="email" name="email" placeholder="Email" value="<?php eh(Param::get('email')) ?>">
+    </div>
     </div>
 
 <!--Password -->
-    <div class="span12">
-    <label for="password"><h5>Password</h5></label>
-    <input type="password" name="password" value="<?php eh(Param::get('password')) ?>">
+    <div class="control-group">
+    <label class="control-label" for="password"><h5>Password</h5></label>
+    <div class="controls">
+    <input type="password" name="password" placeholder="Password" value="<?php eh(Param::get('password')) ?>">
     </div>
-    <br />
+    </div>
 
 <!--Confirm Password-->
-    <div class="span12">
-    <label for="confirm_password"><h5>Confirm Password</h5></label>
-    <input type="password" name="confirm_password" value="<?php eh(Param::get('confirm_password')) ?>">
+    <div class="control-group">
+    <label class="control-label" for="confirm_password"><h5>Confirm Password</h5></label>
+    <div class="controls">
+    <input type="password" name="confirm_password" placeholder="Confirm Password" value="<?php eh(Param::get('confirm_password')) ?>">
+    </div>
     </div>
 
-<input type="hidden" name="page_next" value="register_end">
-<div class="span12">
-<button class="btn btn-info btn-medium" type="submit">Register</button>
-<br />
-<br />
+    <div class="control-group">
+    <div class="controls">
+    <input type="hidden" name="page_next" value="register_end">
+    <button class="btn btn-info btn-medium" type="submit"></span> Register</button>
+    <br />
+    <br />
 
 <!--If user already has an account-->
-Already have an account? Log in
+    Already have an account? Log in
     <a href="<?php eh(url('user/login')) ?>"> HERE</a>.
-
-</div>
+    </div>
+    </div>
 </form>
 </font>

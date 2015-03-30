@@ -1,14 +1,16 @@
  <!-- Follow/Unfollow User -->
  <font color = "black">
+ <br /> 
 <?php if ($user->isUserFollowing()) : ?> 
     <a href="<?php eh(url('user/setFollowing', array('user_id' => $user->id, 'method' => 'add')))?>"> 
-    	Follow</a>
+    	<span class ="icon-plus"></span></a> Follow
 <?php else : ?>
-    <a href="<?php eh(url('user/setFollowing', array('user_id' => $user->id, 'method' => 'remove')))?>">Unfollow</a>
+    <a href="<?php eh(url('user/setFollowing', array('user_id' => $user->id, 'method' => 'remove')))?>">
+    	<span class ="icon-minus"></span></a> Unfollow
 <?php endif ?>
 
 <!--Other user profile information-->
-<h2><?php eh($user->username);?>'s profile</h2>
+<h4><?php eh($user->username);?>'s profile</h4>
 <form class="span6 well shadow" method="POST">
 
 <label>First name</label>

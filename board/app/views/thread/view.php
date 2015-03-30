@@ -30,17 +30,17 @@
 <?php if ($get_from_comment->isUserComment()) : ?> 
   <a href="<?php eh(url('comment/delete', array('comment_id' => $get_from_comment->id)))?>"
   onclick="return confirm('Are you sure you want to delete this comment?')">
-|| Delete this comment ||
-</a>
+<span class ="icon-trash"></span>
+</a> Delete <font color ="white">...</font>
 <?php endif ?>
 
  <!-- Favorite Comment -->
 <?php if ($get_from_comment->isCommentFavorited()) : ?>
 <a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
-    Favorite</a>
+    <span class="icon-star"></span></a>
 <?php else : ?>
-<a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'remove')))?>">
-  Unfavorite</a>
+<a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'remove')))?>" class="yellow"> 
+  <span class="icon-star icon-yellow"></span></a>
 <?php endif ?>
 
 <!-- Count Favorite -->
@@ -50,7 +50,7 @@
 
 </div> 
 </div>
-
+</br> </br>
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>
     <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->prev ?>'>Previous</a>
