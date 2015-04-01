@@ -12,29 +12,41 @@
     </div>
 <?php endif  ?>
 
+    <form class="form-horizontal">
+    <form action="<?php eh(url('')) ?>" method="post">
 
-<form action="<?php eh(url('')) ?>" method="post">
-    <div class="span12">
-    <label for="username"><h4>Username:</h4></label>
-    <input type="text" name="username" value="<?php eh(Param::get('username')) ?>">
+    <div class="control-group">
+    <label class="control-label" for ="username"><h4>Username</h4></label>
+    <div class="controls">
+    <input type="text" placeholder = "Username"  name="username" value="<?php eh(Param::get('username')) ?>">
     </div>
+    </div>
+ 
 
-    <div class="span12">
-    <label for="password"><h4>Password:</h4></label>
-    <input type="password" name="password" value="<?php eh(Param::get('password')) ?>">
+    <div class="control-group">
+    <label class="control-label" for="password"><h4>Password  </h4></label>
+    <div class="controls">
+    <input type="password" placeholder = "Password" name="password" value="<?php eh(Param::get('password')) ?>">
+    </div>
     </div>
     <br />
+
     
 <!--Will be redirected to login_end once successfully logged in-->
+    <div class="control-group">
+    <div class="controls">
     <input type="hidden" name="page_next" value="home">
     <div class="span12">
     <button class="btn btn-info btn-medium" type="submit">Login</button>
 
     <br />
     <br /> 
+
 If you don't have an account, register 
 <a href="<?php eh(url('user/register')) ?>"> HERE</a>.
 </div>
+</div>
+    </div>
 
 </form>
 </font>

@@ -51,6 +51,9 @@
 </div> 
 </div>
 </br> </br>
+
+
+
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>
     <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->prev ?>'>Previous</a>
@@ -58,7 +61,7 @@
          Previous
     <?php endif ?>
 
-<?php for($i = 1; $i <= $current_page; $i++): ?>
+<?php for($i = 1; $i <= $pages; $i++): ?>
     <?php if($i == $current_page): ?>
       <?php echo $i ?>
     <?php else: ?>
