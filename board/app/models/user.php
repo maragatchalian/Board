@@ -134,32 +134,23 @@ class User extends AppModel {
     }
 
 
-    public static function get($user_id) {
+    public static function get($user_id) 
+    {
         $db = DB::conn();
         $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
         return $row;
     }   
 
-    public static function getAll($id) {
-        $user = array();
-        $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM user WHERE id = ?", array($id));
-        
-        foreach ($rows as $row) {
-            $user[] = new self($row);
-            }
-        return $user;
-        }
-
     //Gets user's Data
     public static function getData($user_id){
-    $db = DB::conn();
-    $row = $db->row("SELECT * FROM user
-        WHERE id = ?", array($user_id));
-    if (!$row) {
-    throw new RecordNotFoundException('no record found');
-    }
-    return new self($row);
+        $db = DB::conn();
+        $row = $db->row("SELECT * FROM user WHERE id = ?", array($user_id));
+
+        if (!$row) {
+        throw new RecordNotFoundException('no record found');
+        }
+   
+        return new self($row);
     }
 
     //Update Profile

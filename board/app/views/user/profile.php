@@ -9,13 +9,12 @@
                
             <form action="<?php eh(url('comment/favorites')) ?>" method="post">
             <button class="btn btn-default btn-medium" type="submit"> <i class="icon-star"></i>Favorites</button>
-
+            </form>
+            
             <form action="<?php eh(url('user/following')) ?>" method="post">
             <button class="btn btn-default btn-medium" type="submit"> <i class="icon-plus"></i>Following</button>
-
-             <br />
-            <br />
-                
+            </form>
+                           
             <div class = "profile_info">
             <b>First Name: </b> <?php eh($user->first_name) ?> <br />
             <b>Last Name:</b>  <?php eh($user->last_name) ?><br />
@@ -26,9 +25,8 @@
             </div>
             <div>
             <br />
-            <form action="<?php eh(url('user/edit')) ?>" method="post">
-            <button class="btn btn-info btn-medium" type="submit"> <i class="icon-user icon-white"></i> Edit Profile</button>
-
+                       
+            <a class="btn btn-medium btn-info" href="<?php eh(url('user/edit')) ?>">Edit profile</a>
                  
             </font>
             </form>
