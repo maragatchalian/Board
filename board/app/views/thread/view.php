@@ -37,22 +37,19 @@
  <!-- Favorite Comment -->
 <?php if ($get_from_comment->isCommentFavorited()) : ?>
 <a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
-    <span class="icon-star"></span></a>
+    <i class="icon-star"></i></a>
 <?php else : ?>
 <a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'remove')))?>" class="yellow"> 
-  <span class="icon-star icon-yellow"></span></a>
+ <i class="icon-star icon-yellow"></i></a>
 <?php endif ?>
+
 
 <!-- Count Favorite -->
 <?php echo $get_from_comment->countFavorite() ?> Favorites
-
 <?php endforeach ?>
-
 </div> 
 </div>
 </br> </br>
-
-
 
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>

@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head> <meta charset="utf-8">
-<title> Welcome to Food </title>
+    <head> <meta charset="utf-8"> </head>
+        <title> Welcome to FoodFacts</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/bootstrap/css/custom.css" rel="stylesheet">
 <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/bootstrap/css/glyphicons-extended.min.css" rel="stylesheet">
+<link href="/bootstrap/css/custom.css" rel="stylesheet">
+
+<!--Dietcake Heading -->
+<body>
+                            
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                 <a class="brand"> <font color = "white"> FoodFacts! </font> </a>
+            </div>
+        </div>
+    </div>
+
+<!--Menu Bar (Once the user is logged in)-->
 
 <style>
     body{
@@ -13,17 +28,6 @@
         }
 </style>
 
-<!--Dietcake Heading -->
-<body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-     <a class="brand"> FoodFacts!</a>
-            </div>
-        </div>
-    </div>
-
-<!--Menu Bar (Once the user is logged in)-->
 <div class="container">
 <?php if (isset($_SESSION['user_id'])):?>
     <nav class="navbar navbar-default">

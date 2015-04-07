@@ -1,0 +1,25 @@
+/** {
+   border: 1px solid red !important;
+}*/
+
+.container{
+ padding:5px;
+ box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1) inset, 0px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-inner {
+background: #000; /*magiging black yung header*/
+}
+
+.profile{
+	position: relative;
+    height: 275px;
+    background: none repeat scroll 0% 0% #e3e3e3;
+    border-radius: 5px;
+    border: 3px dashed #000000;
+}
+
+.profile_info{
+    background: ;
+}
+

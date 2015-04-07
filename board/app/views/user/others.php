@@ -3,10 +3,10 @@
  <br /> 
 <?php if ($user->isUserFollowing()) : ?> 
     <a href="<?php eh(url('user/setFollowing', array('user_id' => $user->id, 'method' => 'add')))?>"> 
-    	<span class ="icon-plus"></span></a> Follow
+        <span class ="icon-plus"></span></a> Follow
 <?php else : ?>
-    <a href="<?php eh(url('user/setFollowing', array('user_id' => $user->id, 'method' => 'remove')))?>">
-    	<span class ="icon-minus"></span></a> Unfollow
+    <a href="<?php eh(url('user/setFollowing', array('user_id' => $user->id, 'method' => 'remove')))?>" class = "red">
+        <i class ="icon-minus icon-red"></i></a> Unfollow
 <?php endif ?>
 
 <!--Other user profile information-->
