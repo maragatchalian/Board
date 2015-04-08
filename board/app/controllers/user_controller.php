@@ -1,8 +1,9 @@
 <?php
 
-class UserController extends AppController{
+class UserController extends AppController {
 
-    public function register() {
+    public function register() 
+    {
         if (is_logged_in()) {
             redirect(url('user/home'));
         }
@@ -39,7 +40,8 @@ class UserController extends AppController{
         $this->render($page);
     }
 
-    public function login() {
+    public function login() 
+    {
         if (is_logged_in()) {
             redirect(url('user/home'));
         }
@@ -52,34 +54,36 @@ class UserController extends AppController{
         $user = new User($params);
         $page = Param::get('page_next', 'login');
 
-            switch ($page) {
-                case 'login':
-                break;
+        switch ($page) {
+            case 'login':
+            break;
          
-                case 'home':
-                    try {
-                        $user->login();
-                    }catch (ValidationException $e){
-                        $page = 'login';
-                    }
+            case 'home':
+                try {
+                    $user->login();
+                }catch (ValidationException $e){
+                    $page = 'login';
+                }
             
-                break;
+            break;
                 default:
                     throw new NotFoundException("{$page} is not found");
-                break;
-            }
+            break;
+        }
         
         $this->set(get_defined_vars());
         $this->render($page); 
     }
         
-    public function logout() {
+    public function logout() 
+    {
         session_destroy();
         redirect(url('user/login'));
     }
   
     //Display user's name, username, and email
-    public function profile() {
+    public function profile() 
+    {
         $user = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
     }
@@ -90,7 +94,8 @@ class UserController extends AppController{
         
     }
 
-    public function edit() {
+    public function edit() 
+    {
         $params = array(
             'username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
@@ -110,11 +115,11 @@ class UserController extends AppController{
                      $user->update();
                 }catch (ValidationException $e) {
                         $page = 'edit';
-                     }
-                break;
+                }
+            break;
                 default:
                     throw new NotFoundException("{$page} is not found");
-                    break;
+            break;
                 }
 
         $this->set(get_defined_vars());
@@ -122,33 +127,34 @@ class UserController extends AppController{
     }
 
     //View all users - user/users.php
-    public function users() {
+    public function users() 
+    {
        $user_id = Param::get('user_id');
        $user = User::get($user_id);
        $users = User::getAllUsers();
        $this->set(get_defined_vars()); 
     }
 
-    public function others() {
-      
+    public function others() 
+    {
         $user_id = Param::get('user_id');   
-        $user = new User;
+        //$user = new User;
         $row = User::get($user_id);
         $user = new User($row);
-        $this->set(get_defined_vars());
-        
+        $this->set(get_defined_vars());  
     }
 
     //Functions related to following/unfollowing a user.
-    
-    public function following() { 
+    public function following() 
+    { 
         $user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
         $following = User::getAllFollowing();
         $username = Param::get('username');
         $this->set(get_defined_vars());
     }
 
-    public function setFollowing() {
+    public function setFollowing() 
+    {
         $follow = User::getData(Param::get('user_id'));
         $method = Param::get('method');
         

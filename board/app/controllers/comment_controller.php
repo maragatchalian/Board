@@ -1,4 +1,5 @@
 <?php
+
 class CommentController extends AppController {
 
 const MAX_COMMENT_PER_PAGE = 5;
@@ -13,29 +14,25 @@ const MAX_COMMENT_PER_PAGE = 5;
 
         switch($current_page) { 
             case 'write':
-            break;
+                break;
+        
+            case 'write_end':                
+                $params = array(
+                'body' => Param::get('body'),
+                'username' => Param::get('username')
+                );
 
-        case 'write_end':                
-            
-            $params = array(
-            'body' => Param::get('body'),
-            'username' => Param::get('username')
-            );
-
-            $comment = new Comment($params);
-                
+                $comment = new Comment($params);
                 try {            
                     $comment->write($comment, $thread_id);
                 } catch (ValidationException $e) {                    
                     $current_page = 'write';
                 }    
-
-        break;
-        default:
-            throw new NotFoundException("{$current_page} is not found");
+                break;
+            default:
+                throw new NotFoundException("{$current_page} is not found");
             break;
         }
-        
         $this->set(get_defined_vars());
         $this->render($current_page);   
     }
@@ -70,9 +67,8 @@ const MAX_COMMENT_PER_PAGE = 5;
                 break;
             default:
                 throw new InvalidArgumentException("{$method} is an invalid parameter");
-                break;
+            break;
         }
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
     }
-
 } //end

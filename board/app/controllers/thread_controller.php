@@ -52,7 +52,8 @@ class ThreadController extends AppController {
     }
         
     //Displays maximum number of threads per page
-        public function index() {
+        public function index() 
+        {
             $per_page = self::MAX_THREAD_PER_PAGE; 
             $current_page = Param::get('page', 1);
             $pagination = new SimplePagination($current_page, $per_page);
@@ -62,12 +63,10 @@ class ThreadController extends AppController {
             $pages = ceil($total / $per_page);
             $this->set(get_defined_vars()); 
         }   
-
-        
+    
     //Displays the comments of the thread
-    public function view() {
-           
-        //pagination
+    public function view() 
+    {
         $per_page = self::MAX_COMMENT_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);      
@@ -82,8 +81,11 @@ class ThreadController extends AppController {
         $this->set(get_defined_vars());
     }
 
-    //sorting
-    public function myThreads() {
+    /*
+    * Sorting of threads
+    */
+    public function myThreads() 
+    {
         $per_page = self::MAX_THREAD_PER_PAGE; 
         $current_page = Param::get('page', 1);
         $id = $_SESSION['user_id'];
@@ -99,28 +101,27 @@ class ThreadController extends AppController {
         $this->render('index');
     }
 
-
-    public function byCategory() {
+    public function byCategory() 
+    {
         $category = Param::get('category','none');
-        if ( $category !== 'none') {
-            $per_page = self::MAX_THREAD_PER_PAGE; 
-            $current_page = Param::get('page', 1);
-            $pagination = new SimplePagination($current_page, $per_page);
+            if ( $category !== 'none') {
+                $per_page = self::MAX_THREAD_PER_PAGE; 
+                $current_page = Param::get('page', 1);
+                $pagination = new SimplePagination($current_page, $per_page);
 
-            $threads = Thread::getByCategory($pagination->start_index -1, $pagination->count + 1, $category);
-            $pagination->checkLastPage($threads);
+                $threads = Thread::getByCategory($pagination->start_index -1, $pagination->count + 1, $category);
+                $pagination->checkLastPage($threads);
 
-            $total = Thread::CountAll();
-            $pages = ceil($total / $per_page);
-            $this->set(get_defined_vars());
-            $this->render('index');
+                $total = Thread::CountAll();
+                $pages = ceil($total / $per_page);
+                $this->set(get_defined_vars());
+                $this->render('index');
         
-        } else {
-            $categories = Thread::getAllCategory();
-            $this->set(get_defined_vars());
-            $this->render('categories');
-        }    
-           
+            } else {
+                $categories = Thread::getAllCategory();
+                $this->set(get_defined_vars());
+                $this->render('categories');
+            }      
     }
 
 } //end

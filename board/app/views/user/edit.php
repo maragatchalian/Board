@@ -1,10 +1,12 @@
+<br />
+<font color ="black">
 <h3>Edit Profile</h3>
-
+</font>
     <?php if ($user->hasError()) : ?>
         <div class="alert alert-error">
         <h4 class="alert-heading">Oh snap!</h4>
             <h7>Change a few things up..</h7><br /><br/>
-    
+        
 <?php if (!empty($user->validation_errors['username']['length'])): ?>
     <div>
         <em>Your Username</em> must be between
@@ -59,9 +61,11 @@
     </div>
 <?php endif ?>
 <?php endif ?>
+</div>
 
-<form action="<?php eh(url('')) ?>" method="post">
+<font color ="black">
 <!--Username-->
+<form action="<?php eh(url('')) ?>" method="post">
     <div class="span12"> 
     <label for="username"><h5>Username</h5></label>
     <input type="text" name="username" value="<?php eh(Param::get('username')) ?>">

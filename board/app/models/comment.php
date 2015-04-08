@@ -38,7 +38,7 @@ public $validation = array(
         
         foreach ($rows as $row) {
             $comments[] = new self($row);
-            }
+        }
         return $comments;
         }
 
@@ -80,7 +80,6 @@ public $validation = array(
         try {
             $db = DB::conn();
             $db->begin();
-            
             $params = array(
                 $this->id,
                 $_SESSION['user_id']
@@ -89,7 +88,8 @@ public $validation = array(
             $db->query('DELETE FROM comment WHERE id = ? AND user_id = ?', $params);
             $this->deleteFavoritedComment();
             $db->commit();
-            } catch (Exception $e) {
+
+        } catch (Exception $e) {
             $db->rollback();
         }
     }
@@ -111,12 +111,13 @@ public $validation = array(
         }
     }
 
-    public function isUserComment() {
-        return $this->user_id === $_SESSION['user_id'];
-        
+    public function isUserComment() 
+    {
+        return $this->user_id === $_SESSION['user_id'];       
     }
 
-    public function addFavorite(){
+    public function addFavorite()
+    {
         try {
             $db = DB::conn();
             $db->begin();
@@ -127,29 +128,31 @@ public $validation = array(
             );
             $db->insert('favorite', $params);
             $db->commit();
-            } catch (Exception $e) {
-        $db->rollback();
-            }
-    }
-
-    public function removeFavorite() {
-    try {
-        $db = DB::conn();
-        $db->begin();
-        $params = array(
-            $this->id, /*if you removed this, once you unvaforited a comment,
-                         every comment you favorited will be deleted*/
-            $_SESSION['user_id']
-        );
-    
-        $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', $params);
-        $db->commit();
         } catch (Exception $e) {
-        $db->rollback();
+            $db->rollback();
         }
     }
 
-    public function isCommentFavorited() {
+    public function removeFavorite() 
+    {
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $params = array(
+            $this->id, /*if you removed this, once you unvaforited a comment,
+                         every comment you favorited will be deleted*/
+            $_SESSION['user_id']
+            );
+    
+            $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', $params);
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+        }
+    }
+
+    public function isCommentFavorited() 
+    {
         $db = DB::conn();
         $params = array(
             $this->id,
@@ -159,13 +162,16 @@ public $validation = array(
         return !$comment_favorited;
     }
 
-    public function countFavorite() {
+    public function countFavorite() 
+    {
         $db = DB::conn();
         $total_favorite = $db->value('SELECT COUNT(*) FROM favorite WHERE comment_id =?', array($this->id));
-    return $total_favorite;
+    
+        return $total_favorite;
     }
 
-    public static function getAllFavorites() {
+    public static function getAllFavorites() 
+    {
         $favorites = array();
         $db = DB::conn();
                         
@@ -173,10 +179,8 @@ public $validation = array(
 
             foreach($rows as $row) {
             $favorites[] = new self($row);
-         }
+            }
         return $favorites;
     }
-
-
-
+    
 } //end
