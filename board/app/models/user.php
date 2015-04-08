@@ -134,7 +134,7 @@ class User extends AppModel {
     }
 
 
-    public static function get($user_id) 
+   public static function get($user_id) 
     {
         $db = DB::conn();
         $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
@@ -180,7 +180,8 @@ class User extends AppModel {
     }
 
     //View all users
-    public static function getAllUsers() {
+    public static function getAllUsers() 
+    {
         $users = array();
         $db = DB::conn();
         $rows = $db->rows("SELECT * FROM user");
@@ -199,7 +200,8 @@ class User extends AppModel {
         return $this->id === $_SESSION['user_id']; 
     }*/
 
-    public function addFollowing(){ 
+    public function addFollowing()
+    { 
         try {
             $db = DB::conn();
             $db->begin();
@@ -215,7 +217,8 @@ class User extends AppModel {
         }
     }
 
-    public function removeFollowing() {
+    public function removeFollowing() 
+    {
         try {
             $db = DB::conn();
             $db->begin();
@@ -231,7 +234,8 @@ class User extends AppModel {
     }
 
 
-    public function isUserFollowing() {
+    public function isUserFollowing() 
+    {
         $db = DB::conn();
         $params = array(
             $this->username,
@@ -241,24 +245,24 @@ class User extends AppModel {
         return !$user_following;
     }
 
-    public static function countFollowing($user_id) {
+    public static function countFollowing($user_id) 
+    {
         $db = DB::conn();
-        $total_following = $db->value('SELECT COUNT(*) FROM follow
-            WHERE user_id = ?', array($user_id));
+        $total_following = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));
         
         return $total_following;
     }
        
-    public static function getAllFollowing() {
+    public static function getAllFollowing() 
+    {
         $following = array();
         $db = DB::conn();
                         
-        $rows = $db->rows('SELECT * FROM follow
-            WHERE user_id = ?', array($_SESSION['user_id']));
+        $rows = $db->rows('SELECT * FROM follow WHERE user_id = ?', array($_SESSION['user_id']));
 
             foreach($rows as $row) {
-            $following[] = new self($row);
-         }
+                $following[] = new self($row);
+            }
         return $following;
     }
 
