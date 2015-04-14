@@ -7,7 +7,6 @@ const MAX_COMMENT_PER_PAGE = 5;
     public function write() 
     {
         $thread_id = Param::get('thread_id');
-
         $thread = Thread::get($thread_id);
         $comment = new Comment();
         $current_page = Param::get('page_next', 'write');
@@ -19,10 +18,11 @@ const MAX_COMMENT_PER_PAGE = 5;
             case 'write_end':                
                 $params = array(
                 'body' => Param::get('body'),
-                'username' => Param::get('username')
+                'username' => Param::get('username'),
+                'user_id' => $_SESSION['user_id']
                 );
-
                 $comment = new Comment($params);
+                
                 try {            
                     $comment->write($comment, $thread_id);
                 } catch (ValidationException $e) {                    
@@ -31,12 +31,11 @@ const MAX_COMMENT_PER_PAGE = 5;
                 break;
             default:
                 throw new NotFoundException("{$current_page} is not found");
-            break;
+                break;
         }
         $this->set(get_defined_vars());
         $this->render($current_page);   
     }
-
 
     public function delete() 
     { 
@@ -49,7 +48,7 @@ const MAX_COMMENT_PER_PAGE = 5;
     public function favorites() 
     { 
         $user = User::get($_SESSION['user_id']);
-        $favorites = Comment::getAllFavorites();
+        $favorites = Comment::getAllFavorites($_SESSION['user_id']);
         $username = Param::get('username');
         $this->set(get_defined_vars());
     }
@@ -61,14 +60,14 @@ const MAX_COMMENT_PER_PAGE = 5;
             
         switch ($method) {
             case 'add':
-                $comment->addFavorite();
+                $comment->addFavorite($_SESSION['user_id']);
                 break;
             case 'remove':
-                $comment->removeFavorite();
+                $comment->removeFavorite($_SESSION['user_id']);
                 break;
             default:
                 throw new InvalidArgumentException("{$method} is an invalid parameter");
-            break;
+                break;
         }
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
     }
