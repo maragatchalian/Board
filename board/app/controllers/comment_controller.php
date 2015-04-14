@@ -37,17 +37,18 @@ const MAX_COMMENT_PER_PAGE = 5;
         $this->render($current_page);   
     }
 
+
     public function delete() 
     { 
         $comment = Comment::get(Param::get('comment_id'));
-        $comment->delete();
+        $comment->delete($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render('comment/delete');
     }  
 
     public function favorites() 
     { 
-        $user = User::get($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
+        $user = User::get($_SESSION['user_id']);
         $favorites = Comment::getAllFavorites();
         $username = Param::get('username');
         $this->set(get_defined_vars());

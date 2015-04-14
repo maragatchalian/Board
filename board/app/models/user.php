@@ -108,8 +108,8 @@ class User extends AppModel {
                 throw new RecordNotFoundException('No Record Found');
             }
 
-    $_SESSION['user_id'] = $user['id'];
-    $_SESSION['username'] = $user['username'];
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
     }
 
 

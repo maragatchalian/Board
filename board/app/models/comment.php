@@ -42,28 +42,27 @@ public $validation = array(
         return $comments;
         }
 
-    public function write(Comment $comment, $thread_id) {
-    
-    if(!$this->validate()) {
-        throw new ValidationException('invalid comment');
-    }
-
-    try {
-        $db = DB::conn();
-         $db->begin();
-        $params = array(
-            'created' => date("Y-m-d H:i:s"),
-            'user_id' => $_SESSION['user_id'],
-            'username' => $this->username,
-            'thread_id' => $thread_id,
-            'body' => $this->body
-        );
-
-        $db->insert('comment', $params);
-        $db->commit();
-        } catch (Exception $e) {
-        $db->rollback();
+   public function write(Comment $comment, $thread_id) {
+        if(!$this->validate()) {
+            throw new ValidationException('invalid comment');
         }
+
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $params = array(
+                'created' => date("Y-m-d H:i:s"),
+                'user_id' => $_SESSION['user_id'],
+                'username' => $this->username,
+                'thread_id' => $thread_id,
+                'body' => $this->body
+            );
+
+            $db->insert('comment', $params);
+            $db->commit();
+            } catch (Exception $e) {
+            $db->rollback();
+            }
     }
 
     public static function get($id) {
@@ -76,13 +75,13 @@ public $validation = array(
     return new self($row);
     }
 
-    public function delete() {
+    public function delete($user_id) {
         try {
             $db = DB::conn();
             $db->begin();
             $params = array(
                 $this->id,
-                $_SESSION['user_id']
+                $this->user_id
             );
 
             $db->query('DELETE FROM comment WHERE id = ? AND user_id = ?', $params);
@@ -94,6 +93,7 @@ public $validation = array(
         }
     }
 
+
     //Functions with regards to favorites
     public function deleteFavoritedComment() {
         try {
@@ -101,17 +101,17 @@ public $validation = array(
             $db->begin();
             $params = array(
                 $this->id,
-                $_SESSION['user_id']
-        );
+                $this->user_id
+            );
 
-        $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', $params );
-        $db->commit();
+            $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', $params );
+            $db->commit();
         } catch (Exception $e) {
-        $db->rollback();
+            $db->rollback();
         }
     }
 
-    public function isUserComment() 
+    public function isUserComment()     
     {
         return $this->user_id === $_SESSION['user_id'];       
     }
@@ -181,6 +181,5 @@ public $validation = array(
             $favorites[] = new self($row);
             }
         return $favorites;
-    }
-    
+    }   
 } //end
