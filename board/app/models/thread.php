@@ -47,10 +47,10 @@ class Thread extends AppModel {
             $params = array(  //$params is the variable name of this set. (title, created)
                 'title' => $this->title,   //input will be stored in the column 'title'
                 'created'=> $date_created, 
-                'user_id'=> $_SESSION['user_id'],
+                'user_id'=> $this->user_id,
                 'category' => $this->category
                 );
-            $db->insert('thread', $params); //insert $params (the previous set i mentioned before) into 'thread' table
+            $db->insert('thread', $params); 
             $this->id = $db->lastInsertId();
             $comment->write($comment, $this->id); //<--write first comment at the same time
             $db->commit();
@@ -65,9 +65,9 @@ class Thread extends AppModel {
         $db = DB::conn();
         $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
             
-            foreach($rows as $row) {
-                $threads[] = new self($row);
-            }
+        foreach($rows as $row) {
+            $threads[] = new self($row);
+        }
         return $threads;
     }
 
@@ -88,10 +88,9 @@ class Thread extends AppModel {
         $db = DB::conn();
         $row = $db->row('SELECT * FROM thread WHERE id = ?', array($id));
             
-            if (!$row) {
-                throw new RecordNotFoundException('No Record Found');
-            }
-
+        if (!$row) {
+            throw new RecordNotFoundException('No Record Found');
+        }
         return new self($row);
     }
     
@@ -99,13 +98,11 @@ class Thread extends AppModel {
     {
         $comments = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM comment WHERE thread_id = ? 
-                                ORDER BY created ASC LIMIT {$offset}, {$limit}", array($this->id));
+        $rows = $db->rows("SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC LIMIT {$offset}, {$limit}", array($this->id));
     
-            foreach ($rows as $row) {
+        foreach ($rows as $row) {
             $comments[] = new Comment($row);
-            }
-
+        }
         return $comments;
     }
 
@@ -116,9 +113,9 @@ class Thread extends AppModel {
         $db = DB::conn();
         $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}",array($id));
         
-            foreach($rows as $row) {
-                $threads[] = new self($row);
-            }
+        foreach($rows as $row) {
+            $threads[] = new self($row);
+        }
         return $threads;
     }
 
@@ -129,11 +126,10 @@ class Thread extends AppModel {
         $db = DB::conn();
         $rows = $db->rows("SELECT * FROM thread WHERE category = ? LIMIT {$offset}, {$limit}",array($category));
             
-            foreach($rows as $row) {
+        foreach($rows as $row) {
             $threads[] = new self($row);
-            }
-
-        return $threads;
+        }
+         return $threads;
     }
 
     public static function getAllCategory() 
@@ -142,12 +138,11 @@ class Thread extends AppModel {
         $rows = $db->rows('SELECT DISTINCT category FROM thread');
         $categories = array();
         
-            foreach ($rows as $row) {
-                if (!empty($row['category'])) {
+        foreach ($rows as $row) {
+            if (!empty($row['category'])) {
                 $categories[] = $row['category'];
-                }
             }
+        }
         return $categories;
     }
-
 } //end

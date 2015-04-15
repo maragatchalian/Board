@@ -33,8 +33,10 @@ class ThreadController extends AppController {
 
                 $thread->title = Param::get('title'); 
                 $thread->category = Param::get('category');
+                $thread->user_id = $_SESSION['user_id'];
                 $comment->body = Param::get('body');
                 $comment->username = Param::get('username');
+                $comment->user_id = $_SESSION['user_id'];
                 
                 try  {
                     $thread->create($comment);
@@ -42,8 +44,8 @@ class ThreadController extends AppController {
                     $current_page = 'create';
                 }
                 break;
-                default:
-                    throw new NotFoundException("{$current_page} is not found");
+            default:
+                throw new NotFoundException("{$current_page} is not found");
                 break;
             }  
 
@@ -52,17 +54,17 @@ class ThreadController extends AppController {
     }
         
     //Displays maximum number of threads per page
-        public function index() 
-        {
-            $per_page = self::MAX_THREAD_PER_PAGE; 
-            $current_page = Param::get('page', 1);
-            $pagination = new SimplePagination($current_page, $per_page);
-            $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
-            $pagination->checkLastPage($threads);
-            $total = Thread::CountAll();
-            $pages = ceil($total / $per_page);
-            $this->set(get_defined_vars()); 
-        }   
+    public function index() 
+    {
+        $per_page = self::MAX_THREAD_PER_PAGE; 
+        $current_page = Param::get('page', 1);
+        $pagination = new SimplePagination($current_page, $per_page);
+        $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
+        $pagination->checkLastPage($threads);
+        $total = Thread::CountAll();
+        $pages = ceil($total / $per_page);
+        $this->set(get_defined_vars()); 
+    }   
     
     //Displays the comments of the thread
     public function view() 
@@ -123,7 +125,6 @@ class ThreadController extends AppController {
                 $this->render('categories');
             }      
     }
-
 } //end
 
 
