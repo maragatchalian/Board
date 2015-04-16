@@ -88,7 +88,6 @@ class UserController extends AppController {
         $this->set(get_defined_vars());
     }
 
-
     public function home() 
     {
         
@@ -100,7 +99,8 @@ class UserController extends AppController {
             'username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
             'last_name' => Param::get('last_name'),
-            'email' => Param::get('email') 
+            'email' => Param::get('email'), 
+            'user_id' => $_SESSION['user_id']
         );
 
         $user = new User($params);
@@ -116,12 +116,11 @@ class UserController extends AppController {
                 }catch (ValidationException $e) {
                         $page = 'edit';
                 }
-            break;
-                default:
-                    throw new NotFoundException("{$page} is not found");
-            break;
-                }
-
+                break;
+            default:
+                throw new NotFoundException("{$page} is not found");
+                break;
+        }
         $this->set(get_defined_vars());
         $this->render($page); 
     }
@@ -137,10 +136,10 @@ class UserController extends AppController {
 
     public function others() 
     {
-        $user_id = Param::get('user_id');   
-        //$user = new User;
-        $row = User::get($user_id);
+        $user_id = Param::get('user_id');
+        $row = User::get($user_id); 
         $user = new User($row);
+        $user->user_id = $_SESSION['user_id']; 
         $this->set(get_defined_vars());  
     }
 
@@ -148,7 +147,7 @@ class UserController extends AppController {
     public function following() 
     { 
         $user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
-        $following = User::getAllFollowing();
+        $following = User::getAllFollowing($_SESSION['user_id']);
         $username = Param::get('username');
         $this->set(get_defined_vars());
     }
@@ -156,8 +155,9 @@ class UserController extends AppController {
     public function setFollowing() 
     {
         $follow = User::getData(Param::get('user_id'));
+        $follow->user_id = $_SESSION['user_id']; 
         $method = Param::get('method');
-        
+                
         switch ($method) {
             case 'add':
                 $follow->addFollowing();

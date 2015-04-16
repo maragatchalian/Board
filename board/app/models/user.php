@@ -62,22 +62,19 @@ class User extends AppModel {
         'confirm_password' => array(
             'match' => array(
                 'is_password_match',
-                )
+            )
         ),
     );
 
     public function register()
     {
         if (!$this->validate()) {
-    
             throw new ValidationException('Invalid Input!');
         }
- 
-        try 
-        {
+
+        try {
             $db = DB::conn(); 
             $db->begin();
-
             $params = array( //what is to be inserted when $params is called
                 'username' => $this->username,
                 'first_name' => $this->first_name,
@@ -93,25 +90,23 @@ class User extends AppModel {
         }
     }
 
-    public function login() {
+    public function login() 
+    {
         $db = DB::conn();
         $params = array(
             'username' => $this->username,
             'password' => md5($this->password)
         );
-
-        $user = $db->row("SELECT id, username FROM user 
-            WHERE BINARY username = :username AND BINARY password = :password", $params);
+        
+        $user = $db->row("SELECT id, username FROM user WHERE BINARY username = :username AND BINARY password = :password", $params);
 
             if(!$user)  {
                 $this->is_validated = false; 
                 throw new RecordNotFoundException('No Record Found');
             }
-
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
     }
-
 
     public function is_password_match()
     {
@@ -142,19 +137,20 @@ class User extends AppModel {
     }   
 
     //Gets user's Data
-    public static function getData($user_id){
+    public static function getData($user_id)
+    {
         $db = DB::conn();
         $row = $db->row("SELECT * FROM user WHERE id = ?", array($user_id));
 
         if (!$row) {
-        throw new RecordNotFoundException('no record found');
+            throw new RecordNotFoundException('no record found');
         }
-   
         return new self($row);
     }
 
     //Update Profile
-    public function update(){
+    public function update()
+    {
          if (!$this->validate()) {
             throw new ValidationException('Invalid user credentials');
         }
@@ -163,20 +159,19 @@ class User extends AppModel {
             $db = DB::conn();
             $db->begin();
             $db->update(
-                 'user', array(
+                'user', array(
                     'username' => $this->username,
                     'first_name' => $this->first_name,
                     'last_name' => $this->last_name,
                     'email' => strtolower($this->email)
                     ),
-                 array('id'=>$_SESSION['user_id']) 
-                  );
+                array('id' =>$this->user_id) 
+                );
             $db->commit();
-            }catch(Exception $e) {
-                 $db->rollback();
-                 throw $e;
-            }
-
+        }catch(Exception $e) {
+            $db->rollback();
+            throw $e;
+        }
     }
 
     //View all users
@@ -207,7 +202,7 @@ class User extends AppModel {
             $db->begin();
             $params = array(
             'username' => $this->username,
-            'user_id' => $_SESSION['user_id']
+            'user_id' => $this->user_id
             );
         
             $db->insert('follow', $params);
@@ -224,7 +219,7 @@ class User extends AppModel {
             $db->begin();
             $params = array(
                 $this->username,
-                $_SESSION['user_id']
+                $this->user_id
             );
             $db->query('DELETE FROM follow WHERE username = ? AND user_id = ?', $params);
             $db->commit();
@@ -232,14 +227,13 @@ class User extends AppModel {
             $db->rollback();
         }
     }
-
-
+    
     public function isUserFollowing() 
     {
         $db = DB::conn();
         $params = array(
             $this->username,
-            $_SESSION['user_id'],     
+            $this->user_id     
         );
         $user_following = $db->row('SELECT * FROM follow WHERE username = ? AND user_id = ?', $params);
         return !$user_following;
@@ -253,17 +247,16 @@ class User extends AppModel {
         return $total_following;
     }
        
-    public static function getAllFollowing() 
+    public static function getAllFollowing($user_id) 
     {
         $following = array();
         $db = DB::conn();
                         
-        $rows = $db->rows('SELECT * FROM follow WHERE user_id = ?', array($_SESSION['user_id']));
+        $rows = $db->rows('SELECT * FROM follow WHERE user_id = ?', array($user_id));
 
             foreach($rows as $row) {
                 $following[] = new self($row);
             }
         return $following;
     }
-
 } //end
