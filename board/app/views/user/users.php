@@ -4,10 +4,8 @@
         <center> 
             <br />
             <br />
-        <h1> All Users </h1> 
-        <br />
-        <br />
-        Here's the list of all the users:
+        <h1> Other Users </h1> 
+        <br />        
         <center>
                 <ul style="list-style-type:square">
                     <?php foreach ($users as $get_from_user): ?>

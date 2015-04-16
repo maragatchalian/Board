@@ -130,7 +130,7 @@ class UserController extends AppController {
     {
        $user_id = Param::get('user_id');
        $user = User::get($user_id);
-       $users = User::getAllUsers();
+       $users = User::getOtherUsers($_SESSION['user_id']);
        $this->set(get_defined_vars()); 
     }
 

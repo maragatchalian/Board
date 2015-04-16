@@ -136,7 +136,6 @@ class User extends AppModel {
         return $row;
     }   
 
-    //Gets user's Data
     public static function getData($user_id)
     {
         $db = DB::conn();
@@ -148,7 +147,6 @@ class User extends AppModel {
         return new self($row);
     }
 
-    //Update Profile
     public function update()
     {
          if (!$this->validate()) {
@@ -174,12 +172,11 @@ class User extends AppModel {
         }
     }
 
-    //View all users
-    public static function getAllUsers() 
+    public static function getOtherUsers($id) 
     {
         $users = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM user");
+        $rows = $db->rows("SELECT * FROM user where id != ?", array($id));
             
             foreach($rows as $row) {
                 $users[] = new self($row);
@@ -187,14 +184,9 @@ class User extends AppModel {
         return $users;
     }
 
-/*-----------------------------------------------------------------------
-                     Follow and Unfollow user
------------------------------------------------------------------------*/
-
-    /*public function isUserFollow() {
-        return $this->id === $_SESSION['user_id']; 
-    }*/
-
+    /*
+    *Follow and Unfollow
+    */
     public function addFollowing()
     { 
         try {
