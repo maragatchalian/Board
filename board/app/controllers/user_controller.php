@@ -99,13 +99,12 @@ class UserController extends AppController {
             'username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
             'last_name' => Param::get('last_name'),
-            'email' => Param::get('email'), 
             'user_id' => $_SESSION['user_id']
         );
 
         $user = new User($params);
         $page = Param::get('page_next', 'edit');
-
+                
         switch ($page) {
             case 'edit':
             break;
@@ -121,6 +120,7 @@ class UserController extends AppController {
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
+        
         $user_edit = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render($page); 

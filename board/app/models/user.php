@@ -29,7 +29,7 @@ class User extends AppModel {
 
             'exist' => array(
                 'is_username_exist', 
-                )
+            )
         ),
 
         'first_name' => array(
@@ -119,7 +119,7 @@ class User extends AppModel {
         $username_exist = $db->row("SELECT username FROM user WHERE username = ?", array($this->username));
         return (!$username_exist);
     }
-  
+
     public function is_email_exist()
     {
         $db = DB::conn();
@@ -158,8 +158,7 @@ class User extends AppModel {
                 'user', array(
                     'username' => $this->username,
                     'first_name' => $this->first_name,
-                    'last_name' => $this->last_name,
-                    'email' => strtolower($this->email)
+                    'last_name' => $this->last_name
                     ),
                 array('id' =>$this->user_id) 
                 );
