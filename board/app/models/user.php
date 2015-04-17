@@ -76,10 +76,10 @@ class User extends AppModel {
             $db = DB::conn(); 
             $db->begin();
             $params = array( //what is to be inserted when $params is called
-                'username' => $this->username,
-                'first_name' => $this->first_name,
-                'last_name' => $this->last_name,
-                'email' => strtolower($this->email),
+                'username' => $this->new_username,
+                'first_name' => $this->new_first_name,
+                'last_name' => $this->new_last_name,
+                'email' => strtolower($this->new_email),
                 'password' => md5($this->password)
             );
             $db->insert('user', $params); //to insert values of $params in table 'user'
@@ -119,7 +119,7 @@ class User extends AppModel {
         $username_exist = $db->row("SELECT username FROM user WHERE username = ?", array($this->username));
         return (!$username_exist);
     }
-
+  
     public function is_email_exist()
     {
         $db = DB::conn();
@@ -127,7 +127,7 @@ class User extends AppModel {
         return (!$username_exist);
     }
 
-   public static function get($user_id) 
+    public static function get($user_id) 
     {
         $db = DB::conn();
         $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));

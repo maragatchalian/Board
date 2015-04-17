@@ -16,12 +16,11 @@
             </form>
                            
             <div class = "profile_info">
+            <b>First Name: </b> <?php eh($user->username) ?> <br />
             <b>First Name: </b> <?php eh($user->first_name) ?> <br />
             <b>Last Name:</b>  <?php eh($user->last_name) ?><br />
             <b>Email:</b>    <?php eh($user->email) ?><br />
              <br />
-            Security  <br />
-            **Password is hidden** 
             </div>
             <div>
             <br />

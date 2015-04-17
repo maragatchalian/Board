@@ -12,12 +12,31 @@
 
     <?php endforeach; //Display contents of individual thread to href to A tag ?>
 
+<br />
+
+<!--Pagination --> 
+<?php if($pagination->current > 1): ?>
+    <a class ="btn" href='?page=<?php echo($pagination->prev) ?>'>Previous</a>
+    <?php else: ?> 
+         Previous
+    <?php endif ?>
+
+<?php for($i = 1; $i <= $pages; $i++): ?>
+    <?php if($i == $current_page): ?>
+      <?php echo $i ?>
+    <?php else: ?>
+        <a class ="btn" href='?page=<?php echo $i ?>'><?php echo $i ?></a>
+    <?php endif; ?>
+<?php endfor; ?>
+
+<?php if(!$pagination->is_last_page): ?>
+    <a class ="btn" href='?page=<?php echo $pagination->next ?>'>Next</a>
+    <?php else: ?>  Next
+<?php endif ?>
+
 <!--Create button--> 
 <br />
 <br />
 <a class="btn btn-medium btn-info" href="<?php eh(url('thread/create')) ?>">Create Thread</a>
-
 </font>
 <ul>
-
-

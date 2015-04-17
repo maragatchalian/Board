@@ -11,7 +11,7 @@
 background: #000; /*magiging black yung header*/
 }
 
-.profile{
+.profile {
 	position: relative;
     height: 320px;
     background: none repeat scroll 0% 0% #e3e3e3;
@@ -19,7 +19,20 @@ background: #000; /*magiging black yung header*/
     border: 3px dashed #000000;
 }
 
-.profile_info{
+.profile_info {
     background: ;
 }
+
+/*.btn a{
+    color:#4C5650;
+}
+.btn  a:hover{
+    color:#24540F;
+}
+a.btn {
+    font-size: 12px;
+    color: #FFF;
+    font-weight: unset;
+    font-style: normal;
+}*/
 

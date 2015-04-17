@@ -94,7 +94,7 @@ class UserController extends AppController {
     }
 
     public function edit() 
-    {
+    {      
         $params = array(
             'username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
@@ -121,6 +121,7 @@ class UserController extends AppController {
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
+        $user_edit = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render($page); 
     }

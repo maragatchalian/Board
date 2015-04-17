@@ -64,28 +64,30 @@
 </div>
 
 <font color ="black">
+
+
 <!--Username-->
 <form action="<?php eh(url('')) ?>" method="post">
     <div class="span12"> 
     <label for="username"><h5>Username</h5></label>
-    <input type="text" name="username" value="<?php eh(Param::get('username')) ?>">
+    <input type="text" name="username" value="<?php eh($user_edit->username) ?>">
 </div>
 <!--First Name-->
     <div class="span12">
     <label for="first_name"><h5>First Name</h5></label>
-    <input type="text" name="first_name" value="<?php eh(Param::get('first_name')) ?>">
+    <input type="text" name="first_name" value="<?php eh($user_edit->first_name) ?>">
     </div>
 
 <!--Last Name-->
     <div class="span12">
     <label for="last_name"><h5>Last Name</h5></label>
-    <input type="text" name="last_name" value="<?php eh(Param::get('last_name')) ?>">
+    <input type="text" name="last_name" value="<?php eh($user_edit->last_name) ?>">
     </div>
 
 <!--Email-->
     <div class="span12">
     <label for="email"><h5>Email</h5></label>
-    <input type="email" name="email" value="<?php eh(Param::get('email')) ?>">
+    <input type="email" name="email" value="<?php eh($user_edit->email) ?>">
     </div>
 
 <input type="hidden" name="page_next" value="edit_end">
@@ -94,4 +96,4 @@
 <button class="btn btn-info btn-medium" type="submit">Save</button>
 <a href="<?php eh(url('user/profile')) ?>" class="btn btn-medium">Cancel</a>
 </div>
-</form>
+

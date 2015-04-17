@@ -1,4 +1,6 @@
 <font color = "black">
+<br />
+<br />
 <h2><?php eh($thread->title) ?></h2>
  
 <p class="alert alert-success">
