@@ -74,6 +74,18 @@ const MAX_TITLE_LENGTH = 30;
         return (int) $db->value('SELECT COUNT(*) FROM thread');
     }
 
+    public static function countAllThreadByUserId($user_id) 
+    {
+        $db = DB::conn();
+        return (int) $db->value('SELECT COUNT(*) FROM thread WHERE user_id = ?', array($user_id));
+    }
+
+    public static function countAllThreadByCategory($category) 
+    {
+        $db = DB::conn();
+        return (int) $db->value('SELECT COUNT(*) FROM thread WHERE user_id = ?', array($category));
+    }
+
     public function countComments() 
     {
         $db = DB::conn();

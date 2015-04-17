@@ -85,10 +85,9 @@ const MAX_COMMENT_PER_PAGE = 5;
         $this->set(get_defined_vars()); 
     }  
 
-    //Own threads
-    public function mythreads() 
+    public function mythreads()
     {
-        $per_page = self::MAX_THREAD_PER_PAGE; 
+        $per_page = self::MAX_THREAD_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
 
@@ -96,10 +95,10 @@ const MAX_COMMENT_PER_PAGE = 5;
         $threads = Thread::getAllMyThread($pagination->start_index -1, $pagination->count + 1, $id);
         $pagination->checkLastPage($threads);
 
-        $total = Thread::CountAll();
+        $total = Thread::countAllThreadByUserId($_SESSION['user_id']);
         $pages = ceil($total / $per_page);
-        
-        $this->set(get_defined_vars()); 
+
+        $this->set(get_defined_vars());
         $this->render('my_threads');
     }
 
@@ -115,7 +114,7 @@ const MAX_COMMENT_PER_PAGE = 5;
                 $threads = Thread::getByCategory($pagination->start_index -1, $pagination->count + 1, $category);
                 $pagination->checkLastPage($threads);
 
-                $total = Thread::CountAll();
+                $total = Thread::countAllThreadByCategory($category);
                 $pages = ceil($total / $per_page);
                 $this->set(get_defined_vars());
                 $this->render('index');
