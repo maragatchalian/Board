@@ -76,10 +76,10 @@ class User extends AppModel {
             $db = DB::conn(); 
             $db->begin();
             $params = array( //what is to be inserted when $params is called
-                'username' => $this->new_username,
-                'first_name' => $this->new_first_name,
-                'last_name' => $this->new_last_name,
-                'email' => strtolower($this->new_email),
+                'username' => $this->username,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email' => strtolower($this->email),
                 'password' => md5($this->password)
             );
             $db->insert('user', $params); //to insert values of $params in table 'user'
