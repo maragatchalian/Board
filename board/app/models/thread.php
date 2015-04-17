@@ -1,19 +1,16 @@
 <?php
-
 /*
 * Thread Model
 * This is where the database manipulation and validation happens
 */
 
 class Thread extends AppModel {
-    
-    /*
-    *   The following constants are declared to avoid magic numbers.
-    *   Avoid using magic numbers so others couuld
-    *   understand what that number is all about.
-    */
-    const MIN_TITLE_LENGTH = 1;
-    const MAX_TITLE_LENGTH = 30;
+/* 
+* The following constants are declared to avoid magic numbers.
+* Avoid using magic numbers so others could understand what that number is all about.
+*/
+const MIN_TITLE_LENGTH = 1;
+const MAX_TITLE_LENGTH = 30;
 
     //Thread Length Validation
     public $validation = array(
@@ -44,8 +41,8 @@ class Thread extends AppModel {
             $db = DB::conn();
             $date_created = date("Y-m-d H:i:s");
             $db->begin();
-            $params = array(  //$params is the variable name of this set. (title, created)
-                'title' => $this->title,   //input will be stored in the column 'title'
+            $params = array(  
+                'title' => $this->title, 
                 'created'=> $date_created, 
                 'user_id'=> $this->user_id,
                 'category' => $this->category
@@ -106,7 +103,7 @@ class Thread extends AppModel {
         return $comments;
     }
 
-    //Sorting of Threads (All Threads)
+    //Sorting of Threads (Own Threads)
     public static function getAllMyThread($offset, $limit, $id) 
     {
         $threads = array();

@@ -1,18 +1,17 @@
 <?php
+
 class ThreadController extends AppController {
 
-    const MAX_THREAD_PER_PAGE = 5;
-    const MAX_COMMENT_PER_PAGE = 5;
-    /*
-    * Create new thread
-    * :: - STATIC FUNCTION, can be called from the class name
-    * -> - INSTANCE, can only be called from an instance of the class.
-    */
+const MAX_THREAD_PER_PAGE = 5;
+const MAX_COMMENT_PER_PAGE = 5;
+/*
+* Create new thread
+* :: - STATIC FUNCTION, can be called from the class name
+* -> - INSTANCE, can only be called from an instance of the class.
+*
+* Everything inputted on the form (view/thread/create.php) will be gathered by this function
+*/
 
-    /*
-    *   Everything inputted on the form (view/thread/create.php) will be 
-    *   gathered by this function
-    */
     public function create() 
     {
         $thread = new Thread();
@@ -21,8 +20,7 @@ class ThreadController extends AppController {
                     
         switch ($current_page) { 
             case 'create':
-            break;
-          
+                break;
             /*  
             *   After the user clicked on submit, the page will be redirected to 'create_end'
             *   From the $thread database, this will get the title.. and so on. 
@@ -38,7 +36,7 @@ class ThreadController extends AppController {
                 $comment->username = Param::get('username');
                 $comment->user_id = $_SESSION['user_id'];
                 
-                try  {
+                try {
                     $thread->create($comment);
                 } catch (ValidationException $e) {
                     $current_page = 'create';
@@ -52,20 +50,7 @@ class ThreadController extends AppController {
         $this->set(get_defined_vars());
         $this->render($current_page);               
     }
-        
-    //Displays maximum number of threads per page
-    public function index() 
-    {
-        $per_page = self::MAX_THREAD_PER_PAGE; 
-        $current_page = Param::get('page', 1);
-        $pagination = new SimplePagination($current_page, $per_page);
-        $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
-        $pagination->checkLastPage($threads);
-        $total = Thread::CountAll();
-        $pages = ceil($total / $per_page);
-        $this->set(get_defined_vars()); 
-    }   
-    
+          
     //Displays the comments of the thread
     public function view() 
     {
@@ -86,13 +71,28 @@ class ThreadController extends AppController {
     /*
     * Sorting of threads
     */
-    public function myThreads() 
+
+    //All Threads
+    public function index() 
     {
         $per_page = self::MAX_THREAD_PER_PAGE; 
         $current_page = Param::get('page', 1);
-        $id = $_SESSION['user_id'];
+        $pagination = new SimplePagination($current_page, $per_page);
+        $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
+        $pagination->checkLastPage($threads);
+        $total = Thread::CountAll();
+        $pages = ceil($total / $per_page);
+        $this->set(get_defined_vars()); 
+    }  
+
+    //Own threads
+    public function mythreads() 
+    {
+        $per_page = self::MAX_THREAD_PER_PAGE; 
+        $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
 
+        $id = $_SESSION['user_id'];
         $threads = Thread::getAllMyThread($pagination->start_index -1, $pagination->count + 1, $id);
         $pagination->checkLastPage($threads);
 
@@ -100,10 +100,11 @@ class ThreadController extends AppController {
         $pages = ceil($total / $per_page);
         
         $this->set(get_defined_vars()); 
-        $this->render('index');
+        $this->render('my_threads');
     }
 
-    public function byCategory() 
+    //Categories
+    public function bycategory() 
     {
         $category = Param::get('category','none');
             if ( $category !== 'none') {

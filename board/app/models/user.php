@@ -113,7 +113,6 @@ class User extends AppModel {
         return $this->password == $this->confirm_password;
     }
 
-
     public function is_username_exist()
     {
         $db = DB::conn();
@@ -127,7 +126,6 @@ class User extends AppModel {
         $username_exist = $db->row("SELECT email FROM user where email = ?", array($this->email));
         return (!$username_exist);
     }
-
 
    public static function get($user_id) 
     {

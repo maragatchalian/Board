@@ -1,7 +1,7 @@
 <font color ="black">
     <br />
     <br />
-    <h1> Threads</h1>
+    <h1> All Threads</h1>
        
 <ul style="list-style-type:square">
     <?php foreach ($threads as $thread): ?>
