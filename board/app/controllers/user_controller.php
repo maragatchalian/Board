@@ -2,6 +2,8 @@
 
 class UserController extends AppController {
 
+const MAX_USER_PER_PAGE = 5;
+
     public function register() 
     {
         if (is_logged_in()) {
@@ -120,20 +122,37 @@ class UserController extends AppController {
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
-        
+
         $user_edit = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render($page); 
     }
 
     //View all users - user/users.php
-    public function users() 
+   /* public function users() 
     {
        $user_id = Param::get('user_id');
        $user = User::get($user_id);
        $users = User::getOtherUsers($_SESSION['user_id']);
        $this->set(get_defined_vars()); 
-    }
+    }*/
+
+    public function users() 
+    {
+        $per_page = self::MAX_USER_PER_PAGE; 
+        $current_page = Param::get('page', 1);
+        $pagination = new SimplePagination($current_page, $per_page);
+
+        $id = $_SESSION['user_id'];
+        $user = User::getPage($pagination->start_index -1, $pagination->count + 1, $id);
+        $pagination->checkLastPage($user);
+                
+        $total = User::CountOtherUsers($id);
+        $pages = ceil($total / $per_page);
+
+        $users = User::getOtherUsers($_SESSION['user_id']);
+        $this->set(get_defined_vars()); 
+    }  
 
     public function others() 
     {

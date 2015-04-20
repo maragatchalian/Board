@@ -63,7 +63,7 @@ class User extends AppModel {
             'match' => array(
                 'is_password_match',
             )
-        ),
+        )
     );
 
     public function register()
@@ -132,7 +132,38 @@ class User extends AppModel {
         $db = DB::conn();
         $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
         return $row;
-    }   
+    } 
+
+    public static function countOtherUsers($id) 
+    {
+        $db = DB::conn();
+        return (int) $db->value('SELECT COUNT(*) FROM user where id != ?', array($id));
+    }
+
+    public static function getPage($offset, $limit, $id) 
+    {
+        $users = array();
+        $db = DB::conn();
+        $rows = $db->rows("SELECT * FROM user WHERE id != ? LIMIT {$offset}, {$limit}", array($id));
+                    
+        foreach($rows as $row) {
+            $users[] = new self($row);
+        }
+        return $users;
+    }
+
+        public static function getAllMyThread($offset, $limit, $id) 
+    {
+        $threads = array();
+        $db = DB::conn();
+        $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}",array($id));
+        
+        foreach($rows as $row) {
+            $threads[] = new self($row);
+        }
+        return $threads;
+    }
+
 
     public static function getData($user_id)
     {
@@ -163,7 +194,7 @@ class User extends AppModel {
                 array('id' =>$this->user_id) 
                 );
             $db->commit();
-        }catch(Exception $e) {
+        } catch(Exception $e) {
             $db->rollback();
             throw $e;
         }

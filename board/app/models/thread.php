@@ -120,8 +120,8 @@ const MAX_TITLE_LENGTH = 30;
     {
         $threads = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}",array($id));
-        
+        $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}", array($id));
+         
         foreach($rows as $row) {
             $threads[] = new self($row);
         }
