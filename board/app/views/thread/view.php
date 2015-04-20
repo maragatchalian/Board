@@ -27,7 +27,7 @@
     <br /> 
 
 <!-- Delete Comment -->
-<?php if ($get_from_comment->isUserComment($_SESSION['user_id'])) : ?> 
+<?php if ($get_from_comment->isUserComment()) : ?> 
   <a href="<?php eh(url('comment/delete', array('comment_id' => $get_from_comment->id)))?>"
   onclick="return confirm('Are you sure you want to delete this comment?')">
 <span class ="icon-trash"></span>
@@ -35,7 +35,7 @@
 <?php endif ?>
 
  <!-- Favorite Comment -->
-<?php if ($get_from_comment->isCommentFavorited()) : ?>
+<?php if ($get_from_comment->isCommentFavorited($_SESSION['user_id'])): ?>
 <a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
     <i class="icon-star"></i></a>
 <?php else : ?>

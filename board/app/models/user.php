@@ -134,25 +134,15 @@ class User extends AppModel {
         return $row;
     } 
 
-    public static function countOtherUsers($id) 
+    public static function pagination($id) 
     {
         $db = DB::conn();
-        return (int) $db->value('SELECT COUNT(*) FROM user where id != ?', array($id));
-    }
-
-    public static function getPage($offset, $limit, $id) 
-    {
-        $users = array();
-        $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM user WHERE id != ? LIMIT {$offset}, {$limit}", array($id));
-                    
-        foreach($rows as $row) {
-            $users[] = new self($row);
-        }
+        $users = $db->value('SELECT COUNT(*) FROM user WHERE id != ?', array($id));
+        
         return $users;
     }
 
-        public static function getAllMyThread($offset, $limit, $id) 
+    public static function getAllMyThread($offset, $limit, $id) 
     {
         $threads = array();
         $db = DB::conn();
@@ -163,7 +153,6 @@ class User extends AppModel {
         }
         return $threads;
     }
-
 
     public static function getData($user_id)
     {
@@ -200,11 +189,11 @@ class User extends AppModel {
         }
     }
 
-    public static function getOtherUsers($id) 
+    public static function getOtherUsers($offset, $limit,$id) 
     {
         $users = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM user where id != ?", array($id));
+        $rows = $db->rows("SELECT * FROM user where id != ? LIMIT {$offset}, {$limit}", array($id));
             
             foreach($rows as $row) {
                 $users[] = new self($row);

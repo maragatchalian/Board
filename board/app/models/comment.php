@@ -96,6 +96,15 @@ public $validation = array(
     /*
     * Functions with regards to favorite/unfavorite comments
     */
+
+    public function countFavorite() 
+    {
+        $db = DB::conn();
+        $total_favorite = $db->value('SELECT COUNT(*) FROM favorite WHERE comment_id =?', array($this->id));
+    
+        return $total_favorite;
+    }
+
     public function deleteFavoritedComment() 
     {
         try {
@@ -163,23 +172,24 @@ public $validation = array(
         return !$comment_favorited;
     }
 
-    public function countFavorite() 
-    {
-        $db = DB::conn();
-        $total_favorite = $db->value('SELECT COUNT(*) FROM favorite WHERE comment_id =?', array($this->id));
-    
-        return $total_favorite;
-    }
-
-    public static function getAllFavorites($user_id) 
+    public static function getAllFavorites($offset, $limit, $user_id) 
     {
         $favorites = array();
-        $db = DB::conn();                    
-        $rows = $db->rows('SELECT * FROM favorite WHERE user_id = ?', array($user_id));
+        $db = DB::conn();
+                        
+        $rows = $db->rows("SELECT * FROM favorite WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
 
             foreach($rows as $row) {
                 $favorites[] = new self($row);
             }
         return $favorites;
-    }   
+    }
+
+    public static function pagination($user_id) 
+    {
+        $db = DB::conn();
+        $fave = $db->value('SELECT COUNT(*) FROM favorite WHERE user_id = ?', array($user_id));
+        
+        return $fave;
+    }
 } //end

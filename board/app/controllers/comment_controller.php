@@ -3,6 +3,7 @@
 class CommentController extends AppController {
 
 const MAX_COMMENT_PER_PAGE = 5;
+const MAX_DATA_PER_PAGE = 5;
 
     public function write() 
     {
@@ -47,7 +48,16 @@ const MAX_COMMENT_PER_PAGE = 5;
 
     public function favorites() 
     { 
-        $favorites = Comment::getAllFavorites($_SESSION['user_id']);
+        $per_page = self::MAX_DATA_PER_PAGE;
+        $current_page = Param::get('page', 1);
+        $pagination = new SimplePagination($current_page, $per_page);
+
+        $id = $_SESSION['user_id'];
+        $favorites = Comment::getAllFavorites($pagination->start_index -1, $pagination->count + 1, $id);
+        
+        $pagination->checkLastPage($favorites);
+        $total = Comment::pagination($id);
+        $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
     }
             
