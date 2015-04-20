@@ -47,23 +47,22 @@ const MAX_COMMENT_PER_PAGE = 5;
 
     public function favorites() 
     { 
-        $user = User::get($_SESSION['user_id']);
         $favorites = Comment::getAllFavorites($_SESSION['user_id']);
-        $username = Param::get('username');
         $this->set(get_defined_vars());
     }
             
     public function setFavorite() 
     {
         $comment = Comment::get(Param::get('comment_id'));
+        $comment->user_id = $_SESSION['user_id']; 
         $method = Param::get('method');
             
         switch ($method) {
             case 'add':
-                $comment->addFavorite($_SESSION['user_id']);
+                $comment->addFavorite();
                 break;
             case 'remove':
-                $comment->removeFavorite($_SESSION['user_id']);
+                $comment->removeFavorite();
                 break;
             default:
                 throw new InvalidArgumentException("{$method} is an invalid parameter");

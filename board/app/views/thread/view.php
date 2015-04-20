@@ -27,7 +27,7 @@
     <br /> 
 
 <!-- Delete Comment -->
-<?php if ($get_from_comment->isUserComment()) : ?> 
+<?php if ($get_from_comment->isUserComment($_SESSION['user_id'])) : ?> 
   <a href="<?php eh(url('comment/delete', array('comment_id' => $get_from_comment->id)))?>"
   onclick="return confirm('Are you sure you want to delete this comment?')">
 <span class ="icon-trash"></span>
@@ -35,14 +35,13 @@
 <?php endif ?>
 
  <!-- Favorite Comment -->
-<?php if ($get_from_comment->isCommentFavorited($_SESSION['user_id'])) : ?>
+<?php if ($get_from_comment->isCommentFavorited()) : ?>
 <a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
     <i class="icon-star"></i></a>
 <?php else : ?>
 <a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'remove')))?>" class="yellow"> 
  <i class="icon-star icon-yellow"></i></a>
 <?php endif ?>
-
 
 <!-- Count Favorite -->
 <?php echo $get_from_comment->countFavorite() ?> Favorites
@@ -70,8 +69,6 @@
     <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->next ?>'>Next</a>
     <?php else: ?>  Next
 <?php endif ?>
-
-
 
 <hr>            
 <form class="well" method="post" action="<?php eh(url('comment/write')) ?>">
