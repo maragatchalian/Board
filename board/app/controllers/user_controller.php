@@ -2,7 +2,7 @@
 
 class UserController extends AppController {
 
-const MAX_USER_PER_PAGE = 5;
+const MAX_DATA_PER_PAGE = 5;
 
     public function register() 
     {
@@ -139,7 +139,7 @@ const MAX_USER_PER_PAGE = 5;
 
     public function users() 
     {
-        $per_page = self::MAX_USER_PER_PAGE; 
+        $per_page = self::MAX_DATA_PER_PAGE; 
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
 
@@ -166,9 +166,16 @@ const MAX_USER_PER_PAGE = 5;
     //Functions related to following/unfollowing a user.
     public function following() 
     { 
-        $user = User::getData($_SESSION['user_id']); //For Greeting Purposes. Fetch the Name of the user.
-        $following = User::getAllFollowing($_SESSION['user_id']);
-        $username = Param::get('username');
+        $per_page = self::MAX_DATA_PER_PAGE;
+        $current_page = Param::get('page', 1);
+        $pagination = new SimplePagination($current_page, $per_page);
+
+        $id = $_SESSION['user_id'];
+        $following = User::getAllFollowing($pagination->start_index -1, $pagination->count + 1, $id);
+        
+        $pagination->checkLastPage($following);
+        $total = User::countFollowing($id);
+        $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
     }
 

@@ -267,12 +267,12 @@ class User extends AppModel {
         return $total_following;
     }
        
-    public static function getAllFollowing($user_id) 
+    public static function getAllFollowing($offset, $limit, $user_id) 
     {
         $following = array();
         $db = DB::conn();
                         
-        $rows = $db->rows('SELECT * FROM follow WHERE user_id = ?', array($user_id));
+        $rows = $db->rows("SELECT * FROM follow WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
 
             foreach($rows as $row) {
                 $following[] = new self($row);
