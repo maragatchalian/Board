@@ -2,19 +2,11 @@
 
 class User extends AppModel {
 //The following constants are declared to avoid magic numbers
-    const MIN_USERNAME_LENGTH = 2;
-    const MIN_FIRST_NAME_LENGTH = 2;
-    const MIN_LAST_NAME_LENGTH = 2;
-    const MIN_EMAIL_LENGTH = 4;
-    const MIN_PASSWORD_LENGTH = 8;
+const FIXED_MIN_LENGTH = 2;
+const MIN_PASSWORD_LENGTH = 8;
+const FIXED_MAX_LENGTH = 30; 
 
-    const MAX_USERNAME_LENGTH = 20;
-    const MAX_FIRST_NAME_LENGTH = 30;
-    const MAX_LAST_NAME_LENGTH = 30;
-    const MAX_EMAIL_LENGTH = 30;
-    const MAX_PASSWORD_LENGTH = 20;
-
-    public $is_validated = true;
+public $is_validated = true;
 
 /*
 *Registration Length Validation.
@@ -24,7 +16,7 @@ class User extends AppModel {
     public $validation = array(
         'username' => array(
             'length' => array(
-                'validate_between', self::MIN_USERNAME_LENGTH, self::MAX_USERNAME_LENGTH,
+                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH,
             ),
 
             'exist' => array(
@@ -34,19 +26,19 @@ class User extends AppModel {
 
         'first_name' => array(
             'length' => array(
-                'validate_between', self::MIN_FIRST_NAME_LENGTH, self::MAX_FIRST_NAME_LENGTH,
+                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH,
              )
         ),
         
         'last_name' => array(
             'length' => array(
-                'validate_between', self::MIN_LAST_NAME_LENGTH, self::MAX_LAST_NAME_LENGTH,
+                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH,
             )
         ),
 
         'email' => array(
             'length' => array(
-                'validate_between', self::MIN_EMAIL_LENGTH, self::MAX_EMAIL_LENGTH,
+                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH,
             ),
 
         'exist' => array(
@@ -56,7 +48,7 @@ class User extends AppModel {
 
         'password' => array(
             'length' => array(
-                'validate_between', self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH,
+                'validate_between', self::MIN_PASSWORD_LENGTH, self::FIXED_MAX_LENGTH,
             )
         ),
         'confirm_password' => array(
