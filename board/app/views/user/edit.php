@@ -17,9 +17,17 @@
 
 <?php 
 //Checking of username if it exists
-    if (!empty($user->validation_errors['username']['exist'])): ?>
+if (!empty($user->validation_errors['username']['exist'])): ?>
     <div>
         <em> Username is already taken. Please choose another.</em>
+    </div>
+<?php endif ?>
+
+<?php 
+//Checking of username if it's valid
+if (!empty($user->validation_errors['username']['valid'])): ?>
+    <div>
+        <em>Username may only consist of letters, numbers, underscores(_), and dots(.).</em>
     </div>
 <?php endif ?>
 
@@ -33,6 +41,13 @@
     </div>
 <?php endif ?>
 
+<?php 
+//Checking of first_name if it's valid.
+if (!empty($user->validation_errors['first_name']['valid'])): ?>
+    <div>
+        <em>First name may only consist of letters, space and a hyphen</em>
+    </div>
+<?php endif ?>
 
 <?php 
 //Last Name Validation
@@ -42,6 +57,15 @@
         <?php eh($user->validation['last_name']['length'][2]) ?> characters.
     </div>
 <?php endif ?>
+
+<?php
+//Checking of first_name if it's valid.
+if (!empty($user->validation_errors['last_name']['valid'])): ?>
+    <div>
+        <em>Last name may only consist of letters, space and a hyphen.</em>
+    </div>
+<?php endif ?>
+
 <?php endif ?>
 </div>
 

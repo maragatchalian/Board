@@ -14,16 +14,6 @@ public $is_validated = true;
 *   to a specific number of characters.
 */
     public $validation = array(
-        /*'username' => array(
-            'length' => array(
-                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH,
-            ),
-
-            'exist' => array(
-                'is_username_exist', 
-            )
-        ),*/
-
         'username' => array(
             'length' => array(
                 'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH
@@ -31,7 +21,7 @@ public $is_validated = true;
             'valid' => array(
                 'validate_username'
             ),
-            'exists' => array(
+            'exist' => array(
                 'is_username_exist'
             ),
         ),
