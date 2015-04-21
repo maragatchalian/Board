@@ -74,9 +74,10 @@ if (!empty($user->validation_errors['last_name']['valid'])): ?>
 <form action="<?php eh(url('')) ?>" method="post">
     <div class="span12"> 
     <label for="username"><h5>Username</h5></label>
-    <input type="text" name="username" value="<?php eh($user_edit->username) ?>"> 
+    <input type="text" name="username" value="<?php eh($user_edit->username) ?>">
 </div>
 
+<br />
 <!--First Name-->
     <div class="span12">
     <label for="first_name"><h5>First Name</h5></label>

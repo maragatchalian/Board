@@ -102,7 +102,6 @@ const MAX_COMMENT_PER_PAGE = 5;
         $this->render('my_threads');
     }
 
-    //Categories
     public function bycategory() 
     {
         $category = Param::get('category','none');
@@ -117,14 +116,26 @@ const MAX_COMMENT_PER_PAGE = 5;
                 $total = Thread::countAllThreadByCategory($category);
                 $pages = ceil($total / $per_page);
                 $this->set(get_defined_vars());
-                $this->render('index');
+                $this->render('under_category');
         
             } else {
                 $categories = Thread::getAllCategory();
                 $this->set(get_defined_vars());
                 $this->render('categories');
-            }      
-    }
+            }
+        }    
+
+    public function under_category() 
+    {
+        $per_page = self::MAX_THREAD_PER_PAGE; 
+        $current_page = Param::get('page', 1);
+        $pagination = new SimplePagination($current_page, $per_page);
+        $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
+        $pagination->checkLastPage($threads);
+        $total = Thread::CountAll();
+        $pages = ceil($total / $per_page);
+        $this->set(get_defined_vars()); 
+    }  
 } //end
 
 
