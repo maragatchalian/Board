@@ -14,7 +14,7 @@ public $is_validated = true;
 *   to a specific number of characters.
 */
     public $validation = array(
-        'username' => array(
+        /*'username' => array(
             'length' => array(
                 'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH,
             ),
@@ -22,18 +22,36 @@ public $is_validated = true;
             'exist' => array(
                 'is_username_exist', 
             )
+        ),*/
+
+        'username' => array(
+            'length' => array(
+                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH
+            ),
+            'valid' => array(
+                'validate_username'
+            ),
+            'exists' => array(
+                'is_username_exist'
+            ),
         ),
 
         'first_name' => array(
             'length' => array(
-                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH,
-             )
+                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH
+            ),
+            'valid' => array(
+                'validate_name'
+            ),
         ),
         
         'last_name' => array(
             'length' => array(
-                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH,
-            )
+                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH
+            ),
+            'valid' => array(
+                'validate_name'
+            ),
         ),
 
         'email' => array(
@@ -181,7 +199,7 @@ public $is_validated = true;
         }
     }
 
-    public static function getOtherUsers($offset, $limit,$id) 
+    public static function getOtherUsers($offset, $limit, $id) 
     {
         $users = array();
         $db = DB::conn();

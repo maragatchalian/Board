@@ -24,7 +24,7 @@ const MAX_DATA_PER_PAGE = 5;
         
         switch ($page) {    
             case 'register':
-            break;
+                break;
             
             case 'register_end':
                 try {
@@ -32,11 +32,10 @@ const MAX_DATA_PER_PAGE = 5;
                 } catch (ValidationException $e) {
                     $page = 'register';
                 }
-
-            break;
+                break;
             default:
                 throw new NotFoundException("{$page} is not found");
-            break;
+                break;
         }
         $this->set(get_defined_vars());
         $this->render($page);
@@ -66,11 +65,10 @@ const MAX_DATA_PER_PAGE = 5;
                 }catch (ValidationException $e){
                     $page = 'login';
                 }
-            
-            break;
-                default:
-                    throw new NotFoundException("{$page} is not found");
-            break;
+                break;
+            default:
+                throw new NotFoundException("{$page} is not found");
+                break;
         }
         
         $this->set(get_defined_vars());
@@ -128,15 +126,6 @@ const MAX_DATA_PER_PAGE = 5;
         $this->render($page); 
     }
 
-    //View all users - user/users.php
-   /* public function users() 
-    {
-       $user_id = Param::get('user_id');
-       $user = User::get($user_id);
-       $users = User::getOtherUsers($_SESSION['user_id']);
-       $this->set(get_defined_vars()); 
-    }*/
-
     public function users() 
     { 
         $per_page = self::MAX_DATA_PER_PAGE;
@@ -149,7 +138,6 @@ const MAX_DATA_PER_PAGE = 5;
         $pagination->checkLastPage($users);
         $total = User::pagination($id);
         $pages = ceil($total / $per_page);
-        //$others = User::getOtherUsers($_SESSION['user_id']);
         $this->set(get_defined_vars());
     } 
 
@@ -162,7 +150,9 @@ const MAX_DATA_PER_PAGE = 5;
         $this->set(get_defined_vars());  
     }
 
-    //Functions related to following/unfollowing a user.
+    /*
+    * Following and Unfollowing a User
+    */
     public function following() 
     { 
         $per_page = self::MAX_DATA_PER_PAGE;

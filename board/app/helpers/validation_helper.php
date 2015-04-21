@@ -11,4 +11,13 @@ function is_logged_in(){
      return isset($_SESSION['user_id']);
 }
 
-?> 
+function validate_username($username)
+{
+	return preg_match('/^[a-zA-Z0-9._-]+$/', $username);
+}
+
+function validate_name($string)
+{
+	return preg_match('/^[a-zA-Z -]+$/', $string);
+}
+

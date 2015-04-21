@@ -6,8 +6,17 @@
     <div class="alert alert-error">
         <h4 class="alert-heading">Oh snap!</h4><h7>Change a few things up and try registering again.</h7><br /><br/>
   
+<?php 
+//Checking of username if it's valid
+if (!empty($user->validation_errors['username']['valid'])): ?>
+    <div>
+        <em>Username may only consist of letters, numbers, underscores(_), and dots(.).</em>
+    </div>
+<?php endif ?>
 
-<?php if (!empty($user->validation_errors['username']['length'])): ?>
+<?php 
+//Checking of username length 
+if (!empty($user->validation_errors['username']['length'])): ?>
     <div>
         <em>Your Username</em> must be between
         <?php eh($user->validation['username']['length'][1]) ?> and
@@ -15,19 +24,17 @@
     </div>
 <?php endif ?>
 
-
 <?php 
 //Checking of username if it exists
-    if (!empty($user->validation_errors['username']['exist'])): ?>
+if (!empty($user->validation_errors['username']['exist'])): ?>
     <div>
         <em> Username is already taken. Please choose another.</em>
     </div>
 <?php endif ?>
 
-
 <?php 
-//First Name Validation 
-    if (!empty($user->validation_errors['first_name']['length'])): ?>
+//Checking of first_name length
+if (!empty($user->validation_errors['first_name']['length'])): ?>
     <div>
         <em>Your First Name</em> must be between
             <?php eh($user->validation['first_name']['length'][1]) ?> and
@@ -35,6 +42,13 @@
     </div>
 <?php endif ?>
 
+<?php 
+//Checking of first_name if it's valid.
+if (!empty($user->validation_errors['first_name']['valid'])): ?>
+    <div>
+        <em>First name may only consist of letters, space and a hyphen</em>
+    </div>
+<?php endif ?>
 
 <?php 
 //Last Name Validation
@@ -45,18 +59,26 @@
     </div>
 <?php endif ?>
 
+<?php
+//Checking of first_name if it's valid.
+if (!empty($user->validation_errors['last_name']['valid'])): ?>
+    <div>
+        <em>Last name may only consist of letters, space and a hyphen.</em>
+    </div>
+<?php endif ?>
+
 <?php 
 //Email Validation
-    if (!empty($user->validation_errors['email']['length'])): ?>
-        <div><em>Your Email</em> must be between
-            <?php eh($user->validation['email']['length'][1]) ?> and
-            <?php eh($user->validation['email']['length'][2]) ?> characters.
-        </div>
+if (!empty($user->validation_errors['email']['length'])): ?>
+    <div><em>Your Email</em> must be between
+        <?php eh($user->validation['email']['length'][1]) ?> and
+        <?php eh($user->validation['email']['length'][2]) ?> characters.
+    </div>
 <?php endif ?>
 
 <?php
 //Checking of email if it already exists 
-    if(!empty($user->validation_errors['email']['exist'])): ?>
+if(!empty($user->validation_errors['email']['exist'])): ?>
     <div>
          <em> Your email address</em> is already registered. Please choose another.
     </div>
@@ -64,20 +86,19 @@
 
 <?php 
 //Password Validation
-    if (!empty($user->validation_errors['password']['length'])): ?>
-        <div><em>Your Password</em> must be between
-            <?php eh($user->validation['password']['length'][1]) ?> and
-            <?php eh($user->validation['password']['length'][2]) ?> characters.
-        </div>
+if (!empty($user->validation_errors['password']['length'])): ?>
+    <div><em>Your Password</em> must be between
+        <?php eh($user->validation['password']['length'][1]) ?> and
+        <?php eh($user->validation['password']['length'][2]) ?> characters.
+    </div>
 <?php endif ?>
-
 
 <?php 
 //Checking if Password and Confirm Password matched
-    if (!empty($user->validation_errors['confirm_password']['match'])) : ?> 
+if (!empty($user->validation_errors['confirm_password']['match'])) : ?> 
     <div>
         <em>Passwords</em> did not match!
-        </div>
+    </div>
 <?php endif ?>
 
 </div>
