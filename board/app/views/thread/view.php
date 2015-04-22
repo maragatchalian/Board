@@ -21,19 +21,21 @@
  <div class="comment">                        
  <div class="meta">
 
+
+
 <!--View Comments-->
 <?php foreach($comments as $get_from_comment): ?>
    
 <!--View Username-->
-<h4> <ul style="list-style-type:square">
-<li>  <?php eh($get_from_comment->username) ?> </li> </h4> 
+<h3> <?php eh($get_from_comment->username) ?> </h3> 
+
+<!--View Comment Body-->    
+<?php echo($get_from_comment->body) ?>
+<br />
 
 <!--View Date of Creation-->    
-<?php eh($get_from_comment->created) ?> 
-
- <!--View Comment Body-->    
-    <div><?php echo($get_from_comment->body) ?></div>
-    <br /> 
+<em> <?php echo time_difference($get_from_comment->created) ?> </em>
+<br /> 
 
 <!-- Delete Comment -->
 <?php if ($get_from_comment->isUserComment()) : ?> 
@@ -57,6 +59,8 @@
 <?php endforeach ?>
 </div> 
 </div>
+<br />
+<br />
 
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>

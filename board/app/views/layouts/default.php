@@ -21,7 +21,6 @@
     </div>
 
 <!--Menu Bar (Once the user is logged in)-->
-
 <style>
     body{
         padding-top: 60px;
@@ -72,9 +71,7 @@
         <li><a href="<?php eh(url('thread/create')) ?>">Create New Thread</a></li>  
         <li><a href="<?php eh(url('user/users')) ?>">Users</a></li> 
         <li><a href="<?php eh(url('user/logout')) ?>">Logout</a></li>
-    </ul>
-    
-      
+        </ul>    
 <?php endif ?>
                
 <?php echo $_content_ ?>

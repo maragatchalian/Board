@@ -23,6 +23,14 @@ background: #000; /*magiging black yung header*/
     background: ;
 }
 
+.pagination a {
+    color:#000000;
+}
+.pagination a:hover{
+    color:#4C5650;
+}
+
+
 /*.btn a{
     color:#4C5650;
 }

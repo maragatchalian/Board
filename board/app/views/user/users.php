@@ -14,6 +14,7 @@
         <?php endforeach; //Display contents of individual user ?>       
 
 <!--Pagination --> 
+<ul class="pagination">
 <?php if($pagination->current > 1): ?>
     <a class ="btn btn-small" href='?page=<?php echo($pagination->prev) ?>'>Previous</a>
     <?php else: ?> 
@@ -32,6 +33,7 @@
     <a class ="btn btn-small" href='?page=<?php echo $pagination->next ?>'>Next</a>
     <?php else: ?>  Next
 <?php endif ?>
+</ul>
   
 </body>
 </font>
