@@ -80,8 +80,7 @@
 
 <hr>            
 <form class="well" method="post" action="<?php eh(url('comment/write')) ?>">
-  <label>Your name</label>
-  <input type="text" class="span2" name="username" value="<?php eh(Param::get('username')) ?>">
+  <input type="hidden" class="span2" name="username" value="<?php eh($_SESSION['username']) ?>">
   
   <label>Comment</label>
   <textarea name="body"><?php eh(Param::get('body')) ?></textarea>

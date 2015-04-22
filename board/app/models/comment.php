@@ -49,11 +49,12 @@ public $validation = array(
 
         try {
             $db = DB::conn();
+            $username =  $_SESSION['username'];
             $db->begin();
             $params = array(
                 'created' => date("Y-m-d H:i:s"),
                 'user_id' =>$this->user_id,
-                'username' => $this->username,
+                'username' => $username,
                 'thread_id' => $thread_id,
                 'body' => $this->body
             );

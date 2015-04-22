@@ -19,7 +19,7 @@ const MAX_DATA_PER_PAGE = 5;
             case 'write_end':                
                 $params = array(
                 'body' => Param::get('body'),
-                'username' => Param::get('username'),
+                'username' => $_SESSION['username'],
                 'user_id' => $_SESSION['user_id']
                 );
                 $comment = new Comment($params);

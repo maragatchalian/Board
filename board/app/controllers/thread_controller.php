@@ -33,7 +33,7 @@ const MAX_COMMENT_PER_PAGE = 5;
                 $thread->category = Param::get('category');
                 $thread->user_id = $_SESSION['user_id'];
                 $comment->body = Param::get('body');
-                $comment->username = Param::get('username');
+               // $comment->username = Param::get('username');
                 $comment->user_id = $_SESSION['user_id'];
                 
                 try {
