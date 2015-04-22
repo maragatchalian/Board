@@ -143,6 +143,7 @@ public $validation = array(
             $db = DB::conn();
             $db->begin();
             $params = array(
+                'username' => $this->username,
                 'comment_id' => $this->id,
                 'comment_body'=> $this->body, 
                 'user_id' => $this->user_id
@@ -163,7 +164,7 @@ public $validation = array(
                 /*if you removed this, once you unvaforited a comment, 
                 every comment you favorited will be deleted*/
                 $this->id, 
-                $this->user_id
+                $this->user_id,
             );
             $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', $params);
             $db->commit();

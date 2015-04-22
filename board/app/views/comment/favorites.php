@@ -1,20 +1,23 @@
 <html>
-    <head> </head>
-        <font color ='black'>
-        <center> 
-            <br />
-            <br />
-        <h1> My Favorites </h1>
-        </center>
+<font color ='black'>
+<center> 
+<br />
+<br />
+<h1> My Favorite Comments </h1>
+</center>
 
-            <ul style="list-style-type:square">
-            <?php foreach ($favorites as $get_from_favorite): ?>
-            <li>
-                <?php eh($get_from_favorite->comment_body) ?></a>      
-                   
-            </li>
-                <?php endforeach; //Display contents of individual thread to href to A tag ?>
-           
+<ul style="list-style-type:square">
+    <?php foreach ($favorites as $get_from_favorite): ?>
+        <li>
+            <?php eh($get_from_favorite->comment_body) ?></a> 
+            <br /> 
+            By: <?php eh($get_from_favorite->username) ?></a>
+            <br /> 
+            <br />                  
+        </li>
+    <?php endforeach; //Display contents of individual thread to href to A tag ?>
+<br />   
+
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>
     <a class ="btn btn-small" href='?page=<?php echo($pagination->prev) ?>'>Previous</a>
@@ -34,9 +37,5 @@
     <a class ="btn btn-small" href='?page=<?php echo $pagination->next ?>'>Next</a>
     <?php else: ?>  Next
 <?php endif ?>
-
-                </font>
-        
-        </form>
-    </body>
+</font>
 </html>
