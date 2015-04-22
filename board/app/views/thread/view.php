@@ -6,6 +6,15 @@
 <center>
 <h1><?php eh($thread->title) ?></h1>
 <h3>Category: <?php eh($thread->category)?></h3>
+
+<!-- Delete Thread -->
+<?php if ($thread->isUserThread()) : ?> 
+  <a href="<?php eh(url('thread/delete_thread', array('thread_id' => $thread->id)))?>"
+  onclick="return confirm('Are you sure you want to delete this thread?')">
+<span class ="icon-trash"></span>
+</a> Delete This Thread<font color ="white">...</font>
+<?php endif ?>
+</br> </br>
 </center>
 
 <!--Spacing-->
@@ -48,7 +57,6 @@
 <?php endforeach ?>
 </div> 
 </div>
-</br> </br>
 
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>

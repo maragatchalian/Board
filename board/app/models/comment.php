@@ -93,6 +93,17 @@ public $validation = array(
         }
     }
 
+    public static function deleteAllComments($thread_id)
+    {
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $db->query('DELETE FROM comment where thread_id = ?', array($thread_id));
+        } catch (Exception $e) {
+            $db-rollback();
+            }
+        }
+
     /*
     * Functions with regards to favorite/unfavorite comments
     */

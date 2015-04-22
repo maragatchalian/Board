@@ -68,6 +68,14 @@ const MAX_COMMENT_PER_PAGE = 5;
         $this->set(get_defined_vars());
     }
 
+    public function delete_thread() 
+    { 
+        $thread = Thread::get(Param::get('thread_id'));
+        $thread->deleteThread($_SESSION['user_id']);
+        $this->set(get_defined_vars());
+        $this->render('thread/delete_thread');
+    }  
+
     /*
     * Sorting of threads
     */

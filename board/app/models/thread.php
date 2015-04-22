@@ -56,6 +56,28 @@ const MAX_TITLE_LENGTH = 30;
         }
     }
 
+    public function isUserThread()     
+    {
+        return $this->user_id === $_SESSION['user_id'];       
+    }
+
+    public function deleteThread($user_id) 
+    {
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $params = array(
+                $this->id,
+                $this->user_id
+            );
+            $db->query('DELETE FROM thread WHERE id = ? AND user_id = ?', $params);
+            $db->commit();
+            Comment::deleteAllComments($this->id);
+        } catch (Exception $e) {
+            $db->rollback();
+        }
+    }
+
     public static function getAll($offset, $limit) 
     {
         $threads = array();
