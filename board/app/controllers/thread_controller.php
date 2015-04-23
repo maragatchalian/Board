@@ -2,6 +2,9 @@
 
 class ThreadController extends AppController {
 
+const CREATE_THREAD = 'create';
+const CREATE_THREAD_END = 'create_end';
+
 /*
 * Create new thread
 * :: - STATIC FUNCTION, can be called from the class name
@@ -14,10 +17,10 @@ class ThreadController extends AppController {
     {
         $thread = new Thread();
         $comment = new Comment();
-        $current_page = Param::get('page_next', 'create');   
+        $current_page = Param::get('page_next', self::CREATE_THREAD);   
                     
         switch ($current_page) { 
-            case 'create':
+            case self::CREATE_THREAD:
                 break;
             /*  
             *   After the user clicked on submit, the page will be redirected to 'create_end'
@@ -25,8 +28,7 @@ class ThreadController extends AppController {
             *   after all, controllers are all about getting the inputted data.
             *   then the data gathered here will be tranferred to view (view/thread/view.php)
             */
-            case 'create_end':
-
+            case self::CREATE_THREAD_END:
                 $thread->title = Param::get('title'); 
                 $thread->category = Param::get('category');
                 $thread->user_id = $_SESSION['user_id'];
@@ -37,7 +39,7 @@ class ThreadController extends AppController {
                 try {
                     $thread->create($comment);
                 } catch (ValidationException $e) {
-                    $current_page = 'create';
+                    $current_page = self::CREATE_THREAD;
                 }
                 break;
             default:

@@ -2,18 +2,21 @@
 
 class CommentController extends AppController {
 
+const WRITE_COMMENT = 'write';
+const WRITE_COMMENT_END = 'write_end';
+
     public function write() 
     {
         $thread_id = Param::get('thread_id');
         $thread = Thread::get($thread_id);
         $comment = new Comment();
-        $current_page = Param::get('page_next', 'write');
+        $current_page = Param::get('page_next', self::WRITE_COMMENT);
 
         switch($current_page) { 
-            case 'write':
+            case self::WRITE_COMMENT:
                 break;
         
-            case 'write_end':                
+            case self::WRITE_COMMENT_END:                
                 $params = array(
                 'body' => Param::get('body'),
                 'username' => $_SESSION['username'],
@@ -24,7 +27,7 @@ class CommentController extends AppController {
                 try {            
                     $comment->write($comment, $thread_id);
                 } catch (ValidationException $e) {                    
-                    $current_page = 'write';
+                    $current_page = self::WRITE_COMMENT;
                 }    
                 break;
             default:

@@ -2,6 +2,9 @@
 
 class UserController extends AppController {
 
+const LOGIN_PAGE = 'login';
+const HOME_PAGE = 'home';
+
     public function register() 
     {
         if (is_logged_in()) {
@@ -51,17 +54,17 @@ class UserController extends AppController {
         );
 
         $user = new User($params);
-        $page = Param::get('page_next', 'login');
+        $page = Param::get('page_next', self::LOGIN_PAGE);
 
         switch ($page) {
-            case 'login':
+            case self::LOGIN_PAGE:
             break;
          
-            case 'home':
+            case self::HOME_PAGE:
                 try {
                     $user->login();
                 }catch (ValidationException $e){
-                    $page = 'login';
+                    $page = self::LOGIN_PAGE;
                 }
                 break;
             default:
