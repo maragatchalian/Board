@@ -12,6 +12,10 @@
         </li>
     <?php endforeach; //Display contents of individual thread to href to A tag ?>
 
+<?php if(empty($following)): ?>
+       You are not following any users.
+<?php endif ?>
+<br />
 <br />
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>

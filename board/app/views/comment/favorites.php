@@ -5,15 +5,21 @@
 <br />
 <h1> My Favorite Comments </h1>
 </center>
-
 <ul style="list-style-type:square">
-    <?php foreach ($favorites as $get_from_favorite): ?>
-        <li>
-            <?php eh($get_from_favorite->comment_body) ?></a> 
-            <br /> 
-            By: <?php eh($get_from_favorite->username) ?></a>
-            <br /> 
-            <br />                  
+<br />
+
+<?php if (empty($favorites)): ?>
+       You have no favorites.
+<?php endif ?>
+<br />
+
+<?php foreach ($favorites as $get_from_favorite): ?>
+    <li>
+        <?php eh($get_from_favorite->comment_body) ?></a> 
+        <br /> 
+        By: <?php eh($get_from_favorite->username) ?></a>
+        <br /> 
+        <br />                  
         </li>
     <?php endforeach; //Display contents of individual thread to href to A tag ?>
 <br />   

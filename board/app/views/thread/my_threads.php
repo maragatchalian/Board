@@ -10,9 +10,14 @@
     <?php eh($thread->title) ?></a>        
     </li>
 
-    <?php endforeach; //Display contents of individual thread to href to A tag ?>
+<?php endforeach; //Display contents of individual thread to href to A tag ?>
 <br />
 
+<?php if(empty($thread)): ?>
+       You have no threads.
+<?php endif ?>
+<br />
+<br />
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>
     <a class ="btn btn-small" href='?page=<?php echo($pagination->prev) ?>'>Previous</a>

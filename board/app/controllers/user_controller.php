@@ -115,7 +115,7 @@ class UserController extends AppController {
                 try {
                      $user->update();
                 }catch (ValidationException $e) {
-                        $page = 'edit';
+                    $page = 'edit';
                 }
                 break;
             default:

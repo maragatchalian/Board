@@ -204,10 +204,11 @@ public $validation = array(
         $db = DB::conn();
                         
         $rows = $db->rows("SELECT * FROM favorite WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
-
+  
             foreach($rows as $row) {
                 $favorites[] = new self($row);
             }
+
         return $favorites;
     }
 
