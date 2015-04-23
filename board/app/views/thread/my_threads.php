@@ -14,7 +14,7 @@
 <br />
 
 <?php if(empty($thread)): ?>
-       You have no threads.
+       You have not created any threads.
 <?php endif ?>
 <br />
 <br />

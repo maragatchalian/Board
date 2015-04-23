@@ -7,20 +7,19 @@ const MIN_PASSWORD_LENGTH = 8;
 const MAX_USERNAME_LENGTH = 20; 
 const REGISTER_MAX_LENGTH = 30; 
 
-public $is_validated = true;
+    public $is_validated = true;
 
+    public function validate_username($username)
+    {
+        $valid = array('-', '_', '');    
+        return ctype_alnum(str_replace($valid, '', $username));
+    }
 
-public function validate_username($username)
-{
-   $valid = array('-', '_', '');    
-   return ctype_alnum(str_replace($valid, '', $username));
-}
-
-public function validate_name($string)
-{
-   $valid = array('-', ' ');    
-   return ctype_alpha(str_replace($valid, '', $string));
-}
+    public function validate_name($string)
+    {
+        $valid = array('-', ' ');    
+        return ctype_alpha(str_replace($valid, '', $string));
+    }
 
 /*
 *Registration Length Validation.
@@ -111,13 +110,13 @@ public function validate_name($string)
             'username' => $this->username,
             'password' => md5($this->password)
         );
-        
         $user = $db->row("SELECT id, username FROM user WHERE BINARY username = :username AND BINARY password = :password", $params);
 
-            if(!$user)  {
-                $this->is_validated = false; 
-                throw new RecordNotFoundException('No Record Found');
-            }
+        if(!$user)  {
+            $this->is_validated = false; 
+            throw new RecordNotFoundException('No Record Found');
+        }
+
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
     }
@@ -151,8 +150,7 @@ public function validate_name($string)
     public static function pagination($id) 
     {
         $db = DB::conn();
-        $users = $db->value('SELECT COUNT(*) FROM user WHERE id != ?', array($id));
-        
+        $users = $db->value('SELECT COUNT(*) FROM user WHERE id != ?', array($id));     
         return $users;
     }
 
@@ -181,7 +179,7 @@ public function validate_name($string)
 
     public function update()
     {
-         if (!$this->validate()) {
+        if (!$this->validate()) {
             throw new ValidationException('Invalid user credentials');
         }
 
@@ -209,9 +207,10 @@ public function validate_name($string)
         $db = DB::conn();
         $rows = $db->rows("SELECT * FROM user where id != ? LIMIT {$offset}, {$limit}", array($id));
             
-            foreach($rows as $row) {
-                $users[] = new self($row);
-            }
+        foreach($rows as $row) {
+            $users[] = new self($row);
+        }
+
         return $users;
     }
 
@@ -265,8 +264,7 @@ public function validate_name($string)
     public static function countFollowing($user_id) 
     {
         $db = DB::conn();
-        $total_following = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));
-        
+        $total_following = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id)); 
         return $total_following;
     }
        
@@ -277,22 +275,24 @@ public function validate_name($string)
                         
         $rows = $db->rows("SELECT * FROM follow WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
 
-            foreach($rows as $row) {
-                $following[] = new self($row);
-            }
+        foreach($rows as $row) {
+            $following[] = new self($row);
+        }
         return $following;
+
     }
 
-    public static function home($user_id) 
+    public static function getRecentActivity($user_id) 
     {
         $home = array();
         $db = DB::conn();
                         
         $rows = $db->rows("SELECT * FROM follow WHERE user_id = ?", array($user_id));
 
-            foreach($rows as $row) {
-                $home[] = new self($row);
-            }
+        foreach($rows as $row) {
+            $home[] = new self($row);
+        }
+        
         return $home;
     }
 } //end

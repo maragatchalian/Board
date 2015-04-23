@@ -113,25 +113,25 @@ const CREATE_THREAD_END = 'create_end';
     public function bycategory() 
     {
         $category = Param::get('category','none');
-            if ( $category !== 'none') {
-                $per_page = MAX_DATA_PER_PAGE;
-                $current_page = Param::get('page', 1);
-                $pagination = new SimplePagination($current_page, $per_page);
+        if ( $category !== 'none') {
+            $per_page = MAX_DATA_PER_PAGE;
+            $current_page = Param::get('page', 1);
+            $pagination = new SimplePagination($current_page, $per_page);
 
-                $threads = Thread::getByCategory($pagination->start_index -1, $pagination->count + 1, $category);
-                $pagination->checkLastPage($threads);
+            $threads = Thread::getByCategory($pagination->start_index -1, $pagination->count + 1, $category);
+            $pagination->checkLastPage($threads);
 
-                $total = Thread::countAllThreadByCategory($category);
-                $pages = ceil($total / $per_page);
-                $this->set(get_defined_vars());
-                $this->render('sub_category');
+            $total = Thread::countAllThreadByCategory($category);
+            $pages = ceil($total / $per_page);
+            $this->set(get_defined_vars());
+            $this->render('sub_category');
         
-            } else {
-                $categories = Thread::getAllCategory();
-                $this->set(get_defined_vars());
-                $this->render('categories');
-            }
-        }    
+        } else {
+            $categories = Thread::getAllCategory();
+            $this->set(get_defined_vars());
+            $this->render('categories');
+        }
+    }    
 
     public function sub_category() 
     {

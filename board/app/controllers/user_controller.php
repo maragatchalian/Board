@@ -4,6 +4,11 @@ class UserController extends AppController {
 
 const LOGIN_PAGE = 'login';
 const HOME_PAGE = 'home';
+const REGISTER = 'register';
+const REGISTER_END = 'register_end';
+const EDIT = 'edit';
+const EDIT_END = 'edit_end';
+
 
     public function register() 
     {
@@ -21,17 +26,17 @@ const HOME_PAGE = 'home';
         );
 
         $user = new User($params);
-        $page = Param::get('page_next', 'register');
+        $page = Param::get('page_next', self::REGISTER);
         
         switch ($page) {    
-            case 'register':
+            case self::REGISTER:
                 break;
             
-            case 'register_end':
+            case self::REGISTER_END:
                 try {
                     $user->register();
                 } catch (ValidationException $e) {
-                    $page = 'register';
+                    $page = self::REGISTER;
                 }
                 break;
             default:
@@ -55,11 +60,10 @@ const HOME_PAGE = 'home';
 
         $user = new User($params);
         $page = Param::get('page_next', self::LOGIN_PAGE);
-
+       
         switch ($page) {
             case self::LOGIN_PAGE:
-            break;
-         
+                break;
             case self::HOME_PAGE:
                 try {
                     $user->login();
@@ -71,7 +75,7 @@ const HOME_PAGE = 'home';
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
-        
+
         $this->set(get_defined_vars());
         $this->render($page); 
     }
@@ -92,7 +96,7 @@ const HOME_PAGE = 'home';
     public function home() 
     {
         $user_id = $_SESSION['user_id'];
-        $home = User::home($user_id);  
+        $home = User::getRecentActivity($user_id);  
         $thread_id = Param::get('thread_id');
         $comments = Comment::newsfeed($thread_id);
         $this->set(get_defined_vars());
@@ -108,17 +112,16 @@ const HOME_PAGE = 'home';
         );
 
         $user = new User($params);
-        $page = Param::get('page_next', 'edit');
+        $page = Param::get('page_next', self::EDIT);
                 
         switch ($page) {
-            case 'edit':
-            break;
-
-            case 'edit_end':
+            case self::EDIT:
+                break;
+            case self::EDIT_END:
                 try {
                      $user->update();
                 }catch (ValidationException $e) {
-                    $page = 'edit';
+                    $page = self::EDIT;
                 }
                 break;
             default:

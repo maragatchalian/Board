@@ -41,7 +41,7 @@ public $validation = array(
         return $comments;
     }
 
-       public static function newsfeed($thread_id) 
+    public static function newsfeed($thread_id) 
     {
         $comments = array();
         $db = DB::conn();
@@ -201,13 +201,12 @@ public $validation = array(
     public static function getAllFavorites($offset, $limit, $user_id) 
     {
         $favorites = array();
-        $db = DB::conn();
-                        
+        $db = DB::conn();                  
         $rows = $db->rows("SELECT * FROM favorite WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
   
-            foreach($rows as $row) {
-                $favorites[] = new self($row);
-            }
+        foreach($rows as $row) {
+            $favorites[] = new self($row);
+        }
 
         return $favorites;
     }

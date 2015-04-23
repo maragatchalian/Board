@@ -21,8 +21,6 @@
  <div class="comment">                        
  <div class="meta">
 
-
-
 <!--View Comments-->
 <?php foreach($comments as $get_from_comment): ?>
    
