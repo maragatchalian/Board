@@ -4,11 +4,23 @@ class User extends AppModel {
 //The following constants are declared to avoid magic numbers
 const REGISTER_MIN_LENGTH = 2;
 const MIN_PASSWORD_LENGTH = 8;
-
 const MAX_USERNAME_LENGTH = 20; 
 const REGISTER_MAX_LENGTH = 30; 
 
 public $is_validated = true;
+
+
+public function validate_username($username)
+{
+   $valid = array('-', '_', '');    
+   return ctype_alnum(str_replace($valid, '', $username));
+}
+
+public function validate_name($string)
+{
+   $valid = array('-', ' ');    
+   return ctype_alpha(str_replace($valid, '', $string));
+}
 
 /*
 *Registration Length Validation.

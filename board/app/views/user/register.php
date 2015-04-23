@@ -8,9 +8,9 @@
   
 <?php 
 //Checking of username if it's valid
-if (!empty($user->validation_errors['username']['valid'])): ?>
+    if ($user->validation_errors['username']['valid']): ?>
     <div>
-        <em>Username may only consist of letters, numbers, underscores(_), and dots(.).</em>
+        <em>Username may only consist of letters, numbers,  hypen (-), underscores(_), and dots(.).</em>
     </div>
 <?php endif ?>
 
@@ -44,9 +44,9 @@ if (!empty($user->validation_errors['first_name']['length'])): ?>
 
 <?php 
 //Checking of first_name if it's valid.
-if (!empty($user->validation_errors['first_name']['valid'])): ?>
+    if ($user->validation_errors['first_name']['valid']): ?>
     <div>
-        <em>First name may only consist of letters, space and a hyphen</em>
+        <em>First Name </em> MUST only consist of letters or hypen (-)</em>
     </div>
 <?php endif ?>
 
@@ -61,11 +61,12 @@ if (!empty($user->validation_errors['first_name']['valid'])): ?>
 
 <?php
 //Checking of first_name if it's valid.
-if (!empty($user->validation_errors['last_name']['valid'])): ?>
+if ($user->validation_errors['last_name']['valid']): ?>
     <div>
-        <em>Last name may only consist of letters, space and a hyphen.</em>
+        <em>Last Name </em> MUST only consist of letters or hypen (-)</em>
     </div>
 <?php endif ?>
+
 
 <?php 
 //Email Validation
