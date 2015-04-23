@@ -34,7 +34,7 @@
 <br />
 
 <!--View Date of Creation-->    
-<em> <?php echo time_difference($get_from_comment->created) ?> </em>
+<em> posted <?php echo time_difference($get_from_comment->created) ?> </em>
 <br /> 
 
 <!-- Delete Comment -->

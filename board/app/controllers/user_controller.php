@@ -90,7 +90,11 @@ const MAX_DATA_PER_PAGE = 5;
 
     public function home() 
     {
-        
+        $user_id = $_SESSION['user_id'];
+        $following = User::home($user_id);  
+        $thread_id = Param::get('thread_id');
+        $comments = Comment::newsfeed($thread_id);
+        $this->set(get_defined_vars());
     }
 
     public function edit() 

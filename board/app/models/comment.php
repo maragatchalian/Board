@@ -41,6 +41,19 @@ public $validation = array(
         return $comments;
     }
 
+       public static function newsfeed($thread_id) 
+    {
+        $comments = array();
+        $db = DB::conn();
+        $rows = $db->rows("SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC", array($thread_id));
+        
+        foreach ($rows as $row) {
+            $comments[] = new self($row);
+        }
+        
+        return $comments;
+    }
+
     public function write(Comment $comment, $thread_id) 
     {
         if(!$this->validate()) {

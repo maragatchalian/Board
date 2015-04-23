@@ -268,4 +268,17 @@ public $is_validated = true;
             }
         return $following;
     }
+
+    public static function home($user_id) 
+    {
+        $following = array();
+        $db = DB::conn();
+                        
+        $rows = $db->rows("SELECT * FROM follow WHERE user_id = ?", array($user_id));
+
+            foreach($rows as $row) {
+                $following[] = new self($row);
+            }
+        return $following;
+    }
 } //end
