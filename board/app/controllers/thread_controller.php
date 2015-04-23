@@ -122,7 +122,7 @@ class ThreadController extends AppController {
                 $total = Thread::countAllThreadByCategory($category);
                 $pages = ceil($total / $per_page);
                 $this->set(get_defined_vars());
-                $this->render('under_category');
+                $this->render('sub_category');
         
             } else {
                 $categories = Thread::getAllCategory();
@@ -131,7 +131,7 @@ class ThreadController extends AppController {
             }
         }    
 
-    public function under_category() 
+    public function sub_category() 
     {
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
