@@ -2,9 +2,11 @@
 
 class User extends AppModel {
 //The following constants are declared to avoid magic numbers
-const FIXED_MIN_LENGTH = 2;
+const REGISTER_MIN_LENGTH = 2;
 const MIN_PASSWORD_LENGTH = 8;
-const FIXED_MAX_LENGTH = 30; 
+
+const MAX_USERNAME_LENGTH = 20; 
+const REGISTER_MAX_LENGTH = 30; 
 
 public $is_validated = true;
 
@@ -16,7 +18,7 @@ public $is_validated = true;
     public $validation = array(
         'username' => array(
             'length' => array(
-                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH
+                'validate_between', self::REGISTER_MIN_LENGTH, self::MAX_USERNAME_LENGTH
             ),
             'valid' => array(
                 'validate_username'
@@ -28,7 +30,7 @@ public $is_validated = true;
 
         'first_name' => array(
             'length' => array(
-                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH
+                'validate_between', self::REGISTER_MIN_LENGTH, self::REGISTER_MAX_LENGTH
             ),
             'valid' => array(
                 'validate_name'
@@ -37,7 +39,7 @@ public $is_validated = true;
         
         'last_name' => array(
             'length' => array(
-                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH
+                'validate_between', self::REGISTER_MIN_LENGTH, self::REGISTER_MAX_LENGTH
             ),
             'valid' => array(
                 'validate_name'
@@ -46,7 +48,7 @@ public $is_validated = true;
 
         'email' => array(
             'length' => array(
-                'validate_between', self::FIXED_MIN_LENGTH, self::FIXED_MAX_LENGTH,
+                'validate_between', self::REGISTER_MIN_LENGTH, self::REGISTER_MAX_LENGTH,
             ),
 
         'exist' => array(
@@ -56,7 +58,7 @@ public $is_validated = true;
 
         'password' => array(
             'length' => array(
-                'validate_between', self::MIN_PASSWORD_LENGTH, self::FIXED_MAX_LENGTH,
+                'validate_between', self::MIN_PASSWORD_LENGTH, self::REGISTER_MAX_LENGTH,
             )
         ),
         'confirm_password' => array(

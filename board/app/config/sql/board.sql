@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS comment (
 id                  INT(11) NOT NULL AUTO_INCREMENT,
 thread_id           INT(11) NOT NULL,
 user_id             INT(11) NOT NULL,
-username            VARCHAR(11) NOT NULL,
+username            VARCHAR(20) NOT NULL,
 body                VARCHAR(140) NOT NULL,
 created             TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (id),
