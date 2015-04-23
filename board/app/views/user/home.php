@@ -5,9 +5,9 @@
 <font color ="black">
 <h1>NEWSFEED</h1>
 </center>
-	<?php foreach ($following as $get_from_following): ?>
+	<?php foreach ($home as $get_from_home): ?>
         <li>
-            <?php eh($get_from_following->username) ?></a> 
+            <?php eh($get_from_home->username) ?></a> 
             <br />
             posted: 
         </li>

@@ -2,8 +2,6 @@
 
 class UserController extends AppController {
 
-const MAX_DATA_PER_PAGE = 5;
-
     public function register() 
     {
         if (is_logged_in()) {
@@ -91,7 +89,7 @@ const MAX_DATA_PER_PAGE = 5;
     public function home() 
     {
         $user_id = $_SESSION['user_id'];
-        $following = User::home($user_id);  
+        $home = User::home($user_id);  
         $thread_id = Param::get('thread_id');
         $comments = Comment::newsfeed($thread_id);
         $this->set(get_defined_vars());
@@ -132,7 +130,7 @@ const MAX_DATA_PER_PAGE = 5;
 
     public function users() 
     { 
-        $per_page = self::MAX_DATA_PER_PAGE;
+        $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
 
@@ -159,7 +157,7 @@ const MAX_DATA_PER_PAGE = 5;
     */
     public function following() 
     { 
-        $per_page = self::MAX_DATA_PER_PAGE;
+        $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
 

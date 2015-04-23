@@ -273,14 +273,14 @@ public $is_validated = true;
 
     public static function home($user_id) 
     {
-        $following = array();
+        $home = array();
         $db = DB::conn();
                         
         $rows = $db->rows("SELECT * FROM follow WHERE user_id = ?", array($user_id));
 
             foreach($rows as $row) {
-                $following[] = new self($row);
+                $home[] = new self($row);
             }
-        return $following;
+        return $home;
     }
 } //end

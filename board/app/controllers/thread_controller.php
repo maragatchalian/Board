@@ -2,8 +2,6 @@
 
 class ThreadController extends AppController {
 
-const MAX_THREAD_PER_PAGE = 5;
-const MAX_COMMENT_PER_PAGE = 5;
 /*
 * Create new thread
 * :: - STATIC FUNCTION, can be called from the class name
@@ -54,7 +52,7 @@ const MAX_COMMENT_PER_PAGE = 5;
     //Displays the comments of the thread
     public function view() 
     {
-        $per_page = self::MAX_COMMENT_PER_PAGE;
+        $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);      
 
@@ -83,7 +81,7 @@ const MAX_COMMENT_PER_PAGE = 5;
     //All Threads
     public function index() 
     {
-        $per_page = self::MAX_THREAD_PER_PAGE; 
+        $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
         $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
@@ -95,7 +93,7 @@ const MAX_COMMENT_PER_PAGE = 5;
 
     public function mythreads()
     {
-        $per_page = self::MAX_THREAD_PER_PAGE;
+        $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
 
@@ -114,7 +112,7 @@ const MAX_COMMENT_PER_PAGE = 5;
     {
         $category = Param::get('category','none');
             if ( $category !== 'none') {
-                $per_page = self::MAX_THREAD_PER_PAGE; 
+                $per_page = MAX_DATA_PER_PAGE;
                 $current_page = Param::get('page', 1);
                 $pagination = new SimplePagination($current_page, $per_page);
 
@@ -135,7 +133,7 @@ const MAX_COMMENT_PER_PAGE = 5;
 
     public function under_category() 
     {
-        $per_page = self::MAX_THREAD_PER_PAGE; 
+        $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
         $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
