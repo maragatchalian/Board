@@ -8,16 +8,16 @@ const MIN_BODY_LENGTH = 1;
 const MAX_USERNAME_LENGTH = 20;
 const MAX_BODY_LENGTH = 140;
 
-public $validation = array(
-    "username" => array(
-        "length" => array(
-            "validate_between", self::MIN_USERNAME_LENGTH, self::MAX_USERNAME_LENGTH,
+    public $validation = array(
+        "username" => array(
+            "length" => array(
+                "validate_between", self::MIN_USERNAME_LENGTH, self::MAX_USERNAME_LENGTH,
+                ),
             ),
-        ),
 
-    "body" => array(
-        "length" => array(
-            "validate_between", self::MIN_BODY_LENGTH, self::MAX_BODY_LENGTH,
+        "body" => array(
+            "length" => array(
+                "validate_between", self::MIN_BODY_LENGTH, self::MAX_BODY_LENGTH,
             ),
         ),
     );
@@ -41,11 +41,11 @@ public $validation = array(
         return $comments;
     }
 
-    public static function newsfeed($thread_id) 
+    public static function newsfeed() 
     {
         $comments = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC", array($thread_id));
+        $rows = $db->rows("SELECT * FROM comment");
         
         foreach ($rows as $row) {
             $comments[] = new self($row);
@@ -218,4 +218,5 @@ public $validation = array(
         
         return $fave;
     }
+
 } //end

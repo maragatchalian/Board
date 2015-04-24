@@ -2,13 +2,18 @@
 
 class User extends AppModel {
 //The following constants are declared to avoid magic numbers
-const REGISTER_MIN_LENGTH = 2;
+const MIN_USERNAME_LENGTH = 2;
+const MIN_FIRST_NAME_LENGTH = 2;
+const MIN_LAST_NAME_LENGTH = 2;
+const MIN_EMAIL_LENGTH = 4;
 const MIN_PASSWORD_LENGTH = 8;
-const MAX_USERNAME_LENGTH = 20; 
-const REGISTER_MAX_LENGTH = 30; 
 
-    public $is_validated = true;
-
+const MAX_USERNAME_LENGTH = 20;
+const MAX_FIRST_NAME_LENGTH = 30;
+const MAX_LAST_NAME_LENGTH = 30;
+const MAX_EMAIL_LENGTH = 30;
+const MAX_PASSWORD_LENGTH = 20;
+  
     public function validate_username($username)
     {
         $valid = array('-', '_', '');    
@@ -29,7 +34,7 @@ const REGISTER_MAX_LENGTH = 30;
     public $validation = array(
         'username' => array(
             'length' => array(
-                'validate_between', self::REGISTER_MIN_LENGTH, self::MAX_USERNAME_LENGTH
+                'validate_between', self::MIN_USERNAME_LENGTH, self::MAX_USERNAME_LENGTH
             ),
             'valid' => array(
                 'validate_username'
@@ -41,7 +46,7 @@ const REGISTER_MAX_LENGTH = 30;
 
         'first_name' => array(
             'length' => array(
-                'validate_between', self::REGISTER_MIN_LENGTH, self::REGISTER_MAX_LENGTH
+                'validate_between', self::MIN_FIRST_NAME_LENGTH, self::MAX_FIRST_NAME_LENGTH
             ),
             'valid' => array(
                 'validate_name'
@@ -50,7 +55,7 @@ const REGISTER_MAX_LENGTH = 30;
         
         'last_name' => array(
             'length' => array(
-                'validate_between', self::REGISTER_MIN_LENGTH, self::REGISTER_MAX_LENGTH
+                'validate_between', self::MIN_LAST_NAME_LENGTH, self::MAX_LAST_NAME_LENGTH
             ),
             'valid' => array(
                 'validate_name'
@@ -59,7 +64,7 @@ const REGISTER_MAX_LENGTH = 30;
 
         'email' => array(
             'length' => array(
-                'validate_between', self::REGISTER_MIN_LENGTH, self::REGISTER_MAX_LENGTH,
+                'validate_between', self::MIN_EMAIL_LENGTH, self::MAX_EMAIL_LENGTH
             ),
 
         'exist' => array(
@@ -69,7 +74,7 @@ const REGISTER_MAX_LENGTH = 30;
 
         'password' => array(
             'length' => array(
-                'validate_between', self::MIN_PASSWORD_LENGTH, self::REGISTER_MAX_LENGTH,
+                'validate_between', self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH
             )
         ),
         'confirm_password' => array(
@@ -112,9 +117,8 @@ const REGISTER_MAX_LENGTH = 30;
         );
         $user = $db->row("SELECT id, username FROM user WHERE BINARY username = :username AND BINARY password = :password", $params);
 
-        if(!$user)  {
-            $this->is_validated = false; 
-            throw new RecordNotFoundException('No Record Found');
+        if(!$user) {
+            throw new RecordNotFoundException('No Record Found');      
         }
 
         $_SESSION['user_id'] = $user['id'];
@@ -279,7 +283,6 @@ const REGISTER_MAX_LENGTH = 30;
             $following[] = new self($row);
         }
         return $following;
-
     }
 
     public static function getRecentActivity($user_id) 

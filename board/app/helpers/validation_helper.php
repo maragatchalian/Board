@@ -8,7 +8,7 @@ function validate_between($check, $min, $max)
 }
 
 function is_logged_in(){
-     return isset($_SESSION['user_id']);
+    return isset($_SESSION['user_id']);
 }
 
 /* I can actually use this but I used PHP built-in functions instead

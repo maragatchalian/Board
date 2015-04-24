@@ -5,13 +5,17 @@
 <font color ="black">
 <h1>NEWSFEED</h1>
 </center>
-    <?php foreach ($home as $get_from_home): ?>
-        <li>
-            <?php eh($get_from_home->username) ?></a> 
-            <br />
-            posted: 
-        </li>
-            <br />
-    <?php endforeach; //Display contents of individual thread to href to A tag ?>
+
+<?php foreach ($home as $get_from_home): ?>
+    <li>
+        <?php eh($get_from_home->username) ?> 
+        <br />	
+        <?php eh($comments->body)?>
+        <br />
+        <br />
+    </li>
+<?php endforeach; ?> 
+
+
 </font>
 </html>

@@ -5,7 +5,7 @@
 <br />
 
 <!--Empty/invalid username/password error message-->
-<?php if (!$user->is_validated) : ?>
+<?php if (!is_logged_in() && $user->username != '') : ?> 
     <div class="alert alert-error">
         <em><h4 class="alert-heading">Oops!</h4></em>
         <em>Invalid Username or Password</em>
@@ -29,8 +29,7 @@
     </div>
     </div>
     <br />
-
-    
+ 
 <!--Will be redirected to login_end once successfully logged in-->
     <div class="control-group">
     <div class="controls">
@@ -49,3 +48,4 @@ If you don't have an account, register
 
 </form>
 </font>
+
