@@ -1,4 +1,4 @@
 app/config/core.php
 app/tmp/logs/*.log
 app/webroot/bootstrap/img/*
-app/webroot/bootstrap/custom.css
+app/webroot/bootstrap/css/custom.css
