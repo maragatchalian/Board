@@ -284,17 +284,4 @@ const MAX_PASSWORD_LENGTH = 20;
         }
         return $following;
     }
-
-    /*public static function getRecentActivity($user_id) 
-    {
-        $home = array();
-        $db = DB::conn();
-                        
-        $rows = $db->rows("SELECT * FROM follow WHERE user_id = ?", array($user_id));
-
-        foreach($rows as $row) {
-            $home[] = new self($row);
-        }
-        return $home;
-    }*/
 } //end

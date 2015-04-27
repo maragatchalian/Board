@@ -40,7 +40,7 @@ const MAX_BODY_LENGTH = 140;
         
         return $comments;
     }
-//---------------------------------------------------------
+
     public static function getRecentActivity($offset, $limit, $user_id) 
     {
         $home = array();
@@ -74,7 +74,6 @@ const MAX_BODY_LENGTH = 140;
         return $users;
     }
 
-//---------------------------------------------------------------
     public function write(Comment $comment, $thread_id) 
     {
         if(!$this->validate()) {
@@ -228,16 +227,13 @@ const MAX_BODY_LENGTH = 140;
         foreach($rows as $row) {
             $favorites[] = new self($row);
         }
-
         return $favorites;
     }
 
     public static function pagination($user_id) 
     {
         $db = DB::conn();
-        $fave = $db->value('SELECT COUNT(*) FROM favorite WHERE user_id = ?', array($user_id));
-        
+        $fave = $db->value('SELECT COUNT(*) FROM favorite WHERE user_id = ?', array($user_id)); 
         return $fave;
     }
-
 } //end

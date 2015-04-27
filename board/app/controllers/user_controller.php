@@ -9,8 +9,6 @@ const REGISTER_END = 'register_end';
 const EDIT = 'edit';
 const EDIT_END = 'edit_end';
 
-
-
     public function register() 
     {
         if (is_logged_in()) {
@@ -93,15 +91,6 @@ const EDIT_END = 'edit_end';
         $user = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
     }
-
-    /*public function home() 
-    {
-        $user_id = $_SESSION['user_id'];
-        $home = User::getRecentActivity($user_id);  
-        $thread_id = Param::get('thread_id');
-        $comments = Comment::newsfeed($thread_id);
-        $this->set(get_defined_vars());
-    }*/
 
     public function edit() 
     {      
