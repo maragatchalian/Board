@@ -25,16 +25,6 @@
     </div>
   <?php endif ?>
 
-  <!--Username Validation Error Message--> 
-  <?php if (!empty($comment->validation_errors['username']['length'])): ?>                
-    <div>
-      <em>Username</em> 
-        must be between    
-        <?php eh($comment->validation['username']['length'][1]) ?> and
-        <?php eh($comment->validation['username']['length'][2]) ?> characters.
-    </div>
-  <?php endif ?>
-
   <!--Comment Validation Error Message--> 
   <?php if (!empty($comment->validation_errors['body']['length'])): ?>
     <div>

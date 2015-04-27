@@ -13,7 +13,7 @@ const CREATE_THREAD_END = 'create_end';
 * Everything inputted on the form (view/thread/create.php) will be gathered by this function
 */
 
-    public function create() 
+   public function create() 
     {
         $thread = new Thread();
         $comment = new Comment();
