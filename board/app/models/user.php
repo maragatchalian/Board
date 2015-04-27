@@ -285,7 +285,7 @@ const MAX_PASSWORD_LENGTH = 20;
         return $following;
     }
 
-    public static function getRecentActivity($user_id) 
+    /*public static function getRecentActivity($user_id) 
     {
         $home = array();
         $db = DB::conn();
@@ -295,7 +295,6 @@ const MAX_PASSWORD_LENGTH = 20;
         foreach($rows as $row) {
             $home[] = new self($row);
         }
-        
         return $home;
-    }
+    }*/
 } //end

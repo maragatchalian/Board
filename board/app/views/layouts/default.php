@@ -63,7 +63,7 @@
 
 
 <ul id="menu">
-        <li><a href="<?php eh(url('user/home')) ?>">Home</a>
+        <li><a href="<?php eh(url('comment/home')) ?>">Home</a>
         <li><a href="<?php eh(url('user/profile')) ?>">Profile</a></li>
         <li><a href="<?php eh(url('thread/index')) ?>">All Threads</a></li>
         <li><a href="<?php eh(url('thread/myThreads')) ?>">My Threads</a></li>

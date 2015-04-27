@@ -1,21 +1,5 @@
-<html>
 <br />
-<br />
-<center>
-<font color ="black">
-<h1>NEWSFEED</h1>
-</center>
-
-<?php foreach ($home as $get_from_home): ?>
-    <li>
-        <?php eh($get_from_home->username) ?> 
-        <br />	
-        <?php eh($comments->body)?>
-        <br />
-        <br />
-    </li>
-<?php endforeach; ?> 
-
-
-</font>
-</html>
+<p class="alert alert-success">
+You have successfully logged in!
+</p>
+<a href="<?php eh(url('user/login')) ?>"> Got it!</a> 

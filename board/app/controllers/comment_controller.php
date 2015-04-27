@@ -4,6 +4,7 @@ class CommentController extends AppController {
 
 const WRITE_COMMENT = 'write';
 const WRITE_COMMENT_END = 'write_end';
+const MAX_DATA_NEWS = 3;
 
     public function write() 
     {
@@ -79,5 +80,22 @@ const WRITE_COMMENT_END = 'write_end';
                 break;
         }
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
+    }
+
+    public function home() 
+    {
+        $per_page = self::MAX_DATA_NEWS; //*/*****/*/*/*/*/* added
+        $current_page = Param::get('page', 1); //*/*****/*/*/*/*/* added
+        $pagination = new SimplePagination($current_page, $per_page); //*/*****/*/*/*/*/* added
+
+        $user_id = $_SESSION['user_id'];
+        $home = Comment::getRecentActivity($pagination->start_index -1, $pagination->count + 1, $user_id);  
+        $thread_id = Param::get('thread_id');
+        $comments = Comment::newsfeed($thread_id);
+
+        $pagination->checkLastPage($home);
+        $total = Comment::countNewsfeed($user_id);
+        $pages = ceil($total / $per_page);
+        $this->set(get_defined_vars());
     }
 } //end

@@ -10,10 +10,11 @@ const EDIT = 'edit';
 const EDIT_END = 'edit_end';
 
 
+
     public function register() 
     {
         if (is_logged_in()) {
-            redirect(url('user/home'));
+            redirect(url('comment/home'));
         }
 
         $params = array(
@@ -50,7 +51,7 @@ const EDIT_END = 'edit_end';
     public function login() 
     {
         if (is_logged_in()) {
-            redirect(url('user/home'));
+            redirect(url('comment/home'));
         }
 
         $params = array(
@@ -93,14 +94,14 @@ const EDIT_END = 'edit_end';
         $this->set(get_defined_vars());
     }
 
-    public function home() 
+    /*public function home() 
     {
         $user_id = $_SESSION['user_id'];
         $home = User::getRecentActivity($user_id);  
         $thread_id = Param::get('thread_id');
         $comments = Comment::newsfeed($thread_id);
         $this->set(get_defined_vars());
-    }
+    }*/
 
     public function edit() 
     {      
@@ -169,7 +170,6 @@ const EDIT_END = 'edit_end';
 
         $id = $_SESSION['user_id'];
         $following = User::getAllFollowing($pagination->start_index -1, $pagination->count + 1, $id);
-        
         $pagination->checkLastPage($following);
         $total = User::countFollowing($id);
         $pages = ceil($total / $per_page);

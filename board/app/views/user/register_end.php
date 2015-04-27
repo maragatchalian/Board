@@ -7,6 +7,6 @@
 You have successfully created an account. 
 </p>
 
-Please click <a href="<?php eh(url('user/login')) ?>"> HERE</a> to log in.
+<a href="<?php eh(url('comment/home')) ?>"> Got it</a> to log in.
 </font>
 </html>

@@ -40,20 +40,41 @@ const MAX_BODY_LENGTH = 140;
         
         return $comments;
     }
+//---------------------------------------------------------
+    public static function getRecentActivity($offset, $limit, $user_id) 
+    {
+        $home = array();
+        $db = DB::conn();
+                        
+        $rows = $db->rows("SELECT * FROM follow WHERE user_id = ?", array($user_id));
 
-    public static function newsfeed() 
+        foreach($rows as $row) {
+            $home[] = new self($row);
+        }
+        return $home;
+    }
+
+    public static function newsfeed($thread_id) 
     {
         $comments = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM comment");
+        $rows = $db->rows("SELECT * FROM comment where created <= (CURRENT_TIMESTAMP) ORDER BY created DESC", array($thread_id));
         
         foreach ($rows as $row) {
             $comments[] = new self($row);
         }
-        
         return $comments;
     }
 
+    public static function countNewsfeed($user_id) 
+    {
+        $db = DB::conn();
+        $users = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));
+        
+        return $users;
+    }
+
+//---------------------------------------------------------------
     public function write(Comment $comment, $thread_id) 
     {
         if(!$this->validate()) {

@@ -14,7 +14,6 @@
 
     <form class="form-horizontal">
     <form action="<?php eh(url('')) ?>" method="post">
-
     <div class="control-group">
     <label class="control-label" for ="username"><h4>Username</h4></label>
     <div class="controls">
