@@ -5,7 +5,7 @@
 <?php if ($user->hasError()): ?>
     <div class="alert alert-error">
         <h4 class="alert-heading">Oh snap!</h4><h7>Change a few things up and try registering again.</h7><br /><br/>
-  
+ 
 <?php 
 //Checking of username if it's valid
     if ($user->validation_errors['username']['valid']): ?>
