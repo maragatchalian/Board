@@ -69,7 +69,7 @@
         <li><a href="<?php eh(url('thread/myThreads')) ?>">My Threads</a></li>
         <li><a href="<?php eh(url('thread/byCategory')) ?>">Thread Categories</a></li>
         <li><a href="<?php eh(url('thread/create')) ?>">Create New Thread</a></li>  
-        <li><a href="<?php eh(url('user/users')) ?>">Users</a></li> 
+        <li><a href="<?php eh(url('user/get_all_users')) ?>">Users</a></li> 
         <li><a href="<?php eh(url('user/logout')) ?>">Logout</a></li>
         </ul>    
 <?php endif ?>

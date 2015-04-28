@@ -125,7 +125,7 @@ const EDIT_END = 'edit_end';
         $this->render($page); 
     }
 
-    public function users() 
+    public function get_all_users() 
     { 
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
@@ -140,7 +140,7 @@ const EDIT_END = 'edit_end';
         $this->set(get_defined_vars());
     } 
 
-    public function others() 
+    public function others_profile() 
     {
         $user_id = Param::get('user_id');
         $row = User::get($user_id); 
@@ -183,7 +183,7 @@ const EDIT_END = 'edit_end';
             throw new InvalidArgumentException("{$method} is an invalid parameter");
             break;
         }
-        redirect(url('user/others', array('user_id' => $follow->id)));   
+        redirect(url('user/others_profile', array('user_id' => $follow->id)));   
     }
 }//end
 
