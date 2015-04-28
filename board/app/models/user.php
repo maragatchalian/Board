@@ -155,12 +155,12 @@ const MAX_PASSWORD_LENGTH = 20;
         return $row;
     } 
 
-    public static function pagination($id) 
+    /*public static function pagination($id) 
     {
         $db = DB::conn();
         $users = $db->value('SELECT COUNT(*) FROM user WHERE id != ?', array($id));     
         return $users;
-    }
+    }*/
 
     public static function getAllMyThread($offset, $limit, $id) 
     {
@@ -210,7 +210,7 @@ const MAX_PASSWORD_LENGTH = 20;
         }
     }
 
-    public static function getOtherUsers($offset, $limit, $id) 
+   /* public static function getOtherUsers($offset, $limit, $id) 
     {
         $users = array();
         $db = DB::conn();
@@ -221,11 +221,28 @@ const MAX_PASSWORD_LENGTH = 20;
         }
 
         return $users;
-    }
+    }*/
 
+//tryyyyyyyyy**************
+    public static function getByUserId($user_id)
+    {
+        $rows = $db->rows('SELECT * FROM user WHERE id = ?', array($user_id));
+        if ($rows == null)
+            throw new RecordNotFoundException;
+    
+    $user = array();
+    foreach ($rows as $row)
+        $user[] = new self($row); // Each row is now an instance of Thread
+
+    return $user;
+}
+//===================**********
+
+/*
+   
     /*
     *Follow and Unfollow
-    */
+    //
     public function addFollowing()
     { 
         try {
@@ -289,4 +306,7 @@ const MAX_PASSWORD_LENGTH = 20;
         }
         return $following;
     }
+*/
+
+
 } //end

@@ -1,23 +1,23 @@
-<?php
-/*
-
-<html>
-<body>
-<font color ='black'>
+<font color = 'black'>
+<center>
 <br />
 <br />
-    <h1> Other Users </h1> 
-    <br />        
-    <ul style="list-style-type:square">
-        <?php foreach ($users as $get_from_user): ?>
-            <li> 
-                <a href="<?php eh(url('user/others_profile', array('user_id' => $get_from_user->id))) ?>">
-                <?php eh($get_from_user->username) ?></a>   
-            </li>
-        <?php endforeach; //Display contents of individual user ?>       
+<h1>Following</h1>
+<br /> 
+</center>
+<ul style="list-style-type:square">
+    <?php foreach ($following as $get_from_following): ?>
+        <li>
+            <?php eh($get_from_following->username) ?></a>      
+        </li>
+    <?php endforeach; //Display contents of individual thread to href to A tag ?>
 
+<?php if(empty($following)): ?>
+       You are not following any users.
+<?php endif ?>
+<br />
+<br />
 <!--Pagination --> 
-<ul class="pagination">
 <?php if($pagination->current > 1): ?>
     <a class ="btn btn-small" href='?page=<?php echo($pagination->prev) ?>'>Previous</a>
     <?php else: ?> 
@@ -36,8 +36,5 @@
     <a class ="btn btn-small" href='?page=<?php echo $pagination->next ?>'>Next</a>
     <?php else: ?>  Next
 <?php endif ?>
-</ul>
-  
-</body>
+
 </font>
-</html>

@@ -59,7 +59,7 @@ const MAX_USER_IN_NEWSFEED = 1;
         $favorites = Comment::getAllFavorites($pagination->start_index -1, $pagination->count + 1, $user_id);
         
         $pagination->checkLastPage($favorites);
-        $total = Comment::pagination($id);
+        $total = Comment::pagination($user_id);
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
     }

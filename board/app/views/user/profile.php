@@ -11,7 +11,7 @@
     <button class="btn btn-default btn-medium" type="submit"> <i class="icon-star"></i>Favorites</button>
     </form>
 
-    <form action="<?php eh(url('user/following')) ?>" method="post">
+    <form action="<?php eh(url('follow/following')) ?>" method="post">
     <button class="btn btn-default btn-medium" type="submit"> <i class="icon-plus"></i>Following</button>
     </form>
 </div>
