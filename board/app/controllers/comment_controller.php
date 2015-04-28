@@ -52,8 +52,8 @@ const MAX_USER_IN_NEWSFEED = 1;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
 
-        $id = $_SESSION['user_id'];
-        $favorites = Comment::getAllFavorites($pagination->start_index -1, $pagination->count + 1, $id);
+        $user_id = $_SESSION['user_id'];
+        $favorites = Comment::getAllFavorites($pagination->start_index -1, $pagination->count + 1, $user_id);
         
         $pagination->checkLastPage($favorites);
         $total = Comment::pagination($id);
