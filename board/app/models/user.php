@@ -194,7 +194,8 @@ const MAX_PASSWORD_LENGTH = 20;
                 'user', array(
                     'username' => $this->username,
                     'first_name' => $this->first_name,
-                    'last_name' => $this->last_name
+                    'last_name' => $this->last_name,
+                    'password' => $this->password
                     ),
                 array('id' =>$this->user_id) 
                 );

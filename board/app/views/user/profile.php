@@ -23,9 +23,8 @@
     <b>Email:</b>    <?php eh($user->email) ?><br />
     <br /><br />
 </div>
-<div>
-           
-    <a class="btn btn-medium btn-info" href="<?php eh(url('user/edit')) ?>">Edit profile</a>
+<div>      
+    <a class="btn btn-medium btn-info" href="<?php eh(url('user/edit')) ?>">Edit profile</a>       
                  
 </font>
 </form>

@@ -98,6 +98,7 @@ const EDIT_END = 'edit_end';
             'username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
             'last_name' => Param::get('last_name'),
+            'password' => Param::get('password'),
             'user_id' => $_SESSION['user_id']
         );
 
