@@ -1,18 +1,18 @@
 <?php
 /*
-* Thread Model
 * This is where the database manipulation and validation happens
 */
 
 class Thread extends AppModel {
 /* 
-* The following constants are declared to avoid magic numbers.
 * Avoid using magic numbers so others could understand what that number is all about.
 */
 const MIN_TITLE_LENGTH = 1;
 const MAX_TITLE_LENGTH = 30;
 
-    //Thread Length Validation
+    /* 
+    * Thread Length Validation
+    */
     public $validation = array(
     'title' => array(
         'length' => array(
@@ -20,7 +20,9 @@ const MAX_TITLE_LENGTH = 30;
             ),
         ),
 
-    //Category Validation
+    /* 
+    * Category Validation
+    */
     'category' => array(
         'length' => array(
             'validate_between', self::MIN_TITLE_LENGTH, self::MAX_TITLE_LENGTH
@@ -137,7 +139,9 @@ const MAX_TITLE_LENGTH = 30;
         return $comments;
     }
 
-    //Sorting of Threads (Own Threads)
+    /* 
+    * Sorting of threads by own threads
+    */
     public static function getAllMyThread($offset, $limit, $id) 
     {
         $threads = array();
@@ -150,7 +154,9 @@ const MAX_TITLE_LENGTH = 30;
         return $threads;
     }
 
-    //Sorting of Threads (By Category)
+    /* 
+    * Sorting of threads by category
+    */
     public static function getByCategory($offset, $limit, $category) 
     {
         $threads = array();

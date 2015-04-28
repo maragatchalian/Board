@@ -11,7 +11,6 @@ function redirect($url)
 	exit();
 }
 
-//Credits to J.Asis :)
 function time_difference($date)
 {
 	$second = 60;

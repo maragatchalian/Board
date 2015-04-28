@@ -1,7 +1,11 @@
 <?php
 
 class User extends AppModel {
-//The following constants are declared to avoid magic numbers
+
+/*
+* constants are used to avoid magic numbers
+*/
+
 const MIN_USERNAME_LENGTH = 2;
 const MIN_FIRST_NAME_LENGTH = 2;
 const MIN_LAST_NAME_LENGTH = 2;
@@ -26,11 +30,11 @@ const MAX_PASSWORD_LENGTH = 20;
         return ctype_alpha(str_replace($valid, '', $string));
     }
 
-/*
-*Registration Length Validation.
-*to make sure that a specific field is only limited 
-*   to a specific number of characters.
-*/
+    /*
+    * Registration Length Validation.
+    * Limits a certain field into a specific number of characters
+    * Checks if the characters are valid. (e.g., dot, hyphen)
+    */
     public $validation = array(
         'username' => array(
             'length' => array(
