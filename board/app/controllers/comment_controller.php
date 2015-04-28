@@ -4,7 +4,7 @@ class CommentController extends AppController {
 
 const WRITE_COMMENT = 'write';
 const WRITE_COMMENT_END = 'write_end';
-const MAX_DATA_NEWS = 3;
+const MAX_USER_IN_NEWSFEED = 1;
 
     public function write() 
     {
@@ -84,9 +84,9 @@ const MAX_DATA_NEWS = 3;
 
     public function home() 
     {
-        $per_page = self::MAX_DATA_NEWS; //*/*****/*/*/*/*/* added
-        $current_page = Param::get('page', 1); //*/*****/*/*/*/*/* added
-        $pagination = new SimplePagination($current_page, $per_page); //*/*****/*/*/*/*/* added
+        $per_page = self::MAX_USER_IN_NEWSFEED; 
+        $current_page = Param::get('page', 1); 
+        $pagination = new SimplePagination($current_page, $per_page); 
 
         $user_id = $_SESSION['user_id'];
         $home = Comment::getRecentActivity($pagination->start_index -1, $pagination->count + 1, $user_id);  
