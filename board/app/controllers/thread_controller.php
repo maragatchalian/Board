@@ -10,7 +10,7 @@ const CREATE_THREAD_END = 'create_end';
 * :: - STATIC FUNCTION, can be called from the class name
 * -> - INSTANCE, can only be called from an instance of the class.
 *
-* Everything inputted on the form (view/thread/create.php) will be gathered by this function
+* Everything inputted on the view will be gathered by this function
 */
 
    public function create() 
@@ -22,18 +22,12 @@ const CREATE_THREAD_END = 'create_end';
         switch ($current_page) { 
             case self::CREATE_THREAD:
                 break;
-            /*  
-            *   After the user clicked on submit, the page will be redirected to 'create_end'
-            *   From the $thread database, this will get the title.. and so on. 
-            *   after all, controllers are all about getting the inputted data.
-            *   then the data gathered here will be tranferred to view (view/thread/view.php)
-            */
+
             case self::CREATE_THREAD_END:
                 $thread->title = Param::get('title'); 
                 $thread->category = Param::get('category');
                 $thread->user_id = $_SESSION['user_id'];
                 $comment->body = Param::get('body');
-               // $comment->username = Param::get('username');
                 $comment->user_id = $_SESSION['user_id'];
                 
                 try {
@@ -51,7 +45,9 @@ const CREATE_THREAD_END = 'create_end';
         $this->render($current_page);               
     }
           
-    //Displays the comments of the thread
+    /*
+    *Displays the comments of the thread
+    */
     public function view() 
     {
         $per_page = MAX_DATA_PER_PAGE;
@@ -80,7 +76,6 @@ const CREATE_THREAD_END = 'create_end';
     * Sorting of threads
     */
 
-    //All Threads
     public function index() 
     {
         $per_page = MAX_DATA_PER_PAGE;

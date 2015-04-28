@@ -85,7 +85,9 @@ const EDIT_END = 'edit_end';
         redirect(url('user/login'));
     }
   
-    //Display user's name, username, and email
+    /*
+    * Displays own profile
+    */
     public function profile() 
     {
         $user = User::getData($_SESSION['user_id']);
@@ -125,6 +127,9 @@ const EDIT_END = 'edit_end';
         $this->render($page); 
     }
 
+    /*
+    * Displays list of users
+    */
     public function get_all_users() 
     { 
         $per_page = MAX_DATA_PER_PAGE;
@@ -140,6 +145,9 @@ const EDIT_END = 'edit_end';
         $this->set(get_defined_vars());
     } 
 
+    /*
+    * Displays profile of other users
+    */
     public function others_profile() 
     {
         $user_id = Param::get('user_id');

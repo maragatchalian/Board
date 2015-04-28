@@ -46,6 +46,9 @@ const MAX_USER_IN_NEWSFEED = 1;
         $this->render('comment/delete');
     }  
 
+    /*
+    * Displays list of user's favorite comments
+    */
     public function favorites() 
     { 
         $per_page = MAX_DATA_PER_PAGE;
@@ -81,6 +84,9 @@ const MAX_USER_IN_NEWSFEED = 1;
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
     }
 
+    /*
+    * Displays the homepage
+    */
     public function home() 
     {
         $per_page = self::MAX_USER_IN_NEWSFEED; 
