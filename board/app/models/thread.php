@@ -127,18 +127,6 @@ const MAX_TITLE_LENGTH = 30;
         return new self($row);
     }
     
-    public function getComments($offset, $limit) 
-    {
-        $comments = array();
-        $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC LIMIT {$offset}, {$limit}", array($this->id));
-    
-        foreach ($rows as $row) {
-            $comments[] = new Comment($row);
-        }
-        return $comments;
-    }
-
     /* 
     * Sorting of threads by own threads
     */
