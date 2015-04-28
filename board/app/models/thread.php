@@ -51,7 +51,7 @@ const MAX_TITLE_LENGTH = 30;
                 );
             $db->insert('thread', $params); 
             $this->id = $db->lastInsertId();
-            $comment->write($comment, $this->id); //<--write first comment at the same time
+            $comment->write($comment, $this->id); //<--write comment at the same time
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
@@ -109,13 +109,7 @@ const MAX_TITLE_LENGTH = 30;
         $db = DB::conn();
         return (int) $db->value('SELECT COUNT(*) FROM thread WHERE user_id = ?', array($category));
     }
-
-    public function countComments() 
-    {
-        $db = DB::conn();
-        return (int) $db->value("SELECT COUNT(*) FROM comment WHERE thread_id = ? ", array($this->id));
-    }
-    
+      
     public static function get($id) 
     {
         $db = DB::conn();
