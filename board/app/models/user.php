@@ -5,7 +5,6 @@ class User extends AppModel {
 /*
 * constants are used to avoid magic numbers
 */
-
 const MIN_USERNAME_LENGTH = 2;
 const MIN_FIRST_NAME_LENGTH = 2;
 const MIN_LAST_NAME_LENGTH = 2;
@@ -88,6 +87,25 @@ const MAX_PASSWORD_LENGTH = 20;
         )
     );
 
+    public function is_password_match()
+    {
+        return $this->password == $this->confirm_password;
+    }
+
+    public function is_username_exist()
+    {
+        $db = DB::conn();
+        $username_exist = $db->row("SELECT username FROM user WHERE username = ?", array($this->username));
+        return (!$username_exist);
+    }
+
+    public function is_email_exist()
+    {
+        $db = DB::conn();
+        $username_exist = $db->row("SELECT email FROM user where email = ?", array($this->email));
+        return (!$username_exist);
+    }
+
     public function register()
     {
         if (!$this->validate()) {
@@ -97,14 +115,14 @@ const MAX_PASSWORD_LENGTH = 20;
         try {
             $db = DB::conn(); 
             $db->begin();
-            $params = array( //what is to be inserted when $params is called
+            $params = array( 
                 'username' => $this->username,
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'email' => strtolower($this->email),
                 'password' => md5($this->password)
             );
-            $db->insert('user', $params); //to insert values of $params in table 'user'
+            $db->insert('user', $params); 
             $db->commit();
         } catch(Exception $e) {
             $db->rollback();
@@ -129,61 +147,12 @@ const MAX_PASSWORD_LENGTH = 20;
         $_SESSION['username'] = $user['username'];
     }
 
-    public function is_password_match()
-    {
-        return $this->password == $this->confirm_password;
-    }
-
-    public function is_username_exist()
-    {
-        $db = DB::conn();
-        $username_exist = $db->row("SELECT username FROM user WHERE username = ?", array($this->username));
-        return (!$username_exist);
-    }
-
-    public function is_email_exist()
-    {
-        $db = DB::conn();
-        $username_exist = $db->row("SELECT email FROM user where email = ?", array($this->email));
-        return (!$username_exist);
-    }
-
     public static function get($user_id) 
     {
         $db = DB::conn();
         $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
         return $row;
     } 
-
-    /*public static function pagination($id) 
-    {
-        $db = DB::conn();
-        $users = $db->value('SELECT COUNT(*) FROM user WHERE id != ?', array($id));     
-        return $users;
-    }*/
-
-    public static function getAllMyThread($offset, $limit, $id) 
-    {
-        $threads = array();
-        $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}",array($id));
-        
-        foreach($rows as $row) {
-            $threads[] = new self($row);
-        }
-        return $threads;
-    }
-
-    public static function getData($user_id)
-    {
-        $db = DB::conn();
-        $row = $db->row("SELECT * FROM user WHERE id = ?", array($user_id));
-
-        if (!$row) {
-            throw new RecordNotFoundException('no record found');
-        }
-        return new self($row);
-    }
 
     public function update()
     {
@@ -210,103 +179,24 @@ const MAX_PASSWORD_LENGTH = 20;
         }
     }
 
-   /* public static function getOtherUsers($offset, $limit, $id) 
-    {
-        $users = array();
-        $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM user where id != ? LIMIT {$offset}, {$limit}", array($id));
-            
-        foreach($rows as $row) {
-            $users[] = new self($row);
-        }
-
-        return $users;
-    }*/
-
-//tryyyyyyyyy**************
-    public static function getByUserId($user_id)
-    {
-        $rows = $db->rows('SELECT * FROM user WHERE id = ?', array($user_id));
-        if ($rows == null)
-            throw new RecordNotFoundException;
-    
-    $user = array();
-    foreach ($rows as $row)
-        $user[] = new self($row); // Each row is now an instance of Thread
-
-    return $user;
-}
-//===================**********
-
-/*
-   
     /*
-    *Follow and Unfollow
-    //
-    public function addFollowing()
-    { 
-        try {
-            $db = DB::conn();
-            $db->begin();
-            $params = array(
-            'username' => $this->username,
-            'user_id' => $this->user_id
-            );
-        
-            $db->insert('follow', $params);
-            $db->commit();
-        } catch (Exception $e) {
-            $db->rollback();
-        }
-    }
-
-    public function removeFollowing() 
-    {
-        try {
-            $db = DB::conn();
-            $db->begin();
-            $params = array(
-                $this->username,
-                $this->user_id
-            );
-            $db->query('DELETE FROM follow WHERE username = ? AND user_id = ?', $params);
-            $db->commit();
-        } catch (Exception $e) {
-            $db->rollback();
-        }
-    }
-    
-    public function isUserFollowing() 
+    *Displays user's information
+    */
+    public static function getData($user_id)
     {
         $db = DB::conn();
-        $params = array(
-            $this->username,
-            $this->user_id     
-        );
-        $user_following = $db->row('SELECT * FROM follow WHERE username = ? AND user_id = ?', $params);
-        return !$user_following;
-    }
+        $row = $db->row("SELECT * FROM user WHERE id = ?", array($user_id));
 
-    public static function countFollowing($user_id) 
-    {
-        $db = DB::conn();
-        $total_following = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id)); 
-        return $total_following;
-    }
-       
-    public static function getAllFollowing($offset, $limit, $user_id) 
-    {
-        $following = array();
-        $db = DB::conn();
-                        
-        $rows = $db->rows("SELECT * FROM follow WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
-
-        foreach($rows as $row) {
-            $following[] = new self($row);
+        if (!$row) {
+            throw new RecordNotFoundException('no record found');
         }
-        return $following;
+        return new self($row);
     }
-*/
 
-
+    public static function countOtherUser($user_id)
+    {
+        $db = DB::conn();
+        $users = $db->value('SELECT COUNT(*) FROM user WHERE id != ?', array($user_id));
+        return $users;
+    }
 } //end

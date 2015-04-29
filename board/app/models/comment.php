@@ -2,7 +2,6 @@
 
 class Comment extends AppModel {
 
-//Comment Length Validation
 const MIN_BODY_LENGTH = 1;
 const MAX_BODY_LENGTH = 140;
 

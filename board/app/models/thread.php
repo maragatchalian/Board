@@ -1,7 +1,4 @@
 <?php
-/*
-* This is where the database manipulation and validation happens
-*/
 
 class Thread extends AppModel {
 /* 
