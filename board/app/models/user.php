@@ -193,6 +193,18 @@ const MAX_PASSWORD_LENGTH = 20;
         return new self($row);
     }
 
+    /*public static function getData($user_id)
+    {
+        $db = DB::conn();
+        $row = $db->row("SELECT * FROM user WHERE id = ?", array($user_id));
+
+        if (!$row) {
+            throw new RecordNotFoundException('no record found');
+        }
+        return $row;
+    }*/
+
+
     public static function countOtherUser($user_id)
     {
         $db = DB::conn();

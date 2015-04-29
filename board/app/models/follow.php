@@ -22,16 +22,6 @@ class Follow extends AppModel {
         return $row;
     } 
 
-    public static function getData($user_id)
-    {
-        $db = DB::conn();
-        $row = $db->row("SELECT * FROM user WHERE id = ?", array($user_id));
-
-        if (!$row) {
-            throw new RecordNotFoundException('no record found');
-        }
-        return new self($row);
-    }
 
 /******************************************************************************|
 |=> ABOVE CODES NEEDS TO BE EDITED SINCE IT'S GETTING DATA FROM THE USER MODEL
@@ -39,11 +29,18 @@ class Follow extends AppModel {
 |=> BELOW CODES ARE OKAY. IT'S GETTING DATA FROM FOLLOW MODEl
 |******************************************************************************/
 
+
+
+    public static function getDataByUserId($user_id)
+    {
+       return new self(objectToArray(User::getData($user_id)));
+    }
+
     public function countOtherUsers($user_id)
     {
         return User::countOtherUser($this->user_id); 
     }
-    
+
     public function addFollowing()
     { 
         try {
