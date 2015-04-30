@@ -2,45 +2,6 @@
 
 class Follow extends AppModel {
 
-    public static function getOtherUsers($offset, $limit, $id)
-    {
-        $users = array();
-        $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM user where id != ? LIMIT {$offset}, {$limit}", array($id));
-            
-        foreach($rows as $row) {
-            $users[] = new self($row);
-        }
-
-        return $users;
-    }
-
-    public static function get($user_id)
-    {
-        $db = DB::conn();
-        $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
-        return $row;
-    } 
-
-
-/******************************************************************************|
-|=> ABOVE CODES NEEDS TO BE EDITED SINCE IT'S GETTING DATA FROM THE USER MODEL
-|******************************************************************************|
-|=> BELOW CODES ARE OKAY. IT'S GETTING DATA FROM FOLLOW MODEl
-|******************************************************************************/
-
-
-
-    public static function getDataByUserId($user_id)
-    {
-       return new self(objectToArray(User::getData($user_id)));
-    }
-
-    public function countOtherUsers($user_id)
-    {
-        return User::countOtherUser($this->user_id); 
-    }
-
     public function addFollowing()
     { 
         try {
@@ -85,13 +46,11 @@ class Follow extends AppModel {
         return !$user_following;
     }
 
-    public static function countFollowing($user_id)
+    public static function getDataByUserId($user_id)
     {
-        $db = DB::conn();
-        $total_following = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));
-        return $total_following;
+       return new self(objectToArray(User::getData($user_id)));
     }
-       
+
     public static function getAllFollowing($offset, $limit, $user_id)
     {
         $following = array();
@@ -103,5 +62,17 @@ class Follow extends AppModel {
             $following[] = new self($row);
         }
         return $following;
+    }
+
+    public static function countFollowing($user_id)
+    {
+        $db = DB::conn();
+        $total_following = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));
+        return $total_following;
+    }
+
+    public function countOtherUsers($user_id)
+    {
+        return User::countOtherUser($this->user_id);
     }
 } //end

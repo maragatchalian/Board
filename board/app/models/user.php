@@ -140,21 +140,14 @@ const MAX_PASSWORD_LENGTH = 20;
         $user = $db->row("SELECT id, username FROM user WHERE BINARY username = :username AND BINARY password = :password", $params);
 
         if(!$user) {
-            throw new RecordNotFoundException('No Record Found');      
+            throw new RecordNotFoundException('No Record Found');
         }
 
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
     }
 
-    public static function get($user_id) 
-    {
-        $db = DB::conn();
-        $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
-        return $row;
-    } 
-
-    public function update()
+        public function update()
     {
         if (!$this->validate()) {
             throw new ValidationException('Invalid user credentials');
@@ -170,7 +163,7 @@ const MAX_PASSWORD_LENGTH = 20;
                     'last_name' => $this->last_name,
                     'password' => $this->password
                     ),
-                array('id' =>$this->user_id) 
+                array('id' =>$this->user_id)
                 );
             $db->commit();
         } catch(Exception $e) {
@@ -179,9 +172,26 @@ const MAX_PASSWORD_LENGTH = 20;
         }
     }
 
-    /*
-    *Displays user's information
-    */
+    public static function get($user_id) 
+    {
+        $db = DB::conn();
+        $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
+        return $row;
+    } 
+
+    public static function getOtherUsers($offset, $limit, $id)
+    {
+        $users = array();
+        $db = DB::conn();
+        $rows = $db->rows("SELECT * FROM user where id != ? LIMIT {$offset}, {$limit}", array($id));
+            
+        foreach($rows as $row) {
+            $users[] = new self($row);
+        }
+
+        return $users;
+    }
+
     public static function getData($user_id)
     {
         $db = DB::conn();
@@ -192,18 +202,6 @@ const MAX_PASSWORD_LENGTH = 20;
         }
         return new self($row);
     }
-
-    /*public static function getData($user_id)
-    {
-        $db = DB::conn();
-        $row = $db->row("SELECT * FROM user WHERE id = ?", array($user_id));
-
-        if (!$row) {
-            throw new RecordNotFoundException('no record found');
-        }
-        return $row;
-    }*/
-
 
     public static function countOtherUser($user_id)
     {

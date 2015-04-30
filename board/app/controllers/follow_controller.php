@@ -12,7 +12,7 @@ class FollowController extends AppController {
         $pagination = new SimplePagination($current_page, $per_page);
 
         $user_id = $_SESSION['user_id'];
-        $users = Follow::getOtherUsers($pagination->start_index -1, $pagination->count + 1, $user_id);
+        $users = User::getOtherUsers($pagination->start_index -1, $pagination->count + 1, $user_id);
         
         $pagination->checkLastPage($users);
         $total = User::countOtherUser($user_id);
@@ -26,7 +26,7 @@ class FollowController extends AppController {
     public function others_profile() 
     {
         $user_id = Param::get('user_id');
-        $row = Follow::get($user_id); 
+        $row = User::get($user_id); 
         $user = new Follow($row);
         $user->user_id = $_SESSION['user_id']; 
         $this->set(get_defined_vars());  
