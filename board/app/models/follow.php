@@ -64,6 +64,19 @@ class Follow extends AppModel {
         return $following;
     }
 
+    public static function getRecentActivity($offset, $limit, $user_id) 
+    {
+        $home = array();
+        $db = DB::conn();
+                        
+        $rows = $db->rows("SELECT * FROM follow WHERE user_id = ?", array($user_id));
+
+        foreach($rows as $row) {
+            $home[] = new self($row);
+        }
+        return $home;
+    }
+
     public static function countFollowing($user_id)
     {
         $db = DB::conn();
@@ -74,5 +87,13 @@ class Follow extends AppModel {
     public function countOtherUsers($user_id)
     {
         return User::countOtherUser($this->user_id);
+    }
+
+        public static function countNewsfeed($user_id) 
+    {
+        $db = DB::conn();
+        $users = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));
+        
+        return $users;
     }
 } //end
