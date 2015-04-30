@@ -57,7 +57,7 @@ const CREATE_THREAD_END = 'create_end';
         $thread_id = Param::get('thread_id'); 
         $thread = Thread::get($thread_id); 
         $comments = Comment::getAll($pagination->start_index -1, $pagination->count + 1, $thread_id);
-                        
+       
         $total = Comment::countAll($thread_id);
         $pagination->checkLastPage($comments);
         $pages = ceil($total / $per_page);

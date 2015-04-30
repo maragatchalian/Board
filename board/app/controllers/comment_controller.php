@@ -56,15 +56,15 @@ const MAX_USER_IN_NEWSFEED = 1;
         $pagination = new SimplePagination($current_page, $per_page);
 
         $user_id = $_SESSION['user_id'];
-        $favorites = Comment::getAllFavorites($pagination->start_index -1, $pagination->count + 1, $user_id);
-        
+        $favorites = Favorite::getAllFavorites($pagination->start_index -1, $pagination->count + 1, $user_id);
+
         $pagination->checkLastPage($favorites);
-        $total = Comment::pagination($user_id);
+        $total = Favorite::countFavoriteByUserId($user_id);
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
     }
             
-    public function setFavorite() 
+    /*public function setFavorite() 
     {
         $comment = Comment::get(Param::get('comment_id'));
         $comment->user_id = $_SESSION['user_id']; 
@@ -82,7 +82,7 @@ const MAX_USER_IN_NEWSFEED = 1;
                 break;
         }
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
-    }
+    }*/
 
     /*
     * Displays the homepage

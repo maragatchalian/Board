@@ -89,7 +89,7 @@ class Follow extends AppModel {
         return User::countOtherUser($this->user_id);
     }
 
-        public static function countNewsfeed($user_id) 
+    public static function countNewsfeed($user_id) 
     {
         $db = DB::conn();
         $users = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));

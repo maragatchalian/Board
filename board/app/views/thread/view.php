@@ -44,11 +44,11 @@
 <?php endif ?>
 
  <!-- Favorite Comment -->
-<?php if ($get_from_comment->isCommentFavorited($_SESSION['user_id'])): ?>
-<a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
+<?php if ($get_from_comment->getIsCommentFavorited($_SESSION['user_id'])): ?>
+<a href="<?php eh(url('favorite/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
     <i class="icon-star"></i></a>
 <?php else : ?>
-<a href="<?php eh(url('comment/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'remove')))?>" class="yellow"> 
+<a href="<?php eh(url('favorite/setFavorite', array('comment_id' => $get_from_comment->id, 'method' => 'remove')))?>" class="yellow"> 
  <i class="icon-star icon-yellow"></i></a>
 <?php endif ?>
 
