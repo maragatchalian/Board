@@ -32,7 +32,7 @@ const MAX_BODY_LENGTH = 140;
         return $comments;
     }
 
-    public static function newsfeed($thread_id) 
+    public static function newsfeed($thread_id)
     {
         $comments = array();
         $db = DB::conn();
@@ -44,7 +44,7 @@ const MAX_BODY_LENGTH = 140;
         return $comments;
     }
 
-    public function write(Comment $comment, $thread_id) 
+    public function write(Comment $comment, $thread_id)
     {
         if(!$this->validate()) {
             throw new ValidationException('invalid comment');
@@ -68,7 +68,7 @@ const MAX_BODY_LENGTH = 140;
         }
     }
 
-    public static function get($id) 
+    public static function get($id)
     {
         $db = DB::conn();
         $row = $db->row('SELECT * FROM comment WHERE id = ?', array($id));
@@ -80,7 +80,7 @@ const MAX_BODY_LENGTH = 140;
         return new self($row);
     }
 
-    public function delete($user_id) 
+    public function delete($user_id)
     {
         try {
             $db = DB::conn();
@@ -112,18 +112,18 @@ const MAX_BODY_LENGTH = 140;
     * Functions with regards to favorite/unfavorite comments
     */
 
-    public function countFavorite() 
+    public function countFavorite()
     {
         return Favorite::countFavoriteByCommentId($this->id);
     }
 
-    public function getIsCommentFavorited() 
+    public function getIsCommentFavorited()
     {
         return Favorite::IsCommentFavorited($this->id, $this->user_id);
     }
 
-    public function isUserComment()     
+    public function isUserComment()
     {
-        return $this->user_id === $_SESSION['user_id'];       
+        return $this->user_id === $_SESSION['user_id'];
     }
 } //end

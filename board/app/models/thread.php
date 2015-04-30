@@ -27,7 +27,7 @@ const MAX_TITLE_LENGTH = 30;
         ),
     );
 
-    public function create(Comment $comment) 
+    public function create(Comment $comment)
     {
         $this->validate();
         $comment->validate();
@@ -57,7 +57,7 @@ const MAX_TITLE_LENGTH = 30;
 
     public function isUserThread()     
     {
-        return $this->user_id === $_SESSION['user_id'];       
+        return $this->user_id === $_SESSION['user_id'];
     }
 
     public function deleteThread($user_id) 
@@ -77,7 +77,7 @@ const MAX_TITLE_LENGTH = 30;
         }
     }
 
-    public static function getAll($offset, $limit) 
+    public static function getAll($offset, $limit)
     {
         $threads = array();
         $db = DB::conn();
@@ -101,7 +101,7 @@ const MAX_TITLE_LENGTH = 30;
         return (int) $db->value('SELECT COUNT(*) FROM thread WHERE user_id = ?', array($user_id));
     }
 
-    public static function countAllThreadByCategory($category) 
+    public static function countAllThreadByCategory($category)
     {
         $db = DB::conn();
         return (int) $db->value('SELECT COUNT(*) FROM thread WHERE user_id = ?', array($category));
@@ -121,7 +121,7 @@ const MAX_TITLE_LENGTH = 30;
     /* 
     * Sorting of threads by own threads
     */
-    public static function getAllMyThread($offset, $limit, $id) 
+    public static function getAllMyThread($offset, $limit, $id)
     {
         $threads = array();
         $db = DB::conn();
@@ -148,7 +148,7 @@ const MAX_TITLE_LENGTH = 30;
          return $threads;
     }
 
-    public static function getAllCategory() 
+    public static function getAllCategory()
     {
         $db = DB::conn();
         $rows = $db->rows('SELECT DISTINCT category FROM thread');

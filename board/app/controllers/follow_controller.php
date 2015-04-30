@@ -2,7 +2,7 @@
 
 class FollowController extends AppController {
 
-   /*
+    /*
     * Displays list of users
     */
     public function get_all_users() 
@@ -23,12 +23,12 @@ class FollowController extends AppController {
     /*
     * Displays profile of other users
     */
-    public function others_profile() 
+    public function others_profile()
     {
         $user_id = Param::get('user_id');
         $row = User::get($user_id); 
         $user = new Follow($row);
-        $user->user_id = $_SESSION['user_id']; 
+        $user->user_id = $_SESSION['user_id'];
         $this->set(get_defined_vars());  
     }
 
@@ -40,8 +40,10 @@ class FollowController extends AppController {
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
         $pagination = new SimplePagination($current_page, $per_page);
+       
         $user_id = $_SESSION['user_id'];
         $following = Follow::getAllFollowing($pagination->start_index -1, $pagination->count + 1, $user_id);
+        
         $pagination->checkLastPage($following);
         $total = Follow::countFollowing($user_id);
         $pages = ceil($total / $per_page);

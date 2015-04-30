@@ -11,7 +11,6 @@ class Follow extends AppModel {
             'username' => $this->username,
             'user_id' => $this->user_id
             );
-        
             $db->insert('follow', $params);
             $db->commit();
         } catch (Exception $e) {
@@ -64,7 +63,7 @@ class Follow extends AppModel {
         return $following;
     }
 
-    public static function getRecentActivity($offset, $limit, $user_id) 
+    public static function getRecentActivity($offset, $limit, $user_id)
     {
         $home = array();
         $db = DB::conn();
@@ -81,6 +80,7 @@ class Follow extends AppModel {
     {
         $db = DB::conn();
         $total_following = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));
+        
         return $total_following;
     }
 

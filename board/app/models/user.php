@@ -25,7 +25,7 @@ const MAX_PASSWORD_LENGTH = 20;
 
     public function validate_name($string)
     {
-        $valid = array('-', ' ');    
+        $valid = array('-', '');    
         return ctype_alpha(str_replace($valid, '', $string));
     }
 
@@ -96,6 +96,7 @@ const MAX_PASSWORD_LENGTH = 20;
     {
         $db = DB::conn();
         $username_exist = $db->row("SELECT username FROM user WHERE username = ?", array($this->username));
+        
         return (!$username_exist);
     }
 
@@ -103,6 +104,7 @@ const MAX_PASSWORD_LENGTH = 20;
     {
         $db = DB::conn();
         $username_exist = $db->row("SELECT email FROM user where email = ?", array($this->email));
+        
         return (!$username_exist);
     }
 
@@ -130,7 +132,7 @@ const MAX_PASSWORD_LENGTH = 20;
         }
     }
 
-    public function login() 
+    public function login()
     {
         $db = DB::conn();
         $params = array(
@@ -147,7 +149,7 @@ const MAX_PASSWORD_LENGTH = 20;
         $_SESSION['username'] = $user['username'];
     }
 
-        public function update()
+    public function update()
     {
         if (!$this->validate()) {
             throw new ValidationException('Invalid user credentials');
@@ -172,7 +174,7 @@ const MAX_PASSWORD_LENGTH = 20;
         }
     }
 
-    public static function get($user_id) 
+    public static function get($user_id)
     {
         $db = DB::conn();
         $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
@@ -188,7 +190,6 @@ const MAX_PASSWORD_LENGTH = 20;
         foreach($rows as $row) {
             $users[] = new self($row);
         }
-
         return $users;
     }
 

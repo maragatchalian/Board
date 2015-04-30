@@ -38,6 +38,7 @@ const EDIT_END = 'edit_end';
                     $page = self::REGISTER;
                 }
                 break;
+
             default:
                 throw new NotFoundException("{$page} is not found");
                 break;
@@ -74,7 +75,6 @@ const EDIT_END = 'edit_end';
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
-
         $this->set(get_defined_vars());
         $this->render($page); 
     }
@@ -85,9 +85,6 @@ const EDIT_END = 'edit_end';
         redirect(url('user/login'));
     }
   
-    /*
-    * Displays own profile
-    */
     public function profile() 
     {
         $user = User::getData($_SESSION['user_id']);
@@ -110,6 +107,7 @@ const EDIT_END = 'edit_end';
         switch ($page) {
             case self::EDIT:
                 break;
+            
             case self::EDIT_END:
                 try {
                      $user->update();
@@ -117,11 +115,11 @@ const EDIT_END = 'edit_end';
                     $page = self::EDIT;
                 }
                 break;
+                
             default:
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
-
         $user_edit = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render($page); 

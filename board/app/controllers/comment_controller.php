@@ -14,9 +14,8 @@ const MAX_USER_IN_NEWSFEED = 1;
 
         switch($current_page) { 
             case self::WRITE_COMMENT:
-                break;
-        
-            case self::WRITE_COMMENT_END:                
+                break;  
+            case self::WRITE_COMMENT_END:
                 $params = array(
                 'body' => Param::get('body'),
                 'username' => $_SESSION['username'],
@@ -24,21 +23,22 @@ const MAX_USER_IN_NEWSFEED = 1;
                 );
                 $comment = new Comment($params);
                 
-                try {            
+                try {
                     $comment->write($comment, $thread_id);
-                } catch (ValidationException $e) {                    
+                } catch (ValidationException $e) {
                     $current_page = self::WRITE_COMMENT;
                 }    
                 break;
+
             default:
                 throw new NotFoundException("{$current_page} is not found");
                 break;
         }
         $this->set(get_defined_vars());
-        $this->render($current_page);   
+        $this->render($current_page);
     }
 
-    public function delete() 
+    public function delete()
     { 
         $comment = Comment::get(Param::get('comment_id'));
         $comment->delete($_SESSION['user_id']);
@@ -63,26 +63,6 @@ const MAX_USER_IN_NEWSFEED = 1;
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
     }
-            
-    /*public function setFavorite() 
-    {
-        $comment = Comment::get(Param::get('comment_id'));
-        $comment->user_id = $_SESSION['user_id']; 
-        $method = Param::get('method');
-            
-        switch ($method) {
-            case 'add':
-                $comment->addFavorite();
-                break;
-            case 'remove':
-                $comment->removeFavorite();
-                break;
-            default:
-                throw new InvalidArgumentException("{$method} is an invalid parameter");
-                break;
-        }
-        redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
-    }*/
 
     /*
     * Displays the homepage
@@ -94,7 +74,7 @@ const MAX_USER_IN_NEWSFEED = 1;
         $pagination = new SimplePagination($current_page, $per_page); 
 
         $user_id = $_SESSION['user_id'];
-        $home = Follow::getRecentActivity($pagination->start_index -1, $pagination->count + 1, $user_id);  
+        $home = Follow::getRecentActivity($pagination->start_index -1, $pagination->count + 1, $user_id);
         $thread_id = Param::get('thread_id');
         $comments = Comment::newsfeed($thread_id);
 
