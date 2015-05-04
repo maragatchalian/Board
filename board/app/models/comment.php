@@ -53,12 +53,11 @@ const MAX_BODY_LENGTH = 140;
 
         try {
             $db = DB::conn();
-            $username =  $_SESSION['username'];
             $db->begin();
             $params = array(
                 'created' => date("Y-m-d H:i:s"),
                 'user_id' =>$this->user_id,
-                'username' => $username,
+                'username' => $this->username,
                 'thread_id' => $thread_id,
                 'body' => $this->body
             );
