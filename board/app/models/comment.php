@@ -56,7 +56,7 @@ const MAX_BODY_LENGTH = 140;
             $db->begin();
             $params = array(
                 'created' => date("Y-m-d H:i:s"),
-                'user_id' =>$this->user_id,
+                'user_id' => $this->user_id,
                 'username' => $this->username,
                 'thread_id' => $thread_id,
                 'body' => $this->body

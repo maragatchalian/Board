@@ -11,7 +11,7 @@ const MAX_USER_IN_NEWSFEED = 1;
         $thread_id = Param::get('thread_id');
         $thread = Thread::get($thread_id);
         $current_page = Param::get('page_next', self::WRITE_COMMENT);
-
+    
         switch($current_page) { 
             case self::WRITE_COMMENT:
                 break;  

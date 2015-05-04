@@ -29,13 +29,15 @@ const CREATE_THREAD_END = 'create_end';
                 $thread->user_id = $_SESSION['user_id'];
                 $comment->body = Param::get('body');
                 $comment->user_id = $_SESSION['user_id'];
-                
+                $comment->username = $_SESSION['username'];
+          
                 try {
                     $thread->create($comment);
                 } catch (ValidationException $e) {
                     $current_page = self::CREATE_THREAD;
                 }
                 break;
+                
             default:
                 throw new NotFoundException("{$current_page} is not found");
                 break;
@@ -44,7 +46,7 @@ const CREATE_THREAD_END = 'create_end';
         $this->set(get_defined_vars());
         $this->render($current_page);
     }
-          
+              
     /*
     *Displays the comments of the thread
     */
