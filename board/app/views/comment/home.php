@@ -20,6 +20,12 @@
 	<?php endforeach; ?> 
 <?php endforeach; ?> 
 
+<?php if(empty($home)): ?>
+      You are not following any users.
+<?php endif ?>
+
+<br />
+<br />
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>
     <a class ="btn btn-small" href='?page=<?php echo($pagination->prev) ?>'>Previous</a>
