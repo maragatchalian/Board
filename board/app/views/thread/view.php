@@ -55,6 +55,11 @@
 <!-- Count Favorite -->
 <?php echo $get_from_comment->countFavorite() ?> Favorites
 <?php endforeach ?>
+
+<?php if(empty($comments)): ?>
+      This thread doesn't have any comments.
+<?php endif ?>
+
 </div> 
 </div>
 <br />
