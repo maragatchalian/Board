@@ -41,6 +41,7 @@ const MAX_BODY_LENGTH = 140;
         foreach ($rows as $row) {
             $comments[] = new self($row);
         }
+        
         return $comments;
     }
 

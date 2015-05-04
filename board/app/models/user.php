@@ -178,6 +178,7 @@ const MAX_PASSWORD_LENGTH = 20;
     {
         $db = DB::conn();
         $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
+        
         return $row;
     } 
 
@@ -190,6 +191,7 @@ const MAX_PASSWORD_LENGTH = 20;
         foreach($rows as $row) {
             $users[] = new self($row);
         }
+        
         return $users;
     }
 
@@ -208,6 +210,7 @@ const MAX_PASSWORD_LENGTH = 20;
     {
         $db = DB::conn();
         $users = $db->value('SELECT COUNT(*) FROM user WHERE id != ?', array($user_id));
+        
         return $users;
     }
 } //end

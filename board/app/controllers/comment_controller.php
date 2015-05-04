@@ -15,6 +15,7 @@ const MAX_USER_IN_NEWSFEED = 1;
         switch($current_page) { 
             case self::WRITE_COMMENT:
                 break;  
+                
             case self::WRITE_COMMENT_END:
                 $params = array(
                 'body' => Param::get('body'),
