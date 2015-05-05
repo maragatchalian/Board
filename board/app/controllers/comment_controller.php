@@ -48,24 +48,6 @@ const MAX_USER_IN_NEWSFEED = 1;
     }  
 
     /*
-    * Displays list of user's favorite comments
-    */
-    public function favorites() 
-    { 
-        $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get('page', 1);
-        $pagination = new SimplePagination($current_page, $per_page);
-
-        $user_id = $_SESSION['user_id'];
-        $favorites = Favorite::getAllFavorites($pagination->start_index -1, $pagination->count + 1, $user_id);
-
-        $pagination->checkLastPage($favorites);
-        $total = Favorite::countFavoriteByUserId($user_id);
-        $pages = ceil($total / $per_page);
-        $this->set(get_defined_vars());
-    }
-
-    /*
     * Displays the homepage
     */
     public function home() 

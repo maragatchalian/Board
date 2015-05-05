@@ -17,22 +17,24 @@ const MAX_LAST_NAME_LENGTH = 30;
 const MAX_EMAIL_LENGTH = 30;
 const MAX_PASSWORD_LENGTH = 20;
   
+    /*
+    * Limits a certain field into a specific number of characters.
+    * Checks if the characters are valid. (e.g., dot, hyphen)
+    */
     public function validate_username($username)
     {
-        $valid = array('-', '_', '');    
+        $valid = array('-', '_', '.');    
         return ctype_alnum(str_replace($valid, '', $username));
     }
 
     public function validate_name($string)
     {
-        $valid = array('-', '');    
+        $valid = array('-', ' ');    
         return ctype_alpha(str_replace($valid, '', $string));
     }
 
     /*
-    * Registration Length Validation.
-    * Limits a certain field into a specific number of characters
-    * Checks if the characters are valid. (e.g., dot, hyphen)
+    * Registration Validation.
     */
     public $validation = array(
         'username' => array(
