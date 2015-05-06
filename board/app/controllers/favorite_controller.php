@@ -23,7 +23,7 @@ class FavoriteController extends AppController
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
     }
 
-     /*
+    /*
     * Displays list of user's favorite comments
     */
     public function favorites() 
