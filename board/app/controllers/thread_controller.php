@@ -91,7 +91,7 @@ const CREATE_THREAD_END = 'create_end';
         $this->set(get_defined_vars()); 
     }  
 
-    public function mythreads()
+    public function my_threads()
     {
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get('page', 1);
@@ -108,7 +108,7 @@ const CREATE_THREAD_END = 'create_end';
         $this->render('my_threads');
     }
 
-    public function bycategory() 
+    public function by_category() 
     {
         $category = Param::get('category','none');
         if ( $category !== 'none') {
