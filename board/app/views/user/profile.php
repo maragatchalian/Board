@@ -7,9 +7,10 @@
 <br /> 
  
 <div class = buttons>               
-<form action="<?php eh(url('comment/favorites')) ?>" method="post">
+<form action="<?php eh(url('favorite/favorites')) ?>" method="post">
     <button class="btn btn-default btn-medium" type="submit"> <i class="icon-star"></i>Favorites</button>
     </form>
+
 
     <form action="<?php eh(url('follow/following')) ?>" method="post">
     <button class="btn btn-default btn-medium" type="submit"> <i class="icon-plus"></i>Following</button>

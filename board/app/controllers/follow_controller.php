@@ -51,7 +51,7 @@ class FollowController extends AppController
         $this->set(get_defined_vars());
     }
 
-    public function setFollowing() 
+    public function set_following() 
     {
         $follow = Follow::getDataByUserId(Param::get('user_id'));
         $follow->user_id = $_SESSION['user_id']; 

@@ -2,10 +2,10 @@
  <font color = "black">
  <br /> 
 <?php if ($user->isUserFollowing($_SESSION['user_id'])) : ?> 	         
-    <a href="<?php eh(url('follow/setFollowing', array('user_id' => $user->id, 'method' => 'add')))?>"> 
+    <a href="<?php eh(url('follow/set_following', array('user_id' => $user->id, 'method' => 'add')))?>"> 
         <span class ="icon-plus"></span></a> Follow
 <?php else : ?>
-    <a href="<?php eh(url('follow/setFollowing', array('user_id' => $user->id, 'method' => 'remove')))?>" class = "red">
+    <a href="<?php eh(url('follow/set_following', array('user_id' => $user->id, 'method' => 'remove')))?>" class = "red">
         <i class ="icon-minus icon-red"></i></a> Unfollow
 <?php endif ?>
 
