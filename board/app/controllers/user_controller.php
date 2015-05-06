@@ -1,6 +1,7 @@
 <?php
 
-class UserController extends AppController {
+class UserController extends AppController 
+{
 
 const LOGIN_PAGE = 'login';
 const HOME_PAGE = 'home';

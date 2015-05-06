@@ -1,6 +1,7 @@
 <?php
 
-class FollowController extends AppController {
+class FollowController extends AppController 
+{
 
     /*
     * Displays list of users

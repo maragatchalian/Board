@@ -1,6 +1,7 @@
 <?php
 
-class Favorite extends AppModel {
+class Favorite extends AppModel 
+{
 
     public static function countFavoriteByCommentId($comment_id)
     {

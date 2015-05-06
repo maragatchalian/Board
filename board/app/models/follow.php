@@ -1,6 +1,7 @@
 <?php
 
-class Follow extends AppModel {
+class Follow extends AppModel 
+{
 
     public function addFollowing()
     { 

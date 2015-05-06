@@ -1,6 +1,7 @@
 <?php
 
-class FavoriteController extends AppController {
+class FavoriteController extends AppController 
+{
 
  public function setFavorite()
     {

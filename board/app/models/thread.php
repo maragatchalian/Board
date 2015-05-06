@@ -1,6 +1,7 @@
 <?php
 
-class Thread extends AppModel {
+class Thread extends AppModel 
+{
 /* 
 * Avoid using magic numbers so others could understand what that number is all about.
 */

@@ -1,6 +1,7 @@
 <?php
 
-class ThreadController extends AppController {
+class ThreadController extends AppController 
+{
 
 const CREATE_THREAD = 'create';
 const CREATE_THREAD_END = 'create_end';

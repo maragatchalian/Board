@@ -1,6 +1,7 @@
 <?php
 
-class User extends AppModel {
+class User extends AppModel 
+{
 
 /*
 * constants are used to avoid magic numbers
