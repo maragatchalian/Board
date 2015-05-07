@@ -26,7 +26,7 @@ const EDIT_END = 'edit_end';
         );
 
         $user = new User($params);
-        $page = Param::get('page_next', self::REGISTER);
+        $page = Param::get(PAGE_NEXT, self::REGISTER);
         
         switch ($page) {    
             case self::REGISTER:
@@ -60,7 +60,7 @@ const EDIT_END = 'edit_end';
         );
 
         $user = new User($params);
-        $page = Param::get('page_next', self::LOGIN_PAGE);
+        $page = Param::get(PAGE_NEXT, self::LOGIN_PAGE);
        
         switch ($page) {
             case self::LOGIN_PAGE:
@@ -103,7 +103,7 @@ const EDIT_END = 'edit_end';
         );
 
         $user = new User($params);
-        $page = Param::get('page_next', self::EDIT);
+        $page = Param::get(PAGE_NEXT, self::EDIT);
                 
         switch ($page) {
             case self::EDIT:

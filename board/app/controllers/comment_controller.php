@@ -11,7 +11,7 @@ const MAX_USER_IN_NEWSFEED = 1;
     {
         $thread_id = Param::get('thread_id');
         $thread = Thread::get($thread_id);
-        $current_page = Param::get('page_next', self::WRITE_COMMENT);
+        $current_page = Param::get(PAGE_NEXT, self::WRITE_COMMENT);
     
         switch($current_page) { 
             case self::WRITE_COMMENT:
@@ -54,7 +54,7 @@ const MAX_USER_IN_NEWSFEED = 1;
     public function home() 
     {
         $per_page = self::MAX_USER_IN_NEWSFEED; 
-        $current_page = Param::get('page', 1); 
+        $current_page = Param::get(PAGE, 1); 
         $pagination = new SimplePagination($current_page, $per_page); 
 
         $user_id = $_SESSION['user_id'];

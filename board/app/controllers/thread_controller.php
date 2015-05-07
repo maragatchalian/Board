@@ -18,7 +18,7 @@ const CREATE_THREAD_END = 'create_end';
     {
         $thread = new Thread();
         $comment = new Comment();
-        $current_page = Param::get('page_next', self::CREATE_THREAD);
+        $current_page = Param::get(PAGE_NEXT, self::CREATE_THREAD);
                     
         switch ($current_page) { 
             case self::CREATE_THREAD:
@@ -54,7 +54,7 @@ const CREATE_THREAD_END = 'create_end';
     public function view() 
     {
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get('page', 1);
+        $current_page = Param::get(PAGE, 1);
         $pagination = new SimplePagination($current_page, $per_page);      
 
         $thread_id = Param::get('thread_id'); 
@@ -82,7 +82,7 @@ const CREATE_THREAD_END = 'create_end';
     public function index() 
     {
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get('page', 1);
+        $current_page = Param::get(PAGE, 1);
         $pagination = new SimplePagination($current_page, $per_page); 
         $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);   
         $pagination->checkLastPage($threads);
@@ -94,7 +94,7 @@ const CREATE_THREAD_END = 'create_end';
     public function my_threads()
     {
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get('page', 1);
+        $current_page = Param::get(PAGE, 1);
         $pagination = new SimplePagination($current_page, $per_page);
 
         $id = $_SESSION['user_id'];
@@ -113,7 +113,7 @@ const CREATE_THREAD_END = 'create_end';
         $category = Param::get('category','none');
         if ( $category !== 'none') {
             $per_page = MAX_DATA_PER_PAGE;
-            $current_page = Param::get('page', 1);
+            $current_page = Param::get(PAGE, 1);
             $pagination = new SimplePagination($current_page, $per_page);
 
             $threads = Thread::getByCategory($pagination->start_index -1, $pagination->count + 1, $category);
@@ -134,7 +134,7 @@ const CREATE_THREAD_END = 'create_end';
     public function sub_category() 
     {
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get('page', 1);
+        $current_page = Param::get(PAGE, 1);
         $pagination = new SimplePagination($current_page, $per_page);
         $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
         $pagination->checkLastPage($threads);
@@ -143,5 +143,3 @@ const CREATE_THREAD_END = 'create_end';
         $this->set(get_defined_vars()); 
     }  
 } //end
-
-

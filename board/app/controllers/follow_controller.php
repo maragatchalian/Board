@@ -9,7 +9,7 @@ class FollowController extends AppController
     public function get_all_users() 
     { 
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get('page', 1);
+        $current_page = Param::get(PAGE, 1);
         $pagination = new SimplePagination($current_page, $per_page);
 
         $user_id = $_SESSION['user_id'];
@@ -39,7 +39,7 @@ class FollowController extends AppController
     public function following() 
     { 
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get('page', 1);
+        $current_page = Param::get(PAGE, 1);
         $pagination = new SimplePagination($current_page, $per_page);
        
         $user_id = $_SESSION['user_id'];
