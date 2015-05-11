@@ -19,22 +19,6 @@ const MAX_EMAIL_LENGTH = 30;
 const MAX_PASSWORD_LENGTH = 20;
   
     /*
-    * Limits a certain field into a specific number of characters.
-    * Checks if the characters are valid. (e.g., dot, hyphen)
-    */
-    public function validate_username($username)
-    {
-        $valid = array('-', '_', '.');    
-        return ctype_alnum(str_replace($valid, '', $username));
-    }
-
-    public function validate_name($string)
-    {
-        $valid = array('-', ' ');    
-        return ctype_alpha(str_replace($valid, '', $string));
-    }
-
-    /*
     * Registration Validation.
     */
     public $validation = array(
@@ -89,6 +73,22 @@ const MAX_PASSWORD_LENGTH = 20;
             )
         )
     );
+
+    /*
+    * Limits a certain field into a specific number of characters.
+    * Checks if the characters are valid. (e.g., dot, hyphen)
+    */
+    public function validate_username($username)
+    {
+        $valid = array('-', '_', '.');    
+        return ctype_alnum(str_replace($valid, '', $username));
+    }
+
+    public function validate_name($string)
+    {
+        $valid = array('-', ' ');    
+        return ctype_alpha(str_replace($valid, '', $string));
+    }
 
     public function is_password_match()
     {

@@ -17,12 +17,12 @@
     <div class="control-group">
     <label class="control-label" for ="username"><h4>Username</h4></label>
     <div class="controls">
-    <input type="text" placeholder = "Username"  name="username" value="<?php eh(Param::get('username')) ?>">
+    <input type="text" placeholder = "Username" name="username" value="<?php eh(Param::get('username')) ?>">
     </div>
     </div>
  
     <div class="control-group">
-    <label class="control-label" for="password"><h4>Password  </h4></label>
+    <label class="control-label" for="password"><h4>Password</h4></label>
     <div class="controls">
     <input type="password" placeholder = "Password" name="password" value="<?php eh(Param::get('password')) ?>">
     </div>

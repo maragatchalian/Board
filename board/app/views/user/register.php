@@ -106,7 +106,7 @@ if (!empty($user->validation_errors['confirm_password']['match'])) : ?>
 <?php endif ?> 
 
 <form class="form-horizontal">
-<form action="<?php eh(url('')) ?>" method="post">
+<form action="<?php eh(url('')) ?>" method="POST">
 <!--Username-->
     <div class="control-group">
     <label class="control-label" for="username"><h5>Username</h5></label>

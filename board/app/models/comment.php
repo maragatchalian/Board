@@ -37,7 +37,7 @@ const MAX_BODY_LENGTH = 140;
     {
         $comments = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM comment where created <= (CURRENT_TIMESTAMP) ORDER BY created DESC", array($thread_id));
+        $rows = $db->rows("SELECT * FROM comment ORDER BY created DESC", array($thread_id));
         
         foreach ($rows as $row) {
             $comments[] = new self($row);

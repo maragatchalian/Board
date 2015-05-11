@@ -58,6 +58,7 @@ const MAX_USER_IN_NEWSFEED = 1;
         $pagination = new SimplePagination($current_page, $per_page); 
 
         $user_id = $_SESSION['user_id'];
+        $follow_id = Follow::getDataByUserId($user_id);
         $home = Follow::getRecentActivity($pagination->start_index -1, $pagination->count + 1, $user_id);
         $thread_id = Param::get('thread_id');
         $comments = Comment::newsfeed($thread_id);

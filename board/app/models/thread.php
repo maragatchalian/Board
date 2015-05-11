@@ -82,8 +82,10 @@ const MAX_TITLE_LENGTH = 30;
     {
         $threads = array();
         $db = DB::conn();
+        $offset = (int) $offset;
+        $limit = (int) $limit;
         $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
-            
+
         foreach($rows as $row) {
             $threads[] = new self($row);
         }

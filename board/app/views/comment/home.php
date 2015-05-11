@@ -7,21 +7,21 @@
 </center>
 
 <?php foreach ($home as $get_from_home): ?>
-	<?php foreach ($comments as $comment): ?>
-   		<li>
-        	<?php eh($get_from_home->username) //username ?> 
-       		 <br />
-        	commented: <?php eh($comment->body) //comment ?> 
-        	<br />
-        	<?php echo time_difference($comment->created) ?> </em>  
-        	<br />
-        	<br />
+  <?php foreach ($comments as $comment): ?>
+      <li>
+          <?php eh($get_from_home->username) //username ?> 
+           <br />
+          commented: <?php eh($comment->body) //comment ?> 
+          <br />
+          <?php echo time_difference($comment->created) ?> </em>  
+          <br />
+          <br />
     </li>
-	<?php endforeach; ?> 
+  <?php endforeach; ?> 
 <?php endforeach; ?> 
 
 <?php if(empty($home)): ?>
-      You are not following any users.
+      No threads available.
 <?php endif ?>
 
 <br />
