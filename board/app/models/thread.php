@@ -82,10 +82,28 @@ const MAX_TITLE_LENGTH = 30;
     {
         $threads = array();
         $db = DB::conn();
-        $offset = (int) $offset;
-        $limit = (int) $limit;
+
+        if (!is_int($offset)) { 
+            throw new NotIntegerException; 
+        }
+
+        if (!is_int($limit)) { 
+            throw new NotIntegerException; 
+            }
+
         $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
 
+        /*or 
+        if (!is_int($offset)) { return false; }
+        if (!is_int($limit)) { return false; }
+        $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");*/
+
+
+        /*$offset = (int)$offset;
+        $limit = (int)$limit;
+
+        $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");*/
+        
         foreach($rows as $row) {
             $threads[] = new self($row);
         }
