@@ -14,13 +14,14 @@
 <br />
 
 <?php foreach ($favorites as $get_from_favorite): ?>
-    <li>
+    <ul>
+        <div class ="comments">
+        <div class ="content">
         <?php eh($get_from_favorite->comment_body) ?></a> 
         <br /> 
         By: <?php eh($get_from_favorite->username) ?></a>
         <br /> 
-        <br />                  
-        </li>
+    </ul>
     <?php endforeach; //Display contents of individual thread to href to A tag ?>
 <br />   
 
@@ -45,3 +46,5 @@
 <?php endif ?>
 </font>
 </html>
+</div>
+</div>
