@@ -43,7 +43,7 @@ If you don't have an account, register
 <a href="<?php eh(url('user/register')) ?>"> HERE</a>.
 </div>
 </div>
-    </div>
+</div>
 
 </form>
 </font>

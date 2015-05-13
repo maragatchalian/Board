@@ -7,11 +7,11 @@
 </center>
 <ul style="list-style-type:square">
     <?php foreach ($following as $get_from_following): ?>
-        <li>
-            <?php eh($get_from_following->username) ?></a>      
-        </li>
+            <li>
+            <?php eh($get_from_following->username) ?></a>     
+            </li>
     <?php endforeach; //Display contents of individual thread to href to A tag ?>
-
+ 
 <?php if(empty($following)): ?>
        You are not following any users.
 <?php endif ?>

@@ -46,6 +46,23 @@ const MAX_BODY_LENGTH = 140;
         return $comments;
     }
 
+    public static function getFollowing($offset, $limit, $user_id)
+    {
+        $following = array();
+        $db = DB::conn();
+
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
+        }
+                        
+        $rows = $db->rows("SELECT * FROM follow WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
+
+        foreach($rows as $row) {
+            $following[] = new self($row);
+        }
+        return $following;
+    }
+
     public function write(Comment $comment, $thread_id)
     {
         if(!$this->validate()) {

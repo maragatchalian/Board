@@ -6,25 +6,25 @@
     <h1>NEWSFEED</h1>
 </center>
 
-<?php foreach ($home as $get_from_home): ?>
+<?php foreach ($following as $get_from_follow): ?>
     <?php foreach ($comments as $comment): ?>
     <ul>
         <div class ="comments">
         <div class ="content">
-        <h5><?php eh($get_from_home->username) //username ?> </h5>
+        <h5><?php eh($comment->username) //username ?> </h5>
             commented: <?php eh($comment->body) //comment ?> 
         <br />
         <?php echo time_difference($comment->created) ?> </em>  
         <br />
         <br />
     </ul>
+
     <?php endforeach; ?> 
 <?php endforeach; ?> 
 
 <?php if(empty($home)): ?>
 No threads available.
 <?php endif ?>
-
 
 <br />
 <br />

@@ -51,6 +51,11 @@ class Follow extends AppModel
        return new self(objectToArray(User::getData($user_id)));
     }
 
+    public static function newsfeed($thread_id)
+    {
+         return new self(objectToArray(Comment::newsfeed($thread_id)));
+    }
+
     public static function getAllFollowing($offset, $limit, $user_id)
     {
         $following = array();
@@ -68,7 +73,7 @@ class Follow extends AppModel
         return $following;
     }
 
-    public static function getRecentActivity($offset, $limit, $user_id)
+    /*public static function getRecentActivity($offset, $limit, $user_id)
     {
         $home = array();
         $db = DB::conn();
@@ -79,7 +84,7 @@ class Follow extends AppModel
             $home[] = new self($row);
         }
         return $home;
-    }
+    }*/
 
     public static function countFollowing($user_id)
     {

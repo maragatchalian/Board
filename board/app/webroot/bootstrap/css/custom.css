@@ -27,7 +27,7 @@ zoom: 1;
 }
 
 .navbar-inner {
-background: #000; /*magiging black yung header*/
+background: #000; /*Black Header*/
 }
 
 .profile {
@@ -48,18 +48,4 @@ background: #000; /*magiging black yung header*/
 .pagination a:hover{
     color:#4C5650;
 }
-
-
-/*.btn a{
-    color:#4C5650;
-}
-.btn  a:hover{
-    color:#24540F;
-}
-a.btn {
-    font-size: 12px;
-    color: #FFF;
-    font-weight: unset;
-    font-style: normal;
-}*/
 
