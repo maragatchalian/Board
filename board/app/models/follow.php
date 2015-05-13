@@ -38,11 +38,6 @@ class Follow extends AppModel
     public function isUserFollowing()
     {
         $db = DB::conn();
-
-        if (!is_int($offset) || !is_int($limit)) { 
-            throw new NotIntegerException; 
-        }
-
         $params = array(
             $this->username,
             $this->user_id

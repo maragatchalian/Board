@@ -14,18 +14,20 @@
 <span class ="icon-trash"></span>
 </a> Delete This Thread<font color ="white">...</font>
 <?php endif ?>
-</br> </br>
+</br> 
 </center>
 
-<!--Spacing-->
- <div class="comment">                        
- <div class="meta">
 
 <!--View Comments-->
 <?php foreach($comments as $get_from_comment): ?>
-   
+
+<ul>
+<!--Spacing-->
+<div class ="comments">
+<div class ="content">
+
 <!--View Username-->
-<h3> <?php eh($get_from_comment->username) ?> </h3> 
+<h4> <?php eh($get_from_comment->username) ?> </h4        > 
 
 <!--View Comment Body-->    
 <?php echo($get_from_comment->body) ?>
@@ -54,14 +56,17 @@
 
 <!-- Count Favorite -->
 <?php echo $get_from_comment->countFavorite() ?> Favorites
+<br />  
+<br /> 
+</ul>
+
 <?php endforeach ?>
 
 <?php if(empty($comments)): ?>
       This thread doesn't have any comments.
 <?php endif ?>
 
-</div> 
-</div>
+
 <br />
 <br />
 
@@ -98,3 +103,6 @@
   <button type="submit" class="btn btn-medium btn-info">Submit</button>
 </font> 
 </form> 
+</div> 
+</div>
+
