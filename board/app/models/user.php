@@ -189,6 +189,11 @@ const MAX_PASSWORD_LENGTH = 20;
     {
         $users = array();
         $db = DB::conn();
+
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
+        }
+
         $rows = $db->rows("SELECT * FROM user where id != ? LIMIT {$offset}, {$limit}", array($id));
             
         foreach($rows as $row) {

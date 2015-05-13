@@ -83,27 +83,12 @@ const MAX_TITLE_LENGTH = 30;
         $threads = array();
         $db = DB::conn();
 
-        if (!is_int($offset)) { 
+        if (!is_int($offset) || !is_int($limit)) { 
             throw new NotIntegerException; 
         }
 
-        if (!is_int($limit)) { 
-            throw new NotIntegerException; 
-            }
-
         $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
-
-        /*or 
-        if (!is_int($offset)) { return false; }
-        if (!is_int($limit)) { return false; }
-        $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");*/
-
-
-        /*$offset = (int)$offset;
-        $limit = (int)$limit;
-
-        $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");*/
-        
+    
         foreach($rows as $row) {
             $threads[] = new self($row);
         }
@@ -146,6 +131,11 @@ const MAX_TITLE_LENGTH = 30;
     {
         $threads = array();
         $db = DB::conn();
+
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
+        }
+
         $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}", array($id));
          
         foreach($rows as $row) {
@@ -161,6 +151,11 @@ const MAX_TITLE_LENGTH = 30;
     {
         $threads = array();
         $db = DB::conn();
+
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
+        }
+
         $rows = $db->rows("SELECT * FROM thread WHERE category = ? LIMIT {$offset}, {$limit}",array($category));
             
         foreach($rows as $row) {

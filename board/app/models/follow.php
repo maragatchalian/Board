@@ -38,6 +38,11 @@ class Follow extends AppModel
     public function isUserFollowing()
     {
         $db = DB::conn();
+
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
+        }
+
         $params = array(
             $this->username,
             $this->user_id
@@ -55,6 +60,10 @@ class Follow extends AppModel
     {
         $following = array();
         $db = DB::conn();
+
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
+        }
                         
         $rows = $db->rows("SELECT * FROM follow WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
 
