@@ -9,6 +9,8 @@ const REGISTER = 'register';
 const REGISTER_END = 'register_end';
 const EDIT = 'edit';
 const EDIT_END = 'edit_end';
+const ADD_BIO = 'add_bio';
+const ADD_BIO_END = 'add_bio_end';
 
     public function register() 
     {

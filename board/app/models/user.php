@@ -125,7 +125,8 @@ const MAX_PASSWORD_LENGTH = 20;
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'email' => strtolower($this->email),
-                'password' => md5($this->password)
+                'password' => md5($this->password),
+                
             );
             $db->insert('user', $params); 
             $db->commit();
@@ -134,7 +135,7 @@ const MAX_PASSWORD_LENGTH = 20;
             throw $e;
         }
     }
-
+  
     public function login()
     {
         $db = DB::conn();

@@ -87,6 +87,7 @@ if (empty($user->validation_errors['confirm_password']['match'])) : ?>
 </div>
 
 <font color ="black">
+
 <!--Username-->
 <form action="<?php eh(url('')) ?>" method="post">
     <div class="span12"> 
