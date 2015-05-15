@@ -1,12 +1,12 @@
 <br />
 <font color ="black">
-<h3>Edit Password</h3>
-    
+<h3>Edit Profile</h3>
+</font>
     <?php if ($user->hasError()) : ?>
         <div class="alert alert-error">
         <h4 class="alert-heading">Oh snap!</h4>
             <h7>Change a few things up..</h7><br /><br/>
- 
+        
 <?php 
 //Password Validation
 if (!empty($user->validation_errors['password']['length'])): ?>
@@ -25,18 +25,26 @@ if (!empty($user->validation_errors['confirm_password']['match'])) : ?>
 <?php endif ?>
 
 </div>
-<?php endif ?> 
+<?php endif ?>
+
+<font color ="black">
+<form action="<?php eh(url('')) ?>" method="post">
 
 <!--Password -->
-<div class="span12">
-<label for="password"><h5>New Password</h5></label>
-<input type="password" name="password" placeholder="Password" value="<?php eh(Param::get('password')) ?>">
-</div>
+    <div class="control-group">
+    <label class="control-label" for="password"><h5>Password</h5></label>
+    <div class="controls">
+    <input type="password" name="password" placeholder="Password" value="<?php eh(Param::get('password')) ?>">
+    </div>
+    </div>
+
 <!--Confirm Password-->
-<div class="span12">
-<label for="confirm_password"><h5>Confirm New Password</h5></label>
-<input type="password" placeholder="Confirm Password" value="<?php eh(Param::get('confirm_password')) ?>">
-</div>
+    <div class="control-group">
+    <label class="control-label" for="confirm_password"><h5>Confirm Password</h5></label>
+    <div class="controls">
+    <input type="password" name="confirm_password" placeholder="Confirm Password" value="<?php eh(Param::get('confirm_password')) ?>">
+    </div>
+    </div>
 
 <input type="hidden" name="page_next" value="edit_password_end">
 <div class="span12">

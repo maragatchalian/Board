@@ -71,12 +71,6 @@ const MAX_PASSWORD_LENGTH = 20;
             'match' => array(
                 'is_password_match',
             )
-        ),
-
-        'new_password' => array(
-            'length' => array(
-                'validate_between', self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH
-            )
         )
     );
 
