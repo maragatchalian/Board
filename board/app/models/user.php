@@ -11,14 +11,12 @@ const MIN_FIRST_NAME_LENGTH = 2;
 const MIN_LAST_NAME_LENGTH = 2;
 const MIN_EMAIL_LENGTH = 4;
 const MIN_PASSWORD_LENGTH = 8;
-const MIN_BIO_LENGTH = 1;
 
 const MAX_USERNAME_LENGTH = 20;
 const MAX_FIRST_NAME_LENGTH = 30;
 const MAX_LAST_NAME_LENGTH = 30;
 const MAX_EMAIL_LENGTH = 30;
 const MAX_PASSWORD_LENGTH = 20;
-const MAX_BIO_LENGTH = 140;
   
     /*
     * Registration Validation.
@@ -75,12 +73,12 @@ const MAX_BIO_LENGTH = 140;
             )
         ),
 
-        'bio' => array(
+        'new_password' => array(
             'length' => array(
-                'validate_between', self::MIN_BIO_LENGTH, self::MAX_BIO_LENGTH 
-                )
+                'validate_between', self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH
             )
-        );
+        )
+    );
 
     /*
     * Limits a certain field into a specific number of characters.
@@ -133,8 +131,7 @@ const MAX_BIO_LENGTH = 140;
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'email' => strtolower($this->email),
-                'bio' => $this->bio,
-                'password' => md5($this->password)  
+               
             );
             $db->insert('user', $params); 
             $db->commit();
@@ -164,47 +161,33 @@ const MAX_BIO_LENGTH = 140;
     public function update()
     {
         if (!$this->validate()) {
-            throw new ValidationException('Invalid user credentials');
+            throw new ValidationException('invalid input');
         }
-
-        try {
+       
+         try {
             $db = DB::conn();
-            $db->begin();
-            $db->update(
-                'user', array(
-                    'username' => $this->username,
-                    'first_name' => $this->first_name,
-                    'last_name' => $this->last_name,
-                    'password' => $this->password
-                    ),
-                array('id' =>$this->user_id)
-                );
-            $db->commit();
+            $params = array(
+                'username' => $this->new_username,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name
+            );
+                $db->update('user', $params, array('id' => $this->user_id));
         } catch(Exception $e) {
-            $db->rollback();
             throw $e;
         }
     }
 
-    public function editBio()
+    public function editPassword()
     {
         if (!$this->validate()) {
-            throw new ValidationException('Invalid user credentials');
+        throw new ValidationException('invalid input');
         }
-
+        
         try {
             $db = DB::conn();
-            $db->begin();
-            $db->update(
-                'user', array(
-                    'bio' => $this->bio,
-                    ),
-                array('id' =>$this->user_id)
-                );
-            $db->commit();
-        } catch(Exception $e) {
-            $db->rollback();
-            throw $e;
+            $db->update('user', array('password' => md5($this->new_password)), array('id' => $this->user_id));
+        } catch (Exception $e) {
+        throw $e;
         }
     }
 

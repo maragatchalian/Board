@@ -18,14 +18,15 @@
 </div>
                            
 <div class = "profile_info">
-    <b>First Name: </b> <?php eh($user->username) ?> <br />
+    <b>Username: </b> <?php eh($user->username) ?> <br />
     <b>First Name: </b> <?php eh($user->first_name) ?> <br />
     <b>Last Name:</b>  <?php eh($user->last_name) ?><br />
     <b>Email:</b>    <?php eh($user->email) ?><br />
     <br /><br />
 </div>
 <div>      
-    <a class="btn btn-medium btn-info" href="<?php eh(url('user/edit')) ?>">Edit profile</a>       
+    <a class="btn btn-medium btn-info" href="<?php eh(url('user/edit')) ?>">Edit profile</a>    
+    <a class="btn btn-medium btn-info" href="<?php eh(url('user/edit_password')) ?>">Edit Password</a>     
                  
 </font>
 </form>

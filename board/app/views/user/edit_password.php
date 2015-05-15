@@ -1,13 +1,13 @@
 <br />
 <font color ="black">
 <h3>Edit Password</h3>
-</font>
+    
     <?php if ($user->hasError()) : ?>
         <div class="alert alert-error">
         <h4 class="alert-heading">Oh snap!</h4>
             <h7>Change a few things up..</h7><br /><br/>
  
- <?php       
+<?php 
 //Password Validation
 if (!empty($user->validation_errors['password']['length'])): ?>
     <div><em>Your Password</em> must be between
@@ -27,26 +27,21 @@ if (!empty($user->validation_errors['confirm_password']['match'])) : ?>
 </div>
 <?php endif ?> 
 
-<font color ="black">
 <!--Password -->
-    <div class="control-group">
-    <label class="control-label" for="password"><h5>Password</h5></label>
-    <div class="controls">
-    <input type="password" name="password" placeholder="Password" value="<?php eh(Param::get('password')) ?>">
-    </div>
-    </div>
-
+<div class="span12">
+<label for="password"><h5>New Password</h5></label>
+<input type="password" name="password" placeholder="Password" value="<?php eh(Param::get('password')) ?>">
+</div>
 <!--Confirm Password-->
-    <div class="control-group">
-    <label class="control-label" for="confirm_password"><h5>Confirm Password</h5></label>
-    <div class="controls">
-    <input type="password" name="confirm_password" placeholder="Confirm Password" value="<?php eh(Param::get('confirm_password')) ?>">
-    </div>
-    </div>
+<div class="span12">
+<label for="confirm_password"><h5>Confirm New Password</h5></label>
+<input type="password" placeholder="Confirm Password" value="<?php eh(Param::get('confirm_password')) ?>">
+</div>
 
 <input type="hidden" name="page_next" value="edit_password_end">
 <div class="span12">
 <br />
 <button class="btn btn-info btn-medium" type="submit">Save</button>
 <a href="<?php eh(url('user/profile')) ?>" class="btn btn-medium">Cancel</a>
+</div>
 </div>

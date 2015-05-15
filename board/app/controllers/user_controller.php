@@ -9,8 +9,8 @@ const REGISTER = 'register';
 const REGISTER_END = 'register_end';
 const EDIT = 'edit';
 const EDIT_END = 'edit_end';
-const EDIT_BIO = 'edit_bio';
-const EDIT_BIO_END = 'edit_bio_end';
+const EDIT_PASSWORD = 'edit_password';
+const EDIT_PASSWORD_END = 'edit_password_end';
 
     public function register() 
     {
@@ -24,7 +24,6 @@ const EDIT_BIO_END = 'edit_bio_end';
             'last_name' => Param::get('last_name'),
             'email' => Param::get('email'),
             'password' => Param::get('password'),
-            'bio' => Param::get('bio'),
             'confirm_password' => Param::get('confirm_password')
         );
 
@@ -97,29 +96,34 @@ const EDIT_BIO_END = 'edit_bio_end';
 
     public function edit() 
     {      
-        $params = array(
-            'username' => Param::get('username'),
+            $params = array(
+            'new_username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
             'last_name' => Param::get('last_name'),
-            'password' => Param::get('password'),
             'user_id' => $_SESSION['user_id']
         );
 
-        $user = new User($params);
+        $user = new User($params);      
         $page = Param::get(PAGE_NEXT, self::EDIT);
                 
         switch ($page) {
             case self::EDIT:
                 break;
             
-            case self::EDIT_END:
+            case self::EDIT_END:               
                 try {
                      $user->update();
+                     $success = true;
                 }catch (ValidationException $e) {
                     $page = self::EDIT;
+                    $success = false;
                 }
-                break;
-                
+
+                if ($success) {
+                $_SESSION['username'] = $user->new_username;
+                }
+
+                break;  
             default:
                 throw new NotFoundException("{$page} is not found");
                 break;
@@ -129,28 +133,32 @@ const EDIT_BIO_END = 'edit_bio_end';
         $this->render($page); 
     }
 
-    public function edit_bio() 
-    {      
+    public function editPassword(){
         $params = array(
-            'bio' => Param::get('bio'),
-            'user_id' => $_SESSION['user_id']
+            'new_password' => Param::get('password'),
         );
 
-        $user = new User($params);
-        $page = Param::get(PAGE_NEXT, self::EDIT_BIO);
+        $user = new User($params);      
+        $page = Param::get(PAGE_NEXT, self::EDIT_PASSWORD);
                 
         switch ($page) {
-            case self::EDIT_BIO:
+            case self::EDIT_PASSWORD:
                 break;
             
-            case self::EDIT_BIO_END:
+            case self::EDIT_PASSWORD_END:               
                 try {
-                     $user->update();
+                     $user->editPassword();
+                     $success = true;
                 }catch (ValidationException $e) {
-                    $page = self::EDIT_BIO;
+                    $page = self::EDIT;
+                    $success = false;
                 }
-                break;
-                
+
+                if ($success) {
+                $_SESSION['password'] = $user->new_password;
+                }
+
+                break;  
             default:
                 throw new NotFoundException("{$page} is not found");
                 break;
@@ -158,6 +166,9 @@ const EDIT_BIO_END = 'edit_bio_end';
         $user_edit = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render($page); 
+
+
     }
+
 }//end
 
