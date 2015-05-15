@@ -122,6 +122,7 @@ const EDIT_PASSWORD_END = 'edit_password_end';
                 if ($success) {
                 $_SESSION['username'] = $user->new_username;
                 }
+
                 break;  
             default:
                 throw new NotFoundException("{$page} is not found");
@@ -149,7 +150,7 @@ const EDIT_PASSWORD_END = 'edit_password_end';
                      $user->editPassword();
                      $success = true;
                 }catch (ValidationException $e) {
-                    $page = self::EDIT_PASSWORD;
+                    $page = self::EDIT;
                     $success = false;
                 }
 
@@ -165,6 +166,8 @@ const EDIT_PASSWORD_END = 'edit_password_end';
         $user_edit = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render($page); 
+
+
     }
 
 }//end

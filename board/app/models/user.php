@@ -71,6 +71,12 @@ const MAX_PASSWORD_LENGTH = 20;
             'match' => array(
                 'is_password_match',
             )
+        ),
+
+        'new_password' => array(
+            'length' => array(
+                'validate_between', self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH
+            )
         )
     );
 
@@ -124,8 +130,8 @@ const MAX_PASSWORD_LENGTH = 20;
                 'username' => $this->username,
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
-                'email' => strtolower($this->email),
-               
+                'password' => md5($this->password),
+                'email' => strtolower($this->email)
             );
             $db->insert('user', $params); 
             $db->commit();
@@ -171,7 +177,7 @@ const MAX_PASSWORD_LENGTH = 20;
         }
     }
 
-    public function editPassword()
+    /*public function editPassword()
     {
         if (!$this->validate()) {
         throw new ValidationException('invalid input');
@@ -183,7 +189,7 @@ const MAX_PASSWORD_LENGTH = 20;
         } catch (Exception $e) {
         throw $e;
         }
-    }
+    }*/
 
     public static function get($user_id)
     {
