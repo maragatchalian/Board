@@ -238,4 +238,4 @@ const MAX_PASSWORD_LENGTH = 20;
         
         return $users;
     }
-} //end
+} 

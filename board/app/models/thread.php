@@ -177,4 +177,4 @@ const MAX_TITLE_LENGTH = 30;
         }
         return $categories;
     }
-} //end
+} 

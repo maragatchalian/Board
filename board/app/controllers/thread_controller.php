@@ -142,4 +142,4 @@ const CREATE_THREAD_END = 'create_end';
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars()); 
     }  
-} //end
+} 

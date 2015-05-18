@@ -68,4 +68,4 @@ const MAX_USER_IN_NEWSFEED = 1;
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
     }
-} //end
+} 

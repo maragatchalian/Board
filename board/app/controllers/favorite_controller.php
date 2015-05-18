@@ -40,4 +40,4 @@ class FavoriteController extends AppController
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
     }
-} //end
+} 

@@ -70,4 +70,4 @@ class FollowController extends AppController
         }
     redirect(url('follow/others_profile', array('user_id' => $follow->id)));  
     }
-}//end
+}

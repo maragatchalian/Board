@@ -92,4 +92,4 @@ class Favorite extends AppModel
             $db->rollback();
         }
     }
-}//end
+}

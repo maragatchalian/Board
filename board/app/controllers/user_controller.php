@@ -171,5 +171,4 @@ const EDIT_PASSWORD_END = 'edit_password_end';
         $this->render($page); 
     }
 
-}//end
-
+}

@@ -144,4 +144,4 @@ const MAX_BODY_LENGTH = 140;
     {
         return $this->user_id === $_SESSION['user_id'];
     }
-} //end
+} 
