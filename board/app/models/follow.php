@@ -60,7 +60,7 @@ class Follow extends AppModel
          return new self(objectToArray(Comment::newsfeed($thread_id)));
     }
 
-    public static function getAllFollowing($offset, $limit, $user_id)
+    public static function getAll($offset, $limit, $user_id)
     {
         $following = array();
         $db = DB::conn();

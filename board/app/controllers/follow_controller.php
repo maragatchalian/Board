@@ -43,7 +43,7 @@ class FollowController extends AppController
         $pagination = new SimplePagination($current_page, $per_page);
        
         $user_id = $_SESSION['user_id'];
-        $following = Follow::getAllFollowing($pagination->start_index -1, $pagination->count + 1, $user_id);
+        $following = Follow::getAll($pagination->start_index -1, $pagination->count + 1, $user_id);
        
         $pagination->checkLastPage($following);
         $total = Follow::countFollowing($user_id);

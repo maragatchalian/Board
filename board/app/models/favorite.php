@@ -27,7 +27,7 @@ class Favorite extends AppModel
         return $fave;
     }
 
-    public static function getAllFavorites($offset, $limit, $user_id)
+    public static function getAll($offset, $limit, $user_id)
     {
         $favorites = array();
         $db = DB::conn();                  

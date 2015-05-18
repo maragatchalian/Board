@@ -33,7 +33,7 @@ class FavoriteController extends AppController
         $pagination = new SimplePagination($current_page, $per_page);
 
         $user_id = $_SESSION['user_id'];
-        $favorites = Favorite::getAllFavorites($pagination->start_index -1, $pagination->count + 1, $user_id);
+        $favorites = Favorite::getAll($pagination->start_index -1, $pagination->count + 1, $user_id);
 
         $pagination->checkLastPage($favorites);
         $total = Favorite::countFavoriteByUserId($user_id);
