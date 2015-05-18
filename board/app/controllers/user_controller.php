@@ -133,9 +133,12 @@ const EDIT_PASSWORD_END = 'edit_password_end';
         $this->render($page); 
     }
 
-    public function editPassword(){
-        $params = array(
+    public function edit_password()
+    {
+    
+     $params = array(
             'new_password' => Param::get('password'),
+            'user_id' => $_SESSION['user_id']
         );
 
         $user = new User($params);      
@@ -150,7 +153,7 @@ const EDIT_PASSWORD_END = 'edit_password_end';
                      $user->editPassword();
                      $success = true;
                 }catch (ValidationException $e) {
-                    $page = self::EDIT;
+                    $page = self::EDIT_PASSWORD;
                     $success = false;
                 }
 
@@ -166,8 +169,6 @@ const EDIT_PASSWORD_END = 'edit_password_end';
         $user_edit = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render($page); 
-
-
     }
 
 }//end

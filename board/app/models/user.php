@@ -177,19 +177,22 @@ const MAX_PASSWORD_LENGTH = 20;
         }
     }
 
-    /*public function editPassword()
+    public function editPassword()
     {
         if (!$this->validate()) {
-        throw new ValidationException('invalid input');
+            throw new ValidationException('invalid input');
         }
-        
-        try {
+       
+         try {
             $db = DB::conn();
-            $db->update('user', array('password' => md5($this->new_password)), array('id' => $this->user_id));
-        } catch (Exception $e) {
-        throw $e;
+            $params = array(
+                'password' => md5($this->new_password)
+            );
+                $db->update('user', $params, array('id' => $this->user_id));
+        } catch(Exception $e) {
+            throw $e;
         }
-    }*/
+    }
 
     public static function get($user_id)
     {
