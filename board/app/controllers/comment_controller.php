@@ -19,9 +19,9 @@ const MAX_USER_IN_NEWSFEED = 1;
                 
             case self::WRITE_COMMENT_END:
                 $params = array(
-                'body' => Param::get('body'),
-                'username' => $_SESSION['username'],
-                'user_id' => $_SESSION['user_id']
+                    'body' => Param::get('body'),
+                    'username' => $_SESSION['username'],
+                    'user_id' => $_SESSION['user_id']
                 );
                 $comment = new Comment($params);
                 

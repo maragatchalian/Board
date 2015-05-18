@@ -144,10 +144,12 @@ const MAX_PASSWORD_LENGTH = 20;
     public function login()
     {
         $db = DB::conn();
+
         $params = array(
             'username' => $this->username,
             'password' => md5($this->password)
         );
+
         $user = $db->row("SELECT id, username FROM user WHERE BINARY username = :username AND BINARY password = :password", $params);
 
         if(!$user) {
@@ -185,10 +187,12 @@ const MAX_PASSWORD_LENGTH = 20;
        
          try {
             $db = DB::conn();
+            
             $params = array(
                 'password' => md5($this->new_password)
             );
-                $db->update('user', $params, array('id' => $this->user_id));
+
+            $db->update('user', $params, array('id' => $this->user_id));
         } catch(Exception $e) {
             throw $e;
         }

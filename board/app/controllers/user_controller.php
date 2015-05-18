@@ -96,7 +96,7 @@ const EDIT_PASSWORD_END = 'edit_password_end';
 
     public function edit() 
     {      
-            $params = array(
+        $params = array(
             'new_username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
             'last_name' => Param::get('last_name'),
@@ -136,7 +136,7 @@ const EDIT_PASSWORD_END = 'edit_password_end';
     public function edit_password()
     {
     
-     $params = array(
+        $params = array(
             'new_password' => Param::get('password'),
             'user_id' => $_SESSION['user_id']
         );

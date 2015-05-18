@@ -41,12 +41,14 @@ const MAX_TITLE_LENGTH = 30;
             $db = DB::conn();
             $date_created = date("Y-m-d H:i:s");
             $db->begin();
+
             $params = array(  
                 'title' => $this->title, 
                 'created'=> $date_created, 
                 'user_id'=> $this->user_id,
                 'category' => $this->category
-                );
+            );
+
             $db->insert('thread', $params); 
             $this->id = $db->lastInsertId();
             $comment->write($comment, $this->id); //<--write comment at the same time
@@ -66,10 +68,12 @@ const MAX_TITLE_LENGTH = 30;
         try {
             $db = DB::conn();
             $db->begin();
+            
             $params = array(
                 $this->id,
                 $this->user_id
             );
+            
             $db->query('DELETE FROM thread WHERE id = ? AND user_id = ?', $params);
             $db->commit();
             Comment::deleteAllComments($this->id);

@@ -8,10 +8,12 @@ class Follow extends AppModel
         try {
             $db = DB::conn();
             $db->begin();
+
             $params = array(
-            'username' => $this->username,
-            'user_id' => $this->user_id
+                'username' => $this->username,
+                'user_id' => $this->user_id
             );
+
             $db->insert('follow', $params);
             $db->commit();
         } catch (Exception $e) {
@@ -24,10 +26,12 @@ class Follow extends AppModel
         try {
             $db = DB::conn();
             $db->begin();
+
             $params = array(
                 $this->username,
                 $this->user_id
             );
+            
             $db->query('DELETE FROM follow WHERE username = ? AND user_id = ?', $params);
             $db->commit();
         } catch (Exception $e) {
