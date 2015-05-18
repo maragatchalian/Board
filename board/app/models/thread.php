@@ -39,12 +39,12 @@ const MAX_TITLE_LENGTH = 30;
             
         try {
             $db = DB::conn();
-            $date_created = date("Y-m-d H:i:s");
+            $created = date("Y-m-d H:i:s");
             $db->begin();
 
             $params = array(  
                 'title' => $this->title, 
-                'created'=> $date_created, 
+                'created'=> $created, 
                 'user_id'=> $this->user_id,
                 'category' => $this->category
             );
