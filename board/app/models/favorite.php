@@ -30,7 +30,12 @@ class Favorite extends AppModel
     public static function getAll($offset, $limit, $user_id)
     {
         $favorites = array();
-        $db = DB::conn();                  
+        $db = DB::conn();      
+        
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
+        }
+
         $rows = $db->rows("SELECT * FROM favorite WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
   
         foreach($rows as $row) {

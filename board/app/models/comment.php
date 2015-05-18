@@ -24,6 +24,11 @@ const MAX_BODY_LENGTH = 140;
     {
         $comments = array();
         $db = DB::conn();
+        
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
+        }
+
         $rows = $db->rows("SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC LIMIT {$offset}, {$limit}", array($thread_id));
         
         foreach ($rows as $row) {

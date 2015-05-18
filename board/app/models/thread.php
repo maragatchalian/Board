@@ -160,7 +160,7 @@ const MAX_TITLE_LENGTH = 30;
             throw new NotIntegerException; 
         }
 
-        $rows = $db->rows("SELECT * FROM thread WHERE category = ? LIMIT {$offset}, {$limit}",array($category));
+        $rows = $db->rows("SELECT * FROM thread WHERE category = ? LIMIT {$offset}, {$limit}", array($category));
             
         foreach($rows as $row) {
             $threads[] = new self($row);
