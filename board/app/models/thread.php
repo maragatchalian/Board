@@ -58,7 +58,7 @@ const MAX_TITLE_LENGTH = 30;
         }
     }
 
-    public function isUserThread()     
+    public function checkThreadOwner()
     {
         return $this->user_id === $_SESSION['user_id'];
     }

@@ -8,7 +8,7 @@
 <h3>Category: <?php eh($thread->category)?></h3>
 
 <!-- Delete Thread -->
-<?php if ($thread->isUserThread()) : ?> 
+<?php if ($thread->checkThreadOwner()) : ?> 
   <a href="<?php eh(url('thread/delete_thread', array('thread_id' => $thread->id)))?>"
   onclick="return confirm('Are you sure you want to delete this thread?')">
 <span class ="icon-trash"></span>
