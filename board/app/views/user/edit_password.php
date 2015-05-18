@@ -45,7 +45,7 @@ if (!empty($user->validation_errors['confirm_password']['match'])): ?>
     <input type="password" name="confirm_password" value="<?php eh(Param::get('confirm_password')) ?>">
     </div>
 
-<input type="hidden" name="page_next" value="edit_password_end">
+<input type="hidden" name="page_next" value="edit_end">
 <div class="span12">
 <br />
 <button class="btn btn-info btn-medium" type="submit">Save</button>
