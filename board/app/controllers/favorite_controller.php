@@ -26,7 +26,7 @@ class FavoriteController extends AppController
     /*
     * Displays list of user's favorite comments
     */
-    public function favorites() 
+    public function display_user_favorite_comments() 
     { 
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get(PAGE, 1);

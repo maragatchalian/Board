@@ -7,7 +7,7 @@
 <br /> 
  
 <div class = buttons>               
-<form action="<?php eh(url('favorite/favorites')) ?>" method="post">
+<form action="<?php eh(url('favorite/display_user_favorite_comments')) ?>" method="post">
     <button class="btn btn-default btn-medium" type="submit"> <i class="icon-star"></i>Favorites</button>
     </form>
 
