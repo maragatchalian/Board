@@ -98,11 +98,6 @@ class Follow extends AppModel
         return $total_following;
     }
 
-    public function countOtherUsers($user_id)
-    {
-        return User::countOtherUser($this->user_id);
-    }
-
     public static function countNewsfeed($user_id) 
     {
         $db = DB::conn();
