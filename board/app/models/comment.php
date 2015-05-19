@@ -120,7 +120,7 @@ const MAX_BODY_LENGTH = 140;
         }
     }
 
-    public static function deleteAllComments($thread_id)
+    public static function deleteByThreadId($thread_id)
     {
         try {
             $db = DB::conn();

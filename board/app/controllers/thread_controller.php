@@ -70,7 +70,7 @@ const CREATE_THREAD_END = 'create_end';
     public function delete_thread() 
     { 
         $thread = Thread::get(Param::get('thread_id'));
-        $thread->deleteThread($_SESSION['user_id']);
+        $thread->delete($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render('thread/delete_thread');
     }  

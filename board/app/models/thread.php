@@ -63,7 +63,7 @@ const MAX_TITLE_LENGTH = 30;
         return $this->user_id === $_SESSION['user_id'];
     }
 
-    public function deleteThread($user_id) 
+    public function delete($user_id) 
     {
         try {
             $db = DB::conn();
@@ -76,7 +76,7 @@ const MAX_TITLE_LENGTH = 30;
             
             $db->query('DELETE FROM thread WHERE id = ? AND user_id = ?', $params);
             $db->commit();
-            Comment::deleteAllComments($this->id);
+            Comment::deleteByThreadId($this->id);
         } catch (Exception $e) {
             $db->rollback();
         }
