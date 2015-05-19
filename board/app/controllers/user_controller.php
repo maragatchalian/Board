@@ -3,14 +3,14 @@
 class UserController extends AppController 
 {
 
-const LOGIN_PAGE = 'login';
-const HOME_PAGE = 'home';
-const REGISTER = 'register';
-const REGISTER_END = 'register_end';
-const EDIT = 'edit';
-const EDIT_END = 'edit_end';
-const EDIT_PASSWORD = 'edit_password';
-const EDIT_PASSWORD_END = 'edit_password_end';
+    const LOGIN_PAGE = 'login';
+    const HOME_PAGE = 'home';
+    const REGISTER = 'register';
+    const REGISTER_END = 'register_end';
+    const EDIT = 'edit';
+    const EDIT_END = 'edit_end';
+    const EDIT_PASSWORD = 'edit_password';
+    const EDIT_PASSWORD_END = 'edit_password_end';
 
     public function register() 
     {

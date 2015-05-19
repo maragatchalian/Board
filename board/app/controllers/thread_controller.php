@@ -3,16 +3,16 @@
 class ThreadController extends AppController 
 {
 
-const CREATE_THREAD = 'create';
-const CREATE_THREAD_END = 'create_end';
+    const CREATE_THREAD = 'create';
+    const CREATE_THREAD_END = 'create_end';
 
-/*
-* Create new thread
-* :: - STATIC FUNCTION, can be called from the class name
-* -> - INSTANCE, can only be called from an instance of the class.
-*
-* Everything inputted on the view will be gathered by this function
-*/
+    /*
+    * Create new thread
+    * :: - STATIC FUNCTION, can be called from the class name
+    * -> - INSTANCE, can only be called from an instance of the class.
+    *
+    * Everything inputted on the view will be gathered by this function
+    */
 
    public function create()
     {

@@ -3,9 +3,9 @@
 class CommentController extends AppController 
 {
 
-const WRITE_COMMENT = 'write';
-const WRITE_COMMENT_END = 'write_end';
-const MAX_USER_IN_NEWSFEED = 1;
+    const WRITE_COMMENT = 'write';
+    const WRITE_COMMENT_END = 'write_end';
+    const MAX_USER_IN_NEWSFEED = 1;
 
     public function write() 
     {

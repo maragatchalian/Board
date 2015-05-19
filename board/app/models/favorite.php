@@ -2,7 +2,6 @@
 
 class Favorite extends AppModel 
 {
-
     public static function countFavoriteByCommentId($comment_id)
     {
         $db = DB::conn();

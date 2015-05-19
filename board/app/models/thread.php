@@ -2,11 +2,8 @@
 
 class Thread extends AppModel 
 {
-/* 
-* Avoid using magic numbers so others could understand what that number is all about.
-*/
-const MIN_TITLE_LENGTH = 1;
-const MAX_TITLE_LENGTH = 30;
+    const MIN_TITLE_LENGTH = 1;
+    const MAX_TITLE_LENGTH = 30;
 
     /* 
     * Thread Length Validation
