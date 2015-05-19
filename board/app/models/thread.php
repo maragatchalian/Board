@@ -116,7 +116,7 @@ const MAX_TITLE_LENGTH = 30;
     public static function countAllThreadByCategory($category)
     {
         $db = DB::conn();
-        return (int) $db->value('SELECT COUNT(*) FROM thread WHERE user_id = ?', array($category));
+        return (int) $db->value('SELECT COUNT(*) FROM thread WHERE category = ?', array($category));
     }
       
     public static function get($id) 
