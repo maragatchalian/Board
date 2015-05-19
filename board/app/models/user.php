@@ -173,7 +173,9 @@ const MAX_PASSWORD_LENGTH = 20;
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name
             );
-                $db->update('user', $params, array('id' => $this->user_id));
+            $user_id = array('id' => $this->user_id);
+            $db->update('user', $params, $user_id);
+            
         } catch(Exception $e) {
             throw $e;
         }
