@@ -27,7 +27,7 @@ const MAX_PASSWORD_LENGTH = 20;
                 'validate_between', self::MIN_USERNAME_LENGTH, self::MAX_USERNAME_LENGTH
             ),
             'valid' => array(
-                'validate_username'
+                'is_valid_username'
             ),
             'exist' => array(
                 'is_username_exist'
@@ -39,7 +39,7 @@ const MAX_PASSWORD_LENGTH = 20;
                 'validate_between', self::MIN_FIRST_NAME_LENGTH, self::MAX_FIRST_NAME_LENGTH
             ),
             'valid' => array(
-                'validate_name'
+                'is_valid_name'
             ),
         ),
         
@@ -48,7 +48,7 @@ const MAX_PASSWORD_LENGTH = 20;
                 'validate_between', self::MIN_LAST_NAME_LENGTH, self::MAX_LAST_NAME_LENGTH
             ),
             'valid' => array(
-                'validate_name'
+                'is_valid_name'
             ),
         ),
 
@@ -84,13 +84,13 @@ const MAX_PASSWORD_LENGTH = 20;
     * Limits a certain field into a specific number of characters.
     * Checks if the characters are valid. (e.g., dot, hyphen)
     */
-    public function validate_username($username)
+    public function is_valid_username($username)
     {
         $valid = array('-', '_', '.');    
         return ctype_alnum(str_replace($valid, '', $username));
     }
 
-    public function validate_name($string)
+    public function is_valid_name($string)
     {
         $valid = array('-', ' ');    
         return ctype_alpha(str_replace($valid, '', $string));
