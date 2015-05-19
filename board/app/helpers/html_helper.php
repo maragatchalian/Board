@@ -62,7 +62,7 @@ function time_difference($date)
 * Gets a declared variable from an object and 
 * converts it into an array.
 */
-function objectToArray($obj)
+function object_to_array($obj)
 {
     if (is_array($obj)) {
         return $obj;

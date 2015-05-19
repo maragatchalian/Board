@@ -47,7 +47,7 @@ class Favorite extends AppModel
 
     public static function getDatabyCommentId($comment_id)
     {
-        return new self(objectToArray(Comment::get($comment_id)));
+        return new self(object_to_array(Comment::get($comment_id)));
     }
 
     public function addFavorite()

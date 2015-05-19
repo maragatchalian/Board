@@ -52,12 +52,12 @@ class Follow extends AppModel
 
     public static function getDataByUserId($user_id)
     {
-       return new self(objectToArray(User::getData($user_id)));
+       return new self(object_to_array(User::getData($user_id)));
     }
 
     public static function newsfeed($thread_id)
     {
-         return new self(objectToArray(Comment::newsfeed($thread_id)));
+         return new self(object_to_array(Comment::newsfeed($thread_id)));
     }
 
     public static function getAll($offset, $limit, $user_id)
