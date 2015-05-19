@@ -91,7 +91,7 @@ class ThreadController extends AppController
         $this->set(get_defined_vars()); 
     }  
 
-    public function my_threads()
+    public function own_threads()
     {
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get(PAGE, 1);
@@ -105,7 +105,6 @@ class ThreadController extends AppController
         $pages = ceil($total / $per_page);
 
         $this->set(get_defined_vars());
-        $this->render('my_threads');
     }
 
     public function by_category() 
