@@ -9,5 +9,9 @@
     		<?php eh($category); ?></a>
     	</li>
     <?php endforeach; ?>
+
+<?php if(empty($categories)): ?>
+    No threads available.
+<?php endif ?>
 </font>
 </ul>
