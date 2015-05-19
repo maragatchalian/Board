@@ -75,8 +75,10 @@ const MAX_TITLE_LENGTH = 30;
             );
             
             $db->query('DELETE FROM thread WHERE id = ? AND user_id = ?', $params);
+            //$delete_comment = Comment::deleteByThreadId($this->id);
+            //$delete_favorite = Favorite::deleteFavoritedComment($this->id, $this->user_id);
             $db->commit();
-            Comment::deleteByThreadId($this->id);
+            
         } catch (Exception $e) {
             $db->rollback();
         }

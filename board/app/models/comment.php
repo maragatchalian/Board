@@ -120,7 +120,7 @@ const MAX_BODY_LENGTH = 140;
         }
     }
 
-    public static function deleteByThreadId($thread_id)
+    /*public static function deleteByThreadId($thread_id)
     {
         try {
             $db = DB::conn();
@@ -128,8 +128,21 @@ const MAX_BODY_LENGTH = 140;
             $db->query('DELETE FROM comment where thread_id = ?', array($thread_id));
         } catch (Exception $e) {
             $db-rollback();
-            }
         }
+    }*/
+
+    public static function deleteByThreadId($id, $user_id)
+    {
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', array($id, $user_id));
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+        }
+    }
+
 
     /*
     * Functions with regards to favorite/unfavorite comments
