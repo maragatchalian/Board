@@ -14,10 +14,6 @@ class UserController extends AppController
 
     public function register() 
     {
-        if (is_logged_in()) {
-            redirect(url('comment/home'));
-        }
-
         $params = array(
             'username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
