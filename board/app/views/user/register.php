@@ -71,9 +71,9 @@ if ($user->validation_errors['last_name']['valid']): ?>
 <?php 
 //Email Validation
 if (!empty($user->validation_errors['email']['length'])): ?>
-    <div><em>Your Email</em> must be between
-        <?php eh($user->validation['email']['length'][1]) ?> and
-        <?php eh($user->validation['email']['length'][2]) ?> characters.
+    <div><em>Your Email</em> must be 
+        <?php eh($user->validation['email']['length'][1]) ?> 
+        <?php eh($user->validation['email']['length'][2]) ?> characters and below only.
     </div>
 <?php endif ?>
 
