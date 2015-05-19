@@ -42,7 +42,7 @@ class ThreadController extends AppController
             default:
                 throw new NotFoundException("{$current_page} is not found");
                 break;
-            }  
+        }  
 
         $this->set(get_defined_vars());
         $this->render($current_page);

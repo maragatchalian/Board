@@ -122,8 +122,8 @@ class UserController extends AppController
                 if ($success) {
                 $_SESSION['username'] = $user->new_username;
                 }
-
                 break;  
+
             default:
                 throw new NotFoundException("{$page} is not found");
                 break;
@@ -160,8 +160,8 @@ class UserController extends AppController
                 if ($success) {
                 $_SESSION['password'] = $user->new_password;
                 }
-
                 break;  
+                
             default:
                 throw new NotFoundException("{$page} is not found");
                 break;
