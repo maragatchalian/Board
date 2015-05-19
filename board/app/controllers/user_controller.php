@@ -14,10 +14,6 @@ class UserController extends AppController
 
     public function register() 
     {
-        if (is_logged_in()) {
-            redirect(url('comment/home'));
-        }
-
         $params = array(
             'username' => Param::get('username'),
             'first_name' => Param::get('first_name'),
@@ -134,8 +130,7 @@ class UserController extends AppController
     }
 
     public function edit_password()
-    {
-    
+    {    
         $params = array(
             'new_password' => Param::get('password'),
             'user_id' => $_SESSION['user_id']
@@ -170,5 +165,4 @@ class UserController extends AppController
         $this->set(get_defined_vars());
         $this->render($page); 
     }
-
 }
