@@ -129,6 +129,7 @@ class UserController extends AppController
         $this->render($page); 
     }
 
+
     public function edit_password()
     {    
         $params = array(
@@ -161,7 +162,6 @@ class UserController extends AppController
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
-        //$user_edit = User::getData($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render($page); 
     }

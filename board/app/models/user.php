@@ -188,16 +188,14 @@ class User extends AppModel
        
          try {
             $db = DB::conn();
-            
+
             $params = array(
                 'password' => md5($this->new_password)
             );
 
-            $user_id = array(
-                'id' => $this->user_id
-            );
-
+            $user_id = array('id' => $this->user_id);
             $db->update('user', $params, $user_id);
+            
         } catch(Exception $e) {
             throw $e;
         }
