@@ -62,7 +62,7 @@ class Thread extends AppModel
 
     public function delete($thread_id)
     {
-        $delete_favorite = Favorite::deleteFavoritedCommentByThreadId($this->id, $this->user_id);
+        Favorite::deleteFavoritedCommentByThreadId($this->id, $this->user_id);
         try {
             $db = DB::conn();
             $db->begin();
@@ -71,7 +71,7 @@ class Thread extends AppModel
                 $this->user_id
             );
             $db->query('DELETE FROM thread WHERE id = ? AND user_id = ?', $params);
-            $delete_comment = Comment::deleteByThreadId($this->id, $this->user_id);
+            Comment::deleteByThreadId($this->id, $this->user_id);
 
             $db->commit();
         } catch (Exception $e) {

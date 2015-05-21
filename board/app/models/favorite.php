@@ -44,7 +44,7 @@ class Favorite extends AppModel
         return $favorites;
     }
 
-    public static function getDatabyCommentId($comment_id)
+    public static function getDataByCommentId($comment_id)
     {
         return new self(object_to_array(Comment::get($comment_id)));
     }
@@ -86,12 +86,12 @@ class Favorite extends AppModel
         }
     }
 
-    public static function deleteFavoritedComment($id, $user_id)
+    public static function deleteFavoritedComment($comment_id, $user_id)
     {
         try {
             $db = DB::conn();
             $db->begin();
-            $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', array($id, $user_id));
+            $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', array($comment_id, $user_id));
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();

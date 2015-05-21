@@ -45,7 +45,6 @@ class CommentController extends AppController
         $comment = Comment::get(Param::get('comment_id'));
         $comment->delete($_SESSION['user_id']);
         $this->set(get_defined_vars());
-        $this->render('comment/delete');
     }  
 
     /*
