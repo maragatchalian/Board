@@ -58,6 +58,7 @@ class Favorite extends AppModel
                 'username' => $this->username,
                 'comment_id' => $this->id,
                 'comment_body'=> $this->body,
+                'thread_id' => $this->thread_id,
                 'user_id' => $this->user_id
             );
             $db->insert('favorite', $params);
@@ -91,6 +92,18 @@ class Favorite extends AppModel
             $db = DB::conn();
             $db->begin();
             $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', array($id, $user_id));
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+        }
+    }
+
+     public static function deleteFavoritedCommentByThreadId($thread_id, $user_id)
+    {
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $db->query('DELETE FROM favorite WHERE thread_id = ? AND user_id = ?', array($thread_id, $user_id));
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
