@@ -5,7 +5,7 @@ class FavoriteController extends AppController
 
     public function set_favorite()
     {
-        $comment = Favorite::getDatabyCommentId(Param::get('comment_id'));
+        $comment = Favorite::getDataByCommentId(Param::get('comment_id'));
         $comment->user_id = $_SESSION['user_id']; 
         $method = Param::get('method');
             

@@ -99,19 +99,19 @@ class Thread extends AppModel
     public static function countAll() 
     {
         $db = DB::conn();
-        return (int) $db->value('SELECT COUNT(*) FROM thread');
+        return $db->value('SELECT COUNT(*) FROM thread');
     }
 
     public static function countAllThreadByUserId($user_id) 
     {
         $db = DB::conn();
-        return (int) $db->value('SELECT COUNT(*) FROM thread WHERE user_id = ?', array($user_id));
+        return $db->value('SELECT COUNT(*) FROM thread WHERE user_id = ?', array($user_id));
     }
 
     public static function countAllThreadByCategory($category)
     {
         $db = DB::conn();
-        return (int) $db->value('SELECT COUNT(*) FROM thread WHERE category = ?', array($category));
+        return $db->value('SELECT COUNT(*) FROM thread WHERE category = ?', array($category));
     }
       
     public static function get($id) 
