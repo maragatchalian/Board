@@ -60,22 +60,19 @@ class Thread extends AppModel
         return $this->user_id === $_SESSION['user_id'];
     }
 
-    public function delete($user_id) 
+    public function delete($thread_id)
     {
         try {
             $db = DB::conn();
             $db->begin();
-            
             $params = array(
                 $this->id,
                 $this->user_id
             );
-            
             $db->query('DELETE FROM thread WHERE id = ? AND user_id = ?', $params);
-            //$delete_comment = Comment::deleteByThreadId($this->id);
-            //$delete_favorite = Favorite::deleteFavoritedComment($this->id, $this->user_id);
+            $delete_comment = Comment::deleteByThreadId($this->id, $this->user_id);
+            $delete_favorite = Favorite::deleteFavoritedComment($this->id, $this->user_id);
             $db->commit();
-            
         } catch (Exception $e) {
             $db->rollback();
         }

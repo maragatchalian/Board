@@ -102,7 +102,7 @@ class Comment extends AppModel
         return new self($row);
     }
 
-    public function delete($user_id)
+    public function delete($comment_id)
     {
         try {
             $db = DB::conn();
@@ -119,29 +119,17 @@ class Comment extends AppModel
         }
     }
 
-    /*public static function deleteByThreadId($thread_id)
+    public static function deleteByThreadId($thread_id, $user_id)
     {
         try {
             $db = DB::conn();
             $db->begin();
-            $db->query('DELETE FROM comment where thread_id = ?', array($thread_id));
-        } catch (Exception $e) {
-            $db-rollback();
-        }
-    }*/
-
-    public static function deleteByThreadId($id, $user_id)
-    {
-        try {
-            $db = DB::conn();
-            $db->begin();
-            $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', array($id, $user_id));
+            $db->query('DELETE FROM comment WHERE thread_id = ? AND user_id = ?', array($thread_id, $user_id));
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
         }
     }
-
 
     /*
     * Functions with regards to favorite/unfavorite comments
@@ -154,7 +142,7 @@ class Comment extends AppModel
 
     public function getIsCommentFavorited()
     {
-        return Favorite::IsCommentFavorited($this->id, $this->user_id);
+        return Favorite::isCommentFavorited($this->id, $this->user_id);
     }
 
     public function isUserComment()

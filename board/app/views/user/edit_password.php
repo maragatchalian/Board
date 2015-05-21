@@ -47,6 +47,7 @@ if (empty($user->validation_errors['confirm_password']['match'])) : ?>
     <div class="controls">
     <input type="hidden" name="page_next" value="edit_password_end">
     <button class="btn btn-info btn-medium" type="submit"></span> Save</button>
+    <a href="<?php eh(url('user/profile')) ?>" class="btn btn-medium">Cancel</a>
     <br />
     <br />
 
