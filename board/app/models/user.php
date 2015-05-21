@@ -8,13 +8,13 @@ class User extends AppModel
     const MIN_USERNAME_LENGTH = 2;
     const MIN_FIRST_NAME_LENGTH = 2;
     const MIN_LAST_NAME_LENGTH = 2;
-    const MIN_EMAIL_LENGTH = 4;
+    const MIN_EMAIL_LENGTH = '';
     const MIN_PASSWORD_LENGTH = 8;
 
     const MAX_USERNAME_LENGTH = 20;
     const MAX_FIRST_NAME_LENGTH = 30;
     const MAX_LAST_NAME_LENGTH = 30;
-    const MAX_EMAIL_LENGTH = 30;
+    const MAX_EMAIL_LENGTH = 50;
     const MAX_PASSWORD_LENGTH = 20;
   
     /*
@@ -193,7 +193,11 @@ class User extends AppModel
                 'password' => md5($this->new_password)
             );
 
-            $db->update('user', $params, array('id' => $this->user_id));
+            $user_id = array(
+                'id' => $this->user_id
+            );
+
+            $db->update('user', $params, $user_id);
         } catch(Exception $e) {
             throw $e;
         }
