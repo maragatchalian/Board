@@ -188,7 +188,6 @@ class User extends AppModel
        
          try {
             $db = DB::conn();
-
             $params = array(
                 'password' => md5($this->new_password)
             );

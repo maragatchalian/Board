@@ -129,8 +129,43 @@ class UserController extends AppController
         $this->render($page); 
     }
 
+public function edit_password() 
+    {
+        $params = array(
+            'new_password' => Param::get('password'),
+            'user_id' => $_SESSION['user_id'] 
+        );
 
-    public function edit_password()
+        $user = new User($params);
+        $page = Param::get(PAGE_NEXT, self::EDIT_PASSWORD);
+        
+        switch ($page) {    
+            case self::EDIT_PASSWORD:
+                break;
+            
+            case self::EDIT_PASSWORD_END:
+                try {
+                     $user->editPassword();
+                     $success = true;
+                } catch (ValidationException $e) {
+                    $page = self::EDIT_PASSWORD;
+                    $success = false;
+                }
+
+                if ($success) {
+                $_SESSION['password'] = $user->new_password;
+                }
+                break;
+
+            default:
+                throw new NotFoundException("{$page} is not found");
+                break;
+        }
+        $this->set(get_defined_vars());
+        $this->render($page);
+    }
+
+    /*public function edit_password()
     {    
         $params = array(
             'new_password' => Param::get('password'),
@@ -164,5 +199,5 @@ class UserController extends AppController
         }
         $this->set(get_defined_vars());
         $this->render($page); 
-    }
+    }*/
 }
