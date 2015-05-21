@@ -193,7 +193,11 @@ class User extends AppModel
                 'password' => md5($this->new_password)
             );
 
-            $db->update('user', $params, array('id' => $this->user_id));
+            $user_id = array(
+                'id' => $this->user_id
+            );
+
+            $db->update('user', $params, $user_id);
         } catch(Exception $e) {
             throw $e;
         }

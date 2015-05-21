@@ -9,7 +9,7 @@
         
 <?php 
 //Password Length
-if (!empty($user->validation_errors['password']['length'])): ?>
+if (empty($user->validation_errors['password']['length'])): ?>
     <div>
         <em>Your Password</em> must be between
         <?php eh($user->validation['password']['length'][1]) ?> and
@@ -19,8 +19,8 @@ if (!empty($user->validation_errors['password']['length'])): ?>
 
 
 <?php
-//Checking of Password if it exists
-if (!empty($user->validation_errors['confirm_password']['match'])): ?>
+//Checking of Password if matched
+if (empty($user->validation_errors['confirm_password']['match'])): ?>
     <div>
         <em>Passwords</em> did not match!
     </div>
@@ -31,21 +31,21 @@ if (!empty($user->validation_errors['confirm_password']['match'])): ?>
 
 <font color ="black">
 
-<!--Username-->
+<!--Password-->
 <form action="<?php eh(url('')) ?>" method="post">
     <div class="span12"> 
     <label for="password"><h5>Password</h5></label>
-    <input type="password" name="password" value="<?php eh(Param::get('password')) ?>">
+    <input type="password" name="password" placeholder="Password" value="<?php eh(Param::get('password')) ?>">
 </div>
 
 <br />
-<!--First Name-->
+<!--Confirm Password-->
     <div class="span12">
     <label for="confirm_password"><h5>Confirm Password</h5></label>
-    <input type="password" name="confirm_password" value="<?php eh(Param::get('confirm_password')) ?>">
+    <input type="password" name="confirm_password" placeholder="Confirm Password" value="<?php eh(Param::get('confirm_password')) ?>">
     </div>
 
-<input type="hidden" name="page_next" value="edit_end">
+<input type="hidden" name="page_next" value="edit_password_end">
 <div class="span12">
 <br />
 <button class="btn btn-info btn-medium" type="submit">Save</button>
