@@ -68,13 +68,7 @@ class User extends AppModel
         ),
         'confirm_password' => array(
             'match' => array(
-                'is_password_match',
-            )
-        ),
-
-        'new_password' => array(
-            'length' => array(
-                'validate_between', self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH
+                'is_password_match'
             )
         )
     );
@@ -189,9 +183,8 @@ class User extends AppModel
          try {
             $db = DB::conn();
             $params = array(
-                'password' => md5($this->new_password)
+                'password' => md5($this->password)
             );
-
             $user_id = array('id' => $this->user_id);
             $db->update('user', $params, $user_id);
             

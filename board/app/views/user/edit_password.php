@@ -1,20 +1,12 @@
 <br />
 <font color ="black">
 <h3>Edit Password</h3>
-</font>
+
 <?php if ($user->hasError()) : ?>
     <div class="alert alert-error">
         <h4 class="alert-heading">Oh snap!</h4>
         <h7>Change a few things up..</h7><br /><br/>
-
-<?php 
-//Checking of password if matched
-if (!empty($user->validation_errors['confirm_password']['match'])): ?>
-    <div>
-        <em> Passwords did not match!</em>
-    </div>
-<?php endif ?>
-        
+       
 <?php 
 //Checking of password length
 if (!empty($user->validation_errors['password']['length'])): ?>
@@ -25,11 +17,18 @@ if (!empty($user->validation_errors['password']['length'])): ?>
     </div>
 <?php endif ?>
 
+<?php 
+//Checking if Password and Confirm Password matched
+if (!empty($user->validation_errors['confirm_password']['match'])) : ?> 
+    <div>
+        <em>Passwords</em> did not match!
+    </div>
+<?php endif ?>
 
     </div>
 <?php endif ?>
 
-<font color ="black">
+
 <br />
 <form action="<?php eh(url('')) ?>" method="post">
 
@@ -60,4 +59,3 @@ if (!empty($user->validation_errors['password']['length'])): ?>
     <div>
 </font>
 </form>
-
