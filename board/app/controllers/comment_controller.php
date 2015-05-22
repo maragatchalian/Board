@@ -1,6 +1,6 @@
 <?php
 
-class CommentController extends AppController 
+class CommentController extends AppController
 {
 
     const WRITE_COMMENT = 'write';

@@ -1,8 +1,7 @@
 <?php
 
-class FollowController extends AppController 
+class FollowController extends AppController
 {
-
     /*
     * Displays list of users
     */
@@ -68,6 +67,6 @@ class FollowController extends AppController
             throw new InvalidArgumentException("{$method} is an invalid parameter");
             break;
         }
-    redirect(url('follow/others_profile', array('user_id' => $follow->id)));  
+    redirect(url('follow/others_profile', array('user_id' => $follow->id)));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Follow extends AppModel 
+class Follow extends AppModel
 {
     public function addFollowing()
     { 
@@ -31,7 +31,7 @@ class Follow extends AppModel
                 $this->user_id
             );
             
-            $db->query('DELETE FROM follow WHERE username = ? AND user_id = ?', $params);
+            $db->query("DELETE FROM follow WHERE username = ? AND user_id = ?", $params);
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
@@ -45,7 +45,7 @@ class Follow extends AppModel
             $this->username,
             $this->user_id
         );
-        $user_following = $db->row('SELECT * FROM follow WHERE username = ? AND user_id = ?', $params);
+        $user_following = $db->row("SELECT * FROM follow WHERE username = ? AND user_id = ?", $params);
         return !$user_following;
     }
 
@@ -64,7 +64,7 @@ class Follow extends AppModel
         $following = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || !is_int($limit)) { 
+        if (!is_int($offset) || is_int($limit)) {
             throw new NotIntegerException; 
         }
                         
@@ -76,23 +76,10 @@ class Follow extends AppModel
         return $following;
     }
 
-    /*public static function getRecentActivity($offset, $limit, $user_id)
-    {
-        $home = array();
-        $db = DB::conn();
-                        
-        $rows = $db->rows("SELECT * FROM follow WHERE user_id = ?", array($user_id));
-
-        foreach($rows as $row) {
-            $home[] = new self($row);
-        }
-        return $home;
-    }*/
-
     public static function countFollowing($user_id)
     {
         $db = DB::conn();
-        $total_following = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));
+        $total_following = $db->value("SELECT COUNT(*) FROM follow WHERE user_id = ?", array($user_id));
         
         return $total_following;
     }
@@ -100,7 +87,7 @@ class Follow extends AppModel
     public static function countNewsfeed($user_id) 
     {
         $db = DB::conn();
-        $newsfeed = $db->value('SELECT COUNT(*) FROM follow WHERE user_id = ?', array($user_id));
+        $newsfeed = $db->value("SELECT COUNT(*) FROM follow WHERE user_id = ?", array($user_id));
         
         return $newsfeed;
     }

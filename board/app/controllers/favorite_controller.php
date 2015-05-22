@@ -1,8 +1,7 @@
 <?php
 
-class FavoriteController extends AppController 
+class FavoriteController extends AppController
 {
-
     public function set_favorite()
     {
         $comment = Favorite::getDataByCommentId(Param::get('comment_id'));

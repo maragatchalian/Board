@@ -1,6 +1,6 @@
 <?php
 
-class Comment extends AppModel 
+class Comment extends AppModel
 {
     const MIN_BODY_LENGTH = 1;
     const MAX_BODY_LENGTH = 140;
@@ -16,15 +16,15 @@ class Comment extends AppModel
     public static function countAll($thread_id) 
     {
         $db = DB::conn();
-        return $db->value("SELECT COUNT(*) FROM comment WHERE thread_id = ? ", array($thread_id));
+        return $db->value("SELECT COUNT(*) FROM comment WHERE thread_id = ?", array($thread_id));
     }
 
-    public static function getAll($offset, $limit, $thread_id) 
+    public static function getAll($offset, $limit, $thread_id)
     {
         $comments = array();
         $db = DB::conn();
         
-        if (!is_int($offset) || !is_int($limit)) { 
+        if (!is_int($offset) || is_int($limit)) {
             throw new NotIntegerException; 
         }
 
@@ -55,7 +55,7 @@ class Comment extends AppModel
         $following = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || !is_int($limit)) { 
+        if (!is_int($offset) || !is_int($limit)) {
             throw new NotIntegerException; 
         }
                         
@@ -93,7 +93,7 @@ class Comment extends AppModel
     public static function get($id)
     {
         $db = DB::conn();
-        $row = $db->row('SELECT * FROM comment WHERE id = ?', array($id));
+        $row = $db->row("SELECT * FROM comment WHERE id = ?", array($id));
             
         if (!$row) {
             throw new RecordNotFoundException('no record found');
@@ -111,7 +111,7 @@ class Comment extends AppModel
                 $this->id,
                 $this->user_id
             );
-            $db->query('DELETE FROM comment WHERE id = ? AND user_id = ?', $params);
+            $db->query("DELETE FROM comment WHERE id = ? AND user_id = ?", $params);
             $delete = Favorite::deleteFavoritedComment($this->id, $this->user_id);
             $db->commit();
         } catch (Exception $e) {
@@ -124,7 +124,7 @@ class Comment extends AppModel
         try {
             $db = DB::conn();
             $db->begin();
-            $db->query('DELETE FROM comment WHERE thread_id = ? AND user_id = ?', array($thread_id, $user_id));
+            $db->query("DELETE FROM comment WHERE thread_id = ? AND user_id = ?", array($thread_id, $user_id));
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();

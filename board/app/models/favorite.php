@@ -1,11 +1,11 @@
 <?php
 
-class Favorite extends AppModel 
+class Favorite extends AppModel
 {
     public static function countFavoriteByCommentId($comment_id)
     {
         $db = DB::conn();
-        $total_favorite = $db->value('SELECT COUNT(*) FROM favorite WHERE comment_id =?', array($comment_id));
+        $total_favorite = $db->value("SELECT COUNT(*) FROM favorite WHERE comment_id =?", array($comment_id));
     
         return $total_favorite;
     }
@@ -13,7 +13,7 @@ class Favorite extends AppModel
     public static function isCommentFavorited($comment_id, $user_id)
     {
         $db = DB::conn();
-        $comment_favorited = $db->rows('SELECT * FROM favorite WHERE comment_id = ? AND user_id = ?', array($comment_id, $_SESSION['user_id']));
+        $comment_favorited = $db->rows("SELECT * FROM favorite WHERE comment_id = ? AND user_id = ?", array($comment_id, $_SESSION['user_id']));
         
         return !$comment_favorited;
     }
@@ -21,17 +21,17 @@ class Favorite extends AppModel
     public static function countFavoriteByUserId($user_id)
     {
         $db = DB::conn();
-        $fave = $db->value('SELECT COUNT(*) FROM favorite WHERE user_id = ?', array($user_id));
+        $favorite = $db->value("SELECT COUNT(*) FROM favorite WHERE user_id = ?", array($user_id));
         
-        return $fave;
+        return $favorite;
     }
 
     public static function getAll($offset, $limit, $user_id)
     {
         $favorites = array();
-        $db = DB::conn();      
+        $db = DB::conn();
         
-        if (!is_int($offset) || !is_int($limit)) { 
+        if (!is_int($offset) || is_int($limit)) {
             throw new NotIntegerException; 
         }
 
@@ -74,12 +74,12 @@ class Favorite extends AppModel
             $db = DB::conn();
             $db->begin();
             $params = array(
-                /*if you removed this, once you unvaforited a comment, 
+                /*if you removed this, once you unvaforited a comment,
                 every comment you favorited will be deleted*/
                 $this->id, 
                 $this->user_id,
             );
-            $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', $params);
+            $db->query("DELETE FROM favorite WHERE comment_id = ? AND user_id = ?", $params);
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
@@ -91,19 +91,19 @@ class Favorite extends AppModel
         try {
             $db = DB::conn();
             $db->begin();
-            $db->query('DELETE FROM favorite WHERE comment_id = ? AND user_id = ?', array($comment_id, $user_id));
+            $db->query("DELETE FROM favorite WHERE comment_id = ? AND user_id = ?", array($comment_id, $user_id));
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
         }
     }
 
-     public static function deleteFavoritedCommentByThreadId($thread_id, $user_id)
+    public static function deleteFavoritedCommentByThreadId($thread_id, $user_id)
     {
         try {
             $db = DB::conn();
             $db->begin();
-            $db->query('DELETE FROM favorite WHERE thread_id = ? AND user_id = ?', array($thread_id, $user_id));
+            $db->query("DELETE FROM favorite WHERE thread_id = ? AND user_id = ?", array($thread_id, $user_id));
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();

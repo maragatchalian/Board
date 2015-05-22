@@ -1,8 +1,7 @@
 <?php
 
-class UserController extends AppController 
+class UserController extends AppController
 {
-
     const LOGIN_PAGE = 'login';
     const HOME_PAGE = 'home';
     const REGISTER = 'register';
@@ -106,7 +105,7 @@ class UserController extends AppController
             case self::EDIT:
                 break;
             
-            case self::EDIT_END:               
+            case self::EDIT_END:
                 try {
                      $user->update();
                      $success = true;

@@ -70,7 +70,7 @@ class Thread extends AppModel
                 $this->id,
                 $this->user_id
             );
-            $db->query('DELETE FROM thread WHERE id = ? AND user_id = ?', $params);
+            $db->query("DELETE FROM thread WHERE id = ? AND user_id = ?", $params);
             Comment::deleteByThreadId($this->id, $this->user_id);
 
             $db->commit();
@@ -84,7 +84,7 @@ class Thread extends AppModel
         $threads = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || !is_int($limit)) { 
+        if (!is_int($offset) || is_int($limit)) { 
             throw new NotIntegerException; 
         }
 
@@ -99,25 +99,25 @@ class Thread extends AppModel
     public static function countAll() 
     {
         $db = DB::conn();
-        return $db->value('SELECT COUNT(*) FROM thread');
+        return $db->value("SELECT COUNT(*) FROM thread");
     }
 
     public static function countAllThreadByUserId($user_id) 
     {
         $db = DB::conn();
-        return $db->value('SELECT COUNT(*) FROM thread WHERE user_id = ?', array($user_id));
+        return $db->value("SELECT COUNT(*) FROM thread WHERE user_id = ?", array($user_id));
     }
 
     public static function countAllThreadByCategory($category)
     {
         $db = DB::conn();
-        return $db->value('SELECT COUNT(*) FROM thread WHERE category = ?', array($category));
+        return $db->value("SELECT COUNT(*) FROM thread WHERE category = ?", array($category));
     }
       
     public static function get($id) 
     {
         $db = DB::conn();
-        $row = $db->row('SELECT * FROM thread WHERE id = ?', array($id));
+        $row = $db->row("SELECT * FROM thread WHERE id = ?", array($id));
             
         if (!$row) {
             throw new RecordNotFoundException('No Record Found');
@@ -133,7 +133,7 @@ class Thread extends AppModel
         $threads = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || !is_int($limit)) { 
+        if (!is_int($offset) || is_int($limit)) { 
             throw new NotIntegerException; 
         }
 
@@ -153,7 +153,7 @@ class Thread extends AppModel
         $threads = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || !is_int($limit)) { 
+        if (!is_int($offset) || is_int($limit)) { 
             throw new NotIntegerException; 
         }
 
@@ -168,7 +168,7 @@ class Thread extends AppModel
     public static function getAllCategory()
     {
         $db = DB::conn();
-        $rows = $db->rows('SELECT DISTINCT category FROM thread');
+        $rows = $db->rows("SELECT DISTINCT category FROM thread");
         $categories = array();
         
         foreach ($rows as $row) {

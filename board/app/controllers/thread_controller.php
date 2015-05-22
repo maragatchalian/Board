@@ -1,8 +1,7 @@
 <?php
 
-class ThreadController extends AppController 
+class ThreadController extends AppController
 {
-
     const CREATE_THREAD = 'create';
     const CREATE_THREAD_END = 'create_end';
 
@@ -55,7 +54,7 @@ class ThreadController extends AppController
     {
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get(PAGE, 1);
-        $pagination = new SimplePagination($current_page, $per_page);      
+        $pagination = new SimplePagination($current_page, $per_page);
 
         $thread_id = Param::get('thread_id'); 
         $thread = Thread::get($thread_id); 
@@ -83,7 +82,7 @@ class ThreadController extends AppController
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get(PAGE, 1);
         $pagination = new SimplePagination($current_page, $per_page); 
-        $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);   
+        $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
         $pagination->checkLastPage($threads);
         $total = Thread::CountAll();
         $pages = ceil($total / $per_page);

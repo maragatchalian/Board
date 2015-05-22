@@ -1,6 +1,6 @@
 <?php
 
-class User extends AppModel 
+class User extends AppModel
 {
     /*
     * These constants are used to avoid magic numbers
@@ -196,7 +196,7 @@ class User extends AppModel
     public static function get($user_id)
     {
         $db = DB::conn();
-        $row = $db->row('SELECT * FROM user WHERE id = ?', array($user_id));
+        $row = $db->row("SELECT * FROM user WHERE id = ?", array($user_id));
         
         return $row;
     } 
@@ -206,7 +206,7 @@ class User extends AppModel
         $users = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || !is_int($limit)) { 
+        if (!is_int($offset) || is_int($limit)) {
             throw new NotIntegerException; 
         }
 
@@ -233,7 +233,7 @@ class User extends AppModel
     public static function countOtherUser($user_id)
     {
         $db = DB::conn();
-        $users = $db->value('SELECT COUNT(*) FROM user WHERE id != ?', array($user_id));
+        $users = $db->value("SELECT COUNT(*) FROM user WHERE id != ?", array($user_id));
         
         return $users;
     }
