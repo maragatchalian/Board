@@ -97,7 +97,7 @@ class ThreadController extends AppController
         $this->set(get_defined_vars());
     }
 
-    public function by_category() 
+    public function display_by_category() 
     {
         $category = Param::get('category','none');
         if ( $category !== 'none') {
@@ -111,7 +111,7 @@ class ThreadController extends AppController
             $total = Thread::countAllThreadByCategory($category);
             $pages = ceil($total / $per_page);
             $this->set(get_defined_vars());
-            $this->render('sub_category');
+            $this->render('display_threads_by_chosen_category');
         
         } else {
             $categories = Thread::getAllCategory();
@@ -120,7 +120,10 @@ class ThreadController extends AppController
         }
     }    
 
-    public function sub_category() 
+    /*
+    *displays the list of threads under chosen categoty
+    */
+    public function display_threads_by_chosen_category() 
     {
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get(PAGE, 1);
