@@ -65,6 +65,10 @@ class ThreadController extends AppController
         $this->set(get_defined_vars());
     }  
 
+    /*
+    * Sorting of threads
+    */
+
     public function index() 
     {
         $per_page = MAX_DATA_PER_PAGE;
@@ -93,7 +97,7 @@ class ThreadController extends AppController
         $this->set(get_defined_vars());
     }
 
-    public function display_by_category() 
+    public function by_category() 
     {
         $category = Param::get('category','none');
         if ( $category !== 'none') {
@@ -115,4 +119,16 @@ class ThreadController extends AppController
             $this->render('categories');
         }
     }    
+
+    public function sub_category() 
+    {
+        $per_page = MAX_DATA_PER_PAGE;
+        $current_page = Param::get(PAGE, 1);
+        $pagination = new SimplePagination($current_page, $per_page);
+        $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
+        $pagination->checkLastPage($threads);
+        $total = Thread::countAll();
+        $pages = ceil($total / $per_page);
+        $this->set(get_defined_vars()); 
+    }  
 } 

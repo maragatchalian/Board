@@ -5,7 +5,7 @@
 <ul>
     <?php foreach ($categories as $category): ?>
     	<li>
-    		<a href="<?php eh('/thread/display_by_category?category='.$category) ?>">
+    		<a href="<?php eh('/thread/by_category?category='.$category) ?>">
     		<?php eh($category); ?></a>
     	</li>
     <?php endforeach; ?>
