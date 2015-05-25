@@ -67,7 +67,7 @@
         <li><a href="<?php eh(url('user/profile')) ?>">Profile</a></li>
         <li><a href="<?php eh(url('thread/index')) ?>">All Threads</a></li>
         <li><a href="<?php eh(url('thread/own_threads')) ?>">My Threads</a></li>
-        <li><a href="<?php eh(url('thread/by_category')) ?>">Thread Categories</a></li>
+        <li><a href="<?php eh(url('thread/display_by_category')) ?>">Thread Categories</a></li>
         <li><a href="<?php eh(url('thread/create')) ?>">Create New Thread</a></li>  
         <li><a href="<?php eh(url('follow/get_all_users')) ?>">Users</a></li> 
         <li><a href="<?php eh(url('user/logout')) ?>">Logout</a></li>
