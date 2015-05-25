@@ -115,7 +115,7 @@ class UserController extends AppController
                 }
 
                 if ($success) {
-                $_SESSION['username'] = $user->new_username;
+                    $_SESSION['username'] = $user->new_username;
                 }
                 break;  
 
@@ -128,7 +128,7 @@ class UserController extends AppController
         $this->render($page); 
     }
 
-public function edit_password() 
+    public function edit_password() 
     {
         $params = array(
             'password' => Param::get('password'),
@@ -146,15 +146,9 @@ public function edit_password()
             case self::EDIT_PASSWORD_END:
                 try {
                     $user->editPassword();
-                    //$success = true;
                 } catch (ValidationException $e) {
                     $page = self::EDIT_PASSWORD;
-                    //$success = false;
                 }
-
-                /*if ($success) {
-                $_SESSION['password'] = $user->new_password;
-                }*/
                 break;
 
             default:
