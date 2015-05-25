@@ -64,7 +64,7 @@ class Follow extends AppModel
         $following = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || is_int($limit)) {
+        if (!is_int($offset) || !is_int($limit)) {
             throw new NotIntegerException; 
         }
                         

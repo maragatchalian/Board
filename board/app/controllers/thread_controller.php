@@ -58,7 +58,7 @@ class ThreadController extends AppController
         $this->set(get_defined_vars());
     }
 
-    public function delete_thread() 
+    public function delete() 
     { 
         $thread = Thread::get(Param::get('thread_id'));
         $thread->delete($_SESSION['user_id']);

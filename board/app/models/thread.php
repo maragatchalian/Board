@@ -84,7 +84,7 @@ class Thread extends AppModel
         $threads = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || is_int($limit)) { 
+        if (!is_int($offset) || !is_int($limit)) { 
             throw new NotIntegerException; 
         }
 
@@ -133,7 +133,7 @@ class Thread extends AppModel
         $threads = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || is_int($limit)) { 
+        if (!is_int($offset) || !is_int($limit)) { 
             throw new NotIntegerException; 
         }
 
@@ -153,7 +153,7 @@ class Thread extends AppModel
         $threads = array();
         $db = DB::conn();
 
-        if (!is_int($offset) || is_int($limit)) { 
+        if (!is_int($offset) || !is_int($limit)) { 
             throw new NotIntegerException; 
         }
 
