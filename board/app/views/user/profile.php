@@ -12,7 +12,7 @@
 <a class="btn btn-default btn-medium" href="<?php eh(url('follow/following')) ?>" 
     method="post"> <i class="icon-plus"></i>Following</a>     
 
-<a class="btn btn-default btn-medium" href="<?php eh(url('thread/own_threads')) ?>" 
+<a class="btn btn-default btn-medium" href="<?php eh(url('thread/all_threads')) ?>" 
     method="post"> <i class="icon-file"></i>My Threads</a>    
 <br />        
 <br />    
