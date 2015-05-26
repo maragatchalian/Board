@@ -89,6 +89,7 @@ class ThreadController extends AppController
         $total = Thread::countAllThreadByUserId($_SESSION['user_id']);
         $pages = ceil($total / $per_page);
         $this->set(get_defined_vars());
+        $this->render('index');
     }
 
     public function display_by_category() 

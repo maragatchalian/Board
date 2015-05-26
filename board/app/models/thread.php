@@ -79,7 +79,7 @@ class Thread extends AppModel
         }
     }
 
-    public static function getAll($offset, $limit)
+    public static function getAll($offset, $limit, $id=null)
     {
         $threads = array();
         $db = DB::conn();
@@ -87,6 +87,14 @@ class Thread extends AppModel
         if (!is_int($offset) || !is_int($limit)) { 
             throw new NotIntegerException; 
         }
+
+        /*$sql = '';
+        if ($id==null)
+            $sql = "SELECT * FROM thread LIMIT {$offset}, {$limit}";
+        else
+            $sql = "SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}", array($id);
+
+        $rows = $db->rows($sql);*/
 
         $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
     
