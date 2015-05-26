@@ -65,7 +65,7 @@
 <ul id="menu">
         <li><a href="<?php eh(url('comment/home')) ?>">Home</a>
         <li><a href="<?php eh(url('user/profile')) ?>">Profile</a></li>
-        <li><a href="<?php eh(url('thread/index')) ?>">All Threads</a></li>
+        <li><a href="<?php eh(url('thread/all_threads')) ?>">All Threads</a></li>
         <li><a href="<?php eh(url('thread/own_threads')) ?>">My Threads</a></li>
         <li><a href="<?php eh(url('thread/display_by_category')) ?>">Thread Categories</a></li>
         <li><a href="<?php eh(url('thread/create')) ?>">Create New Thread</a></li>  

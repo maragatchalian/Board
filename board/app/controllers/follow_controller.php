@@ -2,7 +2,6 @@
 
 class FollowController extends AppController
 {
-
     /*
     * Follow/Unfollow user on their profile
     */
