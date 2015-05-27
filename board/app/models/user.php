@@ -201,24 +201,6 @@ class User extends AppModel
         return $row;
     } 
 
-    public static function getOtherUsers($offset, $limit, $id)
-    {
-        $users = array();
-        $db = DB::conn();
-
-        if (!is_int($offset) || !is_int($limit)) {
-            throw new NotIntegerException; 
-        }
-
-        $rows = $db->rows("SELECT * FROM user where id != ? LIMIT {$offset}, {$limit}", array($id));
-            
-        foreach($rows as $row) {
-            $users[] = new self($row);
-        }
-        
-        return $users;
-    }
-
     public static function getData($user_id)
     {
         $db = DB::conn();
@@ -228,13 +210,5 @@ class User extends AppModel
             throw new RecordNotFoundException('no record found');
         }
         return new self($row);
-    }
-
-    public static function countOtherUser($user_id)
-    {
-        $db = DB::conn();
-        $users = $db->value("SELECT COUNT(*) FROM user WHERE id != ?", array($user_id));
-        
-        return $users;
     }
 } 
