@@ -8,7 +8,7 @@ class FollowController extends AppController
     public function others_profile()
     {
         $user_id = Param::get('user_id');
-        $row = User::get($user_id); 
+        $row = User::get($user_id);
         $user = new Follow($row);
         $user->user_id = $_SESSION['user_id'];
         $this->set(get_defined_vars());  

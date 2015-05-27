@@ -68,7 +68,8 @@ class ThreadController extends AppController
     public function all_threads() 
     {
         //$user_id = $_SESSION['user_id']; 
-        $user_id = Param::get('user_id');  
+        $user_id = Param::get('user_id');
+          
         if  ($user_id == NULL) {
             $per_page = MAX_DATA_PER_PAGE;
             $current_page = Param::get(PAGE, 1);
@@ -81,13 +82,13 @@ class ThreadController extends AppController
             $this->render('index');
 
         } else {       
-            //$user_id = $_SESSION['user_id']; 
+            $user_id = $_SESSION['user_id']; 
             $per_page = MAX_DATA_PER_PAGE;
             $current_page = Param::get(PAGE, 1);
             $pagination = new SimplePagination($current_page, $per_page);
-            $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1, $_SESSION['user_id']);
+            $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1, $user_id);
             $pagination->checkLastPage($threads);
-            $total = Thread::countAllThreadByUserId($_SESSION['user_id']);
+            $total = Thread::countAllThreadByUserId($user_id);
             $pages = ceil($total / $per_page);
             $this->set(get_defined_vars());
             $this->render('index');
