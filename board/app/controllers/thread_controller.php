@@ -67,8 +67,8 @@ class ThreadController extends AppController
 
     public function all_threads() 
     {
-        $user_id = $_SESSION['user_id']; 
-        //$user_id = Param::get('user_id');  
+        //$user_id = $_SESSION['user_id']; 
+        $user_id = Param::get('user_id');  
         if  ($user_id == NULL) {
             $per_page = MAX_DATA_PER_PAGE;
             $current_page = Param::get(PAGE, 1);

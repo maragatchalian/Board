@@ -12,11 +12,10 @@
 <a class="btn btn-default btn-medium" href="<?php eh(url('follow/following')) ?>" 
     method="post"> <i class="icon-plus"></i>Following</a>     
 
-<a class="btn btn-default btn-medium" href="<?php eh(url('thread/all_threads')) ?>" 
-    method="post"> <i class="icon-file"></i>My Threads</a>    
-<br />        
-<br />    
-<br />    
+<form action="<?php eh(url('thread/all_threads')) ?>" method="post">
+    <input type="hidden" name="user_id" value="(PHP CODE GENERATED USER_ID)">
+    <button class="btn btn-default btn-medium"><i class="icon-file"></i>My Threads</button>
+</form>
 
 <div class = "profile_info">
     <b>Username: </b> <?php eh($user->username) ?> <br />
