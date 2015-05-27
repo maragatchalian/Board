@@ -67,7 +67,6 @@ class ThreadController extends AppController
 
     public function all_threads() 
     {
-        //$user_id = $_SESSION['user_id']; 
         $user_id = Param::get('user_id');
           
         if  ($user_id == NULL) {
@@ -95,20 +94,6 @@ class ThreadController extends AppController
         }
     }  
 
-    /*public function own_threads()
-    {
-        $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get(PAGE, 1);
-        $pagination = new SimplePagination($current_page, $per_page);
-        $user_id = $_SESSION['user_id'];
-        $threads = Thread::getAllMyThread($pagination->start_index -1, $pagination->count + 1, $user_id);
-        $pagination->checkLastPage($threads);
-        $total = Thread::countAllThreadByUserId($_SESSION['user_id']);
-        $pages = ceil($total / $per_page);
-        $this->set(get_defined_vars());
-        $this->render('index');
-    }*/
-
     public function display_by_category() 
     {
         $category = Param::get('category','none');
@@ -133,7 +118,7 @@ class ThreadController extends AppController
     }    
 
     /*
-    *displays the list of threads under chosen categoty
+    *Displays the list of threads under chosen categoty
     */
     public function display_threads_by_chosen_category() 
     {

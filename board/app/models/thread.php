@@ -88,7 +88,6 @@ class Thread extends AppModel
             throw new NotIntegerException; 
         }
 
-        //$sql = '';
         if ($user_id == NULL) {
             $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
 
@@ -96,12 +95,10 @@ class Thread extends AppModel
             $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
         }
 
-        //$rows = $db->rows($sql);
-        //$rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
-    
         foreach($rows as $row) {
             $threads[] = new self($row);
         }
+        
         return $threads;
     }
 
@@ -134,26 +131,6 @@ class Thread extends AppModel
         return new self($row);
     }
     
-    /* 
-    * Sorting of threads by own threads
-    */
-    /*public static function getAllMyThread($offset, $limit, $id)
-    {
-        $threads = array();
-        $db = DB::conn();
-
-        if (!is_int($offset) || !is_int($limit)) { 
-            throw new NotIntegerException; 
-        }
-
-        $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}", array($id));
-         
-        foreach($rows as $row) {
-            $threads[] = new self($row);
-        }
-        return $threads;
-    }*/
-
     /* 
     * Sorting of threads by category
     */
