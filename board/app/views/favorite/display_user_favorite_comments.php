@@ -19,7 +19,9 @@
         <div class ="content">
         <?php eh($get_from_favorite->comment_body) ?></a> 
         <br /> 
-        By: <?php eh($get_from_favorite->username) ?></a>
+        By:  <a href="<?php //eh(url('follow/others_profile', array('user_id' => $get_from_favorite->user_id))) ?>">
+            <?php eh($get_from_favorite->username) ?></a>
+
         <br /> 
     </ul>
     <?php endforeach; //Display contents of individual thread to href to A tag ?>

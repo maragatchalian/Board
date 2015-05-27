@@ -11,7 +11,9 @@
     <ul>
         <div class ="comments">
         <div class ="content">
-        <h5><?php eh($comment->username) //username ?> </h5>
+            <a href="<?php eh(url('follow/others_profile', array('user_id' => $comment->user_id))) ?>">
+        <h5><?php eh($comment->username) //username ?> </h5> </a>
+         
             commented: <?php eh($comment->body) //comment ?> 
         <br />
         <?php echo time_difference($comment->created) ?> </em>  
