@@ -30,17 +30,22 @@ class Favorite extends AppModel
     {
         $favorites = array();
         $db = DB::conn();
-        
+
         if (!is_int($offset) || !is_int($limit)) {
             throw new NotIntegerException; 
         }
 
-        $rows = $db->rows("SELECT * FROM favorite WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
-  
-        foreach($rows as $row) {
-            $favorites[] = new self($row);
-        }
+        $rows = $db->rows("SELECT * from favorite WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
         
+
+        foreach ($rows as $favorite) {
+            $favorites[] = new Favorite($favorite);
+        }
+
+        foreach ($favorites as $favorite) {
+            $row = $db->row("SELECT * from user WHERE username = ? LIMIT {$offset}, {$limit}", array($favorite->username));
+            $favorite->user_id = $row['id'];
+        }
         return $favorites;
     }
 

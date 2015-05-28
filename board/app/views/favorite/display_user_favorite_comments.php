@@ -19,7 +19,7 @@
         <div class ="content">
         <?php eh($get_from_favorite->comment_body) ?></a> 
         <br /> 
-        By:  <a href="<?php //eh(url('follow/others_profile', array('user_id' => $get_from_favorite->user_id))) ?>">
+        By:  <a href="<?php eh(url('follow/others_profile', array('user_id' => $get_from_favorite->user_id))) ?>">  
             <?php eh($get_from_favorite->username) ?></a>
 
         <br /> 

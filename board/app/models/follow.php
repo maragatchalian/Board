@@ -48,7 +48,7 @@ class Follow extends AppModel
         }
 
         $db = DB::conn();
-        $rows = $db->rows("SELECT * from follow WHERE user_id=? LIMIT {$offset}, {$limit}", array($user_id));
+        $rows = $db->rows("SELECT * from follow WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
         
 
         foreach ($rows as $follow) {
@@ -56,7 +56,7 @@ class Follow extends AppModel
         }
 
         foreach ($follows as $follow) {
-            $row = $db->row("SELECT * from user WHERE username=? LIMIT {$offset}, {$limit}", array($follow->username));
+            $row = $db->row("SELECT * from user WHERE username = ? LIMIT {$offset}, {$limit}", array($follow->username));
             $follow->user_id = $row['id'];
         }
         return $follows;

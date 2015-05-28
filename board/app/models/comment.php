@@ -114,10 +114,6 @@ class Comment extends AppModel
         }
     }
 
-    /*
-    * Functions with regards to favorite/unfavorite comments
-    */
-
     public function countFavorite()
     {
         return Favorite::countFavoriteByCommentId($this->id);
