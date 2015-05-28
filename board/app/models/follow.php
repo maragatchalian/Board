@@ -2,6 +2,7 @@
 
 class Follow extends AppModel
 {
+
     public function addFollowing()
     { 
         try {

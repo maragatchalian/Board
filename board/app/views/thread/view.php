@@ -28,7 +28,8 @@
 <div class ="content">
 
 <!--View Username-->
-<h4> <a href="<?php eh(url('follow/others_profile', array('user_id' => $get_from_comment->user_id))) ?>">
+<h4> 
+  <a href="<?php eh(url('follow/others_profile', array('user_id' => $get_from_comment->user_id))) ?>">
   <?php eh($get_from_comment->username) ?> </h4> </a>
 
 <!--View Comment Body-->    

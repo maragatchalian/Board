@@ -65,7 +65,7 @@ class ThreadController extends AppController
         $this->set(get_defined_vars());
     }  
 
-    public function all_threads() 
+    public function index() 
     {
         $user_id = Param::get('user_id');
           
@@ -78,7 +78,7 @@ class ThreadController extends AppController
             $total = Thread::countAll();
             $pages = ceil($total / $per_page);
             $this->set(get_defined_vars()); 
-            $this->render('index');
+            
 
         } else {       
             $user_id = $_SESSION['user_id']; 
@@ -90,11 +90,11 @@ class ThreadController extends AppController
             $total = Thread::countAllThreadByUserId($user_id);
             $pages = ceil($total / $per_page);
             $this->set(get_defined_vars());
-            $this->render('index');
+            
         }
     }  
 
-    public function display_by_category() 
+    public function display_category() 
     {
         $category = Param::get('category','none');
         if ( $category !== 'none') {
@@ -108,7 +108,7 @@ class ThreadController extends AppController
             $total = Thread::countAllThreadByCategory($category);
             $pages = ceil($total / $per_page);
             $this->set(get_defined_vars());
-            $this->render('display_threads_by_chosen_category');
+            $this->render('display_by_category');
         
         } else {
             $categories = Thread::getAllCategory();
@@ -120,7 +120,7 @@ class ThreadController extends AppController
     /*
     *Displays the list of threads under chosen categoty
     */
-    public function display_threads_by_chosen_category() 
+    public function display_by_category() 
     {
         $per_page = MAX_DATA_PER_PAGE;
         $current_page = Param::get(PAGE, 1);

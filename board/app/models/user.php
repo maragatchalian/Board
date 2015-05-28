@@ -73,22 +73,6 @@ class User extends AppModel
         )
     );
 
-    /*
-    * Limits a certain field into a specific number of characters.
-    * Checks if the characters are valid. (e.g., dot, hyphen)
-    */
-    public function is_valid_username($username)
-    {
-        $valid = array('-', '_', '.');    
-        return ctype_alnum(str_replace($valid, '', $username));
-    }
-
-    public function is_valid_name($string)
-    {
-        $valid = array('-', ' ');    
-        return ctype_alpha(str_replace($valid, '', $string));
-    }
-
     public function is_password_match()
     {
         return $this->password == $this->confirm_password;

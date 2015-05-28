@@ -57,7 +57,7 @@ class CommentController extends AppController
         $pagination = new SimplePagination($current_page, $per_page); 
 
         $user_id = $_SESSION['user_id'];
-        $following = Comment::getFollowing($pagination->start_index -1, $pagination->count + 1, $user_id);
+        $following = Follow::getAll($pagination->start_index -1, $pagination->count + 1, $user_id);
         
         $thread_id = Param::get('thread_id');
         $comments = Comment::newsfeed($thread_id);

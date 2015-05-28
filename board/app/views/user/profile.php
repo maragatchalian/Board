@@ -12,7 +12,7 @@
 <a class="btn btn-default btn-medium" href="<?php eh(url('follow/following')) ?>" 
     method="post"> <i class="icon-plus"></i>Following</a>     
 
-<form action="<?php eh(url('thread/all_threads')) ?>" method="post">
+<form action="<?php eh(url('thread/index')) ?>" method="post">
     <input type="hidden" name="user_id" value="(PHP CODE GENERATED USER_ID)">
     <button class="btn btn-default btn-medium"><i class="icon-file"></i>My Threads</button>
 </form>
