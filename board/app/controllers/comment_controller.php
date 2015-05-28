@@ -47,10 +47,7 @@ class CommentController extends AppController
         $this->set(get_defined_vars());
     }  
 
-    /*
-    * Displays the homepage
-    */
-    public function home() 
+    public function display_recent_comment() 
     {
         $per_page = self::MAX_USER_IN_NEWSFEED; 
         $current_page = Param::get(PAGE, 1); 
@@ -60,7 +57,7 @@ class CommentController extends AppController
         $following = Follow::getAll($pagination->start_index -1, $pagination->count + 1, $user_id);
         
         $thread_id = Param::get('thread_id');
-        $comments = Comment::newsfeed($thread_id);
+        $comments = Comment::displayRecentComment($thread_id);
 
         $pagination->checkLastPage($following);
         $total = Follow::countNewsfeed($user_id);

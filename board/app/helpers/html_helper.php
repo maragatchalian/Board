@@ -43,6 +43,7 @@ function time_difference($date)
         if ($difference >= ONE_SECOND) {
             $result = round($difference);
             $output = $result . ' ' . $str . ($result > ONE_SECOND ? 's' : '') . " ago";
+            
             return $output;
         }
     }

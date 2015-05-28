@@ -39,9 +39,6 @@ class ThreadController extends AppController
         $this->render($current_page);
     }
               
-    /*
-    *Displays the comments of the thread
-    */
     public function view() 
     {
         $per_page = MAX_DATA_PER_PAGE;
@@ -68,23 +65,19 @@ class ThreadController extends AppController
     public function index() 
     {
         $user_id = Param::get('user_id');
-          
+        $per_page = MAX_DATA_PER_PAGE;
+        $current_page = Param::get(PAGE, 1);
+        $pagination = new SimplePagination($current_page, $per_page); 
+        
         if  ($user_id == NULL) {
-            $per_page = MAX_DATA_PER_PAGE;
-            $current_page = Param::get(PAGE, 1);
-            $pagination = new SimplePagination($current_page, $per_page); 
             $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1, $user_id);
             $pagination->checkLastPage($threads);
             $total = Thread::countAll();
             $pages = ceil($total / $per_page);
-            $this->set(get_defined_vars()); 
-            
+            $this->set(get_defined_vars());         
 
         } else {       
             $user_id = $_SESSION['user_id']; 
-            $per_page = MAX_DATA_PER_PAGE;
-            $current_page = Param::get(PAGE, 1);
-            $pagination = new SimplePagination($current_page, $per_page);
             $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1, $user_id);
             $pagination->checkLastPage($threads);
             $total = Thread::countAllThreadByUserId($user_id);
@@ -117,9 +110,6 @@ class ThreadController extends AppController
         }
     }    
 
-    /*
-    *Displays the list of threads under chosen categoty
-    */
     public function display_by_category() 
     {
         $per_page = MAX_DATA_PER_PAGE;

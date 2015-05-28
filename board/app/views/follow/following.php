@@ -9,9 +9,15 @@
 <ul style="list-style-type:square">
 <?php foreach ($following as $get_from_following): ?>
     <li>
-        <a href="<?php eh(url('follow/others_profile', array('user_id' => $get_from_following->user_id))) ?>">       <?php eh($get_from_following->username) ?> </a>         
+       
+        <a href="<?php eh(url('follow/others_profile', array('user_id' => $get_from_following->user_id))) ?>">       
+
+         <?php eh($get_from_following->username) ?> </a>         
+    
     </li>
 <?php endforeach; ?>
+
+
  
 <?php if(empty($following)): ?>
        You are not following any users.

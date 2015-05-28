@@ -37,7 +37,7 @@ class Comment extends AppModel
         return $comments;
     }
 
-    public static function newsfeed($thread_id)
+    public static function displayRecentComment($thread_id)
     {
         $comments = array();
         $db = DB::conn();

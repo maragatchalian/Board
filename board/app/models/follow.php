@@ -38,7 +38,30 @@ class Follow extends AppModel
             $db->rollback();
         }
     }
-    
+   
+    public static function getAll($offset, $limit, $user_id)
+    {
+        $follows = array();
+
+        if (!is_int($offset) || !is_int($limit)) {
+            throw new NotIntegerException; 
+        }
+
+        $db = DB::conn();
+        $rows = $db->rows("SELECT * from follow WHERE user_id=? LIMIT {$offset}, {$limit}", array($user_id));
+        
+
+        foreach ($rows as $follow) {
+            $follows[] = new Follow($follow);
+        }
+
+        foreach ($follows as $follow) {
+            $row = $db->row("SELECT * from user WHERE username=? LIMIT {$offset}, {$limit}", array($follow->username));
+            $follow->user_id = $row['id'];
+        }
+        return $follows;
+    }
+
     public function isUserFollowing()
     {
         $db = DB::conn();
@@ -55,26 +78,9 @@ class Follow extends AppModel
        return new self(object_to_array(User::getData($user_id)));
     }
 
-    public static function newsfeed($thread_id)
+    public static function displayRecentComment($thread_id)
     {
-         return new self(object_to_array(Comment::newsfeed($thread_id)));
-    }
-
-    public static function getAll($offset, $limit, $user_id)
-    {
-        $following = array();
-        $db = DB::conn();
-
-        if (!is_int($offset) || !is_int($limit)) {
-            throw new NotIntegerException; 
-        }
-                        
-        $rows = $db->rows("SELECT * FROM follow WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
-
-        foreach($rows as $row) {
-            $following[] = new self($row);
-        }
-        return $following;
+         return new self(object_to_array(Comment::displayRecentComment($thread_id)));
     }
 
     public static function countFollowing($user_id)
@@ -88,8 +94,8 @@ class Follow extends AppModel
     public static function countNewsfeed($user_id) 
     {
         $db = DB::conn();
-        $newsfeed = $db->value("SELECT COUNT(*) FROM follow WHERE user_id = ?", array($user_id));
+        $recent_comment = $db->value("SELECT COUNT(*) FROM follow WHERE user_id = ?", array($user_id));
         
-        return $newsfeed;
+        return $recent_comment;
     }
 } 
