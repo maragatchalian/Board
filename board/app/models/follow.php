@@ -2,7 +2,6 @@
 
 class Follow extends AppModel
 {
-
     public function addFollowing()
     { 
         try {
@@ -91,7 +90,7 @@ class Follow extends AppModel
         return $total_following;
     }
 
-    public static function countNewsfeed($user_id) 
+    public static function countRecentComment($user_id) 
     {
         $db = DB::conn();
         $recent_comment = $db->value("SELECT COUNT(*) FROM follow WHERE user_id = ?", array($user_id));

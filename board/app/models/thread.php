@@ -5,9 +5,6 @@ class Thread extends AppModel
     const MIN_TITLE_LENGTH = 1;
     const MAX_TITLE_LENGTH = 30;
 
-    /* 
-    * Thread Length Validation
-    */
     public $validation = array(
     'title' => array(
         'length' => array(
@@ -15,9 +12,6 @@ class Thread extends AppModel
             ),
         ),
 
-    /* 
-    * Category Validation
-    */
     'category' => array(
         'length' => array(
             'validate_between', self::MIN_TITLE_LENGTH, self::MAX_TITLE_LENGTH
@@ -131,9 +125,6 @@ class Thread extends AppModel
         return new self($row);
     }
     
-    /* 
-    * Sorting of threads by category
-    */
     public static function getByCategory($offset, $limit, $category) 
     {
         $threads = array();

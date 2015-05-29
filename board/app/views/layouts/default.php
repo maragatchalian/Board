@@ -15,7 +15,7 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="<?php eh(url('comment/home')) ?>"> <font color ="white"> FoodFacts! </font></a>                   
+            <a class="brand" href="<?php eh(url('comment/display_recent_comment')) ?>"> <font color ="white"> FoodFacts! </font></a>                   
         </div>
     </div>
 </div>

@@ -2,9 +2,6 @@
 
 class User extends AppModel
 {
-    /*
-    * These constants are used to avoid magic numbers
-    */
     const MIN_USERNAME_LENGTH = 2;
     const MIN_FIRST_NAME_LENGTH = 2;
     const MIN_LAST_NAME_LENGTH = 2;
@@ -17,9 +14,6 @@ class User extends AppModel
     const MAX_EMAIL_LENGTH = 50;
     const MAX_PASSWORD_LENGTH = 20;
   
-    /*
-    * Registration Validation.
-    */
     public $validation = array(
         'username' => array(
             'length' => array(
@@ -195,4 +189,4 @@ class User extends AppModel
         }
         return new self($row);
     }
-} 
+}

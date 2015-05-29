@@ -22,9 +22,6 @@ class FavoriteController extends AppController
         redirect(url('thread/view', array('thread_id' => $comment->thread_id)));
     }
 
-    /*
-    * Displays list of user's favorite comments
-    */
     public function display_user_favorite_comments() 
     { 
         $per_page = MAX_DATA_PER_PAGE;

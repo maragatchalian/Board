@@ -2,9 +2,9 @@
 
 class FollowController extends AppController
 {
-    /*
+    /**
     * Follow/Unfollow user on their profile
-    */
+    **/
     public function others_profile()
     {
         $user_id = Param::get('user_id');
@@ -14,9 +14,6 @@ class FollowController extends AppController
         $this->set(get_defined_vars());  
     }
 
-    /*
-    * Following and Unfollowing a User
-    */
     public function following() 
     { 
         $per_page = MAX_DATA_PER_PAGE;

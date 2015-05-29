@@ -11,6 +11,7 @@
 <?php if (empty($favorites)): ?>
        You have no favorites.
 <?php endif ?>
+
 <br />
 
 <?php foreach ($favorites as $get_from_favorite): ?>
@@ -19,12 +20,12 @@
         <div class ="content">
         <?php eh($get_from_favorite->comment_body) ?></a> 
         <br /> 
-        By:  <a href="<?php eh(url('follow/others_profile', array('user_id' => $get_from_favorite->user_id))) ?>">  
-            <?php eh($get_from_favorite->username) ?></a>
-
-        <br /> 
+        <em>by: <a href="<?php eh(url('follow/others_profile', array('user_id' => $get_from_favorite->user_id))) ?>">  
+            <?php eh($get_from_favorite->username) ?></a></em>
+         <br /> 
     </ul>
-    <?php endforeach; //Display contents of individual thread to href to A tag ?>
+<?php endforeach; ?>
+
 <br />   
 
 <!--Pagination --> 
