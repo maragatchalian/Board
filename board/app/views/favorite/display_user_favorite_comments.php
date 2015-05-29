@@ -18,10 +18,10 @@
     <ul>
         <div class ="comments">
         <div class ="content">
-        <?php eh($get_from_favorite->comment_body) ?></a> 
+        <?php readable_text($get_from_favorite->comment_body) ?></a> 
         <br /> 
-        <em>by: <a href="<?php eh(url('follow/others_profile', array('user_id' => $get_from_favorite->user_id))) ?>">  
-            <?php eh($get_from_favorite->username) ?></a></em>
+        <em>by: <a href="<?php readable_text(url('follow/others_profile', array('user_id' => $get_from_favorite->user_id))) ?>">  
+            <?php readable_text($get_from_favorite->username) ?></a></em>
          <br /> 
     </ul>
 <?php endforeach; ?>

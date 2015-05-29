@@ -4,12 +4,12 @@
 <br />
 <!--Thread Title-->
 <center>
-<h1><?php eh($thread->title) ?></h1>
-<h3>Category: <?php eh($thread->category)?></h3>
+<h1><?php readable_text($thread->title) ?></h1>
+<h3>Category: <?php readable_text($thread->category)?></h3>
 
 <!-- Delete Thread -->
 <?php if ($thread->checkThreadOwner()) : ?> 
-  <a href="<?php eh(url('thread/delete', array('thread_id' => $thread->id)))?>"
+  <a href="<?php readable_text(url('thread/delete', array('thread_id' => $thread->id)))?>"
   onclick="return confirm('Are you sure you want to delete this thread?')">
 <span class ="icon-trash"></span>
 </a> Delete This Thread<font color ="white">...</font>
@@ -29,8 +29,8 @@
 
 <!--View Username-->
 <h4> 
-  <a href="<?php eh(url('follow/others_profile', array('user_id' => $get_from_comment->user_id))) ?>">
-  <?php eh($get_from_comment->username) ?> </h4> </a>
+  <a href="<?php readable_text(url('follow/others_profile', array('user_id' => $get_from_comment->user_id))) ?>">
+  <?php readable_text($get_from_comment->username) ?> </h4> </a>
 
 <!--View Comment Body-->    
 <?php echo($get_from_comment->body) ?>
@@ -42,7 +42,7 @@
 
 <!-- Delete Comment -->
 <?php if ($get_from_comment->isUserComment()) : ?> 
-  <a href="<?php eh(url('comment/delete', array('comment_id' => $get_from_comment->id)))?>"
+  <a href="<?php readable_text(url('comment/delete', array('comment_id' => $get_from_comment->id)))?>"
   onclick="return confirm('Are you sure you want to delete this comment?')">
 <span class ="icon-trash"></span>
 </a> Delete <font color ="white">...</font>
@@ -50,10 +50,10 @@
 
  <!-- Favorite Comment -->
 <?php if ($get_from_comment->getIsCommentFavorited($_SESSION['user_id'])): ?>
-<a href="<?php eh(url('favorite/set_favorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
+<a href="<?php readable_text(url('favorite/set_favorite', array('comment_id' => $get_from_comment->id, 'method' => 'add')))?>">
     <i class="icon-star"></i></a>
 <?php else : ?>
-<a href="<?php eh(url('favorite/set_favorite', array('comment_id' => $get_from_comment->id, 'method' => 'remove')))?>" class="yellow"> 
+<a href="<?php readable_text(url('favorite/set_favorite', array('comment_id' => $get_from_comment->id, 'method' => 'remove')))?>" class="yellow"> 
  <i class="icon-star icon-yellow"></i></a>
 <?php endif ?>
 
@@ -75,7 +75,7 @@
 
 <!--Pagination --> 
 <?php if($pagination->current > 1): ?>
-    <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->prev ?>'>Previous</a>
+    <a class ="btn btn-small" href='?thread_id=<?php readable_text($thread->id) ?>&page=<?php echo $pagination->prev ?>'>Previous</a>
     <?php else: ?> 
          Previous
     <?php endif ?>
@@ -84,24 +84,24 @@
     <?php if($i == $current_page): ?>
       <?php echo $i ?>
     <?php else: ?>
-        <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $i ?>'><?php echo $i ?></a>
+        <a class ="btn btn-small" href='?thread_id=<?php readable_text($thread->id) ?>&page=<?php echo $i ?>'><?php echo $i ?></a>
     <?php endif; ?>
 <?php endfor; ?>
 
 <?php if(!$pagination->is_last_page): ?>
-    <a class ="btn btn-small" href='?thread_id=<?php eh($thread->id) ?>&page=<?php echo $pagination->next ?>'>Next</a>
+    <a class ="btn btn-small" href='?thread_id=<?php readable_text($thread->id) ?>&page=<?php echo $pagination->next ?>'>Next</a>
     <?php else: ?>  Next
 <?php endif ?>
 
 <hr>            
-<form class="well" method="post" action="<?php eh(url('comment/write')) ?>">
-  <input type="hidden" class="span2" name="username" value="<?php eh($_SESSION['username']) ?>">
+<form class="well" method="post" action="<?php readable_text(url('comment/write')) ?>">
+  <input type="hidden" class="span2" name="username" value="<?php readable_text($_SESSION['username']) ?>">
   
   <label>Comment</label>
-  <textarea name="body"><?php eh(Param::get('body')) ?></textarea>
+  <textarea name="body"><?php readable_text(Param::get('body')) ?></textarea>
   <br />
 
-  <input type="hidden" name="thread_id" value="<?php eh($thread->id) ?>">
+  <input type="hidden" name="thread_id" value="<?php readable_text($thread->id) ?>">
   <input type="hidden" name="page_next" value="write_end">
   <button type="submit" class="btn btn-medium btn-info">Submit</button>
 </font> 

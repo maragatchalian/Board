@@ -11,10 +11,10 @@
     <ul>
         <div class ="comments">
         <div class ="content">
-            <a href="<?php eh(url('follow/others_profile', array('user_id' => $comment->user_id))) ?>">
-        <h5><?php eh($comment->username) //username ?> </h5> </a>
+            <a href="<?php readable_text(url('follow/others_profile', array('user_id' => $comment->user_id))) ?>">
+        <h5><?php readable_text($comment->username) //username ?> </h5> </a>
          
-            commented: <?php eh($comment->body) //comment ?> 
+            commented: <?php readable_text($comment->body) //comment ?> 
         <br />
         <?php echo time_difference($comment->created) ?> </em>  
         <br />

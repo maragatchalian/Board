@@ -13,18 +13,18 @@
 <?php endif  ?>
 
     <form class="form-horizontal">
-    <form action="<?php eh(url('')) ?>" method="post">
+    <form action="<?php readable_text(url('')) ?>" method="post">
     <div class="control-group">
     <label class="control-label" for ="username"><h4>Username</h4></label>
     <div class="controls">
-    <input type="text" placeholder = "Username" name="username" value="<?php eh(Param::get('username')) ?>">
+    <input type="text" placeholder = "Username" name="username" value="<?php readable_text(Param::get('username')) ?>">
     </div>
     </div>
  
     <div class="control-group">
     <label class="control-label" for="password"><h4>Password</h4></label>
     <div class="controls">
-    <input type="password" placeholder = "Password" name="password" value="<?php eh(Param::get('password')) ?>">
+    <input type="password" placeholder = "Password" name="password" value="<?php readable_text(Param::get('password')) ?>">
     </div>
     </div>
     <br />
@@ -40,7 +40,7 @@
     <br /> 
 
 If you don't have an account, register 
-<a href="<?php eh(url('user/register')) ?>"> HERE</a>.
+<a href="<?php readable_text(url('user/register')) ?>"> HERE</a>.
 </div>
 </div>
 </div>

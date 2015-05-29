@@ -15,7 +15,7 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="<?php eh(url('comment/display_recent_comment')) ?>"> <font color ="white"> FoodFacts! </font></a>                   
+            <a class="brand" href="<?php readable_text(url('comment/display_recent_comment')) ?>"> <font color ="white"> FoodFacts! </font></a>                   
         </div>
     </div>
 </div>
@@ -63,12 +63,12 @@
 
 
 <ul id="menu">
-        <li><a href="<?php eh(url('comment/display_recent_comment')) ?>">Home</a>
-        <li><a href="<?php eh(url('user/profile')) ?>">Profile</a></li>
-        <li><a href="<?php eh(url('thread/index')) ?>">All Threads</a></li>
-        <li><a href="<?php eh(url('thread/display_category')) ?>">Thread Categories</a></li>
-        <li><a href="<?php eh(url('thread/create')) ?>">Create New Thread</a></li>  
-        <li><a href="<?php eh(url('user/logout')) ?>">Logout</a></li>
+        <li><a href="<?php readable_text(url('comment/display_recent_comment')) ?>">Home</a>
+        <li><a href="<?php readable_text(url('user/profile')) ?>">Profile</a></li>
+        <li><a href="<?php readable_text(url('thread/index')) ?>">All Threads</a></li>
+        <li><a href="<?php readable_text(url('thread/display_category')) ?>">Thread Categories</a></li>
+        <li><a href="<?php readable_text(url('thread/create')) ?>">Create New Thread</a></li>  
+        <li><a href="<?php readable_text(url('user/logout')) ?>">Logout</a></li>
         </ul>    
 <?php endif ?>
                
@@ -76,7 +76,7 @@
 </div>
 
 <script>
-    console.log(<?php eh(round(microtime(true) - TIME_START, 3)) ?> + 'sec');
+    console.log(<?php readable_text(round(microtime(true) - TIME_START, 3)) ?> + 'sec');
 </script>
 
 </body>

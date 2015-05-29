@@ -10,8 +10,8 @@
 <?php if (!empty($user->validation_errors['username']['length'])): ?>
     <div>
         <em>Your Username</em> must be between
-        <?php eh($user->validation['username']['length'][1]) ?> and
-        <?php eh($user->validation['username']['length'][2]) ?> characters.
+        <?php readable_text($user->validation['username']['length'][1]) ?> and
+        <?php readable_text($user->validation['username']['length'][2]) ?> characters.
     </div>
 <?php endif ?>
 
@@ -36,8 +36,8 @@ if (!empty($user->validation_errors['username']['valid'])): ?>
 if (!empty($user->validation_errors['first_name']['length'])): ?>
     <div>
         <em>Your First Name</em> must be between
-            <?php eh($user->validation['first_name']['length'][1]) ?> and
-            <?php eh($user->validation['first_name']['length'][2]) ?> characters.
+            <?php readable_text($user->validation['first_name']['length'][1]) ?> and
+            <?php readable_text($user->validation['first_name']['length'][2]) ?> characters.
     </div>
 <?php endif ?>
 
@@ -53,8 +53,8 @@ if (!empty($user->validation_errors['first_name']['valid'])): ?>
 //Last Name Validation
 if (!empty($user->validation_errors['last_name']['length'])): ?>
     <div><em>Your Last Name</em> must be between
-        <?php eh($user->validation['last_name']['length'][1]) ?> and
-        <?php eh($user->validation['last_name']['length'][2]) ?> characters.
+        <?php readable_text($user->validation['last_name']['length'][1]) ?> and
+        <?php readable_text($user->validation['last_name']['length'][2]) ?> characters.
     </div>
 <?php endif ?>
 
@@ -72,29 +72,29 @@ if (!empty($user->validation_errors['last_name']['valid'])): ?>
 <font color ="black">
 
 <!--Username-->
-<form action="<?php eh(url('')) ?>" method="post">
+<form action="<?php readable_text(url('')) ?>" method="post">
     <div class="span12"> 
     <label for="username"><h5>Username</h5></label>
-    <input type="text" name="username" value="<?php eh($user_edit->username) ?>">
+    <input type="text" name="username" value="<?php readable_text($user_edit->username) ?>">
 </div>
 
 <br />
 <!--First Name-->
     <div class="span12">
     <label for="first_name"><h5>First Name</h5></label>
-    <input type="text" name="first_name" value="<?php eh($user_edit->first_name) ?>">
+    <input type="text" name="first_name" value="<?php readable_text($user_edit->first_name) ?>">
     </div>
 
 <!--Last Name-->
     <div class="span12">
     <label for="last_name"><h5>Last Name</h5></label>
-    <input type="text" name="last_name" value="<?php eh($user_edit->last_name) ?>">
+    <input type="text" name="last_name" value="<?php readable_text($user_edit->last_name) ?>">
     </div>
 
 <input type="hidden" name="page_next" value="edit_end">
 <div class="span12">
 <br />
 <button class="btn btn-info btn-medium" type="submit">Save</button>
-<a href="<?php eh(url('user/profile')) ?>" class="btn btn-medium">Cancel</a>
+<a href="<?php readable_text(url('user/profile')) ?>" class="btn btn-medium">Cancel</a>
 </div>
 </div>

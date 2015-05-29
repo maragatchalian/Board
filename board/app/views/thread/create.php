@@ -20,8 +20,8 @@
     <div>
     <em>Title</em> 
       must be between
-      <?php eh($thread->validation['title']['length'][1]) ?> and
-      <?php eh($thread->validation['title']['length'][2]) ?> characters.
+      <?php readable_text($thread->validation['title']['length'][1]) ?> and
+      <?php readable_text($thread->validation['title']['length'][2]) ?> characters.
     </div>
   <?php endif ?>
 
@@ -30,15 +30,15 @@
     <div>
       <em>Comment</em> 
         must be between
-        <?php eh($comment->validation['body']['length'][1]) ?> and
-        <?php eh($comment->validation['body']['length'][2]) ?> characters.
+        <?php readable_text($comment->validation['body']['length'][1]) ?> and
+        <?php readable_text($comment->validation['body']['length'][2]) ?> characters.
     </div>
   <?php endif ?>
 
 </div>
 <?php endif ?>
  
-<form class="well" method="post" action="<?php eh(url('')) ?>">
+<form class="well" method="post" action="<?php readable_text(url('')) ?>">
  
 <label>Category</label>
     <select name="category">
@@ -54,12 +54,12 @@
 <br />
 
 <label>Title</label>
-<input type="text" class="span2" name="title" value="<?php eh(Param::get('title')) ?>">
-<input type="hidden" class="span2" name="username" value="<?php eh($_SESSION['username']) ?>">
+<input type="text" class="span2" name="title" value="<?php readable_text(Param::get('title')) ?>">
+<input type="hidden" class="span2" name="username" value="<?php readable_text($_SESSION['username']) ?>">
   
  
 <label>Comment</label>
-  <textarea name="body"><?php eh(Param::get('body')) ?></textarea>
+  <textarea name="body"><?php readable_text(Param::get('body')) ?></textarea>
 
 <br />
 

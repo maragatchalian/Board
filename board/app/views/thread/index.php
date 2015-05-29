@@ -6,8 +6,8 @@
 <ul style="list-style-type:square">
     <?php foreach ($threads as $thread): ?>
     <li>
-    <a href="<?php eh(url('thread/view', array('thread_id' => $thread->id))) ?>">
-    <?php eh($thread->title) ?></a>        
+    <a href="<?php readable_text(url('thread/view', array('thread_id' => $thread->id))) ?>">
+    <?php readable_text($thread->title) ?></a>        
     </li>
     <?php endforeach; //Display contents of individual thread to href to A tag ?>
 
@@ -36,7 +36,7 @@
 <!--Create button--> 
 <br />
 <br />
-<a class="btn btn-medium btn-info" href="<?php eh(url('thread/create')) ?>">Create Thread</a>
+<a class="btn btn-medium btn-info" href="<?php readable_text(url('thread/create')) ?>">Create Thread</a>
 
     </font>
 </ul>
