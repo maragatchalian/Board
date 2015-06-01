@@ -139,7 +139,7 @@ class Thread extends AppModel
         foreach($rows as $row) {
             $threads[] = new self($row);
         }
-         return $threads;
+        return $threads;
     }
 
     public static function getAllCategory()
