@@ -25,7 +25,7 @@ class FavoriteController extends AppController
     public function display_user_favorite_comments() 
     { 
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get(PAGE, 1);
+        $current_page = Param::get(CURRENT_PAGE, PAGE_ONE);
         $pagination = new SimplePagination($current_page, $per_page);
 
         $user_id = $_SESSION['user_id'];

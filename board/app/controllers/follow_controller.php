@@ -17,7 +17,7 @@ class FollowController extends AppController
     public function following() 
     { 
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get(PAGE, 1);
+        $current_page = Param::get(CURRENT_PAGE, PAGE_ONE);
         $pagination = new SimplePagination($current_page, $per_page);
        
         $user_id = $_SESSION['user_id'];
@@ -46,6 +46,6 @@ class FollowController extends AppController
             throw new InvalidArgumentException("{$method} is an invalid parameter");
             break;
         }
-    redirect(url('follow/others_profile', array('user_id' => $follow->id)));
+        redirect(url('follow/others_profile', array('user_id' => $follow->id)));
     }
 }

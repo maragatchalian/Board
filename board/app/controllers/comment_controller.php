@@ -49,7 +49,7 @@ class CommentController extends AppController
     public function display_recent_comment() 
     {
         $per_page = self::MAX_USER_IN_NEWSFEED; 
-        $current_page = Param::get(PAGE, 1); 
+        $current_page = Param::get(CURRENT_PAGE, PAGE_ONE); 
         $pagination = new SimplePagination($current_page, $per_page); 
 
         $user_id = $_SESSION['user_id'];

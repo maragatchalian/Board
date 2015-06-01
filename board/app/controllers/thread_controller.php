@@ -42,7 +42,7 @@ class ThreadController extends AppController
     public function view() 
     {
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get(PAGE, 1);
+        $current_page = Param::get(CURRENT_PAGE, PAGE_ONE);
         $pagination = new SimplePagination($current_page, $per_page);
 
         $thread_id = Param::get('thread_id'); 
@@ -66,7 +66,7 @@ class ThreadController extends AppController
     {
         $user_id = Param::get('user_id');
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get(PAGE, 1);
+        $current_page = Param::get(CURRENT_PAGE, PAGE_ONE);
         $pagination = new SimplePagination($current_page, $per_page); 
         
         if  ($user_id == NULL) {
@@ -92,7 +92,7 @@ class ThreadController extends AppController
         $category = Param::get('category','none');
         if ( $category !== 'none') {
             $per_page = MAX_DATA_PER_PAGE;
-            $current_page = Param::get(PAGE, 1);
+            $current_page = Param::get(CURRENT_PAGE, PAGE_ONE);
             $pagination = new SimplePagination($current_page, $per_page);
 
             $threads = Thread::getByCategory($pagination->start_index -1, $pagination->count + 1, $category);
@@ -113,7 +113,7 @@ class ThreadController extends AppController
     public function display_by_category() 
     {
         $per_page = MAX_DATA_PER_PAGE;
-        $current_page = Param::get(PAGE, 1);
+        $current_page = Param::get(CURRENT_PAGE, PAGE_ONE);
         $pagination = new SimplePagination($current_page, $per_page);
         $threads = Thread::getAll($pagination->start_index -1, $pagination->count + 1);
         $pagination->checkLastPage($threads);
