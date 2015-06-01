@@ -75,20 +75,20 @@ if (!empty($user->validation_errors['last_name']['valid'])): ?>
 <form action="<?php readable_text(url('')) ?>" method="post">
     <div class="span12"> 
     <label for="username"><h5>Username</h5></label>
-    <input type="text" name="username" value="<?php readable_text($user_edit->username) ?>">
+    <input type="text" name="username" value="<?php readable_text($user_edit['username']) ?>">
 </div>
 
 <br />
 <!--First Name-->
     <div class="span12">
     <label for="first_name"><h5>First Name</h5></label>
-    <input type="text" name="first_name" value="<?php readable_text($user_edit->first_name) ?>">
+    <input type="text" name="first_name" value="<?php readable_text($user_edit['first_name']) ?>">
     </div>
 
 <!--Last Name-->
     <div class="span12">
     <label for="last_name"><h5>Last Name</h5></label>
-    <input type="text" name="last_name" value="<?php readable_text($user_edit->last_name) ?>">
+    <input type="text" name="last_name" value="<?php readable_text($user_edit['last_name']) ?>">
     </div>
 
 <input type="hidden" name="page_next" value="edit_end">

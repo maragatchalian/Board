@@ -2,7 +2,7 @@
 <br />
 <br />
 <font color ="black">
-<h1>Hello, <?php readable_text($user->first_name) ?>!</h1>
+<h1>Hello, <?php readable_text($user['first_name']);?></h1>
 <center class="profile">
 <br />        
 <br />   
@@ -18,10 +18,10 @@
 </form>
 
 <div class = "profile_info">
-    <b>Username: </b> <?php readable_text($user->username) ?> <br />
-    <b>First Name: </b> <?php readable_text($user->first_name) ?> <br />
-    <b>Last Name:</b>  <?php readable_text($user->last_name) ?><br />
-    <b>Email:</b>    <?php readable_text($user->email) ?><br />
+    <b>Username: </b> <?php readable_text($user['username']) ?> <br />
+    <b>First Name: </b> <?php readable_text($user['first_name']) ?> <br />
+    <b>Last Name:</b>  <?php readable_text($user['last_name']) ?><br />
+    <b>Email:</b>    <?php readable_text($user['email']) ?><br />
     <br /><br />
 </div>
 

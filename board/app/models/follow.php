@@ -92,4 +92,4 @@ class Follow extends AppModel
         
         return $recent_comment;
     }
-} 
+}

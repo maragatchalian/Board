@@ -85,7 +85,7 @@ class UserController extends AppController
   
     public function profile() 
     {
-        $user = User::getData($_SESSION['user_id']);
+        $user= User::get($_SESSION['user_id']);
         $this->set(get_defined_vars());
     }
 
@@ -123,7 +123,7 @@ class UserController extends AppController
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
-        $user_edit = User::getData($_SESSION['user_id']);
+        $user_edit = User::get($_SESSION['user_id']);
         $this->set(get_defined_vars());
         $this->render($page); 
     }

@@ -13,14 +13,11 @@
 <h4><?php readable_text($user->username);?>'s profile</h4>
 <form class="span6 well shadow" method="POST">
 
-<label>First name</label>
-<input class="span6" type="text" value="<?php readable_text($user->first_name) ?>" name="firstname" disabled> <br />
-<label>Last name</label>
-<input class="span6" type="text" value="<?php readable_text($user->last_name) ?>" name="lastname" disabled> <br />
-<label>Username</label>
-<input class="span6" type="text" value="<?php readable_text($user->username) ?>" name="username" disabled> <br />
-<label>Email</label>
-<input class="span6" type="email" value="<?php readable_text($user->email) ?>" name="email" disabled> 
-<br/>
+<div class = "profile_info">
+    <b>Username: </b> <?php readable_text($user->username) ?> <br />
+    <b>First Name: </b> <?php readable_text($user->first_name) ?> <br />
+    <b>Last Name:</b>  <?php readable_text($user->last_name) ?><br />
+    <b>Email:</b>    <?php readable_text($user->email) ?><br />
+</div>
 </font>
 </form>

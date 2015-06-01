@@ -178,15 +178,4 @@ class User extends AppModel
         
         return $row;
     } 
-
-    public static function getData($user_id)
-    {
-        $db = DB::conn();
-        $row = $db->row("SELECT * FROM user WHERE id = ?", array($user_id));
-
-        if (!$row) {
-            throw new RecordNotFoundException('no record found');
-        }
-        return new self($row);
-    }
 }
