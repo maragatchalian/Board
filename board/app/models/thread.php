@@ -1,122 +1,158 @@
 <?php
 
-class Thread extends AppModel{
-
-/* 
-*The following constants are declared to avoid magic numbers.
-*Avoid using magic numbers so others couuld
-*   understand what that number is all about.
-*/
+class Thread extends AppModel 
+{
     const MIN_TITLE_LENGTH = 1;
     const MAX_TITLE_LENGTH = 30;
 
-//Thread Length Validation
     public $validation = array(
-        'title' => array(
-            'length' => array(
-                'validate_between', self::MIN_TITLE_LENGTH, self::MAX_TITLE_LENGTH
+    'title' => array(
+        'length' => array(
+            'validate_between', self::MIN_TITLE_LENGTH, self::MAX_TITLE_LENGTH
+            ),
+        ),
+
+    'category' => array(
+        'length' => array(
+            'validate_between', self::MIN_TITLE_LENGTH, self::MAX_TITLE_LENGTH
             ),
         ),
     );
 
-    public function create(Comment $comment) 
+    public function create(Comment $comment)
     {
         $this->validate();
         $comment->validate();
+        
+        if ($this->hasError() || $comment->hasError()) {
+            throw new ValidationException('Invalid thread or comment');
+        }
+            
+        try {
+            $db = DB::conn();
+            $created = date("Y-m-d H:i:s");
+            $db->begin();
 
-            if ($this->hasError() || $comment->hasError())
-            {
-                throw new ValidationException('Invalid thread or comment');
-            }
+            $params = array(  
+                'title' => $this->title, 
+                'created'=> $created, 
+                'user_id'=> $this->user_id,
+                'category' => $this->category
+            );
 
-        $date_created = date("Y-m-d H:i:s");
-        $params = array(
-            'title' => $this->title,
-            'created'=> $date_created
-             );
-
-    //Latest inserted ID
-            try 
-            {
-                $db = DB::conn();
-                $db->begin();
-                $db->insert('thread', $params);
-                $this->id = $db->lastInsertId();
-
-    //write first comment at the same time
-                $this->write($comment);
-                $db->commit();
-            } catch (Exception $e) {
-                $db->rollback();
-            }
+            $db->insert('thread', $params); 
+            $this->id = $db->lastInsertId();
+            $comment->write($comment, $this->id); //<--write comment at the same time
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+        }
     }
 
-    public static function getAll($offset, $limit) 
+    public function checkThreadOwner()
+    {
+        return $this->user_id === $_SESSION['user_id'];
+    }
+
+    public function delete($thread_id)
+    {
+        Favorite::deleteFavoritedCommentByThreadId($this->id, $this->user_id);
+        try {
+            $db = DB::conn();
+            $db->begin();
+            $params = array(
+                $this->id,
+                $this->user_id
+            );
+            $db->query("DELETE FROM thread WHERE id = ? AND user_id = ?", $params);
+            Comment::deleteByThreadId($this->id, $this->user_id);
+
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+        }
+    }
+
+    public static function getAll($offset, $limit, $user_id = NULL)
     {
         $threads = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
 
-        foreach($rows as $row) 
-        {
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
+        }
+
+        if ($user_id == NULL) {
+            $rows = $db->rows("SELECT * FROM thread LIMIT {$offset}, {$limit}");
+
+        } else { 
+            $rows = $db->rows("SELECT * FROM thread WHERE user_id = ? LIMIT {$offset}, {$limit}", array($user_id));
+        }
+
+        foreach($rows as $row) {
             $threads[] = new self($row);
         }
-
-    return $threads;
-    }
-
-    public static function countAll()
-    {
-        $db = DB::conn();
-        return (int) $db->value('SELECT COUNT(*) FROM thread');
-    }
-
-    public function countComments()
-    {
-        $db = DB::conn();
-        return (int) $db->value("SELECT COUNT(*) FROM comment WHERE thread_id = ? ", array($this->id));
-    }
-
-
-    public static function get($id)
-    {
-        $db = DB::conn();
-        $row = $db->row('SELECT * FROM thread WHERE id = ?', array($id));
         
-            if (!$row) 
-            {
-                throw new RecordNotFoundException('No Record Found');
-            }
+        return $threads;
+    }
 
+    public static function countAll() 
+    {
+        $db = DB::conn();
+        return $db->value("SELECT COUNT(*) FROM thread");
+    }
+
+    public static function countAllThreadByUserId($user_id) 
+    {
+        $db = DB::conn();
+        return $db->value("SELECT COUNT(*) FROM thread WHERE user_id = ?", array($user_id));
+    }
+
+    public static function countAllThreadByCategory($category)
+    {
+        $db = DB::conn();
+        return $db->value("SELECT COUNT(*) FROM thread WHERE category = ?", array($category));
+    }
+      
+    public static function get($id) 
+    {
+        $db = DB::conn();
+        $row = $db->row("SELECT * FROM thread WHERE id = ?", array($id));
+            
+        if (!$row) {
+            throw new RecordNotFoundException('No Record Found');
+        }
         return new self($row);
     }
-
-    public function getComments($offset, $limit)
+    
+    public static function getByCategory($offset, $limit, $category) 
     {
-        $comments = array();
+        $threads = array();
         $db = DB::conn();
-        $rows = $db->rows("SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC LIMIT {$offset}, {$limit}", array($this->id));
-        
-            foreach ($rows as $row) 
-            {
-                $comments[] = new Comment($row);
-            }
 
-        return $comments;
-    }
-
-    public function write(Comment $comment)
-    {
-
-        if(!$comment->validate())
-        {
-            throw new ValidationException('Invalid Comment');
+        if (!is_int($offset) || !is_int($limit)) { 
+            throw new NotIntegerException; 
         }
 
-        $db = DB::conn();
-        $db->query(
-            'INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created = NOW()',
-                array($this->id, $comment->username, $comment->body)
-        );     
+        $rows = $db->rows("SELECT * FROM thread WHERE category = ? LIMIT {$offset}, {$limit}", array($category));
+            
+        foreach($rows as $row) {
+            $threads[] = new self($row);
+        }
+        return $threads;
     }
-}
+
+    public static function getAllCategory()
+    {
+        $db = DB::conn();
+        $rows = $db->rows("SELECT DISTINCT category FROM thread");
+        $categories = array();
+        
+        foreach ($rows as $row) {
+            if (!empty($row['category'])) {
+                $categories[] = $row['category'];
+            }
+        }
+        return $categories;
+    }
+} 

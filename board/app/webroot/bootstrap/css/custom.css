@@ -1,0 +1,51 @@
+/** {
+   border: 1px solid red !important;
+}*/
+
+.container{
+ padding:5px;
+ box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1) inset, 0px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comments{
+margin: 40px;
+background-color: rgb(248, 248, 248); /* Needed for IEs */
+outline: #000000 solid thin;
+-moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+-webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+
+filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+-ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+zoom: 1;
+}
+
+.comments .content{
+    position: relative; /* This protects the inner element from being blurred */
+    padding: 15px;
+    background-color: rgb(248, 248, 248);
+}
+
+.navbar-inner {
+background: #000; /*Black Header*/
+}
+
+.profile {
+	position: relative;
+    height: 320px;
+    background: none repeat scroll 0% 0% #e3e3e3;
+    border-radius: 5px;
+    outline: #000000 solid thin;
+}
+
+.profile_info {
+    background: ;
+}
+
+.pagination a {
+    color:#000000;
+}
+.pagination a:hover{
+    color:#4C5650;
+}
+

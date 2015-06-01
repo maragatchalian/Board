@@ -1,6 +1,6 @@
 <?php
 
-class AppController extends Controller{
+class AppController extends Controller {
 
     public $default_view_class = 'AppLayoutView';
     
@@ -11,14 +11,12 @@ class AppController extends Controller{
             'user/login'
         );
 
-        if (in_array(Param::get(DC_ACTION), $exclude)) 
-            {
-                return;
-            }
+        if (in_array(Param::get(DC_ACTION), $exclude)) {
+            return;
+        }
 
-         if (!is_logged_in()) 
-            {
-                redirect(url('user/login'));
-            }
+        if (!is_logged_in()) {
+            redirect(url('user/login'));
+        }
     }
 }
