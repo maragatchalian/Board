@@ -77,11 +77,6 @@ class Follow extends AppModel
        return new self(object_to_array(User::getData($user_id)));
     }
 
-    /*public static function displayRecentComment($thread_id)
-    {
-         return new self(object_to_array(Comment::displayRecent($thread_id)));
-    }*/
-
     public static function countFollowing($user_id)
     {
         $db = DB::conn();
