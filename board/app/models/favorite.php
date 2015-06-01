@@ -39,7 +39,7 @@ class Favorite extends AppModel
         
 
         foreach ($rows as $favorite) {
-            $favorites[] = new Favorite($favorite);
+            $favorites[] = new self($favorite);
         }
 
         foreach ($favorites as $favorite) {

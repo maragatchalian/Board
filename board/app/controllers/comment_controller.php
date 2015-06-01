@@ -56,7 +56,7 @@ class CommentController extends AppController
         $following = Follow::getAll($pagination->start_index -1, $pagination->count + 1, $user_id);
         
         $thread_id = Param::get('thread_id');
-        $comments = Comment::displayRecentComment($thread_id);
+        $comments = Comment::displayRecent($thread_id);
 
         $pagination->checkLastPage($following);
         $total = Follow::countRecentComment($user_id);
